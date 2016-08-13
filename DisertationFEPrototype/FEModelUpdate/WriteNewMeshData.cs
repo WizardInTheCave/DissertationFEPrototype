@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DisertationFEPrototype.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DisertationFEPrototype.FEModelUpdate
+namespace DisertationFEPrototype.ModelUpdate
 {
     /// <summary>
     /// write back a lisa XML file after updates to the node positions have been conducted using our algorithm
@@ -12,7 +13,7 @@ namespace DisertationFEPrototype.FEModelUpdate
     class WriteNewMeshData
     {
        
-        public WriteNewMeshData()
+        public WriteNewMeshData(MeshData meshData)
         {
 
 

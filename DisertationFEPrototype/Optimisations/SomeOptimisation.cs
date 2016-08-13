@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using DisertationFEPrototype.Model;
 
 namespace DisertationFEPrototype.Optimisations
 {
@@ -12,20 +12,31 @@ namespace DisertationFEPrototype.Optimisations
     /// </summary>
     class SomeOptimisation
     {
-        FEModel.FEModel workingModel;
+        FEModel workingModel;
+        List<AnalysisData> analysisData;
+        MeshData updatedMesh;
 
-        public FEModel.FEModel GetUpdatedModel
+        public MeshData GetUpdatedMesh
         {
             get
             {
-                return this.workingModel;
+                return this.updatedMesh;
             }
         }
-        public SomeOptimisation(FEModel.FEModel model)
+        public SomeOptimisation(FEModel model, List<AnalysisData> analysisData)
         {
             this.workingModel = model;
-
+            this.analysisData = analysisData;
         }
 
+        internal void runOptimisation()
+        {
+
+
+
+            //updatedMesh = new MeshData();
+            updatedMesh = null;
+            throw new NotImplementedException();
+        }
     }
 }

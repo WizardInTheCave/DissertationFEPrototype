@@ -16,8 +16,8 @@ namespace DisertationFEPrototype
         {
             Console.WriteLine("YOU WHAT MATE!!");
 
-            string lisaString = @"D:\Documents\DissertationWork\basicCube.liml";
-            var control = new Control(lisaString);
+            
+            var control = new Control();
 
 
             //Application.EnableVisualStyles();

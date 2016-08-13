@@ -1,4 +1,4 @@
-﻿using DisertationFEPrototype.FEModel.MeshDataStructure;
+﻿using DisertationFEPrototype.Model.MeshDataStructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DisertationFEPrototype.FEModel
+namespace DisertationFEPrototype.Model
 {
     /// <summary>
     /// This class is a representation of
@@ -14,7 +14,7 @@ namespace DisertationFEPrototype.FEModel
     class MeshData
     {
         List<Node> nodes;
-        List<Element> elements;
+        List<ElementData> elements;
         string lisaFile;
 
         public List<Node> GetNodes
@@ -25,14 +25,14 @@ namespace DisertationFEPrototype.FEModel
             }
         }
 
-        public List<Element> GetElements
+        public List<ElementData> GetElements
         {
             get
             {
                 return this.elements;
             }
         }
-        public MeshData(List<Node> nodes, List<Element> elements)
+        public MeshData(List<Node> nodes, List<ElementData> elements)
         {
             this.nodes = nodes;
             this.elements = elements;

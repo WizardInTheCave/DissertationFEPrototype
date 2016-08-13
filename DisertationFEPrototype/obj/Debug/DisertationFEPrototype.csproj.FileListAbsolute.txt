@@ -5,7 +5,5 @@ C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\Diser
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.csproj.GenerateResource.Cache
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\DisertationFEPrototype.exe
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\DisertationFEPrototype.pdb
-C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\lisa8.exe
-C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\ZedGraph.dll
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.exe
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.pdb

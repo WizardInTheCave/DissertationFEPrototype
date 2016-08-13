@@ -9,15 +9,16 @@ using System.Xml;
 using System.IO;
 using System.Text;
 using System.Linq;
-using DisertationFEPrototype.FEModel;
-using DisertationFEPrototype.FEModel.MeshDataStructure;
+
+using DisertationFEPrototype.Model.MeshDataStructure;
+using DisertationFEPrototype.Model;
 
 namespace DisertationFEPrototype.FEModelUpdate
 {
     class ReadMeshData
     {
         MeshData meshData;
-        private string lisaString;
+        
 
         public MeshData GetMeshData{
             get{
@@ -32,18 +33,22 @@ namespace DisertationFEPrototype.FEModelUpdate
         /// <returns>a MeshData object which represents the model internally so that it can be manipulated</returns>
         public ReadMeshData(string lisaString)
         {
+     
             // This text is added only once to the file.
-            if (!File.Exists(lisaString))
+            if (File.Exists(lisaString))
             {
                 string xmlString = File.ReadAllText(lisaString);
                 List<Node> nodes = readAllNodes(xmlString);
                 List<Element> elements = readAllElements(xmlString, nodes);
+               
                 this.meshData = new MeshData(nodes, elements);
             }
             else
             {
                 throw new FileNotFoundException("Could not load the lisa mesh file to rebuild model");
-            }         
+            }
+
+          
         }
 
         private List<Node> readAllNodes(string xmlString)
@@ -54,13 +59,17 @@ namespace DisertationFEPrototype.FEModelUpdate
             {
                 while (reader.Read())
                 {
-                    if (reader.IsStartElement() && reader.Name == nodeTag)
+                    if (reader.IsStartElement() && reader.Name == "elset")
+                    {
+                        break;
+                    }
+                    else if (reader.IsStartElement() && reader.Name == nodeTag)
                     {
                         // Get element name and switch on it.
                         Node node = getNodeData(reader);
                         nodes.Add(node);
-                        break;
                     }
+                    
                 }
             }
             return nodes;
@@ -76,7 +85,12 @@ namespace DisertationFEPrototype.FEModelUpdate
             {
                 while (reader.Read())
                 {
-                    if (reader.IsStartElement() && reader.Name == elemTag)
+                    if(reader.IsStartElement() && reader.Name == "faceselection" || reader.Name == "Unnamed(2)")
+                    {
+                        Console.WriteLine(reader.Name);
+                        break;
+                    }
+                    else if (reader.IsStartElement() && reader.Name == elemTag)
                     {
                         // Get element name and switch on it.
                         Element element = getElementData(reader, nodes);
@@ -87,9 +101,6 @@ namespace DisertationFEPrototype.FEModelUpdate
             }
             return elements;
         }
-
-
-
 
 
         private Element getElementData(XmlReader reader, List<Node> nodes)

@@ -4,27 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using DisertationFEPrototype.FEModel.MeshDataStructure;
+using DisertationFEPrototype.Model.MeshDataStructure;
 
-namespace DisertationFEPrototype.FEModel
+namespace DisertationFEPrototype.Model
 {
     class FEModel
     {
-        MeshData meshData;
-        AnalysisData analyData;
+        MeshData meshData; 
         string lisaFile;
+        private string lisaString;
 
         public FEModel(string lisaFile, MeshData meshData, AnalysisData analyData)
         {
             this.lisaFile = lisaFile;
             this.meshData = meshData;
-            this.analyData = analyData;
         }
+
+        public FEModel(string lisaString, MeshData meshData)
+        {
+            this.lisaString = lisaString;
+            this.meshData = meshData;
+        }
+
         /// <summary>
         /// tells lisa to run a solve on the lisa file which will produce some output
         /// </summary>
         /// <param name="lisaFile"></param>
-        public void executeSolve()
+        public void solve()
         {
             string strCmdText = "lisa8" + this.lisaFile + "solve";
             Process.Start("CMD.exe", strCmdText);
