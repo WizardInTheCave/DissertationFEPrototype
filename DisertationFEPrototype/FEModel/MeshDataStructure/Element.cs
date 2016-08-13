@@ -13,7 +13,8 @@ namespace DisertationFEPrototype.MeshDataStructure
         // id of nodes which form the element
         List<Node> nodes;
 
-        public List<Node> GetNodes{
+        public List<Node> GetNodes
+        {
             get
             {
                 return GetNodes;

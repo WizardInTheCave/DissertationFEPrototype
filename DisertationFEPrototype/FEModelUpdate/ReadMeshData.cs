@@ -14,28 +14,36 @@ using System.Linq;
 using DisertationFEPrototype.MeshDataStructure;
 
 
-namespace DisertationFEPrototype.FEModelManipulation
+namespace DisertationFEPrototype.FEModelUpdate
 {
-    class FEModelUpdate
+    class ReadMeshData
     {
+        MeshData currentModel;
+        private string lisaString;
 
-        FEModel currentModel;
-        /// <summary>
-        /// update our FE model based on changes
-        /// </summary>
-        public void updateFEModel()
-        {
-
-
+        public MeshData GetCurrentModel{
+            get{
+                return this.currentModel;
+            }
         }
- 
+
         /// <summary>
         /// load in our lisa file which contains all the data about our FE Model and extract node data about the model
         /// </summary>
         /// <param name="xmlString"></param>
-        /// <returns>a FEModel object which represents the model internally so that it can be manipulated</returns>
-        private FEModel readModelFile(string xmlString)
+        /// <returns>a MeshData object which represents the model internally so that it can be manipulated</returns>
+        public ReadMeshData(string lisaString)
         {
+            // This text is added only once to the file.
+            if (!File.Exists(lisaString))
+            {
+                string xmlString = File.ReadAllText(lisaString);
+
+            }
+            else
+            {
+                throw new FileNotFoundException("Could not load the lisa mesh file to rebuild model");
+            }
 
             string xmlTest = @"<liml8>
   <analysis type=""S30"" />
@@ -94,37 +102,10 @@ namespace DisertationFEPrototype.FEModelManipulation
   </solution>
 </liml8>";
 
-            StringBuilder output = new StringBuilder();
 
-            List<Node> nodes = readAllNodes(xmlString);
-
-            List<Element> elements = readAllElements(xmlString, nodes);
-
-            
-
-
-
-
-
-
-
-
-
-
-
-                // https://msdn.microsoft.com/en-us/library/cc189056(v=vs.95).aspx
-                //reader.ReadToFollowing("node");
-                //reader.readTo
-                //reader.MoveToFirstAttribute();
-                //string genre = reader.Value;
-                //output.AppendLine("The genre value: " + genre);
-
-            //reader.ReadToFollowing("title");
-            //output.AppendLine("Content of the title element: " + reader.ReadElementContentAsString());
-        
-
-            FEModel currentModel = new FEModel();
-            return currentModel;
+            List<Node> nodes = readAllNodes(xmlTest);
+            List<Element> elements = readAllElements(xmlTest, nodes);
+            this.currentModel = new MeshData();
         }
 
         private List<Node> readAllNodes(string xmlString)
@@ -150,7 +131,7 @@ namespace DisertationFEPrototype.FEModelManipulation
         private List<Element> readAllElements(string xmlString, List<Node> nodes)
         {
             const string elemTag = "elem";
-      
+
             List<Element> elements = new List<Element>();
 
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
@@ -162,16 +143,16 @@ namespace DisertationFEPrototype.FEModelManipulation
                         // Get element name and switch on it.
                         Element element = getElementData(reader, nodes);
                         elements.Add(element);
-               
+
                     }
                 }
             }
             return elements;
         }
 
-    
-           
-    
+
+
+
 
         private Element getElementData(XmlReader reader, List<Node> nodes)
         {
@@ -184,7 +165,8 @@ namespace DisertationFEPrototype.FEModelManipulation
             string shape = reader[shapeAtt];
             string rawNodes = reader[nodesAtt];
 
-            try { 
+            try
+            {
                 int id = Convert.ToInt32(elementId);
                 List<string> splitNodes = new List<string>(nodes.Split(' '));
                 List<int> nodeIDs = splitNodes.Select(x => Convert.ToInt32(x)).ToList();
@@ -228,23 +210,6 @@ namespace DisertationFEPrototype.FEModelManipulation
             {
                 throw new Exception("Could not read node data from xml correctly");
             }
-
-        }
-
-        /// <summary>
-        /// Writes the model that we have updated with our fancy algorithm back to a file so we can re run the FE
-        /// </summary>
-        /// <param name="updatedModel">The Modle object which we have updated</param>
-        private void writeModelBack(FEModel updatedModel)
-        {
-
-
-
-        }
-        private void executeModel()
-        {
-
-
 
         }
     }

@@ -14,6 +14,11 @@ namespace DisertationFEPrototype
         [STAThread]
         static void Main()
         {
+            Console.WriteLine("YOU WHAT MATE!!");
+
+
+            
+            Console.WriteLine(Lisa8);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

@@ -9,29 +9,40 @@ namespace DisertationFEPrototype.MeshDataStructure
     /// <summary>
     /// This class is a representation of
     /// </summary>
-    class FEModel
+    class MeshData
     {
-        List<Node> modelNodes;
-        List<Element> modelElements;
+        List<Node> nodes;
+        List<Element> elements;
+        string lisaFile;
 
-        public List<Node> GetModelNodes
+        public List<Node> GetNodes
         {
-            get{
-                return modelNodes;
+            get
+            {
+                return this.nodes;
             }
         }
-        public FEModel()
+
+        public List<Element> GetElements
         {
+            get
+            {
+                return this.elements;
+            }
+        }
+        public MeshData(string lisaFile, Node)
+        {
+            this.lisaFile = lisaFile;
 
         }
-
         /// <summary>
         /// For every pair of nodes add an extra node between the two of them
         /// </summary>
         /// <returns></returns>
         public void createMidpointNodes(List<Element> elements)
         {
-            foreach(Element element in elements){
+            foreach (Element element in elements)
+            {
                 List<Node> elementNodes = element.GetNodes;
 
             }
