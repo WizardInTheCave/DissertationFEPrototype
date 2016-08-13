@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using DisertationFEPrototype.FEModel.MeshDataStructure;
 
-namespace DisertationFEPrototype.MeshDataStructure.FEModel
+namespace DisertationFEPrototype.FEModel
 {
     class FEModel
     {

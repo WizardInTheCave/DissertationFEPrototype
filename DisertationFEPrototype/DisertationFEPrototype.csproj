@@ -50,18 +50,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control.cs" />
-    <Compile Include="FEModelUpdate\ExecuteSolve.cs" />
     <Compile Include="FEModelUpdate\ReadMeshData.cs" />
-    <Compile Include="FEModelUpdate\ReadSolveData.cs" />
+    <Compile Include="FEModelUpdate\ReadAnalysisData.cs" />
+    <Compile Include="FEModelUpdate\WriteNewMeshData.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="MeshDataStructure\Element.cs" />
-    <Compile Include="MeshDataStructure\FEModel.cs" />
-    <Compile Include="MeshDataStructure\Node.cs" />
+    <Compile Include="FEModel\MeshDataStructure\Element.cs" />
+    <Compile Include="FEModel\AnalysisData.cs" />
+    <Compile Include="FEModel\FEModel.cs" />
+    <Compile Include="FEModel\MeshData.cs" />
+    <Compile Include="FEModel\MeshDataStructure\Node.cs" />
     <Compile Include="PartGraph\ComponentNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

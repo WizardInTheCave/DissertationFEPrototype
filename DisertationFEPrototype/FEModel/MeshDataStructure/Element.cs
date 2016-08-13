@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DisertationFEPrototype.MeshDataStructure
+namespace DisertationFEPrototype.FEModel.MeshDataStructure
 {
     class Element
     {

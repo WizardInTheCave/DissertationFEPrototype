@@ -1,10 +1,12 @@
-﻿using System;
+﻿using DisertationFEPrototype.FEModel.MeshDataStructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DisertationFEPrototype.MeshDataStructure
+
+namespace DisertationFEPrototype.FEModel
 {
     /// <summary>
     /// This class is a representation of
@@ -30,27 +32,10 @@ namespace DisertationFEPrototype.MeshDataStructure
                 return this.elements;
             }
         }
-        public MeshData(string lisaFile, Node)
+        public MeshData(List<Node> nodes, List<Element> elements)
         {
-            this.lisaFile = lisaFile;
-
-        }
-        /// <summary>
-        /// For every pair of nodes add an extra node between the two of them
-        /// </summary>
-        /// <returns></returns>
-        public void createMidpointNodes(List<Element> elements)
-        {
-            foreach (Element element in elements)
-            {
-                List<Node> elementNodes = element.GetNodes;
-
-            }
-        }
-        private void createNodeMidpoints(List<Node> nodes)
-        {
-
-
+            this.nodes = nodes;
+            this.elements = elements;
         }
     }
 }

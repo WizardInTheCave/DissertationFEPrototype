@@ -16,12 +16,13 @@ namespace DisertationFEPrototype
         {
             Console.WriteLine("YOU WHAT MATE!!");
 
+            string lisaString = @"D:\Documents\DissertationWork\basicCube.liml";
+            var control = new Control(lisaString);
 
-            
-            Console.WriteLine(Lisa8);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Form1());
         }
     }
 }

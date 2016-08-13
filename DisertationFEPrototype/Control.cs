@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 
 using DisertationFEPrototype.FEModelUpdate;
+using DisertationFEPrototype.FEModel;
+using DisertationFEPrototype.Optimisations;
 
 namespace DisertationFEPrototype
 {
@@ -13,9 +15,19 @@ namespace DisertationFEPrototype
     {
         public Control(string lisaString) {
 
-           var meshData = new ReadMeshData(lisaString);
-           MeshDataStructure.MeshData model = meshData.GetCurrentModel;
-            
+            var meshDataReader = new ReadMeshData(lisaString);
+            MeshData meshData = meshDataReader.GetMeshData;
+
+            var analysisDataReader = new ReadAnalysisData();
+            AnalysisData analysisData = analysisDataReader.GetAnalysisData;
+
+            var model = new FEModel.FEModel(lisaString, meshData, analysisData);
+
+            SomeOptimisation optimisation = new SomeOptimisation(model);
+            optimisation.runOptimisation();
+            optimisation.GetUpdatedModel;
+
+
 
 
         }

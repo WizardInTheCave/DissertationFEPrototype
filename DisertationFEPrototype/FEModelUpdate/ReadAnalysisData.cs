@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DisertationFEPrototype.MeshDataStructure.FEModel; 
+using DisertationFEPrototype.FEModel;
 
 namespace DisertationFEPrototype.FEModelUpdate
 {
@@ -14,13 +14,19 @@ namespace DisertationFEPrototype.FEModelUpdate
     class ReadAnalysisData
     {
         AnalysisData analysisData;
+
+        public AnalysisData GetAnalysisData
+        {
+            get
+            {
+                return this.analysisData;
+            }
+        }
         public ReadAnalysisData()
         {
 
 
-           
             //this.analysisData = something;
         }
-
-    }
+    }    
 }
