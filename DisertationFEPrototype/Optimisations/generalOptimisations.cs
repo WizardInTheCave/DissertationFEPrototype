@@ -36,24 +36,32 @@ namespace DisertationFEPrototype.Optimisations
             // try a basic mesh refinement by creating more elements first
             List<Element> elements = this.meshData.Elements;
 
+            var nodes = this.meshData.Nodes;
+
             foreach (var elem in elements)
             {
                 
-                List<Element> children = QuadElementRefinement.newElements(elem);
+                List<Element> children = QuadElementRefinement.newElements(elem, nodes);
                 elem.Children = children;
             }
             // now flatten the tree structure
             List<Element> flatElemTree = getNewElementList(elements);
-            List<Node> all_nodes = getAllNodes(flatElemTree);
+            //List<Node> all_nodes = getAllNodes(flatElemTree);
+
+            //List<Node> allNodes = meshData.Nodes.Values.ToList();
+            // update the ids on nodes which don't have ids
+            // assignNodeNumbers(allNodes);
 
             // our mesh should now be refined
-            this.meshData = new MeshData();
+            var newMeshDataNodes = meshData.Nodes;
 
+            this.meshData = new MeshData();
             this.meshData.Elements = flatElemTree;
-            this.meshData.Nodes = all_nodes;
+            this.meshData.Nodes = newMeshDataNodes;
+
         }
 
-        int flatStructElemId = 0;
+        int flatStructElemId = 1;
         /// <summary>
         /// Use this method to flatten the element tree to produce a single list of leaf nodes by recursing through the quad tree 
         /// </summary>
@@ -67,7 +75,7 @@ namespace DisertationFEPrototype.Optimisations
                 // this is the bottom of the tree
                 if(elem.Children == null)
                 {
-                    elem.SetId = flatStructElemId;
+                    elem.Id = flatStructElemId;
                     flatElemTree.Add(elem);
                     flatStructElemId++;
                 }
@@ -86,6 +94,7 @@ namespace DisertationFEPrototype.Optimisations
         private List<Node> getAllNodes(List<Element> flatElemTree)
         {
             List<Node> modelNodes = new List<Node>();
+
             foreach(Element elem in flatElemTree)
             {
                 foreach(Node node in elem.GetNodes)
@@ -95,5 +104,22 @@ namespace DisertationFEPrototype.Optimisations
             }
             return modelNodes;
         }
+        //private void assignNodeNumbers(List<Node> nodes)
+        //{
+        //    //int? highestId = nodes.Max(x => x.Id);
+        //    //if(highestId == null)
+        //    //{
+        //    //    highestId = 0;
+        //    //}
+        //    int highestId = 1;
+        //    foreach(Node node in nodes)
+        //    {
+        //        if(node.Id == null)
+        //        {
+        //            node.Id = highestId;
+        //            highestId++;
+        //        }
+        //    }
+        //}
     }
 }

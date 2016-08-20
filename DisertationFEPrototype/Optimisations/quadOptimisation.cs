@@ -14,8 +14,13 @@ namespace DisertationFEPrototype.Optimisations
     static class QuadElementRefinement
     {
         
-        ///
-        public static List<Element> newElements(Element elem)
+        /// <summary>
+        /// given an element get a list of sub devided elements the sum of which forms that element
+        /// </summary>
+        /// <param name="elem"></param>
+        /// <param name="nodes"></param>
+        /// <returns></returns>
+        public static List<Element> newElements(Element elem, Dictionary<Tuple<double, double, double>,Node> nodes)
         {
 
             List<Element> newElements = new List<Element>();
@@ -24,15 +29,46 @@ namespace DisertationFEPrototype.Optimisations
             List<Node> originalNodes = elem.GetNodes;
             string constantAxis = getConstantAxis(originalNodes);
 
-            var thing = createMidpointNodes(originalNodes);
+            var subNodeTup = createMidpointNodes(originalNodes, nodes);
 
-            List<List<Node>> elementEdgeTrios = thing.Item1;
-            List<Node> midpointLineNodes = thing.Item2;
+            List<List<Node>> elementEdgeTrios = subNodeTup.Item1;
+            List<Node> midpointLineNodes = subNodeTup.Item2;
 
-            Node centreNode = createCentreNode(midpointLineNodes);
+            Node centerNode = createCenterNode(midpointLineNodes, nodes);
+           
+           
+            // list of all the new elements with their four nodes
+            return getNewElements(elementEdgeTrios, centerNode, constantAxis);
 
-            return getNewElements(elementEdgeTrios, centreNode, constantAxis);
+        }
 
+        
+        /// <summary>
+        /// check if node already exists within the model, if yes then use the node object already in the model, else add
+        /// the node to the model
+        /// </summary>
+        /// <param name="node">the node we want to check the presence of in the model</param>
+        /// 
+        /// <returns>the safe node reference</returns>
+        private static Node createNode(double x, double y, double z, Dictionary<Tuple<double, double, double>, Node> nodes)
+        {
+            var key = new Tuple<double, double, double>(x, y, z);
+
+            // kind of expensive but fine for the time being, we just want to know what to use as the starting value for assigning node ids
+            // nodes.Values.ToArray().Max(x => x.Id);
+
+            Node node;
+            if (nodes.ContainsKey(key)) {
+                node = nodes[key];
+            }
+            else
+            {
+                // set the centre node to the noder that already exists, otherwise keep the one we just made
+                int maxNodeCount = nodes.Values.ToArray().Select(a => a.Id).Max();
+                node = new Node(maxNodeCount + 1, x, y, z);
+                nodes[key] = node;
+            }
+            return node;
         }
         private static string getConstantAxis(List<Node> elementNodes)
         {
@@ -83,7 +119,7 @@ namespace DisertationFEPrototype.Optimisations
         /// </summary>
         /// <param name="midpointLineNodes"></param>
         /// <returns>centeral node object</returns>
-        private static Node createCentreNode(List<Node> midpointLineNodes)
+        private static Node createCenterNode(List<Node> midpointLineNodes, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
 
             double maxX = midpointLineNodes.Max(node => node.GetX);
@@ -98,19 +134,27 @@ namespace DisertationFEPrototype.Optimisations
             double minZ = midpointLineNodes.Min(node => node.GetZ);
             double zVal = (maxZ + minZ) / 2;
 
-        
-            Node centralNode = new Node(null, xVal, yVal, zVal);
+            
+           
+            Node centralNode = createNode(xVal, yVal, zVal, nodes);
+
+
             return centralNode;
         }
-        
-        private static Tuple<List<List<Node>>, List<Node>> createMidpointNodes(List<Node> elementNodes)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="elementNodes">four nodes within a particular element</param>
+        /// <returns></returns>
+        private static Tuple<List<List<Node>>, List<Node>> createMidpointNodes(List<Node> elementNodes, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
-            List<Node> currentMidpointNodes = new List<Node>();
             List<List<Node>> elementEdgeTrios = new List<List<Node>>();
+            List<Node> midEdgeNodes = new List<Node>();
 
             foreach (Node node in elementNodes)
             {
-                List < Node > singleNodeTrio = new List<Node>();
+                List <Node> singleNodeTrio = new List<Node>();
+                // add the corner node to the trio
                 singleNodeTrio.Add(node);
 
                 foreach (Node adjacentNode in elementNodes)
@@ -140,43 +184,22 @@ namespace DisertationFEPrototype.Optimisations
                         // if two of the nodes share two values in x y or z then they are on a plane together.
                         if (commonAxisVals == 2)
                         {
-                            Node midEdge = makeMidEdgeNode(sameVals, node, adjacentNode);
-
-                            Node alreadyRecordedEquiv = tryGetAlreadyRecorded(midEdge, currentMidpointNodes);
-                            if (alreadyRecordedEquiv == null)
-                            {
-                                currentMidpointNodes.Add(midEdge);
-                                singleNodeTrio.Add(midEdge);
-                            }
-                            else
-                            {
-                                singleNodeTrio.Add(alreadyRecordedEquiv);
-                            }
+                            Node midEdge = makeMidEdgeNode(sameVals, node, adjacentNode, nodes);
+                            midEdgeNodes.Add(midEdge);
+                            singleNodeTrio.Add(midEdge);
                         }
                     }
                 }
                 elementEdgeTrios.Add(singleNodeTrio);
             }
-            return Tuple.Create(elementEdgeTrios, currentMidpointNodes);
+            return Tuple.Create(elementEdgeTrios, midEdgeNodes);
         }
-        private static Node tryGetAlreadyRecorded(Node minEdge, List<Node> currentMidPointNodes)
-        {
-            foreach (Node currentNode in currentMidPointNodes)
-            {
-                if (minEdge.GetX == currentNode.GetX && minEdge.GetY == currentNode.GetY && minEdge.GetZ == currentNode.GetZ)
-                {
-                    return currentNode;
-                }
-            }
-            return null;
-        }
-
 
         /// <summary>
         /// return a node which lies on the midpoint between the two edges
         /// </summary>
         /// <returns></returns>
-        private static Node makeMidEdgeNode(bool[] sameVals, Node node, Node adjacentNode)
+        private static Node makeMidEdgeNode(bool[] sameVals, Node node, Node adjacentNode, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
 
             // int id = this.meshData.GetNodes.Count + 1;
@@ -209,8 +232,7 @@ namespace DisertationFEPrototype.Optimisations
                 default:
                     throw new Exception("computeMidEdgeNode: index is incorrect, can't operate in more than 3d space");
             }
-            return new Node(null, newX, newY, newZ);
-
+            return createNode(newX, newY, newZ, nodes); 
         }
     }
 }

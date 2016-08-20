@@ -13,11 +13,11 @@ namespace DisertationFEPrototype.Model
     /// </summary>
     public class MeshData
     {
-        List<Node> nodes;
+        Dictionary<Tuple<double, double, double>, Node> nodes;
         List<Element> elements;
         //string lisaFile;
 
-        public List<Node> Nodes
+        public Dictionary<Tuple<double, double, double>, Node> Nodes
         {
             get
             {

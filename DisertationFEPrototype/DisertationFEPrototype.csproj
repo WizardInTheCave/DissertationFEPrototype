@@ -64,6 +64,7 @@
     <Compile Include="Model\MeshDataStructure\Element.cs" />
     <Compile Include="Model\AnalysisData.cs" />
     <Compile Include="Model\MeshDataStructure\Node.cs" />
+    <Compile Include="Optimisations\CheckForDuplicates.cs" />
     <Compile Include="Optimisations\generalOptimisations.cs" />
     <Compile Include="Optimisations\quadOptimisation.cs" />
     <Compile Include="PartGraph\ComponentNode.cs" />

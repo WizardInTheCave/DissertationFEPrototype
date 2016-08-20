@@ -8,16 +8,20 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
 {
     public class Node
     {
-        int? id;
+        int id;
         double x;
         double y;
         double z;
 
-        public int? GetId
+        public int Id
         {
             get
             {
                 return this.id;
+            }
+            set
+            {
+                this.id = value;
             }
         }
 
@@ -45,7 +49,7 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
             }
         }
 
-        public Node(int? id, double x, double y, double z)
+        public Node(int id, double x, double y, double z)
         {
             this.id = id;
             this.x = x;

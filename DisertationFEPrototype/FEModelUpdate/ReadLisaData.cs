@@ -37,13 +37,12 @@ namespace DisertationFEPrototype.FEModelUpdate
             // This text is added only once to the file.
             if (File.Exists(lisaString))
             {
+
                 string xmlString = File.ReadAllText(lisaString);
-                List<Node> nodes = readAllNodes(xmlString);
-                List<Element> elements = readAllElements(xmlString, nodes);
 
                 this.meshData = new MeshData();
-                this.meshData.Nodes = nodes;
-                this.meshData.Elements = elements;
+                this.meshData.Nodes = readAllNodes(xmlString);
+                this.meshData.Elements= readAllElements(xmlString);
             }
             else
             {
@@ -51,10 +50,12 @@ namespace DisertationFEPrototype.FEModelUpdate
             }  
         }
 
-        private List<Node> readAllNodes(string xmlString)
+        private Dictionary<Tuple<double, double, double>, Node> readAllNodes(string xmlString)
         {
             const string nodeTag = "node";
-            List<Node> nodes = new List<Node>();
+            var nodes = new Dictionary<Tuple<double, double, double>, Node>();
+             
+            // List<Node> nodes = new List<Node>();
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
             {
                 while (reader.Read())
@@ -67,7 +68,8 @@ namespace DisertationFEPrototype.FEModelUpdate
                     {
                         // Get element name and switch on it.
                         Node node = getNodeData(reader);
-                        nodes.Add(node);
+                        //nodes.Add(node);
+                        nodes[new Tuple<double, double, double>(node.GetX, node.GetY, node.GetZ)] = node;
                     }
                     
                 }
@@ -75,7 +77,7 @@ namespace DisertationFEPrototype.FEModelUpdate
             return nodes;
         }
 
-        private List<Element> readAllElements(string xmlString, List<Node> nodes)
+        private List<Element> readAllElements(string xmlString)
         {
             const string elemTag = "elem";
 
@@ -94,7 +96,7 @@ namespace DisertationFEPrototype.FEModelUpdate
                     else if (reader.IsStartElement() && reader.Name == elemTag)
                     {
                         // Get element name and switch on it.
-                        Element element = getElementData(reader, nodes);
+                        Element element = getElementData(reader);
                         elements.Add(element);
                         inElementsSection = true;
 
@@ -111,7 +113,7 @@ namespace DisertationFEPrototype.FEModelUpdate
         /// <param name="reader">Xml reader object which contains the lisa file data</param>
         /// <param name="nodes">List of all the node objects</param>
         /// <returns>Element object </returns>
-        private Element getElementData(XmlReader reader, List<Node> nodes)
+        private Element getElementData(XmlReader reader)
         {
             const string elementIdAtt = "eid";
             const string shapeAtt = "shape";
@@ -130,12 +132,14 @@ namespace DisertationFEPrototype.FEModelUpdate
 
                 // get the nodes which we have been able to load in already
                 List<Node> matchedNodes = new List<Node>();
-
-                foreach (Node node in nodes)
+    
+                // iterate through all the stored nodes in the mesh, if we can find the node in the model already
+                // then link it up to the element
+                foreach (Node node in meshData.Nodes.Values)
                 {
                     foreach (int elemNodeId in elemNodeIds)
                     {
-                        if (node.GetId == elemNodeId)
+                        if (node.Id == elemNodeId)
                         {
                             matchedNodes.Add(node);
                         }
@@ -148,7 +152,6 @@ namespace DisertationFEPrototype.FEModelUpdate
             {
                 throw new Exception("Could not read element data from xml correctly");
             }
-
         }
         private Node getNodeData(XmlReader reader)
         {
@@ -170,6 +173,9 @@ namespace DisertationFEPrototype.FEModelUpdate
                 double y = Convert.ToDouble(yStr);
                 double z = Convert.ToDouble(zStr);
                 Node node = new Node(id, x, y, z);
+
+                // allow fast lookup of a node in the database with just x, y, z choords, useful for checking node overlaps
+               
                 return node;
             }
             catch

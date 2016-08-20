@@ -24,7 +24,7 @@ namespace DisertationFEPrototype
             string solveFile = @"D:\Documents\DissertationWork\secondTest.csv";
 
             string lisaFileName = Path.GetFileNameWithoutExtension(lisaFile);
-            string lisaFolderPath = Path.GetDirectoryName(lisaFileName);
+            string lisaFolderPath = Path.GetDirectoryName(lisaFile);
 
             List<MeshData> meshLog = new List<MeshData>();
 
@@ -42,7 +42,7 @@ namespace DisertationFEPrototype
             {
                 List<AnalysisData> analysisData = analysisDataReader.getAnalysisData();
 
-                solve(lisaFile);
+                // solve(lisaFile);
                 // read data from the solve
                 analysisData = analysisDataReader.getAnalysisData();
 
@@ -52,7 +52,7 @@ namespace DisertationFEPrototype
                 MeshData refinedMesh = optimisation.GetUpdatedMesh;
                 meshLog.Add(refinedMesh);
 
-                string outputFilePath = lisaFolderPath + lisaFileName + ii.ToString();
+                string outputFilePath = lisaFolderPath + "\\" + lisaFileName + ii.ToString() + ".liml";
                 WriteNewMeshData meshWriter = new WriteNewMeshData(refinedMesh, outputFilePath);
 
                 ii++;
