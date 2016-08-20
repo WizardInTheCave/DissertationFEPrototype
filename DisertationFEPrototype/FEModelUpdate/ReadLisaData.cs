@@ -40,15 +40,15 @@ namespace DisertationFEPrototype.FEModelUpdate
                 string xmlString = File.ReadAllText(lisaString);
                 List<Node> nodes = readAllNodes(xmlString);
                 List<Element> elements = readAllElements(xmlString, nodes);
-               
-                this.meshData = new MeshData(nodes, elements);
+
+                this.meshData = new MeshData();
+                this.meshData.Nodes = nodes;
+                this.meshData.Elements = elements;
             }
             else
             {
                 throw new FileNotFoundException("Could not load the lisa mesh file to rebuild model");
-            }
-
-          
+            }  
         }
 
         private List<Node> readAllNodes(string xmlString)
@@ -83,9 +83,10 @@ namespace DisertationFEPrototype.FEModelUpdate
 
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
             {
+                bool inElementsSection = false;
                 while (reader.Read())
                 {
-                    if(reader.IsStartElement() && reader.Name == "faceselection" || reader.Name == "Unnamed(2)")
+                    if(reader.IsStartElement() && inElementsSection && reader.Name != elemTag)
                     {
                         Console.WriteLine(reader.Name);
                         break;
@@ -95,6 +96,8 @@ namespace DisertationFEPrototype.FEModelUpdate
                         // Get element name and switch on it.
                         Element element = getElementData(reader, nodes);
                         elements.Add(element);
+                        inElementsSection = true;
+
 
                     }
                 }
@@ -102,7 +105,12 @@ namespace DisertationFEPrototype.FEModelUpdate
             return elements;
         }
 
-
+        /// <summary>
+        /// Go through each element within the file and construct an element object in memory which we can then manipulate
+        /// </summary>
+        /// <param name="reader">Xml reader object which contains the lisa file data</param>
+        /// <param name="nodes">List of all the node objects</param>
+        /// <returns>Element object </returns>
         private Element getElementData(XmlReader reader, List<Node> nodes)
         {
             const string elementIdAtt = "eid";
@@ -127,7 +135,7 @@ namespace DisertationFEPrototype.FEModelUpdate
                 {
                     foreach (int elemNodeId in elemNodeIds)
                     {
-                        if (node.GetId == id)
+                        if (node.GetId == elemNodeId)
                         {
                             matchedNodes.Add(node);
                         }

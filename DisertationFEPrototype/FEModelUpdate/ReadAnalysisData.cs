@@ -30,13 +30,10 @@ namespace DisertationFEPrototype.ModelUpdate
 
             using (TextFieldParser parser = new TextFieldParser(solveFile))
             {
-
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
 
                 string[] header = parser.ReadFields();
-
-
 
                 while (!parser.EndOfData)
                 {

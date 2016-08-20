@@ -5,6 +5,8 @@ using DisertationFEPrototype.ModelUpdate;
 using DisertationFEPrototype.Optimisations;
 using DisertationFEPrototype.FEModelUpdate;
 using DisertationFEPrototype.Model;
+using System.Diagnostics;
+using System.IO;
 
 namespace DisertationFEPrototype
 {
@@ -18,45 +20,55 @@ namespace DisertationFEPrototype
 
             int ii = 0;
 
-            string lisaString = @"D:\Documents\DissertationWork\basicCube.liml";
+            string lisaFile = @"D:\Documents\DissertationWork\simpleElement.liml";  
             string solveFile = @"D:\Documents\DissertationWork\secondTest.csv";
+
+            string lisaFileName = Path.GetFileNameWithoutExtension(lisaFile);
+            string lisaFolderPath = Path.GetDirectoryName(lisaFileName);
 
             List<MeshData> meshLog = new List<MeshData>();
 
             // only need to do this once to get the inital mesh, after that should try and drive it
             // purely with the solve data
 
-            var meshDataReader = new ReadMeshData(lisaString);
+            var meshDataReader = new ReadMeshData(lisaFile);
             MeshData meshData = meshDataReader.GetMeshData;
-
-            var model = new FEModel(lisaString, meshData);
-
-            model.solve();
 
             // read data from the solve
             var analysisDataReader = new ReadAnalysisData(solveFile);
-            List<AnalysisData> analysisData = analysisDataReader.getAnalysisData();
+         
 
             while (evaluationFunction(ii) == false)
-            { 
+            {
+                List<AnalysisData> analysisData = analysisDataReader.getAnalysisData();
 
-                SomeOptimisation optimisation = new SomeOptimisation(model, analysisData);
-                optimisation.runOptimisation();
+                solve(lisaFile);
+                // read data from the solve
+                analysisData = analysisDataReader.getAnalysisData();
+
+                generalOptimisations optimisation = new generalOptimisations(meshData, analysisData);
+                optimisation.doubleNodeCount();
 
                 MeshData refinedMesh = optimisation.GetUpdatedMesh;
                 meshLog.Add(refinedMesh);
 
-                WriteNewMeshData meshWriter = new WriteNewMeshData(refinedMesh);
-
-                model.solve();
-                
-                // read data from the solve
-                analysisData = analysisDataReader.getAnalysisData();
+                string outputFilePath = lisaFolderPath + lisaFileName + ii.ToString();
+                WriteNewMeshData meshWriter = new WriteNewMeshData(refinedMesh, outputFilePath);
 
                 ii++;
             }
 
         }
+        /// <summary>
+        /// tells lisa to run a solve on the lisa file which will produce some output
+        /// </summary>
+        /// <param name="lisaFile"></param>
+        public void solve(string lisaFile)
+        {
+            string strCmdText = "lisa8" + lisaFile + "solve";
+            Process.Start("CMD.exe", strCmdText);
+        }
+
         private bool evaluationFunction(int ii)
         {
             return ii > 3;

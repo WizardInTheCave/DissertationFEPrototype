@@ -11,31 +11,40 @@ namespace DisertationFEPrototype.Model
     /// <summary>
     /// This class is a representation of
     /// </summary>
-    class MeshData
+    public class MeshData
     {
         List<Node> nodes;
         List<Element> elements;
-        string lisaFile;
+        //string lisaFile;
 
-        public List<Node> GetNodes
+        public List<Node> Nodes
         {
             get
             {
                 return this.nodes;
             }
+            set
+            {
+                this.nodes = value;
+            }
         }
 
-        public List<Element> GetElements
+        public List<Element> Elements
         {
             get
             {
                 return this.elements;
             }
+            set
+            {
+                this.elements = value;
+            }
+
         }
-        public MeshData(List<Node> nodes, List<Element> elements)
+        public MeshData()
         {
-            this.nodes = nodes;
-            this.elements = elements;
+            //this.nodes = nodes;
+            //this.elements = elements;
         }
     }
 }
