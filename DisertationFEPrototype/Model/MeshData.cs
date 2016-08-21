@@ -1,4 +1,5 @@
-﻿using DisertationFEPrototype.Model.MeshDataStructure;
+﻿using DisertationFEPrototype.Model.Analysis;
+using DisertationFEPrototype.Model.MeshDataStructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,29 +14,65 @@ namespace DisertationFEPrototype.Model
     /// </summary>
     class MeshData
     {
-        List<Node> nodes;
-        List<ElementData> elements;
-        string lisaFile;
+        Dictionary<Tuple<double, double, double>, Node> nodes;
+        List<Element> elements;
+        Force force;
+        Material material;
 
-        public List<Node> GetNodes
+        //string lisaFile;
+
+        public Dictionary<Tuple<double, double, double>, Node> Nodes
         {
             get
             {
                 return this.nodes;
             }
+            set
+            {
+                this.nodes = value;
+            }
         }
 
-        public List<ElementData> GetElements
+        public List<Element> Elements
         {
             get
             {
                 return this.elements;
             }
+            set
+            {
+                this.elements = value;
+            }
+
         }
-        public MeshData(List<Node> nodes, List<ElementData> elements)
+        public Force TheForce
         {
-            this.nodes = nodes;
-            this.elements = elements;
+            get
+            {
+                return this.force;
+            }
+            set
+            {
+                this.force = value;
+            }
+
+        }
+        public Material TheMaterial
+        {
+            get
+            {
+                return this.material;
+            }
+            set
+            {
+                this.material = value;
+            }
+
+        }
+        public MeshData()
+        {
+            //this.nodes = nodes;
+            //this.elements = elements;
         }
     }
 }

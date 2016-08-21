@@ -31,7 +31,7 @@ namespace DisertationFEPrototype.Optimisations
 
             var subNodeTup = createMidpointNodes(originalNodes, nodes);
 
-            List<List<Node>> elementEdgeTrios = subNodeTup.Item1;
+            List<Node[]> elementEdgeTrios = subNodeTup.Item1;
             List<Node> midpointLineNodes = subNodeTup.Item2;
 
             Node centerNode = createCenterNode(midpointLineNodes, nodes);
@@ -101,15 +101,19 @@ namespace DisertationFEPrototype.Optimisations
         /// Create the new four interior elements for the current element
         /// </summary>
         /// <returns>the new elements which are the children of the original element</returns>
-        private static List<Element> getNewElements(List<List<Node>> elementEdgeTrios, Node centreNode, string constantAxis)
+        private static List<Element> getNewElements(List<Node[]> elementEdgeTrios, Node centreNode, string constantAxis)
         {
             List<Element> newElements = new List<Element>();
 
-            foreach (List<Node> trio in elementEdgeTrios)
+            foreach (Node[] trio in elementEdgeTrios)
             {
+                // problem here is that the matched nodes need to be in such an order that they go around in squares,
+                // not an order where nodes are linked across the center of the element
+
                 // add the centre node to get the smaller element
-                trio.Add(centreNode);
-                newElements.Add(new Element(null, "quad4", trio));
+                trio[2] = centreNode;
+                var orderedTrio = trio.ToList();
+                newElements.Add(new Element(null, "quad4", orderedTrio));
             }
             return newElements;
         }
@@ -146,16 +150,18 @@ namespace DisertationFEPrototype.Optimisations
         /// </summary>
         /// <param name="elementNodes">four nodes within a particular element</param>
         /// <returns></returns>
-        private static Tuple<List<List<Node>>, List<Node>> createMidpointNodes(List<Node> elementNodes, Dictionary<Tuple<double, double, double>, Node> nodes)
+        private static Tuple<List<Node[]>, List<Node>> createMidpointNodes(List<Node> elementNodes, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
-            List<List<Node>> elementEdgeTrios = new List<List<Node>>();
+            List<Node[]> elementEdgeTrios = new List<Node[]>();
             List<Node> midEdgeNodes = new List<Node>();
 
             foreach (Node node in elementNodes)
             {
-                List <Node> singleNodeTrio = new List<Node>();
+                Node[] singleNodeTrio = new Node[4];
                 // add the corner node to the trio
-                singleNodeTrio.Add(node);
+                singleNodeTrio[0] = node;
+                
+                //singleNodeTrio.Add(node);
 
                 foreach (Node adjacentNode in elementNodes)
                 {
@@ -186,7 +192,15 @@ namespace DisertationFEPrototype.Optimisations
                         {
                             Node midEdge = makeMidEdgeNode(sameVals, node, adjacentNode, nodes);
                             midEdgeNodes.Add(midEdge);
-                            singleNodeTrio.Add(midEdge);
+
+                            // this is important so that the mesh forms correct square elements
+                            if(singleNodeTrio[1] == null)
+                            {
+                                singleNodeTrio[1] = midEdge;
+                            }
+                            else{
+                                singleNodeTrio[3] = midEdge;
+                            }      
                         }
                     }
                 }

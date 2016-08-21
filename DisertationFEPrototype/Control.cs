@@ -20,7 +20,7 @@ namespace DisertationFEPrototype
 
             int ii = 0;
 
-            string lisaFile = @"D:\Documents\DissertationWork\simpleElement.liml";  
+            string lisaFile = @"D:\Documents\DissertationWork\models\newBlockTestSquareNodes.liml";  
             string solveFile = @"D:\Documents\DissertationWork\secondTest.csv";
 
             string lisaFileName = Path.GetFileNameWithoutExtension(lisaFile);
@@ -55,6 +55,8 @@ namespace DisertationFEPrototype
                 string outputFilePath = lisaFolderPath + "\\" + lisaFileName + ii.ToString() + ".liml";
                 WriteNewMeshData meshWriter = new WriteNewMeshData(refinedMesh, outputFilePath);
 
+                // update the model for the next iteration
+                meshData = refinedMesh;
                 ii++;
             }
 
