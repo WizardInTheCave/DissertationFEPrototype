@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DisertationFEPrototype.Model;
 using DisertationFEPrototype.Model.MeshDataStructure;
-
+using DisertationFEPrototype.Model.Analysis;
 
 namespace DisertationFEPrototype.Optimisations
 {
@@ -38,10 +38,22 @@ namespace DisertationFEPrototype.Optimisations
 
             var nodes = this.meshData.Nodes;
 
+            List<Element> dividedElements = new List<Element>();
+
+            // we need to add the elements that are created by the refinement to the face selection so that
+            // forces and constraints on the next iteration of the model are appropreately spread across the refined mesh
+            foreach(FaceSelection faceSelection in meshData.TheFaceSelections)
+            {
+                if ()
+                {
+
+                }
+            }
             foreach (var elem in elements)
             {
                 
                 List<Element> children = QuadElementRefinement.newElements(elem, nodes);
+                
                 elem.Children = children;
             }
             // now flatten the tree structure

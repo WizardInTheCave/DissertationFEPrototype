@@ -47,13 +47,53 @@ namespace DisertationFEPrototype.FEModelUpdate
                 this.meshData.Elements= ReadElements.readAllElements(xmlString, meshData);
                 this.meshData.TheForce = readForce(xmlString);
                 this.meshData.TheMaterial = readMaterial(xmlString);
-                
+                this.meshData.TheFaceSelections = readFaceSelections(xmlString);
 
             }
             else
             {
                 throw new FileNotFoundException("Could not load the lisa mesh file to rebuild model");
             }  
+        }
+
+        private List<FaceSelection> readFaceSelections(string xmlString)
+        {
+            const string elemTag = "faceselection";
+
+            List<FaceSelection> faceSelections = new List<FaceSelection>();
+
+            using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+            {
+
+                while (reader.ReadToFollowing(elemTag))
+                {
+
+
+                    const string name = "name";
+
+                    //read in properties from the xml file
+                    string selectionName = reader[name];
+
+                    try
+                    {
+                        List<Face> faceSelectionFaces = new List<Face>();
+                        var innerSubtree = reader.ReadSubtree();
+                        while (innerSubtree.Read())
+                        {
+                            int elemId = Convert.ToInt16(innerSubtree["eid"]);
+                            int faceId = Convert.ToInt16(innerSubtree["faceid"]);
+                            faceSelectionFaces.Add(new Face(elemId, faceId));
+                        }
+                        faceSelections.Add(new FaceSelection(selectionName, faceSelectionFaces));
+                    }
+                    catch
+                    {
+                        throw;
+                        //throw new Exception("Could not read force data from xml correctly");
+                    }
+                }
+            }
+            return faceSelections;
         }
         private Force readForce(string xmlString)
         {
@@ -93,6 +133,11 @@ namespace DisertationFEPrototype.FEModelUpdate
             return force;
         } 
        
+        /// <summary>
+        /// read material data in from the file and build a material object
+        /// </summary>
+        /// <param name="xmlString">the xml file as a string</param>
+        /// <returns>Material object containing all the material data</returns>
         private Material readMaterial(string xmlString)
         {
 

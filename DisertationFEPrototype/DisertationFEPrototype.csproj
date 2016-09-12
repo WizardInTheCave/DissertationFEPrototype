@@ -63,6 +63,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Analysis\AnalysisData.cs" />
+    <Compile Include="Model\Analysis\Face.cs" />
+    <Compile Include="Model\Analysis\FaceSelection.cs" />
     <Compile Include="Model\Analysis\Force.cs" />
     <Compile Include="Model\Analysis\Material.cs" />
     <Compile Include="Model\Analysis\MaterialProps\Geometric.cs" />

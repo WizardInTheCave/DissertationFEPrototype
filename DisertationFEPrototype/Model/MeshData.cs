@@ -19,8 +19,11 @@ namespace DisertationFEPrototype.Model
         Force force;
         Material material;
 
+        List<FaceSelection> faceSelections;
+
         //string lisaFile;
 
+        
         public Dictionary<Tuple<double, double, double>, Node> Nodes
         {
             get
@@ -68,6 +71,17 @@ namespace DisertationFEPrototype.Model
                 this.material = value;
             }
 
+        }
+        public List<FaceSelection> TheFaceSelections
+        {
+            get
+            {
+                return this.faceSelections;
+            }
+            set
+            {
+                this.faceSelections = value;
+            }
         }
         public MeshData()
         {
