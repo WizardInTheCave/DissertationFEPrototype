@@ -11,6 +11,24 @@ namespace DisertationFEPrototype.Model.Analysis
         string name;
         List<Face> faces;
 
+        public List<Face> Faces{
+            get
+            { 
+                return this.faces;
+            }
+            set
+            {
+                this.faces = value;
+            }
+        }
+        public string GetName
+        {
+            get
+            {
+                return this.name;
+            }
+        }
+
         public FaceSelection(string name, List<Face> faces)
         {
             this.name = name;

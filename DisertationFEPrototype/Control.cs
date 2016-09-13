@@ -7,6 +7,7 @@ using DisertationFEPrototype.FEModelUpdate;
 using DisertationFEPrototype.Model;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace DisertationFEPrototype
 {
@@ -20,16 +21,19 @@ namespace DisertationFEPrototype
 
             int ii = 0;
 
-            string lisaFile = @"D:\Documents\DissertationWork\models\newBlockTestSquareNodes.liml";  
+            //string lisaFile = @"D:\Documents\DissertationWork\models\newBlockTestSquareNodes.liml";  
+            string lisaFile = "newBlockTestSquareNodes.liml";
             string solveFile = @"D:\Documents\DissertationWork\secondTest.csv";
 
             string lisaFileName = Path.GetFileNameWithoutExtension(lisaFile);
-            string lisaFolderPath = Path.GetDirectoryName(lisaFile);
+            string lisaFolderPath = @"D:\Documents\DissertationWork\models\";
 
             List<MeshData> meshLog = new List<MeshData>();
 
             // only need to do this once to get the inital mesh, after that should try and drive it
             // purely with the solve data
+
+            Directory.SetCurrentDirectory(lisaFolderPath);
 
             var meshDataReader = new ReadMeshData(lisaFile);
             MeshData meshData = meshDataReader.GetMeshData;
@@ -42,7 +46,11 @@ namespace DisertationFEPrototype
             {
                 List<AnalysisData> analysisData = analysisDataReader.getAnalysisData();
 
-                // solve(lisaFile);
+                //if (ii == 0)
+                //{
+                solve(lisaFile, lisaFolderPath);
+                //}
+
                 // read data from the solve
                 analysisData = analysisDataReader.getAnalysisData();
 
@@ -52,8 +60,10 @@ namespace DisertationFEPrototype
                 MeshData refinedMesh = optimisation.GetUpdatedMesh;
                 meshLog.Add(refinedMesh);
 
-                string outputFilePath = lisaFolderPath + "\\" + lisaFileName + ii.ToString() + ".liml";
-                WriteNewMeshData meshWriter = new WriteNewMeshData(refinedMesh, outputFilePath);
+                // update the lisa file we are now working on (we next want to solve the updated file)
+                lisaFile = lisaFolderPath + lisaFileName + ii.ToString() + ".liml";
+                WriteNewMeshData meshWriter = new WriteNewMeshData(refinedMesh, lisaFile, lisaFolderPath);
+                Thread.Sleep(1000);
 
                 // update the model for the next iteration
                 meshData = refinedMesh;
@@ -65,10 +75,23 @@ namespace DisertationFEPrototype
         /// tells lisa to run a solve on the lisa file which will produce some output
         /// </summary>
         /// <param name="lisaFile"></param>
-        public void solve(string lisaFile)
+        public void solve(string lisaFile, string lisaFolderPath)
         {
-            string strCmdText = "lisa8" + lisaFile + "solve";
-            Process.Start("CMD.exe", strCmdText);
+
+            //ProcessStartInfo startInfo = new ProcessStartInfo("lisa8");
+            //startInfo.WindowStyle = ProcessWindowStyle.Minimized;
+
+            //Process.Start(startInfo);
+
+            //startInfo.Arguments = ;
+
+            //Process.Start(startInfo);
+
+            using (Process exeProcess = Process.Start("lisa8", lisaFile + " solve"))
+            {
+                
+                exeProcess.WaitForExit();
+            }
         }
 
         private bool evaluationFunction(int ii)

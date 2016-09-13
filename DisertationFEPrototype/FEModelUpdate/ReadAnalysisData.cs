@@ -18,7 +18,6 @@ namespace DisertationFEPrototype.ModelUpdate
         List<AnalysisData> analysisData;
         string solveFile;
       
-
         /// <summary>
         /// Read data stored in the file produced by the solve operation
         /// between refinement iterations

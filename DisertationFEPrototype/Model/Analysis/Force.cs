@@ -13,6 +13,37 @@ namespace DisertationFEPrototype.Model.Analysis
         double y;
         double z;
 
+        public string Selection
+        {
+            get
+            {
+                return this.selection;
+            }
+        }
+        public double X
+        {
+            get
+            {
+                return this.x;
+            }
+        }
+
+        public double Y
+        {
+            get
+            {
+                return this.y;
+            }
+        }
+
+        public double Z
+        {
+            get
+            {
+                return this.z;
+            }
+        }
+
         public Force(string selection, double x, double y, double z)
         {
             this.selection = selection;

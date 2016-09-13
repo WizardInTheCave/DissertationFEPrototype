@@ -8,6 +8,7 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
 {
     public class Element
     {
+        // was int?
         int? id;
         string shape;
         // id of nodes which form the element

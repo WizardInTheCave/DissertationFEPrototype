@@ -80,9 +80,25 @@ namespace DisertationFEPrototype.FEModelUpdate
                         var innerSubtree = reader.ReadSubtree();
                         while (innerSubtree.Read())
                         {
-                            int elemId = Convert.ToInt16(innerSubtree["eid"]);
-                            int faceId = Convert.ToInt16(innerSubtree["faceid"]);
-                            faceSelectionFaces.Add(new Face(elemId, faceId));
+                            var face = innerSubtree["face"];
+                            //Console.WriteLine(innerSubtree.NodeType + ": " + innerSubtree.Name);
+
+                            if (innerSubtree.NodeType == XmlNodeType.Element && innerSubtree.Name == "face")
+                            {
+                                int elemId = Convert.ToInt16(innerSubtree["eid"]);
+                                int faceId = Convert.ToInt16(innerSubtree["faceid"]);
+
+
+                                List<Element> elements = this.meshData.Elements.Where(e => e.Id == elemId).ToList();
+                                if (elements.Count > 1)
+                                {
+                                    throw new IOException("ReadLisaData.readFaceSelections: Face seems to have more than one element when reading select elements");
+                                }
+                                Element elem = elements[0];
+
+                                faceSelectionFaces.Add(new Face(elem, faceId));
+                            }
+
                         }
                         faceSelections.Add(new FaceSelection(selectionName, faceSelectionFaces));
                     }
@@ -159,13 +175,12 @@ namespace DisertationFEPrototype.FEModelUpdate
                     var innerSubtree = reader.ReadSubtree();
 
                     innerSubtree.ReadToDescendant("geometric");
-
                     string geomType = innerSubtree["type"];
                     double thickness = Convert.ToDouble(innerSubtree["thickness"]);
                     double planestrain = Convert.ToDouble(innerSubtree["planestrain"]);
                     
 
-                    innerSubtree.ReadToDescendant("mechanical");
+                    innerSubtree.ReadToFollowing("mechanical");
                     string mechType = innerSubtree["type"];
                     long youngsModulus = Convert.ToInt64(innerSubtree["youngsmodulus"]);
                     double poissonRatio = Convert.ToDouble(innerSubtree["poissonratio"]);

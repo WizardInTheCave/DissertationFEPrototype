@@ -11,6 +11,28 @@ namespace DisertationFEPrototype.Model.Analysis.MaterialProps
         string type;
         double thickness;
         double planestrain;
+
+        public string GetGeometricType
+        {
+            get{
+                return this.type;
+            }
+        }
+        public double GetThickness
+        {
+            get
+            {
+                return this.thickness;
+            }
+        }
+        public double GetPlaneStrain
+        {
+            get
+            {
+                return this.planestrain;
+            }
+        }
+
         public Geometric(string type, double thickness, double planestrain)
         {
             this.type = type;

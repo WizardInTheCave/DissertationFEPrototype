@@ -63,7 +63,7 @@ namespace DisertationFEPrototype.Optimisations
             }
             else
             {
-                // set the centre node to the noder that already exists, otherwise keep the one we just made
+                // set the centre node to the node that already exists, otherwise keep the one we just made
                 int maxNodeCount = nodes.Values.ToArray().Select(a => a.Id).Max();
                 node = new Node(maxNodeCount + 1, x, y, z);
                 nodes[key] = node;

@@ -40,64 +40,106 @@ namespace DisertationFEPrototype.Optimisations
 
             List<Element> dividedElements = new List<Element>();
 
-            // we need to add the elements that are created by the refinement to the face selection so that
-            // forces and constraints on the next iteration of the model are appropreately spread across the refined mesh
-            foreach(FaceSelection faceSelection in meshData.TheFaceSelections)
-            {
-                if ()
-                {
 
-                }
-            }
             foreach (var elem in elements)
-            {
-                
+            {    
                 List<Element> children = QuadElementRefinement.newElements(elem, nodes);
-                
                 elem.Children = children;
             }
+
+
             // now flatten the tree structure
             List<Element> flatElemTree = getNewElementList(elements);
             //List<Node> all_nodes = getAllNodes(flatElemTree);
 
-            //List<Node> allNodes = meshData.Nodes.Values.ToList();
             // update the ids on nodes which don't have ids
-            // assignNodeNumbers(allNodes);
 
             // our mesh should now be refined
             var newMeshDataNodes = meshData.Nodes;
 
-            this.meshData = new MeshData();
-            this.meshData.Elements = flatElemTree;
-            this.meshData.Nodes = newMeshDataNodes;
+   
+
+            var newmeshData = new MeshData();
+            newmeshData.Elements = flatElemTree;
+            newmeshData.Nodes = newMeshDataNodes;
+            newmeshData.TheForce = meshData.TheForce;
+            newmeshData.TheMaterial = meshData.TheMaterial;
+            newmeshData.TheFaceSelections = meshData.TheFaceSelections;
+            this.meshData = newmeshData;
 
         }
-
+ 
         int flatStructElemId = 1;
         /// <summary>
         /// Use this method to flatten the element tree to produce a single list of leaf nodes by recursing through the quad tree 
         /// </summary>
         /// <returns>all elements in model in a 1d list</returns>
+        // List<FaceSelection> faceSelections
         private List<Element> getNewElementList(List<Element> rootElements)
         {
             List<Element> flatElemTree = new List<Element>();
 
+            List<Face> myFaces = new List<Face>();
+
             foreach (Element elem in rootElements)
             {
+
+
                 // this is the bottom of the tree
-                if(elem.Children == null)
+                if (elem.Children == null)
                 {
                     elem.Id = flatStructElemId;
                     flatElemTree.Add(elem);
+
+                    //updateFaceSelection(elem, new List<Element>() { elem });
+
                     flatStructElemId++;
                 }
                 // not at the bottom of the tree yet so continue to recurse until we hit leaf elements
                 else
                 {
-                    flatElemTree.AddRange(getNewElementList(elem.Children));
+                    // this element we have recursed through is in a face selection, 
+                    // therefore all it's children should be under that same face selection
+                    var subElems = getNewElementList(elem.Children);
+                    updateFaceSelection(elem, subElems);
+
+                    flatElemTree.AddRange(subElems);
+
                 }
             }
+            // this.meshData.TheFaceSelections
             return flatElemTree;
+        }
+
+        /// <summary>
+        /// updates the face selection objects in the mesh data model
+        /// </summary>
+        private void updateFaceSelection(Element elem, List<Element> subElems)
+        {
+            foreach (FaceSelection faceSelection in meshData.TheFaceSelections)
+            {
+                // if the current element is an element in a face selection then we want to
+                // getnerate a list of it's sub faces containing it's sub elements and store these within the face selection.
+                List<Element> faceSelectElements = faceSelection.Faces.Select(f => f.Element).ToList();
+                if (faceSelectElements.Contains(elem))
+                {
+                    // get a list of new faces for the face selection to update the constraint
+                    // this has to be all of the loads or constraints
+                    List<Face> newConstraintFaces = new List<Face>();
+                    subElems.ForEach(sub => newConstraintFaces.Add(new Face(sub, 6)));
+
+                    Face[] tempFaces = faceSelection.Faces.Where(f => f.Element == elem).ToArray();
+                    if (tempFaces.Length > 1)
+                    {
+                        throw new Exception("There should never be two faces here!");
+                    }
+                    Face removeFace = tempFaces[0];
+                    faceSelection.Faces.Remove(removeFace);
+
+                    faceSelection.Faces.AddRange(newConstraintFaces);
+                }
+            }
+
         }
         /// <summary>
         /// for a set of elements extract all the nodes that make them up in order to repopulate the model file
@@ -116,22 +158,5 @@ namespace DisertationFEPrototype.Optimisations
             }
             return modelNodes;
         }
-        //private void assignNodeNumbers(List<Node> nodes)
-        //{
-        //    //int? highestId = nodes.Max(x => x.Id);
-        //    //if(highestId == null)
-        //    //{
-        //    //    highestId = 0;
-        //    //}
-        //    int highestId = 1;
-        //    foreach(Node node in nodes)
-        //    {
-        //        if(node.Id == null)
-        //        {
-        //            node.Id = highestId;
-        //            highestId++;
-        //        }
-        //    }
-        //}
     }
 }

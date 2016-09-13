@@ -34,8 +34,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Read
                         Element element = getElementData(reader, meshData);
                         elements.Add(element);
                         inElementsSection = true;
-
-
                     }
                 }
             }
