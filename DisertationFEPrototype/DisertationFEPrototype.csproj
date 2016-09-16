@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control.cs" />
+    <Compile Include="FEModelUpdate\GeneralGeomMethods.cs" />
+    <Compile Include="FEModelUpdate\Model\Analysis\NodeAnalysisData.cs" />
     <Compile Include="FEModelUpdate\Read\ReadElements.cs" />
     <Compile Include="FEModelUpdate\ReadLisaData.cs" />
     <Compile Include="FEModelUpdate\ReadAnalysisData.cs" />
@@ -62,16 +64,16 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Analysis\AnalysisData.cs" />
-    <Compile Include="Model\Analysis\Face.cs" />
-    <Compile Include="Model\Analysis\FaceSelection.cs" />
-    <Compile Include="Model\Analysis\Force.cs" />
-    <Compile Include="Model\Analysis\Material.cs" />
-    <Compile Include="Model\Analysis\MaterialProps\Geometric.cs" />
-    <Compile Include="Model\Analysis\MaterialProps\Mechanical.cs" />
-    <Compile Include="Model\MeshData.cs" />
-    <Compile Include="Model\Structure\Element.cs" />
-    <Compile Include="Model\Structure\Node.cs" />
+    <Compile Include="FEModelUpdate\Model\Analysis\ElementAnalysisData.cs" />
+    <Compile Include="FEModelUpdate\Model\Analysis\Face.cs" />
+    <Compile Include="FEModelUpdate\Model\Analysis\FaceSelection.cs" />
+    <Compile Include="FEModelUpdate\Model\Analysis\Force.cs" />
+    <Compile Include="FEModelUpdate\Model\Analysis\Material.cs" />
+    <Compile Include="FEModelUpdate\Model\Analysis\MaterialProps\Geometric.cs" />
+    <Compile Include="FEModelUpdate\Model\Analysis\MaterialProps\Mechanical.cs" />
+    <Compile Include="FEModelUpdate\Model\MeshData.cs" />
+    <Compile Include="FEModelUpdate\Model\Structure\Element.cs" />
+    <Compile Include="FEModelUpdate\Model\Structure\Node.cs" />
     <Compile Include="Optimisations\generalOptimisations.cs" />
     <Compile Include="Optimisations\quadOptimisation.cs" />
     <Compile Include="PartGraph\ComponentNode.cs" />

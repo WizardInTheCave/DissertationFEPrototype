@@ -32,7 +32,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Read
                         //nodes.Add(node);
                         nodes[new Tuple<double, double, double>(node.GetX, node.GetY, node.GetZ)] = node;
                     }
-
                 }
             }
             return nodes;

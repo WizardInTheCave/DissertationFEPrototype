@@ -18,7 +18,7 @@ namespace DisertationFEPrototype.ModelUpdate
     class WriteNewMeshData
     {
         
-        public WriteNewMeshData(MeshData meshData, string lisaPath, string lisaFolderPath)
+        public WriteNewMeshData(MeshData meshData, string lisaPath, string outputFileName)
         {
 
             // Directory.SetCurrentDirectory(lisaFolderPath);
@@ -54,8 +54,8 @@ namespace DisertationFEPrototype.ModelUpdate
                     fw.WriteLine("    <analysis type=\"S30\"/>");
                     fw.WriteLine("    <elset name=\"Default\" color=\"-6710887\"/>");
                     fw.WriteLine("    <table>");
-                    writeTableSetup(outputFilePath);
-                    fw.WriteLine("    <table/>");
+                    writeTableSetup(fw, outputFileName);
+                    fw.WriteLine("    </table>");
                     fw.WriteLine("  </solution>");
                     fw.WriteLine("</liml8 >");
                 }
@@ -65,13 +65,61 @@ namespace DisertationFEPrototype.ModelUpdate
                 throw;
             }  
         }
-
-        private void writeTableSetup(StreamWriter fw, string outputFilePath)
+        /// <summary>
+        /// It's important that we write the table fields that we expect to the
+        /// lisa file so that when we perform a solve operation an output containing
+        /// displacement/stress values is created by lisa
+        /// </summary>
+        /// <param name="fw"></param>
+        /// <param name="outputFilePath"></param>
+        private void writeTableSetup(StreamWriter fw, string outputFileName)
         {
             fw.WriteLine("      <component>Default</component>");
-            
 
+            fw.WriteLine("      <namedselection>Unnamed</namedselection>");
+            fw.WriteLine("      <namedselection>Unnamed(2)</namedselection>");
 
+            fw.WriteLine("      <fieldvalue>displx</fieldvalue>");
+            fw.WriteLine("      <fieldvalue>disply</fieldvalue>");
+            fw.WriteLine("      <fieldvalue>displz</fieldvalue>");
+
+            // at the moment I am just interested in displacement
+            //fw.WriteLine("      <fieldvalue>rotx</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>roty</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>rotz</fieldvalue>");
+
+            //fw.WriteLine("      <fieldvalue>momentu</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>momentv</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>momentuv</fieldvalue>");
+
+            //fw.WriteLine("      <fieldvalue>shearuw</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>shearvw</fieldvalue>");
+
+            //fw.WriteLine("      <fieldvalue>vonmisesb</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>vonmisesu</fieldvalue>");
+
+            //fw.WriteLine("      <fieldvalue>principal1u</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>principal2u</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>principal1b</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>principal2b</fieldvalue>");
+
+            //fw.WriteLine("      <fieldvalue>stressuu</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>stressvv</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>stressuv</fieldvalue>");
+
+            //fw.WriteLine("      <fieldvalue>vonmisesm</fieldvalue>");
+
+            //fw.WriteLine("      <fieldvalue>principal1m</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>principal2m</fieldvalue>");
+            fw.WriteLine("      <fieldvalue>displmag</fieldvalue>");
+
+            // elem values results only in data from the element analysis being outputted, 
+            //we are interested in displacement which is associeated with Nodes
+
+            //fw.WriteLine("      <elementvalues />");
+            fw.WriteLine("      <coordinates />");
+
+            fw.WriteLine("      <saveonsolve filename=\"" + outputFileName + "\" />");
         }
 
         private void writeForce(StreamWriter fw, Force theForce)
@@ -141,6 +189,13 @@ namespace DisertationFEPrototype.ModelUpdate
 
         private string getNodesString(List<Node> nodes)
         {
+            var nodeIds = nodes.Select(x => x.Id);
+
+
+            if (nodeIds.Contains(13) && nodeIds.Contains(12) && nodeIds.Contains(14) && nodeIds.Contains(15))
+            {
+                Console.WriteLine("Node order: " + nodes[0].Id + " " + nodes[1].Id + " " + nodes[2].Id + " " + nodes[3].Id);
+            }
             string nodeString = "";
             foreach(var node in nodes)
             {

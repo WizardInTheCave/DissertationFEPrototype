@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace DisertationFEPrototype.Model.MeshDataStructure
 {
-    public class Node
+    public class Node : ICloneable
     {
         int id;
         double x;
         double y;
         double z;
 
+        public object Clone()
+        {
+            return new Node(this.id, this.x, this.y, this.z);
+        }
         public int Id
         {
             get

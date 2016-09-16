@@ -23,9 +23,12 @@ namespace DisertationFEPrototype
 
             //string lisaFile = @"D:\Documents\DissertationWork\models\newBlockTestSquareNodes.liml";  
             string lisaFile = "newBlockTestSquareNodes.liml";
-            string solveFile = @"D:\Documents\DissertationWork\secondTest.csv";
+            //string solveFile = @"D:\Documents\DissertationWork\secondTest.csv";
+            bool isNodeOutput = true;
 
             string lisaFileName = Path.GetFileNameWithoutExtension(lisaFile);
+            string outputCSVname = lisaFileName + "Out.csv";
+
             string lisaFolderPath = @"D:\Documents\DissertationWork\models\";
 
             List<MeshData> meshLog = new List<MeshData>();
@@ -39,17 +42,13 @@ namespace DisertationFEPrototype
             MeshData meshData = meshDataReader.GetMeshData;
 
             // read data from the solve
-            var analysisDataReader = new ReadAnalysisData(solveFile);
-         
+            var analysisDataReader = new ReadAnalysisData(outputCSVname, isNodeOutput);
 
+            List<NodeAnalysisData> analysisData;
             while (evaluationFunction(ii) == false)
             {
-                List<AnalysisData> analysisData = analysisDataReader.getAnalysisData();
-
-                //if (ii == 0)
-                //{
-                solve(lisaFile, lisaFolderPath);
-                //}
+                
+                solve(lisaFile);
 
                 // read data from the solve
                 analysisData = analysisDataReader.getAnalysisData();
@@ -61,9 +60,11 @@ namespace DisertationFEPrototype
                 meshLog.Add(refinedMesh);
 
                 // update the lisa file we are now working on (we next want to solve the updated file)
-                lisaFile = lisaFolderPath + lisaFileName + ii.ToString() + ".liml";
-                WriteNewMeshData meshWriter = new WriteNewMeshData(refinedMesh, lisaFile, lisaFolderPath);
-                Thread.Sleep(1000);
+                lisaFile = lisaFileName + ii.ToString() + ".liml";
+                outputCSVname = lisaFileName + "Out" + ii.ToString() + ".csv";
+                WriteNewMeshData meshWriter = new WriteNewMeshData(refinedMesh, lisaFile, outputCSVname);
+                analysisDataReader.SolveFile = outputCSVname;
+
 
                 // update the model for the next iteration
                 meshData = refinedMesh;
@@ -75,7 +76,7 @@ namespace DisertationFEPrototype
         /// tells lisa to run a solve on the lisa file which will produce some output
         /// </summary>
         /// <param name="lisaFile"></param>
-        public void solve(string lisaFile, string lisaFolderPath)
+        public void solve(string lisaFile)
         {
 
             //ProcessStartInfo startInfo = new ProcessStartInfo("lisa8");
@@ -87,9 +88,9 @@ namespace DisertationFEPrototype
 
             //Process.Start(startInfo);
 
+
             using (Process exeProcess = Process.Start("lisa8", lisaFile + " solve"))
             {
-                
                 exeProcess.WaitForExit();
             }
         }

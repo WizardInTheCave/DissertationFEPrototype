@@ -16,7 +16,7 @@ namespace DisertationFEPrototype.Optimisations
     class generalOptimisations
     {
         MeshData meshData;
-        List<AnalysisData> analysisData;
+        List<NodeAnalysisData> analysisData;
 
         public MeshData GetUpdatedMesh
         {
@@ -25,7 +25,7 @@ namespace DisertationFEPrototype.Optimisations
                 return this.meshData;
             }
         }
-        public generalOptimisations(MeshData meshData, List<AnalysisData> analysisData)
+        public generalOptimisations(MeshData meshData, List<NodeAnalysisData> analysisData)
         {
             this.meshData = meshData;
             this.analysisData = analysisData;
@@ -36,17 +36,16 @@ namespace DisertationFEPrototype.Optimisations
             // try a basic mesh refinement by creating more elements first
             List<Element> elements = this.meshData.Elements;
 
-            var nodes = this.meshData.Nodes;
+            Dictionary<Tuple<double, double, double>, Node> nodes = this.meshData.Nodes;
 
-            List<Element> dividedElements = new List<Element>();
+            var elem = elements.Select(x => x.Id);
 
+            //if (elem.Contains(32))
+            //{
+            //    Console.WriteLine("WHAT???");
+            //}
 
-            foreach (var elem in elements)
-            {    
-                List<Element> children = QuadElementRefinement.newElements(elem, nodes);
-                elem.Children = children;
-            }
-
+            basicAnalysisDrivenMesh(nodes, elements, analysisData);
 
             // now flatten the tree structure
             List<Element> flatElemTree = getNewElementList(elements);
@@ -57,8 +56,6 @@ namespace DisertationFEPrototype.Optimisations
             // our mesh should now be refined
             var newMeshDataNodes = meshData.Nodes;
 
-   
-
             var newmeshData = new MeshData();
             newmeshData.Elements = flatElemTree;
             newmeshData.Nodes = newMeshDataNodes;
@@ -68,7 +65,56 @@ namespace DisertationFEPrototype.Optimisations
             this.meshData = newmeshData;
 
         }
- 
+
+        /// <summary>
+        /// we want to use the data from the previous analyis that we have to refine our mesh specificially in areas with high stress values
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <param name="analysisData"></param>
+        private void basicAnalysisDrivenMesh(Dictionary<Tuple<double, double, double>, Node> nodes, List<Element> elements, List<NodeAnalysisData> analysisData)
+        {
+
+            double remeshThreshold = determineRemeshThreshold(analysisData);
+
+            foreach (var elem in elements)
+            {
+                List<Node> elemNodes = elem.GetNodes;
+                List<int> elemNodesIds = elemNodes.Select(node => node.Id).ToList();
+
+                // get the analysis data objecs for this particular element
+                List<NodeAnalysisData> nodeAnalysisData = analysisData.Where(d => elemNodesIds.Contains(d.NodeId)).ToList();
+
+                // get the average displacement for the element based on the nodal displacements
+                double avgDispMag = nodeAnalysisData.Select(nad => nad.DispMag).Average();
+
+                if (avgDispMag > remeshThreshold)
+                {
+                    Console.WriteLine("Remeshed elements: " + elem.Id.ToString());
+                    List<Element> children = QuadElementRefinement.newElements(elem, nodes);
+                    elem.Children = children;
+
+                }
+            }
+            Console.WriteLine("done all");
+        }
+
+        /// <summary>
+        /// some function which using the nodal displacements for the whole model determines what is considered a high displacement,
+        /// this can then be used to determine whether to do a h-refinement of a particular element
+        /// </summary>
+        /// <param name="analysisData"></param>
+        /// <returns>threshold value</returns>
+        private double determineRemeshThreshold(List<NodeAnalysisData> analysisData)
+        {
+            double threshold = 0;
+
+            List<double> allDisps = analysisData.Select(ad => ad.DispMag).ToList();
+
+            threshold = allDisps.Average();
+
+            return threshold;
+        }
+
         int flatStructElemId = 1;
         /// <summary>
         /// Use this method to flatten the element tree to produce a single list of leaf nodes by recursing through the quad tree 
@@ -83,11 +129,16 @@ namespace DisertationFEPrototype.Optimisations
 
             foreach (Element elem in rootElements)
             {
-
+                
 
                 // this is the bottom of the tree
                 if (elem.Children == null)
                 {
+                    if (elem.Id == 12)
+                    {
+                        Console.WriteLine("current id: " + elem.Id + "new id: " + flatStructElemId);
+                    }
+                    
                     elem.Id = flatStructElemId;
                     flatElemTree.Add(elem);
 

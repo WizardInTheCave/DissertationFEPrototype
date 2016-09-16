@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DisertationFEPrototype.Model
 {
 
-    class AnalysisData
+    class ElementAnalysisData
     {
         int element;
         int localNode;
@@ -29,7 +29,7 @@ namespace DisertationFEPrototype.Model
         double stressZX;
 
 
-        public AnalysisData(int element, int localNode, double x, double y, double z, 
+        public ElementAnalysisData(int element, int localNode, double x, double y, double z, 
             string dispX, string dispY, string dispZ, 
             double stressXX, double stressYY, double stressZZ,
             double stressXY, double stressYZ, double stressZX)

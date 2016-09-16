@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DisertationFEPrototype.Model;
 using DisertationFEPrototype.Model.MeshDataStructure;
+using DisertationFEPrototype.FEModelUpdate;
 
 namespace DisertationFEPrototype.Optimisations
 {
@@ -167,26 +168,9 @@ namespace DisertationFEPrototype.Optimisations
                 {
                     if (adjacentNode != node)
                     {
-                        short commonAxisVals = 0;
-
-
-                        bool[] sameVals = new bool[3] { false, false, false };
-
-                        if (adjacentNode.GetX == node.GetX)
-                        {
-                            sameVals[0] = true;
-                            commonAxisVals++;
-                        }
-                        if (adjacentNode.GetY == node.GetY)
-                        {
-                            sameVals[1] = true;
-                            commonAxisVals++;
-                        }
-                        if (adjacentNode.GetZ == node.GetZ)
-                        {
-                            sameVals[2] = true;
-                            commonAxisVals++;
-                        }
+                        bool[] sameVals = FEModelUpdate.GeneralGeomMethods.commonPlaneData(node, adjacentNode);
+                        int commonAxisVals = sameVals.Count(b => b == true);
+             
                         // if two of the nodes share two values in x y or z then they are on a plane together.
                         if (commonAxisVals == 2)
                         {
