@@ -13,7 +13,13 @@ namespace DisertationFEPrototype.FEModelUpdate
     class GeneralGeomMethods
     {
 
-        public static bool[] commonPlaneData(Node a, Node b)
+        /// <summary>
+        /// work out on what planes in 3d space a pair of nodes have in common 
+        /// </summary>
+        /// <param name="a">first node</param>
+        /// <param name="b">second node</param>
+        /// <returns>list of bools with pos 0 representing x plane, 1 representing y plane and z representing z plane</returns>
+        public static bool[] whichPlanesCommon(Node a, Node b)
         {
 
             bool[] sameVals = new bool[3] { false, false, false };
@@ -34,6 +40,22 @@ namespace DisertationFEPrototype.FEModelUpdate
             }
 
             return sameVals;
+        }
+        public static bool isCommonAxis(Node firstNode, Node secondNode)
+        {
+            bool[] sameVals = GeneralGeomMethods.whichPlanesCommon(firstNode, secondNode);
+            int commonAxisVals = sameVals.Count(b => b == true);
+            return commonAxisVals == 2;
+        }
+        /// <summary>
+        /// function override for if we have already computed same vals outside
+        /// </summary>
+        /// <param name="sameVals"></param>
+        /// <returns></returns>
+        public static bool isCommonAxis(bool[] sameVals)
+        {
+            int commonAxisVals = sameVals.Count(b => b == true);
+            return commonAxisVals == 2;
         }
     }
 }

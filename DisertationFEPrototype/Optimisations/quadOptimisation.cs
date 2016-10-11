@@ -25,7 +25,6 @@ namespace DisertationFEPrototype.Optimisations
         {
 
             List<Element> newElements = new List<Element>();
-
             
             List<Node> originalNodes = elem.GetNodes;
             string constantAxis = getConstantAxis(originalNodes);
@@ -168,7 +167,7 @@ namespace DisertationFEPrototype.Optimisations
                 {
                     if (adjacentNode != node)
                     {
-                        bool[] sameVals = FEModelUpdate.GeneralGeomMethods.commonPlaneData(node, adjacentNode);
+                        bool[] sameVals = FEModelUpdate.GeneralGeomMethods.whichPlanesCommon(node, adjacentNode);
                         int commonAxisVals = sameVals.Count(b => b == true);
              
                         // if two of the nodes share two values in x y or z then they are on a plane together.

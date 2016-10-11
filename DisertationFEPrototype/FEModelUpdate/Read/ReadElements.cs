@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using DisertationFEPrototype.Model;
+using DisertationFEPrototype.FEModelUpdate;
 
 namespace DisertationFEPrototype.FEModelUpdate.Read
 {
@@ -111,20 +112,20 @@ namespace DisertationFEPrototype.FEModelUpdate.Read
                 var nodeComp1 = nodes[nums[0]];
                 var nodeComp2 = nodes[nums[1]];
                 var nodeComp3 = nodes[nums[2]];
-
-                if (isCommonAxis(currentNode, nodeComp1) && !sortMatchedNodes.Contains(nodeComp1))
+                
+                if (GeneralGeomMethods.isCommonAxis(currentNode, nodeComp1) && !sortMatchedNodes.Contains(nodeComp1))
                 {
                     //.Clone() as Node
                     sortMatchedNodes.Add(nodeComp1);
                     currentNode = nodeComp1;
                 }
-                else if (isCommonAxis(currentNode, nodeComp2) && !sortMatchedNodes.Contains(nodeComp2))
+                else if (GeneralGeomMethods.isCommonAxis(currentNode, nodeComp2) && !sortMatchedNodes.Contains(nodeComp2))
                 {
                     //.Clone() as Node
                     sortMatchedNodes.Add(nodeComp2);
                     currentNode = nodeComp2;
                 }
-                else if (isCommonAxis(currentNode, nodeComp3) && !sortMatchedNodes.Contains(nodeComp3))
+                else if (GeneralGeomMethods.isCommonAxis(currentNode, nodeComp3) && !sortMatchedNodes.Contains(nodeComp3))
                 {
                     // .Clone() as Node
                     sortMatchedNodes.Add(nodeComp3);
@@ -162,11 +163,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Read
             //    throw new Exception("SortMatchedNodes method did not work by producing an output list of the same length as it's input");
             //}
         }
-        private static bool isCommonAxis(Node firstNode, Node secondNode)
-        {
-            bool[] sameVals = GeneralGeomMethods.commonPlaneData(firstNode, secondNode);
-            int commonAxisVals = sameVals.Count(b => b == true);
-            return commonAxisVals == 2;
-        }
+        
     }
 }
