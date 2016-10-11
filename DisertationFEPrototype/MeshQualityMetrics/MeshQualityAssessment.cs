@@ -13,7 +13,7 @@ namespace DisertationFEPrototype.MeshQualityMetrics
     class MeshQualityAssessment
     {
 
-        double elementPattern()
+        double elementQuality()
         {
             throw new NotImplementedException();
         }
