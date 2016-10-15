@@ -26,7 +26,7 @@ namespace DisertationFEPrototype.Optimisations
 
             List<Element> newElements = new List<Element>();
             
-            List<Node> originalNodes = elem.GetNodes;
+            List<Node> originalNodes = elem.Nodes;
             string constantAxis = getConstantAxis(originalNodes);
 
             var subNodeTup = createMidpointNodes(originalNodes, nodes);
@@ -185,6 +185,16 @@ namespace DisertationFEPrototype.Optimisations
                                 singleNodeTrio[3] = midEdge;
                             }      
                         }
+                        // now one node is diagonal from the other
+                        else if (commonAxisVals == 1)
+                        {
+
+                        }
+                        else if(commonAxisVals == 0)
+                        {
+
+                        }
+
                     }
                 }
                 elementEdgeTrios.Add(singleNodeTrio);
@@ -199,7 +209,7 @@ namespace DisertationFEPrototype.Optimisations
         private static Node makeMidEdgeNode(bool[] sameVals, Node node, Node adjacentNode, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
 
-            // int id = this.meshData.GetNodes.Count + 1;
+            // int id = this.meshData.Nodes.Count + 1;
 
             // figure if it's the x, y or z coordinate which makes them different
             int index = Array.IndexOf(sameVals, false);

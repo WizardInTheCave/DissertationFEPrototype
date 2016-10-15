@@ -146,11 +146,11 @@ namespace DisertationFEPrototype.ModelUpdate
             fw.WriteLine("  <elset name=\"Default\" color=\"-6710887\" material=\"" + materialName + "\" >");
             foreach (var elem in elements)
             {
-                string nodesString = getNodesString(elem.GetNodes);
+                string nodesString = getNodesString(elem.Nodes);
                 if (elem.Id != null)
                 {
                     fw.WriteLine("    <elem eid=\"" + elem.Id.ToString() + "\" shape=\""
-                        + elem.GetShape + "\" nodes=\"" + nodesString + "\" />");
+                        + elem.Shape + "\" nodes=\"" + nodesString + "\" />");
                 }
             }
             fw.WriteLine("  </elset >");

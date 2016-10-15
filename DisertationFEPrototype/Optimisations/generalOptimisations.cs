@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DisertationFEPrototype.Model;
 using DisertationFEPrototype.Model.MeshDataStructure;
 using DisertationFEPrototype.Model.Analysis;
+using DisertationFEPrototype.Optimisations.AIRules;
 
 namespace DisertationFEPrototype.Optimisations
 {
@@ -17,6 +18,7 @@ namespace DisertationFEPrototype.Optimisations
     {
         MeshData meshData;
         List<NodeAnalysisData> analysisData;
+        RuleManager ruleManager;
 
         public MeshData GetUpdatedMesh
         {
@@ -29,6 +31,12 @@ namespace DisertationFEPrototype.Optimisations
         {
             this.meshData = meshData;
             this.analysisData = analysisData;
+
+            // need to figure out how we are going to finish formulating the edges.
+
+            this.ruleManager = AIRules.RuleManager();
+            throw new NotImplementedException()
+
         }
 
         public void doubleNodeCount()
@@ -76,9 +84,11 @@ namespace DisertationFEPrototype.Optimisations
 
             double remeshThreshold = determineRemeshThreshold(analysisData);
 
+            ruleRefinement();
+
             foreach (var elem in elements)
             {
-                List<Node> elemNodes = elem.GetNodes;
+                List<Node> elemNodes = elem.Nodes;
                 List<int> elemNodesIds = elemNodes.Select(node => node.Id).ToList();
 
                 // get the analysis data objecs for this particular element
@@ -96,6 +106,15 @@ namespace DisertationFEPrototype.Optimisations
                 }
             }
             Console.WriteLine("done all");
+        }
+        /// <summary>
+        /// hand some edges from the refined model back to this routine, and then fit the rules again and see if we can apply them some
+        /// more before going back to stress values for refinement.
+        /// </summary>
+        private void ruleRefinement()
+        {
+            this.ruleManager();
+
         }
 
         /// <summary>
@@ -202,7 +221,7 @@ namespace DisertationFEPrototype.Optimisations
 
             foreach(Element elem in flatElemTree)
             {
-                foreach(Node node in elem.GetNodes)
+                foreach(Node node in elem.Nodes)
                 {
                     modelNodes.Add(node);
                 }

@@ -8,6 +8,7 @@ using DisertationFEPrototype.Model;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using DisertationFEPrototype.MeshQualityMetrics;
 
 namespace DisertationFEPrototype
 {
@@ -58,6 +59,8 @@ namespace DisertationFEPrototype
 
                 MeshData refinedMesh = optimisation.GetUpdatedMesh;
                 meshLog.Add(refinedMesh);
+
+                MeshQualityMetrics.MeshQualityAssessment.assessMesh(refinedMesh);
 
                 // update the lisa file we are now working on (we next want to solve the updated file)
                 lisaFile = lisaFileName + ii.ToString() + ".liml";

@@ -74,7 +74,8 @@
     <Compile Include="FEModelUpdate\Model\MeshData.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Element.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Node.cs" />
-    <Compile Include="MeshQualityAssessment.cs" />
+    <Compile Include="MeshQualityMetrics\ElementQualityMetrics.cs" />
+    <Compile Include="MeshQualityMetrics\MeshQualityAssessment.cs" />
     <Compile Include="Optimisations\generalOptimisations.cs" />
     <Compile Include="Optimisations\quadOptimisation.cs" />
     <Compile Include="PartGraph\ComponentNode.cs" />
