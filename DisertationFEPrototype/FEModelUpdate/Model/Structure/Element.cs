@@ -23,6 +23,17 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
         double maxCornerAngle;
         double maxParallelDev;
         double area;
+        int flatPlaneIndex;
+
+        readonly double LONGEST_EDGE_DEFAULT = 0.0;
+        readonly double SHORTEST_EDGE_DEFAULT = 1000000.0;
+
+        double longestEdge = 0.0;
+        double shortestEdge = 1000000.0;
+
+
+        readonly string QUAD4 = "Quad4";
+        readonly string TRI3 = "Tri3";
 
         public double Area
         {
@@ -100,38 +111,111 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
                 this.childElements = value;
             }
         }
+        public double LongestEdge
+        {
+            get
+            {
+                return this.longestEdge;
+            }
+        }
+        public double ShortestEdge
+        {
+            get
+            {
+                return this.shortestEdge;               
+            }
+        }
+        public int FlatPlaneIndex
+        {
+            get
+            {
+                if(this.flatPlaneIndex != -1)
+                {
+                    return this.flatPlaneIndex;
+                }
+                else
+                {
+                    throw new Exception("Sorry but this element is not situated precisely on an x,y,z plane");
+                }
+            }
+        }
+
+        private int computeCommonPlane()
+        {
+            // to be considered an edge node one of the nodes four partners should be 
+            // positioned on a different plane to the other three??? (one x,y or z value which 3 out of 4 have in
+            // common
+
+            bool[] commonPlanesA = GeneralGeomMethods.whichPlanesCommon(this.nodes[0], this.nodes[1]);
+            bool[] commonPlanesB = GeneralGeomMethods.whichPlanesCommon(this.nodes[1], this.nodes[2]);
+            bool[] commonPlanesC = GeneralGeomMethods.whichPlanesCommon(this.nodes[2], this.nodes[3]);
+
+            for (int ii = 0; ii < this.Nodes.Count; ii++)
+            {
+                bool a = commonPlanesA[ii];
+                bool b = commonPlanesB[ii];
+                bool c = commonPlanesC[ii];
+
+                if (a == b == c == true)
+                {
+                    return ii;
+                }
+            }
+            return -1;
+        }
+                
 
 
-        private double computeAspectRatio(List<Node> nodes)
+
+        private double computeAspectRatio()
         {
             double aspectRatio;
+            aspectRatio = LongestEdge / ShortestEdge;
+            return aspectRatio;
+        }
 
-            //List<Tuple<Node, Node>> nodePairs = new List<Tuple<Node, Node>>();
-            double longestEdge = 0.0;
-            double shortestEdge = 10000.0;
+        private double computeLongestEdge()
+        {
+            double longestEdge = SHORTEST_EDGE_DEFAULT;
 
             // this is a bit inefficent because going over each edge twice, but most edges we are going to have is 4 so
             // it doesn't matter too much, may write it better later
-            foreach (Node nodeA in nodes) {
-                foreach (Node nodeB in nodes) {
+            foreach (Node nodeA in this.nodes)
+            {
+                foreach (Node nodeB in this.nodes)
+                {
+                    //bool[] commonPlanes = GeneralGeomMethods.whichPlanesCommon(nodeA, nodeB);
+                    //if (GeneralGeomMethods.isCommonAxis(commonPlanes))
 
-                    bool[] commonPlanes = GeneralGeomMethods.whichPlanesCommon(nodeA, nodeB);
-                    if (GeneralGeomMethods.isCommonAxis(commonPlanes))
+                    double edgeLength = GeneralGeomMethods.distanceBetweenPoints(nodeA, nodeB);
+                    if (edgeLength > longestEdge)
                     {
-                        double edgeLength = getEdgeLength(commonPlanes, nodeA, nodeB);
-                        if (edgeLength > longestEdge)
-                        {
-                            longestEdge = edgeLength;
-                        }
-                        else if (edgeLength < shortestEdge)
-                        {
-                            shortestEdge = edgeLength;
-                        }
+                        longestEdge = edgeLength;
                     }
+                      
                 }
             }
-            aspectRatio = longestEdge / shortestEdge;
-            return aspectRatio;
+            return longestEdge;
+        }
+
+        private double computeShortestEdge()
+        {
+            double shortestEdge = LONGEST_EDGE_DEFAULT;
+
+            // this is a bit inefficent because going over each edge twice, but most edges we are going to have is 4 so
+            // it doesn't matter too much, may write it better later
+            foreach (Node nodeA in this.nodes)
+            {
+                foreach (Node nodeB in this.nodes)
+                {
+                    double edgeLength = GeneralGeomMethods.distanceBetweenPoints(nodeA, nodeB);
+                    if (edgeLength < shortestEdge)
+                    {
+                        shortestEdge = edgeLength;
+                    } 
+                }
+            }
+            return shortestEdge;
         }
 
         /// <summary>
@@ -139,27 +223,14 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
         /// </summary>
         /// <param name="nodes"></param>
         /// <returns></returns>
-        private double computeMaxCornerAngle(List<Node> nodes)
+        private double computeMaxCornerAngle()
         {
             // for each element, find the two  others which have at least two planes in common
 
             double maxAngle = 0;
-            foreach (Node nodeA in nodes)
+            foreach (Node nodeA in this.nodes)
             {
-                Node[] commonNodes = new Node[2];
-                int ii = 0;
-                // bool[] theCommonPlanes = { false, false, false };
-
-                foreach (Node nodeB in nodes)
-                {
-                    bool[] commonPlanes = GeneralGeomMethods.whichPlanesCommon(nodeA, nodeB);
-                    if (GeneralGeomMethods.isCommonAxis(commonPlanes))
-                    {
-                        commonNodes[ii] = nodeB;
-                        // theCommonPlanes = commonPlanes;
-                        ii++;
-                    }
-                }
+                Node[] commonNodes = getNonDiagAdjacentNodes(nodeA, this.nodes);
                 // get angle here
                 double angle = getAngle(nodeA, commonNodes);
                 if (angle > maxAngle)
@@ -168,6 +239,32 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
                 }
             }
             return maxAngle;
+        }
+
+        /// <summary>
+        /// For a particular node this method can be used to find up to two other nodes that are adjacent to it, thus in the case of quad4 elements
+        /// allowing the programmer to ascertain if the element is rectangular or not and if so which side is the longest.
+        /// </summary>
+        /// <param name="nodeA">the node you want to find the non diagonally adjacent nodes for</param>
+        /// <param name="nodes">all the nodes in that particular element</param>
+        /// <returns></returns>
+        private static Node[] getNonDiagAdjacentNodes(Node nodeA, List<Node> nodes)
+        {
+            Node[] commonNodes = new Node[2];
+            int ii = 0;
+            // bool[] theCommonPlanes = { false, false, false };
+
+            foreach (Node nodeB in nodes)
+            {
+                bool[] commonPlanes = GeneralGeomMethods.whichPlanesCommon(nodeA, nodeB);
+                if (GeneralGeomMethods.isCommonAxis(commonPlanes))
+                {
+                    commonNodes[ii] = nodeB;
+                    // theCommonPlanes = commonPlanes;
+                    ii++;
+                }
+            }
+            return commonNodes;
         }
 
         private double getAngle(Node angleNode, Node[] commonNodes)
@@ -196,21 +293,51 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
         /// </summary>
         /// <param name="nodes"></param>
         /// <returns></returns>
-        private double computeArea(List<Node> nodes)
+        private double computeArea()
         {
             // element has no area (not polygon)
-            if(nodes.Count < 3)
+            if (this.nodes.Count < 3)
             {
                 return 0;
             }
 
+            double[] total = getTotal(this.nodes);
+            var elemNormal = GeneralGeomMethods.unitNormal(this.nodes[0], this.nodes[1], this.nodes[2]);
+
+            double result = GeneralGeomMethods.dotProduct(total, elemNormal);
+
+            // just width * height in this case
+            if (double.IsNaN(result))
+            {
+                double b = ShortestEdge;
+                double h = LongestEdge;
+                // enum Shape { Quad4, Tri3 };
+
+                if (this.shape == QUAD4)
+                {
+                    result = b * h;
+                }
+                else if (this.shape == TRI3)
+                {
+                    result = (b * h) / 2;
+                }
+            }
+            else
+            {
+                result = Math.Abs(result / 2);
+            }
+            return result;
+        }
+
+        private static double[] getTotal(List<Node> nodes)
+        {
             double[] total = new double[] { 0, 0, 0 };
             for (int ii = 0; ii < nodes.Count; ii++)
             {
                 Node vi1 = nodes[ii];
                 Node vi2;
 
-                if(ii == nodes.Count - 1)
+                if (ii == nodes.Count - 1)
                 {
                     vi2 = nodes[0];
                 }
@@ -223,48 +350,21 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
                 total[1] += product.Item2;
                 total[2] += product.Item3;
             }
-            var elemNormal = GeneralGeomMethods.unitNormal(nodes[0], nodes[1], nodes[2]);
-
-            double result = GeneralGeomMethods.dotProduct(total, elemNormal);
-
-            // just width * height in this case
-            if (double.IsNaN(result))
-            {
-                // enum Shape { Quad4, Tri3 };
-                if(this.shape == "Quad4")
-                {
-                    double b = 
-                    double h =
-                    result = b * h;
-                }
-                else if(this.shape == "Tri3")
-                {
-                    double b = 
-                    double h = 
-
-                    result = (b / 2) * h;
-                }
-            }
-            else
-            {
-                result = Math.Abs(result / 2);
-            }
-            return result;
-
-
+            return total;
         }
+
         // area3D_Polygon(): computes the area of a 3D planar polygon
         //    Input:  int n = the number of vertices in the polygon
         //            Point[] V = an array of n+2 vertices in a plane
         //                       with V[n]=V[0] and V[n+1]=V[1]
         //            Point N = unit normal vector of the polygon's plane
         //    Return: the (float) area of the polygon
-        
 
 
 
 
-        private double getEdgeLength(bool[] commonPlanes, Node nodeA, Node nodeB)
+
+        private double computeEdgeLength(bool[] commonPlanes, Node nodeA, Node nodeB)
         {
             double edgeLength;
             int measuringAxis = commonPlanes.ToList().IndexOf(false);
@@ -280,12 +380,33 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
                     edgeLength = Math.Abs(nodeA.GetZ - nodeB.GetZ);
                     break;
                 default:
-                    throw new Exception("Element:getEdgeLength there was no differing axis, this can only mean that there are two nodes in the exact same position");
+                    throw new Exception("Element:computeEdgeLength there was no differing axis, this can only mean that there are two nodes in the exact same position");
             };
             return edgeLength;
             // work out 
         }
-       
+        //private double computeEdgeLength(Node nodeA, Node nodeB)
+        //{
+        //    double edgeLength;
+        //    bool[] commonPlanes = GeneralGeomMethods.whichPlanesCommon(nodeA, nodeB);
+        //    int measuringAxis = commonPlanes.ToList().IndexOf(false);
+        //    switch (measuringAxis)
+        //    {
+        //        case 0:
+        //            edgeLength = Math.Abs(nodeA.GetX - nodeB.GetX);
+        //            break;
+        //        case 1:
+        //            edgeLength = Math.Abs(nodeA.GetY - nodeB.GetY);
+        //            break;
+        //        case 2:
+        //            edgeLength = Math.Abs(nodeA.GetZ - nodeB.GetZ);
+        //            break;
+        //        default:
+        //            throw new Exception("Element:computeEdgeLength there was no differing axis, this can only mean that there are two nodes in the exact same position");
+        //    };
+        //    return edgeLength;
+        //}
+
 
         public Element(int? id, string shape, List<Node> nodes)
         {
@@ -294,11 +415,14 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
             this.nodes = nodes;
             this.parentElement = null;
             this.childElements = null;
-            this.aspectRatio = computeAspectRatio(nodes);
-            this.maxCornerAngle = computeMaxCornerAngle(nodes);
-            this.area = computeArea(nodes);
-        }
 
-        
+            // all three of these methods use 
+            this.aspectRatio = computeAspectRatio();
+            this.maxCornerAngle = computeMaxCornerAngle();
+            this.area = computeArea();
+            this.longestEdge = computeLongestEdge();
+            this.shortestEdge = computeShortestEdge();
+            this.flatPlaneIndex = computeCommonPlane();
+        }
     }
 }

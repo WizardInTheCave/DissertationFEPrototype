@@ -34,8 +34,8 @@ namespace DisertationFEPrototype.Optimisations
 
             // need to figure out how we are going to finish formulating the edges.
 
-            this.ruleManager = AIRules.RuleManager();
-            throw new NotImplementedException()
+            this.ruleManager = AIRules.RuleManager(meshData);
+            throw new NotImplementedException();
 
         }
 

@@ -41,6 +41,10 @@ namespace DisertationFEPrototype.FEModelUpdate
 
             return sameVals;
         }
+        public static double distanceBetweenPoints(Node a, Node b)
+        {
+            return Math.Sqrt(Math.Pow((a.GetX - b.GetX), 2) + Math.Pow((a.GetY - b.GetY), 2) + Math.Pow((a.GetZ - b.GetZ), 2));
+        }
         public static bool isCommonAxis(Node firstNode, Node secondNode)
         {
             bool[] sameVals = GeneralGeomMethods.whichPlanesCommon(firstNode, secondNode);
@@ -58,8 +62,6 @@ namespace DisertationFEPrototype.FEModelUpdate
             return commonAxisVals == 2;
         }
 
-
-       
         public static double dotProduct(Node a, Node b)
         {
             return a.GetX * b.GetX + a.GetY * b.GetY + a.GetZ * b.GetZ;

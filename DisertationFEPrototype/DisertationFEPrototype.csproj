@@ -76,6 +76,10 @@
     <Compile Include="FEModelUpdate\Model\Structure\Node.cs" />
     <Compile Include="MeshQualityMetrics\ElementQualityMetrics.cs" />
     <Compile Include="MeshQualityMetrics\MeshQualityAssessment.cs" />
+    <Compile Include="Optimisations\AIRules\Edge.cs" />
+    <Compile Include="Optimisations\AIRules\EdgeRelation.cs" />
+    <Compile Include="Optimisations\AIRules\Rule.cs" />
+    <Compile Include="Optimisations\AIRules\RuleManager.cs" />
     <Compile Include="Optimisations\generalOptimisations.cs" />
     <Compile Include="Optimisations\quadOptimisation.cs" />
     <Compile Include="PartGraph\ComponentNode.cs" />
