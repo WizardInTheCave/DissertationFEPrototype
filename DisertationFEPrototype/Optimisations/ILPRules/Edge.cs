@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DisertationFEPrototype.FEModelUpdate;
 
-namespace DisertationFEPrototype.Optimisations.AIRules
+namespace DisertationFEPrototype.Optimisations.ILPRules
 {
     class Edge
     {
@@ -15,16 +15,16 @@ namespace DisertationFEPrototype.Optimisations.AIRules
         {
             importantLong, important, importantShort,
             notImportant, circuit, halfCircuit, quaterCircuit, shortForAHole,
-            LongForAHole, CircuitHole, HalfCircuitHole, QuarterCircuitHole, NoneSet
+            longForAHole, circuitHole, halfCircuitHole, quarterCircuitHole, noneSet
         };
 
         public enum BoundaryType
         {
-            free, fixedOneSide, fixedTwoSides, fixedCompletely, NoneSet
+            free, fixedOneSide, fixedTwoSides, fixedCompletely, noneSet
         };
 
         public enum LoadingType {
-            notLoaded, oneSideLoaded, twoSidesLoaded, ContinuiousLoading, NoneSet
+            notLoaded, oneSideLoaded, twoSidesLoaded, ContinuiousLoading, noneSet
         };
 
         EdgeType edgeType;
@@ -35,13 +35,7 @@ namespace DisertationFEPrototype.Optimisations.AIRules
         int elementCount;
         double totalLength;
 
-        public int ID
-        {
-            get
-            {
-                return this.id;
-            }
-        }
+        public int ID { get { return this.id; } }
         public EdgeType GetEdgeType()
         {
             return edgeType;
@@ -52,34 +46,18 @@ namespace DisertationFEPrototype.Optimisations.AIRules
             //Enum.TryParse(value, out this.edgeType);
             this.edgeType = type;
         }
-        public List<Node> NodePath
-        {
-            get
-            {
-                return this.nodePath;
-            }
-        }
+        public List<Node> NodePath { get { return this.nodePath; } }
 
         public BoundaryType GetBoundaryType()
         {
             return this.boundaryType;
         }
-        public void SetBoundaryType(BoundaryType type)
-        {
-            this.boundaryType = type;
-        }
+        public void SetBoundaryType(BoundaryType type){ this.boundaryType = type; }
 
-        public LoadingType GetLoadType()
-        {
-            return this.loadType;
-        }
-        public double TotalLength
-        {
-            get
-            {
-                return this.totalLength;
-            }
-        }
+        public LoadingType GetLoadType(){ return this.loadType; }
+        public double TotalLength{ get{ return this.totalLength; } }
+
+        public List<Node> GetNodePath() { return this.nodePath; }
 
         public void SetLoadType(LoadingType type)
         {
@@ -109,14 +87,17 @@ namespace DisertationFEPrototype.Optimisations.AIRules
             }
             return totalLength;
         }
+
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id">id of the edge so that it can be refferenced</param>
         /// <param name="type"> specific type of the edge, may have an interface with seperate classes later to implement this</param>
         /// <param name="nodePath">node which define the edge by specifying it's path</param>
-        
+        public Edge(int id, EdgeType edgeType, BoundaryType boundaryType, LoadingType loadingType, List<Node> nodePath)
         {
+
             //Enum.TryParse(edgeType, out this.edgeType);
             //Enum.TryParse(loadType, out this.loadType);
             // List<Element> elements,
@@ -124,8 +105,8 @@ namespace DisertationFEPrototype.Optimisations.AIRules
             this.id = id;
             this.edgeType = edgeType;
             this.boundaryType = boundaryType;
-            this.edgeType = edgeType;
             this.nodePath = nodePath;
+            this.loadType = loadingType;
             this.totalLength = computeTotalLength(nodePath);
         }
     }

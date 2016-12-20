@@ -18,7 +18,6 @@ namespace DisertationFEPrototype.Model
         List<Element> elements;
         Force force;
         Material material;
-
         List<FaceSelection> faceSelections;
 
         //string lisaFile;
@@ -88,5 +87,32 @@ namespace DisertationFEPrototype.Model
             //this.nodes = nodes;
             //this.elements = elements;
         }
+
+        /// <summary>
+        /// Given a node finds all the elements in the mesh data structure that are constructed using that node.
+        /// For elements of type quad4 there shouldn't be more than four elements for each node
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="elements"></param>
+        /// <returns></returns>
+        public List<Element> findElems(Node node)
+        {
+            List<Element> nodeElems = new List<Element>();
+
+            // find out what element our start is a part of
+            foreach (Element elem in this.elements)
+            {
+                // this will only select the first element that is found which is not actually what we want
+                foreach (Node aNode in elem.Nodes)
+                {
+                    if (aNode == node)
+                    {
+                        nodeElems.Add(elem);
+                    }
+                }
+            }
+            return nodeElems;
+        }
+
     }
 }

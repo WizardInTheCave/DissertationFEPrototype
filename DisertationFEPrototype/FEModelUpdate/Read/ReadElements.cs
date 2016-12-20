@@ -81,7 +81,8 @@ namespace DisertationFEPrototype.FEModelUpdate.Read
                         }
                     }
                 }
-                matchedNodes = sortMatchedNodes(matchedNodes);
+                
+                matchedNodes = GeneralGeomMethods.sortMatchedNodes(matchedNodes);
 
                 Element newElement = new Element(id, shape, matchedNodes);
                 return newElement;
@@ -91,78 +92,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Read
             //    throw new Exception("Could not read element data from xml correctly");
             //}
         }
-        /// <summary>
-        /// this method will sort the match nodes into an order such that when an element is generated
-        /// </summary>
-        private static List<Node> sortMatchedNodes(List<Node> nodes)
-        {
-            List<Node> sortMatchedNodes = new List<Node>();
-
-            Node currentNode = nodes[0];
-            sortMatchedNodes.Add(currentNode);
-             
-            // List<Node> remainingNodes = nodes.Skip(1).ToList();
-
-            while (sortMatchedNodes.Count < 4)
-            {
-                int currentIdx = nodes.IndexOf(currentNode);
-                List<int> nums = new List<int>() { 0, 1, 2, 3 };
-                nums.Remove(currentIdx);
-
-                var nodeComp1 = nodes[nums[0]];
-                var nodeComp2 = nodes[nums[1]];
-                var nodeComp3 = nodes[nums[2]];
-                
-                if (GeneralGeomMethods.isCommonAxis(currentNode, nodeComp1) && !sortMatchedNodes.Contains(nodeComp1))
-                {
-                    //.Clone() as Node
-                    sortMatchedNodes.Add(nodeComp1);
-                    currentNode = nodeComp1;
-                }
-                else if (GeneralGeomMethods.isCommonAxis(currentNode, nodeComp2) && !sortMatchedNodes.Contains(nodeComp2))
-                {
-                    //.Clone() as Node
-                    sortMatchedNodes.Add(nodeComp2);
-                    currentNode = nodeComp2;
-                }
-                else if (GeneralGeomMethods.isCommonAxis(currentNode, nodeComp3) && !sortMatchedNodes.Contains(nodeComp3))
-                {
-                    // .Clone() as Node
-                    sortMatchedNodes.Add(nodeComp3);
-                    currentNode = nodeComp3;
-                }
-                else
-                {
-                    break;
-                }
-            }
-            return sortMatchedNodes;
-
-            //while (remainingNodes.Count > 0) { 
-            ////for (; ii < remainingNodes.Count; ii++) {
-
-            //    if (isCommonAxis(currentNode, remainingNodes[ii]))
-            //    {
-            //        Node reaminingNodeClone = remainingNodes[ii].Clone() as Node;
-            //        // don't want to re map the same node twice
-
-            //        remainingNodes.RemoveAt(ii);
-
-            //        sortMatchedNodes.Add(reaminingNodeClone);
-            //        currentNode = reaminingNodeClone;
-            //        // break;
-            //    }
-            //    ii++;
-            //}
-            //if (sortMatchedNodes.Count == 4)
-            //{
-                
-            //}
-            //else
-            //{
-            //    throw new Exception("SortMatchedNodes method did not work by producing an output list of the same length as it's input");
-            //}
-        }
+       
         
     }
 }

@@ -15,27 +15,10 @@ namespace DisertationFEPrototype.Model.Analysis
         Geometric geometric;
         Mechanical mechanical;
 
-        public int GetId
-        {
-            get
-            {
-                return this.id;
-            }
-        }
-        public string GetName
-        {
-            get
-            {
-                return this.name;
-            }
-        }
-        public Geometric Geometric
-        {
-            get
-            {
-                return this.geometric;
-            }
-        }
+        public int GetId{ get{ return this.id; } }
+        public string GetName{ get{ return this.name; } }
+
+        public Geometric Geometric{ get {return this.geometric; } }
         public Mechanical Mechanical
         {
             get

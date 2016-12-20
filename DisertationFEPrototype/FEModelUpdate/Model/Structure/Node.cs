@@ -12,6 +12,7 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
         double x;
         double y;
         double z;
+        // List<Element> associatedElements;
 
         public object Clone()
         {
@@ -19,14 +20,8 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
         }
         public int Id
         {
-            get
-            {
-                return this.id;
-            }
-            set
-            {
-                this.id = value;
-            }
+            get {return this.id; }
+            set {this.id = value;}
         }
 
         public double GetX
@@ -59,6 +54,13 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
             this.x = x;
             this.y = y;
             this.z = z;
+        }
+        public Node(Node node)
+        {
+            this.id = node.id;
+            this.x = node.x;
+            this.y = node.y;
+            this.z = node.z;
         }
     }
 }

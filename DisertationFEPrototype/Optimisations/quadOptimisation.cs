@@ -16,12 +16,12 @@ namespace DisertationFEPrototype.Optimisations
     {
         
         /// <summary>
-        /// given an element get a list of sub devided elements the sum of which forms that element
+        /// Given an element get a list of sub devided elements the sum of which forms that element
         /// </summary>
-        /// <param name="elem"></param>
-        /// <param name="nodes"></param>
-        /// <returns></returns>
-        public static List<Element> newElements(Element elem, Dictionary<Tuple<double, double, double>,Node> nodes)
+        /// <param name="elem">Element we want to split into four sub elements using h-refinement</param>
+        /// <param name="nodes">Lookup of all nodes in the current model</param>
+        /// <returns>List of sub elements to replace the input element</returns>
+        public static List<Element> getNewElements(Element elem, Dictionary<Tuple<double, double, double>,Node> nodes)
         {
 
             List<Element> newElements = new List<Element>();
@@ -34,14 +34,13 @@ namespace DisertationFEPrototype.Optimisations
             List<Node[]> elementEdgeTrios = subNodeTup.Item1;
             List<Node> midpointLineNodes = subNodeTup.Item2;
 
+            // get the new center node which will be a corner for each of the four new elements
             Node centerNode = createCenterNode(midpointLineNodes, nodes);
-           
-           
-            // list of all the new elements with their four nodes
+            
+            // return the new elements with their four nodes
             return getNewElements(elementEdgeTrios, centerNode, constantAxis);
 
         }
-
         
         /// <summary>
         /// check if node already exists within the model, if yes then use the node object already in the model, else add
@@ -97,19 +96,20 @@ namespace DisertationFEPrototype.Optimisations
             return constAxis;
 
         }
+
         /// <summary>
-        /// Create the new four interior elements for the current element
+        /// get four new interior quad4 elements for the current element
         /// </summary>
-        /// <returns>the new elements which are the children of the original element</returns>
+        /// <param name="elementEdgeTrios"> The current edge nodes which will each </param>
+        /// <param name="centreNode">The new node which will be a corner for each of the new sub elements</param>
+        /// <param name="constantAxis">Axis that the nodes share a common value for</param>
+        /// <returns> The new elements which are the children of the original element </returns>
         private static List<Element> getNewElements(List<Node[]> elementEdgeTrios, Node centreNode, string constantAxis)
         {
             List<Element> newElements = new List<Element>();
 
             foreach (Node[] trio in elementEdgeTrios)
             {
-                // problem here is that the matched nodes need to be in such an order that they go around in squares,
-                // not an order where nodes are linked across the center of the element
-
                 // add the centre node to get the smaller element
                 trio[2] = centreNode;
                 var orderedTrio = trio.ToList();

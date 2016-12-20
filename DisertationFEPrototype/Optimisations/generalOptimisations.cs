@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DisertationFEPrototype.Model;
 using DisertationFEPrototype.Model.MeshDataStructure;
 using DisertationFEPrototype.Model.Analysis;
-using DisertationFEPrototype.Optimisations.AIRules;
+using DisertationFEPrototype.Optimisations.ILPRules;
 
 namespace DisertationFEPrototype.Optimisations
 {
@@ -31,15 +31,11 @@ namespace DisertationFEPrototype.Optimisations
         {
             this.meshData = meshData;
             this.analysisData = analysisData;
-
-            // need to figure out how we are going to finish formulating the edges.
-
-            this.ruleManager = AIRules.RuleManager(meshData);
-            throw new NotImplementedException();
-
+            this.ruleManager = new RuleManager(meshData);
+          
         }
 
-        public void doubleNodeCount()
+        public void refineMesh()
         {
             // try a basic mesh refinement by creating more elements first
             List<Element> elements = this.meshData.Elements;
@@ -48,12 +44,18 @@ namespace DisertationFEPrototype.Optimisations
 
             var elem = elements.Select(x => x.Id);
 
-            //if (elem.Contains(32))
-            //{
-            //    Console.WriteLine("WHAT???");
+            // using an if statement for now but a deligate would ultimately be ideal for doing this.
+            // later on need to do both but with some weighting
+           // if ()
+           // {
+                    
             //}
-
-            basicAnalysisDrivenMesh(nodes, elements, analysisData);
+           // else
+           // {
+                
+            // }    
+            ILPEdgeDrivenRefinement();
+            stressGradientDrivenRemesh(nodes, elements, analysisData);
 
             // now flatten the tree structure
             List<Element> flatElemTree = getNewElementList(elements);
@@ -74,17 +76,55 @@ namespace DisertationFEPrototype.Optimisations
 
         }
 
+    
+        /// <summary>
+        /// This method will use information derived from running the ILP rules that determine how much meshing should occur around each edge.
+        /// Data for the edges has already been computed in the EdgeIdentification module.
+        /// </summary>
+        private void ILPEdgeDrivenRefinement()
+        {
+            // the edges which had been assigned an amount for remeshing
+            List<Edge> meshingEdges = this.ruleManager.GetEdges;
+
+            foreach (Edge edge in meshingEdges)
+            {
+                int elemCount = edge.ElementCount;
+                List<Node> nodePath = edge.NodePath;
+                // for each node on the path get its elements and mesh those
+                List<Element> allRemeshingElems = nodePath.SelectMany(np => meshData.findElems(np)).ToList();
+
+                remesh(allRemeshingElems, 0, edge.ElementCount);
+            }
+        }
+
+        
+        private void remesh(List<Element> elements, int ii, int elemCount)
+        {
+            if (ii < elemCount) {
+                foreach (Element elem in elements)
+                {
+                    List<Element> refined = QuadElementRefinement.getNewElements(elem, meshData.Nodes);
+                    elem.Children = refined;
+
+                    ii++;
+                    // mesh another level
+                    remesh(refined, ii, elemCount);
+                }
+            }
+        }
+
+    
         /// <summary>
         /// we want to use the data from the previous analyis that we have to refine our mesh specificially in areas with high stress values
         /// </summary>
         /// <param name="elements"></param>
         /// <param name="analysisData"></param>
-        private void basicAnalysisDrivenMesh(Dictionary<Tuple<double, double, double>, Node> nodes, List<Element> elements, List<NodeAnalysisData> analysisData)
+        private void stressGradientDrivenRemesh(Dictionary<Tuple<double, double, double>, Node> nodes, List<Element> elements, List<NodeAnalysisData> analysisData)
         {
 
             double remeshThreshold = determineRemeshThreshold(analysisData);
 
-            ruleRefinement();
+            // ruleRefinement();
 
             foreach (var elem in elements)
             {
@@ -100,22 +140,14 @@ namespace DisertationFEPrototype.Optimisations
                 if (avgDispMag > remeshThreshold)
                 {
                     Console.WriteLine("Remeshed elements: " + elem.Id.ToString());
-                    List<Element> children = QuadElementRefinement.newElements(elem, nodes);
+                    List<Element> children = QuadElementRefinement.getNewElements(elem, nodes);
                     elem.Children = children;
-
                 }
             }
             Console.WriteLine("done all");
         }
-        /// <summary>
-        /// hand some edges from the refined model back to this routine, and then fit the rules again and see if we can apply them some
-        /// more before going back to stress values for refinement.
-        /// </summary>
-        private void ruleRefinement()
-        {
-            this.ruleManager();
-
-        }
+        
+      
 
         /// <summary>
         /// some function which using the nodal displacements for the whole model determines what is considered a high displacement,

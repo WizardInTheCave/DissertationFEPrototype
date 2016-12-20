@@ -76,13 +76,13 @@
     <Compile Include="FEModelUpdate\Model\Structure\Node.cs" />
     <Compile Include="MeshQualityMetrics\ElementQualityMetrics.cs" />
     <Compile Include="MeshQualityMetrics\MeshQualityAssessment.cs" />
-    <Compile Include="Optimisations\AIRules\Edge.cs" />
-    <Compile Include="Optimisations\AIRules\EdgeRelation.cs" />
-    <Compile Include="Optimisations\AIRules\Rule.cs" />
-    <Compile Include="Optimisations\AIRules\RuleManager.cs" />
     <Compile Include="Optimisations\generalOptimisations.cs" />
+    <Compile Include="Optimisations\ILPRules\Edge.cs" />
+    <Compile Include="Optimisations\ILPRules\EdgeIdentifier.cs" />
+    <Compile Include="Optimisations\ILPRules\EdgeRelation.cs" />
+    <Compile Include="Optimisations\ILPRules\Rule.cs" />
+    <Compile Include="Optimisations\ILPRules\RuleManager.cs" />
     <Compile Include="Optimisations\quadOptimisation.cs" />
-    <Compile Include="PartGraph\ComponentNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -110,7 +110,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="PartGraph\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

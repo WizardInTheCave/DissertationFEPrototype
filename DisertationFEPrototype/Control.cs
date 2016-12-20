@@ -55,12 +55,13 @@ namespace DisertationFEPrototype
                 analysisData = analysisDataReader.getAnalysisData();
 
                 generalOptimisations optimisation = new generalOptimisations(meshData, analysisData);
-                optimisation.doubleNodeCount();
+                optimisation.refineMesh();
 
                 MeshData refinedMesh = optimisation.GetUpdatedMesh;
                 meshLog.Add(refinedMesh);
 
-                MeshQualityMetrics.MeshQualityAssessment.assessMesh(refinedMesh);
+                // remember to uncomment this
+                //MeshQualityMetrics.MeshQualityAssessment.assessMesh(refinedMesh);
 
                 // update the lisa file we are now working on (we next want to solve the updated file)
                 lisaFile = lisaFileName + ii.ToString() + ".liml";

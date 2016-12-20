@@ -102,8 +102,7 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
         }
         public List<Element> Children
         {
-            get
-            {
+            get{
                 return this.childElements;
             }
             set
@@ -163,10 +162,11 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
             }
             return -1;
         }
-                
-
-
-
+        
+        /// <summary>
+        /// Compute the aspect ratio for an element 
+        /// </summary>
+        /// <returns></returns>
         private double computeAspectRatio()
         {
             double aspectRatio;
@@ -174,6 +174,10 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
             return aspectRatio;
         }
 
+        /// <summary>
+        /// Compute the longest edge for an element
+        /// </summary>
+        /// <returns></returns>
         private double computeLongestEdge()
         {
             double longestEdge = SHORTEST_EDGE_DEFAULT;
@@ -216,6 +220,21 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
                 }
             }
             return shortestEdge;
+        }
+
+        public Node getDiagonalNode(Node queryNode){
+            if (nodes.Contains(queryNode))
+            {
+                List<Node> sortedNodes = GeneralGeomMethods.sortMatchedNodes(this.nodes);
+                int diagIndex = (sortedNodes.IndexOf(queryNode) + 2) % 4;
+                Node diagNode = sortedNodes[diagIndex];
+                return diagNode;
+            }
+            else
+            {
+                throw new Exception("canot compute the diagonal node when the node you have provided is not a part of this element");
+            }
+
         }
 
         /// <summary>
@@ -267,12 +286,12 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
             return commonNodes;
         }
 
-        private double getAngle(Node angleNode, Node[] commonNodes)
+        private double getAngle(Node angleNode, Node[] twoCommonNodes)
         {
             // using method described here: http://stackoverflow.com/questions/19729831/angle-between-3-points-in-3d-space
 
-            double[] v1 = new double[] { commonNodes[0].GetX - angleNode.GetX, commonNodes[0].GetY - angleNode.GetY, commonNodes[0].GetZ - angleNode.GetZ };
-            double[] v2 = new double[] { commonNodes[1].GetX - angleNode.GetX, commonNodes[1].GetY - angleNode.GetY, commonNodes[1].GetZ - angleNode.GetZ };
+            double[] v1 = new double[] { twoCommonNodes[0].GetX - angleNode.GetX, twoCommonNodes[0].GetY - angleNode.GetY, twoCommonNodes[0].GetZ - angleNode.GetZ };
+            double[] v2 = new double[] { twoCommonNodes[1].GetX - angleNode.GetX, twoCommonNodes[1].GetY - angleNode.GetY, twoCommonNodes[1].GetZ - angleNode.GetZ };
           
 
             double v1mag = Math.Sqrt(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
@@ -301,7 +320,7 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
                 return 0;
             }
 
-            double[] total = getTotal(this.nodes);
+            double[] total = getTotalCrossProduct(this.nodes);
             var elemNormal = GeneralGeomMethods.unitNormal(this.nodes[0], this.nodes[1], this.nodes[2]);
 
             double result = GeneralGeomMethods.dotProduct(total, elemNormal);
@@ -329,7 +348,12 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
             return result;
         }
 
-        private static double[] getTotal(List<Node> nodes)
+        /// <summary>
+        /// For the nodes in the element get the cross product for each pair and add to total
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <returns></returns>
+        private static double[] getTotalCrossProduct(List<Node> nodes)
         {
             double[] total = new double[] { 0, 0, 0 };
             for (int ii = 0; ii < nodes.Count; ii++)
@@ -359,10 +383,6 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
         //                       with V[n]=V[0] and V[n+1]=V[1]
         //            Point N = unit normal vector of the polygon's plane
         //    Return: the (float) area of the polygon
-
-
-
-
 
         private double computeEdgeLength(bool[] commonPlanes, Node nodeA, Node nodeB)
         {

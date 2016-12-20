@@ -83,13 +83,6 @@ namespace DisertationFEPrototype.ModelUpdate
 
                 double dispMag = Convert.ToDouble(fields[7]);
 
-                //double stressXX = Convert.ToDouble(fields[8]);
-                //double stressYY = Convert.ToDouble(fields[9]);
-                //double stressZZ = Convert.ToDouble(fields[10]);
-
-                //double stressXY = Convert.ToDouble(fields[11]);
-                //double stressYZ = Convert.ToDouble(fields[12]);
-                //double stressZX = Convert.ToDouble(fields[13]);
                 analysisData.Add(new NodeAnalysisData(nodeId, x, y, z, dispX, dispY, dispZ, dispMag));
             }
             return analysisData;
