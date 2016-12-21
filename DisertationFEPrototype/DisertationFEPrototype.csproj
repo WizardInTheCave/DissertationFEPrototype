@@ -80,7 +80,6 @@
     <Compile Include="Optimisations\ILPRules\Edge.cs" />
     <Compile Include="Optimisations\ILPRules\EdgeIdentifier.cs" />
     <Compile Include="Optimisations\ILPRules\EdgeRelation.cs" />
-    <Compile Include="Optimisations\ILPRules\Rule.cs" />
     <Compile Include="Optimisations\ILPRules\RuleManager.cs" />
     <Compile Include="Optimisations\quadOptimisation.cs" />
     <Compile Include="Program.cs" />

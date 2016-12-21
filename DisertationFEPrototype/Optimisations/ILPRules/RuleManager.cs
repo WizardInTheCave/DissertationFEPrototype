@@ -20,7 +20,6 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
     class RuleManager
     {
 
-        Rule r1;
         readonly double SAME_DISTANCE_TOLERANCE = 0.1;
         List<Edge> edges;
 
@@ -39,43 +38,105 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
 
             // build a set of edges out of the mesh data
 
-            rule1(edges);
-            
-        }
-
-        
-
-        // for all the edges in the model we want to see if there is a group of edges which meet
-        // this specific rule, if so we want to apply the rule 
-        private void rule1(List<Edge> edges)
-        {
-            int involvedEdges = 2;
-
+            // main rule loop to save computation time
             // do comparisons between all of the different edges in the model.
-            foreach(Edge edge in edges)
+            foreach (Edge edge in edges)
             {
+                rule4(edge);
                 foreach (Edge otherEdge in edges)
                 {
                     if (edge.ID != otherEdge.ID)
                     {
-                        bool b1 = edge.GetEdgeType() == Edge.EdgeType.importantShort;
-                        bool b2 = isNeighbour(edge, otherEdge);
-                        bool b3 = otherEdge.GetBoundaryType() == Edge.BoundaryType.fixedCompletely;
-                        bool b4 = otherEdge.GetLoadType() == Edge.LoadingType.notLoaded;
-                        if (b1
-                        && b2
-                        && b3
-                        && b4)
-                        {
-                            edge.ElementCount = involvedEdges;
-                            otherEdge.ElementCount = involvedEdges;
-                        }
+                        // try tro apply each of these rules to the edgeA pair
+                        rule1(edge, otherEdge);
+                        rule2(edge, otherEdge);
+                        rule3(edge, otherEdge);
+
                     }
                 }
             }
- 
             
         }
+
+
+        // rules can be found in Dolsak and muggleton paper "The Application of Inductive Logic Programming to Finite Element Mesh Design"
+        // as referenced within the dissertation bibliography
+        // rules are coded here in column ordering within the paper
+
+        /// <summary>
+        /// for all the edges in the model we want to see if there is a group of edges which meet
+        /// this specific rule, if so we want to apply the rule 
+        /// </summary>
+        /// <param name="edges"></param>
+        private void rule1(Edge edgeA, Edge edgeB)
+        {
+            int involvedEdges = 2;
+            bool b1 = edgeA.GetEdgeType() == Edge.EdgeType.importantShort;
+            bool b2 = isNeighbour(edgeA, edgeB);
+            bool b3 = edgeB.GetBoundaryType() == Edge.BoundaryType.fixedCompletely;
+            bool b4 = edgeB.GetLoadType() == Edge.LoadingType.notLoaded;
+            if (b1
+            && b2
+            && b3
+            && b4)
+            {
+                edgeA.ElementCount = involvedEdges;
+                edgeB.ElementCount = involvedEdges;
+            }
+        }
+        
+        private void rule2(Edge edgeA, Edge edgeB)
+        {
+            int involvedEdges = 2;
+            if (edgeA.GetEdgeType() == Edge.EdgeType.importantShort
+            && isNeighbour(edgeA, edgeB)
+            && edgeB.GetEdgeType() == Edge.EdgeType.notImportant
+            && edgeB.GetLoadType() == Edge.LoadingType.notLoaded)
+            {
+                edgeA.ElementCount = involvedEdges;
+                edgeB.ElementCount = involvedEdges;
+            }  
+        }
+        private void rule3(Edge edgeA, Edge edgeB)
+        {
+            int involvedEdges = 2;
+            if (edgeA.GetEdgeType() == Edge.EdgeType.importantShort
+            && edgeA.GetBoundaryType() == Edge.BoundaryType.free
+            && isNeighbour(edgeB, edgeA)
+            && edgeB.GetLoadType() == Edge.LoadingType.notLoaded)
+            {
+                edgeA.ElementCount = involvedEdges;
+                edgeB.ElementCount = involvedEdges;
+            }
+        }
+        private void rule4(Edge edgeA)
+        {
+            int involvedEdges = 2;
+            if (edgeA.GetBoundaryType() == Edge.BoundaryType.free
+               && edgeA.GetLoadType() == Edge.LoadingType.oneSideLoaded
+                )
+            {
+                edgeA.ElementCount = involvedEdges;
+            }
+        }
+        //private void rule5(Edge edgeA, Edge edgeB)
+        //{
+        //    int involvedEdges = 2;
+        //    if (isSame(edgeA, edgeB)
+        //       && Ed)
+        //    {
+
+        //    }
+        //}
+
+
+        /// <summary>
+        /// Determine if two edges are neighbours to one another
+        /// </summary>
+        /// <param name="edgeA">The first edge</param>
+        /// <param name="edgeB">The second edge</param>
+        /// <returns>true if are neighbours,
+        /// false if not neighbours</returns>
         private bool isNeighbour(Edge edgeA, Edge edgeB)
         {
             bool neighbour = true;
@@ -83,6 +144,14 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
 
             return neighbour;
         }
+
+        /// <summary>
+        /// Check to see if the two edges can be considered opposite from one another
+        /// </summary>
+        /// <param name="edgeA">The first edge</param>
+        /// <param name="edgeB">The second edge</param>
+        /// <returns>true if the edges are opposite from one another
+        /// false if the edges are not opposite from one another</returns>
         private bool isOpposite(Edge edgeA, Edge edgeB)
         {
             bool opposite = false;
@@ -119,7 +188,6 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             double oppositeDistance = lengths[0];
             opposite = lengths.All(len => Math.Abs(len - oppositeDistance) <= SAME_DISTANCE_TOLERANCE);
             return opposite;
-
         }
 
         private bool hasSameLength(Edge edgeA, Edge edgeB)

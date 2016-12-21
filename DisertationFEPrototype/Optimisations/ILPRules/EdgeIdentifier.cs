@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace DisertationFEPrototype.Optimisations.ILPRules
 {
+    /// <summary>
+    /// This class is responsible for containing code that identifies edges within the mesh structure, by finding edges it is then
+    /// Possible to apply Dolsaks ILP rules. 
+    /// </summary>
     class EdgeIdentifier
     {
 
@@ -19,8 +23,9 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
 
         int totalEdgeCount = 1;
 
+        // all the edges we have been able to find automatically in the model by applying some logic 
+        // about what is and isn't an edge
         List<Edge> foundEdges;
-
 
         /// <summary>
         /// using the mesh model build a set of edges that we can apply rules to and then map back into the mesh data domain
@@ -68,8 +73,18 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 ii++;
             }
 
-
-            Console.WriteLine("HERE!");
+            // get an edge for each corner node
+            ii = 0;
+            foreach (Node corner in internalCornerNodes)
+            {
+                List<Node> internalCornerNodesReduced = internalCornerNodes.Select(x => x).ToList();
+                internalCornerNodesReduced.RemoveAt(ii);
+                List<Node> otherEdgeNodes = externalEdgeNodes.Select(edgeNode => edgeNode).ToList();
+                otherEdgeNodes.AddRange(internalCornerNodesReduced);
+                // need to do something here to check if the same edge has been found twice.
+                modelEdges.Add(findEdge(corner, otherEdgeNodes, modelEdges, mesh));
+                ii++;
+            }
             return modelEdges;
         }
 
@@ -171,11 +186,10 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 {
                     numOfSides = 1;
                 }
-                // else if(max == 2 && elemsAreDiagonal(edgeElemsWithAppliedForce))
-                //
+                //else if(max == 2 && elemsAreDiagonal(edgeElemsWithAppliedForce))
                 //{
                 //     numOfSides = 2;
-                // }
+                //}
             }
             return numOfSides;
         }
@@ -240,9 +254,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
         /// <returns></returns>
         private Node getNextNode(Node currentNode, List<Element> currentNodeElems, List<Node> otherEdgeNodes, List<List<Element>> otherEdgeNodeElements, List<Node> ourEdge)
         {
-
             int ii = 0;
-
             foreach (List<Element> elementSet in otherEdgeNodeElements)
             {
                 List<Element> intersects = elementSet.Intersect(currentNodeElems).ToList();
@@ -266,25 +278,8 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 ii++;
             }
 
-            // List<Element> allEdgeElements = otherEdgeNodeElements.SelectMany(elem => elem).ToList();
-
-            // go through all the elements groups around nodes which are considered on an edge.
-            // if there is an element around the current node which is also within one of the elements 
-            // around the other nodes within the edge then link the two up
-            //foreach (var nodeElement in currentNodeElems)
-            //{
-            //    otherEdgeNodes[ii]
-            //    // yes we are happy that from the current node there is a link to another node
-            //    if (allEdgeElements.Contains(nodeElement))
-            //    {
-
-            //    }
-            //}
-
-
             // if we get to here then the edge has ended
             return null;
-
         }
 
 

@@ -19,54 +19,67 @@ namespace DisertationFEPrototype.FEModelUpdate
         /// <param name="a">first node</param>
         /// <param name="b">second node</param>
         /// <returns>list of bools with pos 0 representing x plane, 1 representing y plane and z representing z plane</returns>
-        public static bool[] whichPlanesCommon(Node a, Node b)
-        {
+        //public static bool[] whichPlanesCommon(Node a, Node b)
+        //{
 
-            bool[] sameVals = new bool[3] { false, false, false };
+        //    bool[] sameVals = new bool[3] { false, false, false };
 
-            if (a.GetX == b.GetX)
-            {
-                sameVals[0] = true;
+        //    if (a.GetX == b.GetX)
+        //    {
+        //        sameVals[0] = true;
 
-            }
-            if (a.GetY == b.GetY)
-            {
-                sameVals[1] = true;
+        //    }
+        //    if (a.GetY == b.GetY)
+        //    {
+        //        sameVals[1] = true;
 
-            }
-            if (a.GetZ == b.GetZ)
-            {
-                sameVals[2] = true;
-            }
+        //    }
+        //    if (a.GetZ == b.GetZ)
+        //    {
+        //        sameVals[2] = true;
+        //    }
 
-            return sameVals;
-        }
+        //    return sameVals;
+        //}
         public static double distanceBetweenPoints(Node a, Node b)
         {
             return Math.Sqrt(Math.Pow((a.GetX - b.GetX), 2) + Math.Pow((a.GetY - b.GetY), 2) + Math.Pow((a.GetZ - b.GetZ), 2));
         }
-        public static bool isCommonAxis(Node firstNode, Node secondNode)
-        {
-            bool[] sameVals = GeneralGeomMethods.whichPlanesCommon(firstNode, secondNode);
-            int commonAxisVals = sameVals.Count(b => b == true);
-            return commonAxisVals == 2;
-        }
+
         /// <summary>
-        /// function override for if we have already computed same vals outside
+        /// Determine if two nodes within an element are adjactent to one another based on their euclidean distance
         /// </summary>
-        /// <param name="sameVals"></param>
+        /// <param name="firstNode">Node we are want to check if the second node is adjacent to</param>
+        /// <param name="secondNode">The second node which may or may not be adjacent</param>
+        /// <param name="elem">The element that both nodes are contained within</param>
         /// <returns></returns>
-        public static bool isCommonAxis(bool[] sameVals)
+        public static bool isAdjacent(Node firstNode, Node secondNode, Element elem)
         {
-            int commonAxisVals = sameVals.Count(b => b == true);
-            return commonAxisVals == 2;
+
+            double maxDistance = elem.Nodes.Select(elemNode => distanceBetweenPoints(firstNode, elemNode)).Max();
+            return distanceBetweenPoints(firstNode, secondNode) < maxDistance;
+
+            //bool[] sameVals = GeneralGeomMethods.whichPlanesCommon(firstNode, secondNode);
+            //int commonAxisVals = sameVals.Count(b => b == true);
+            //return commonAxisVals == 2;
         }
+        ///// <summary>
+        ///// function override for if we have already computed same vals outside
+        ///// </summary>
+        ///// <param name="sameVals"></param>
+        ///// <returns></returns>
+        //public static bool isAdjacent(bool[] sameVals)
+        //{
+        //    int commonAxisVals = sameVals.Count(b => b == true);
+        //    return commonAxisVals == 2;
+        //}
 
         /// <summary>
         /// this method will sort the match nodes into an order such that when an element is generated
         /// </summary>
-        public static List<Node> sortMatchedNodes(List<Node> nodes)
+        public static List<Node> sortMatchedNodes(Element elem)
         {
+            List<Node> nodes = elem.Nodes;
             List<Node> sortMatchedNodes = new List<Node>();
 
             Node currentNode = nodes[0];
@@ -74,7 +87,9 @@ namespace DisertationFEPrototype.FEModelUpdate
 
             // List<Node> remainingNodes = nodes.Skip(1).ToList();
 
-            while (sortMatchedNodes.Count < 4)
+            const int  NODES_IN_QUAD_FOUR = 4;
+
+            while (sortMatchedNodes.Count < NODES_IN_QUAD_FOUR)
             {
                 int currentIdx = nodes.IndexOf(currentNode);
                 List<int> nums = new List<int>() { 0, 1, 2, 3 };
@@ -84,19 +99,20 @@ namespace DisertationFEPrototype.FEModelUpdate
                 var nodeComp2 = nodes[nums[1]];
                 var nodeComp3 = nodes[nums[2]];
 
-                if (GeneralGeomMethods.isCommonAxis(currentNode, nodeComp1) && !sortMatchedNodes.Contains(nodeComp1))
+                // basically checking if it's not diagonal and wheter or not we have already encountered it
+                if (GeneralGeomMethods.isAdjacent(currentNode, nodeComp1, elem) && !sortMatchedNodes.Contains(nodeComp1))
                 {
                     //.Clone() as Node
                     sortMatchedNodes.Add(nodeComp1);
                     currentNode = nodeComp1;
                 }
-                else if (GeneralGeomMethods.isCommonAxis(currentNode, nodeComp2) && !sortMatchedNodes.Contains(nodeComp2))
+                else if (GeneralGeomMethods.isAdjacent(currentNode, nodeComp2, elem) && !sortMatchedNodes.Contains(nodeComp2))
                 {
                     //.Clone() as Node
                     sortMatchedNodes.Add(nodeComp2);
                     currentNode = nodeComp2;
                 }
-                else if (GeneralGeomMethods.isCommonAxis(currentNode, nodeComp3) && !sortMatchedNodes.Contains(nodeComp3))
+                else if (GeneralGeomMethods.isAdjacent(currentNode, nodeComp3, elem) && !sortMatchedNodes.Contains(nodeComp3))
                 {
                     // .Clone() as Node
                     sortMatchedNodes.Add(nodeComp3);

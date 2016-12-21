@@ -23,7 +23,7 @@ namespace DisertationFEPrototype
             int ii = 0;
 
             //string lisaFile = @"D:\Documents\DissertationWork\models\newBlockTestSquareNodes.liml";  
-            string lisaFile = "newBlockTestSquareNodes.liml";
+            string lisaFile = "bridge.liml";
             //string solveFile = @"D:\Documents\DissertationWork\secondTest.csv";
             bool isNodeOutput = true;
 

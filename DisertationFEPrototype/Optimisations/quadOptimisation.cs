@@ -41,7 +41,7 @@ namespace DisertationFEPrototype.Optimisations
             return getNewElements(elementEdgeTrios, centerNode, constantAxis);
 
         }
-        
+
         /// <summary>
         /// check if node already exists within the model, if yes then use the node object already in the model, else add
         /// the node to the model
@@ -49,22 +49,25 @@ namespace DisertationFEPrototype.Optimisations
         /// <param name="node">the node we want to check the presence of in the model</param>
         /// 
         /// <returns>the safe node reference</returns>
-        private static Node createNode(double x, double y, double z, Dictionary<Tuple<double, double, double>, Node> nodes)
+        private static Node createNode(Node node, Node adjacentNode, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
-            var key = new Tuple<double, double, double>(x, y, z);
+            double newX = (node.GetX + adjacentNode.GetX) / 2;
+            double newY = (node.GetY + adjacentNode.GetY) / 2;
+            double newZ = (node.GetZ + adjacentNode.GetZ) / 2;
+            var key = new Tuple<double, double, double>(newX, newY, newZ);
 
             // kind of expensive but fine for the time being, we just want to know what to use as the starting value for assigning node ids
             // nodes.Values.ToArray().Max(x => x.Id);
 
-            Node node;
+            Node newNode;
             if (nodes.ContainsKey(key)) {
-                node = nodes[key];
+                newNode = nodes[key];
             }
             else
             {
                 // set the centre node to the node that already exists, otherwise keep the one we just made
                 int maxNodeCount = nodes.Values.ToArray().Select(a => a.Id).Max();
-                node = new Node(maxNodeCount + 1, x, y, z);
+                newNode = new Node(maxNodeCount + 1, newX, newY, newZ);
                 nodes[key] = node;
             }
             return node;
@@ -202,44 +205,46 @@ namespace DisertationFEPrototype.Optimisations
             return Tuple.Create(elementEdgeTrios, midEdgeNodes);
         }
 
+
         /// <summary>
         /// return a node which lies on the midpoint between the two edges
         /// </summary>
         /// <returns></returns>
-        private static Node makeMidEdgeNode(bool[] sameVals, Node node, Node adjacentNode, Dictionary<Tuple<double, double, double>, Node> nodes)
-        {
+        //private static Node makeMidEdgeNode(bool[] sameVals, Node node, Node adjacentNode, Dictionary<Tuple<double, double, double>, Node> nodes)
+        //{
 
-            // int id = this.meshData.Nodes.Count + 1;
+        //    // int id = this.meshData.Nodes.Count + 1;
 
-            // figure if it's the x, y or z coordinate which makes them different
-            int index = Array.IndexOf(sameVals, false);
 
-            double newX;
-            double newY;
-            double newZ;
+        //    // figure if it's the x, y or z coordinate which makes them different
+        //    int index = Array.IndexOf(sameVals, false);
 
-            switch (index)
-            {
-                case 0:
-                    newX = (node.GetX + adjacentNode.GetX) / 2;
-                    newY = node.GetY;
-                    newZ = node.GetZ;
-                    break;
+        //    double newX;
+        //    double newY;
+        //    double newZ;
 
-                case 1:
-                    newX = node.GetX;
-                    newY = (node.GetY + adjacentNode.GetY) / 2;
-                    newZ = node.GetZ;
-                    break;
-                case 2:
-                    newX = node.GetX;
-                    newY = node.GetY;
-                    newZ = (node.GetZ + adjacentNode.GetZ) / 2;
-                    break;
-                default:
-                    throw new Exception("computeMidEdgeNode: index is incorrect, can't operate in more than 3d space");
-            }
-            return createNode(newX, newY, newZ, nodes); 
-        }
+        //    switch (index)
+        //    {
+        //        case 0:
+        //            newX = (node.GetX + adjacentNode.GetX) / 2;
+        //            newY = node.GetY;
+        //            newZ = node.GetZ;
+        //            break;
+
+        //        case 1:
+        //            newX = node.GetX;
+        //            newY = (node.GetY + adjacentNode.GetY) / 2;
+        //            newZ = node.GetZ;
+        //            break;
+        //        case 2:
+        //            newX = node.GetX;
+        //            newY = node.GetY;
+        //            newZ = (node.GetZ + adjacentNode.GetZ) / 2;
+        //            break;
+        //        default:
+        //            throw new Exception("computeMidEdgeNode: index is incorrect, can't operate in more than 3d space");
+        //    }
+        //    return createNode(newX, newY, newZ, nodes); 
+        //}
     }
 }
