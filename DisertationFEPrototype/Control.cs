@@ -9,18 +9,18 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using DisertationFEPrototype.MeshQualityMetrics;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
+using System;
 
 namespace DisertationFEPrototype
 {
     class Control
     {
         /// <summary>
-        /// main loop which drives iteration until we have a FE model which meets the requirements, easy!
+        /// main loop which drives iteration until we have a FE model which meets the requirements, simple!
         /// </summary>
         /// <param name="lisaString"></param>
         public Control() {
-
-            int ii = 0;
 
             //string lisaFile = @"D:\Documents\DissertationWork\models\newBlockTestSquareNodes.liml";  
             string lisaFile = "bridge.liml";
@@ -32,11 +32,8 @@ namespace DisertationFEPrototype
 
             string lisaFolderPath = @"D:\Documents\DissertationWork\models\";
 
-            List<MeshData> meshLog = new List<MeshData>();
-
             // only need to do this once to get the inital mesh, after that should try and drive it
             // purely with the solve data
-
             Directory.SetCurrentDirectory(lisaFolderPath);
 
             var meshDataReader = new ReadMeshData(lisaFile);
@@ -45,23 +42,49 @@ namespace DisertationFEPrototype
             // read data from the solve
             var analysisDataReader = new ReadAnalysisData(outputCSVname, isNodeOutput);
 
+
+            int ii = 0;
             List<NodeAnalysisData> analysisData;
+
+            MeshQualityAssessment meshQualityAssessment = null;
+            List<MeshQualityAssessment> meshAssessments = new List<MeshQualityAssessment>();
+
             while (evaluationFunction(ii) == false)
-            {
-                
+            {    
                 solve(lisaFile);
 
                 // read data from the solve
                 analysisData = analysisDataReader.getAnalysisData();
 
-                generalOptimisations optimisation = new generalOptimisations(meshData, analysisData);
-                optimisation.refineMesh();
 
+                foreach (IElement elem in meshData.Elements)
+                {
+                    if (elem.Nodes.Count < 4)
+                    {
+                        Console.WriteLine("What???");
+                    }
+                }
+                // assuming we have different mesh data should get a new set of edges.
+                OptimisationManager optimisation = new OptimisationManager(meshData, analysisData, ii);
+                
+                // hand quality assessment down to the refinement method so we can apply apply either rule based
+                // or traditional meshing further
+                optimisation.refineMesh(meshAssessments);
                 MeshData refinedMesh = optimisation.GetUpdatedMesh;
-                meshLog.Add(refinedMesh);
 
-                // remember to uncomment this
-                //MeshQualityMetrics.MeshQualityAssessment.assessMesh(refinedMesh);
+                foreach(IElement elem in refinedMesh.Elements)
+                {
+                    if (elem.Nodes.Count < 4)
+                    {
+                        Console.WriteLine("What???");
+                    }             
+                }
+
+
+                meshQualityAssessment = new MeshQualityAssessment(refinedMesh);
+                meshQualityAssessment.assessMesh();
+                meshAssessments.Add(meshQualityAssessment);
+
 
                 // update the lisa file we are now working on (we next want to solve the updated file)
                 lisaFile = lisaFileName + ii.ToString() + ".liml";
@@ -77,28 +100,23 @@ namespace DisertationFEPrototype
 
         }
         /// <summary>
-        /// tells lisa to run a solve on the lisa file which will produce some output
+        /// Tells lisa to run a solve on the lisa file which will produce some output
         /// </summary>
         /// <param name="lisaFile"></param>
         public void solve(string lisaFile)
         {
-
-            //ProcessStartInfo startInfo = new ProcessStartInfo("lisa8");
-            //startInfo.WindowStyle = ProcessWindowStyle.Minimized;
-
-            //Process.Start(startInfo);
-
-            //startInfo.Arguments = ;
-
-            //Process.Start(startInfo);
-
-
-            using (Process exeProcess = Process.Start("lisa8", lisaFile + " solve"))
+            using (Process lisaProcess = Process.Start("lisa8", lisaFile + " solve"))
             {
-                exeProcess.WaitForExit();
+                lisaProcess.StartInfo.RedirectStandardOutput = true;
+                lisaProcess.WaitForExit();
             }
         }
 
+        /// <summary>
+        /// Some function which determines whether it is cool for us to stop meshing yet.
+        /// </summary>
+        /// <param name="ii"></param>
+        /// <returns></returns>
         private bool evaluationFunction(int ii)
         {
             return ii > 3;

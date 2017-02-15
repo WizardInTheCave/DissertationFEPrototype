@@ -14,18 +14,18 @@ namespace DisertationFEPrototype.Model.Analysis
         public List<Face> Faces{
             get
             { 
-                return this.faces;
+                return faces;
             }
             set
             {
-                this.faces = value;
+                faces = value;
             }
         }
         public string GetName
         {
             get
             {
-                return this.name;
+                return name;
             }
         }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DisertationFEPrototype.Model.MeshDataStructure
+namespace DisertationFEPrototype.Model.Structure
 {
     public class Node : ICloneable
     {
@@ -12,7 +12,7 @@ namespace DisertationFEPrototype.Model.MeshDataStructure
         double x;
         double y;
         double z;
-        // List<Element> associatedElements;
+        // List<Quad4Elem> associatedElements;
 
         public object Clone()
         {

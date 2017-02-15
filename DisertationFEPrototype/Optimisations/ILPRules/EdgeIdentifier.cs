@@ -1,10 +1,13 @@
-﻿using DisertationFEPrototype.Model;
-using DisertationFEPrototype.Model.MeshDataStructure;
+﻿using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
+using DisertationFEPrototype.Model;
+using DisertationFEPrototype.Model.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using DisertationFEPrototype.Optimisations;
 
 namespace DisertationFEPrototype.Optimisations.ILPRules
 {
@@ -36,11 +39,12 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
         /// <returns>edges built out of the mesh data</returns>
         public EdgeIdentifier(MeshData mesh)
         {
+            this.internalCornerNodes = new List<Node>();
             this.internalEdgeNodes = new List<Node>();
-            this.externalEdgeNodes = new List<Node>();
 
             this.externalCornerNodes = new List<Node>();
-            this.internalCornerNodes = new List<Node>();
+            this.externalEdgeNodes = new List<Node>();
+
 
 
             // populate the above lists so that the code for identifing edges within the structure has some information is can search through
@@ -79,7 +83,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             {
                 List<Node> internalCornerNodesReduced = internalCornerNodes.Select(x => x).ToList();
                 internalCornerNodesReduced.RemoveAt(ii);
-                List<Node> otherEdgeNodes = externalEdgeNodes.Select(edgeNode => edgeNode).ToList();
+                List<Node> otherEdgeNodes = internalEdgeNodes.Select(edgeNode => edgeNode).ToList();
                 otherEdgeNodes.AddRange(internalCornerNodesReduced);
                 // need to do something here to check if the same edge has been found twice.
                 modelEdges.Add(findEdge(corner, otherEdgeNodes, modelEdges, mesh));
@@ -133,18 +137,19 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
         {
             Edge.LoadingType lt;
 
-            List<List<Element>> elementsGrouped = ourEdge.Select(edgeNode => mesh.findElems(edgeNode)).ToList();
-            List<Element> allNodeElems = elementsGrouped.SelectMany(elems => elems).ToList();
+            List<List<IElement>> elementsGrouped = ourEdge.Select(edgeNode => mesh.findElems(edgeNode)).ToList();
+            List<IElement> allNodeElems = elementsGrouped.SelectMany(elems => elems).ToList();
 
             // cross reference the elements in the model which have a force applied to them against 
             // elements which lie on an edge then intersect the two lists to get the elements which lie on the edge
             // and have an applied force
-            List<Element> edgeElemsWithAppliedForce =
-                mesh.TheFaceSelections
-                .Where(selection => selection.GetName == mesh.TheForce.Selection)
+            List<IElement> edgeElemsWithAppliedForce =
+                mesh.FaceSelections
+                .Where(selection => selection.GetName == mesh.Force.Selection)
                 .SelectMany(select => select.Faces)
                 .Select(face => face.Element).Intersect(allNodeElems)
                 .ToList();
+
 
             short numOfLoadedSides = checkNumberOfLoadedSides(elementsGrouped, edgeElemsWithAppliedForce);
 
@@ -166,12 +171,19 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             }
             return lt;
         }
-        private short checkNumberOfLoadedSides(List<List<Element>> allNodeElems, List<Element> edgeElemsWithAppliedForce)
+
+        /// <summary>
+        /// Using the elements along the edge which have a force applied we want to determine how many sides of the edge are loaded
+        /// </summary>
+        /// <param name="allNodeElems"></param>
+        /// <param name="edgeElemsWithAppliedForce"></param>
+        /// <returns></returns>
+        private short checkNumberOfLoadedSides(List<List<IElement>> allNodeElems, List<IElement> edgeElemsWithAppliedForce)
         {
             short numOfSides = -1;
             if (edgeElemsWithAppliedForce.Count == 0)
             {
-                numOfSides = 1;
+                numOfSides = 0;
             }
             else
             {
@@ -197,7 +209,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
         /// need to conclude if the elements are diagonal from eachother in which case even with two force elements the edge is loaded on both sides
         /// </summary>
         /// <returns>true if two elements are diagonal to one another and false if not</returns>
-        //private bool elemsAreDiagonal(List<Element> edgeElemsWithAppliedForce)
+        //private bool elemsAreDiagonal(List<Quad4Elem> edgeElemsWithAppliedForce)
         //{
         //}
 
@@ -211,13 +223,13 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
         /// <returns></returns>
         private List<Node> findNodeChain(Node currentNode, List<Node> otherEdgeNodes, MeshData mesh)
         {
-            //List<Node> ourEdge, List<Node> nodesToSelectFrom, List<Element> edgeNodeElems)
+            //List<Node> ourEdge, List<Node> nodesToSelectFrom, List<Quad4Elem> edgeNodeElems)
 
             List<Node> ourEdge = new List<Node>();
             ourEdge.Add(currentNode);
 
             // elements associated with the current node
-            List<List<Element>> otherEdgeNodeElements = otherEdgeNodes.Select(x => mesh.findElems(x)).ToList();
+            List<List<IElement>> otherEdgeNodeElements = otherEdgeNodes.Select(x => mesh.findElems(x)).ToList();
 
             // while we can still move to another edge node.
             while (true)
@@ -237,14 +249,14 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                     break;
                 }
             }
-            ourEdge.ForEach(x => Console.WriteLine("this " + x.GetX + " " + x.GetY + " " + x.GetZ + "\n"));
-            Console.WriteLine("=============================================================================");
+            // ourEdge.ForEach(x => Console.WriteLine("this " + x.GetX + " " + x.GetY + " " + x.GetZ + "\n"));
+            // Console.WriteLine("=============================================================================");
             // Console.WriteLine("something");
             return ourEdge;
 
         }
         /// <summary>
-        /// 
+        /// Get the next node in a potential edge
         /// </summary>
         /// <param name="currentNode">the node we are currently searching for more nodes from</param>
         /// <param name="currentNodeElems">elements around the current node we are searching from</param>
@@ -252,25 +264,26 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
         /// <param name="otherEdgeNodeElements">elements around all edge nodes within the graph</param>
         /// <param name="ourEdge">the current edge</param>
         /// <returns></returns>
-        private Node getNextNode(Node currentNode, List<Element> currentNodeElems, List<Node> otherEdgeNodes, List<List<Element>> otherEdgeNodeElements, List<Node> ourEdge)
+        private Node getNextNode(Node currentNode, List<IElement> currentNodeElems, List<Node> otherEdgeNodes, List<List<IElement>> otherEdgeNodeElements, List<Node> ourEdge)
         {
             int ii = 0;
-            foreach (List<Element> elementSet in otherEdgeNodeElements)
+            foreach (List<IElement> elementSet in otherEdgeNodeElements)
             {
-                List<Element> intersects = elementSet.Intersect(currentNodeElems).ToList();
+                List<IElement> intersects = elementSet.Intersect(currentNodeElems).ToList();
 
 
                 // the two nodes can be linked
                 if (intersects.Count() > 0)
                 {
 
-                    Node diag = intersects[0].getDiagonalNode(currentNode);
+                    
+                    List<Node> diags = intersects[0].getDiagonalNodes(currentNode);
 
                     // Node nodeCopy = new Node(otherEdgeNodes[ii]);
                     // otherEdgeNodeElements.RemoveAt(ii);
                     // otherEdgeNodes.RemoveAt(ii);
 
-                    if (otherEdgeNodes[ii] != diag && !ourEdge.Contains(otherEdgeNodes[ii]))
+                    if (otherEdgeNodes[ii] != diags[0] && !ourEdge.Contains(otherEdgeNodes[ii]))
                     {
                         return otherEdgeNodes[ii];
                     }
@@ -291,7 +304,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
         private void findEdgeNodes(MeshData meshData)
         {
             // edge
-            //foreach (Element elem in meshData.Elements)
+            //foreach (Quad4Elem elem in meshData.Elements)
             //{
 
             //    int plane = elem.FlatPlaneIndex;
@@ -316,6 +329,11 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
 
                 List<Node>[] sectors = new List<Node>[8] { XYZ, mXYZ, XmYZ, XYmZ, mXmYZ, XmYmZ, mXYmZ, mXmYmZ };
 
+
+                const double xTol = 0.25;
+                const double yTol = 0.25;
+                const double zTol = 0.25;
+
                 // here we go through all the nodes, check that the two nodes are not the same, 
                 // if not are two of the planes the same then chech if the remaining plane is higher or lower
                 // and add to a list representing all positions greater or less than that position on that axis
@@ -323,44 +341,51 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 {
                     if (node.Id != node2.Id)
                     {
-                        if (node.GetX < node2.GetX && node.GetY < node2.GetY && node.GetZ < node2.GetZ)
-                        {
-                            XYZ.Add(node2);
-                        }
-                        else if (node.GetX > node2.GetX && node.GetY < node2.GetY && node.GetZ < node2.GetZ)
-                        {
-                            mXYZ.Add(node2);
-                        }
-                        else if (node.GetX < node2.GetX && node.GetY > node2.GetY && node.GetZ < node2.GetZ)
-                        {
-                            XmYZ.Add(node2);
-                        }
-                        else if (node.GetX < node2.GetX && node.GetY < node2.GetY && node.GetZ > node2.GetZ)
-                        {
-                            XYmZ.Add(node2);
-                        }
 
-                        else if (node.GetX > node2.GetX && node.GetY > node2.GetY && node.GetZ < node2.GetZ)
-                        {
-                            mXmYZ.Add(node2);
-                        }
-                        else if (node.GetX < node2.GetX && node.GetY > node2.GetY && node.GetZ > node2.GetZ)
-                        {
-                            XmYmZ.Add(node2);
-                        }
-                        else if (node.GetX > node2.GetX && node.GetY < node2.GetY && node.GetZ > node2.GetZ)
-                        {
-                            mXYmZ.Add(node2);
-                        }
+                        double xDelta = Math.Abs(node.GetX - node2.GetX);
+                        double yDelta = Math.Abs(node.GetY - node2.GetY);
+                        double zDelta = Math.Abs(node.GetZ - node2.GetZ);
 
-                        else if (node.GetX > node2.GetX && node.GetY > node2.GetY && node.GetZ > node2.GetZ)
-                        {
-                            mXmYmZ.Add(node2);
+                        if (xDelta < xTol && yDelta < yTol && zDelta < zTol) {
+
+                            if (node.GetX < node2.GetX && node.GetY < node2.GetY && node.GetZ < node2.GetZ)
+                            {
+                                XYZ.Add(node2);
+                            }
+                            else if (node.GetX > node2.GetX && node.GetY < node2.GetY && node.GetZ < node2.GetZ)
+                            {
+                                mXYZ.Add(node2);
+                            }
+                            else if (node.GetX < node2.GetX && node.GetY > node2.GetY && node.GetZ < node2.GetZ)
+                            {
+                                XmYZ.Add(node2);
+                            }
+                            else if (node.GetX < node2.GetX && node.GetY < node2.GetY && node.GetZ > node2.GetZ)
+                            {
+                                XYmZ.Add(node2);
+                            }
+
+                            else if (node.GetX > node2.GetX && node.GetY > node2.GetY && node.GetZ < node2.GetZ)
+                            {
+                                mXmYZ.Add(node2);
+                            }
+                            else if (node.GetX < node2.GetX && node.GetY > node2.GetY && node.GetZ > node2.GetZ)
+                            {
+                                XmYmZ.Add(node2);
+                            }
+                            else if (node.GetX > node2.GetX && node.GetY < node2.GetY && node.GetZ > node2.GetZ)
+                            {
+                                mXYmZ.Add(node2);
+                            }
+                            else if (node.GetX > node2.GetX && node.GetY > node2.GetY && node.GetZ > node2.GetZ)
+                            {
+                                mXmYmZ.Add(node2);
+                            }
                         }
                     }
                 }
 
-                // perhaps split the edges up here into a tree structure?
+                // perhaps split the edges up here into a tree data structure?
                 int emptyRegions = sectors.Where(sector => sector.Count == 0).ToList().Count;
 
                 if (emptyRegions != 4 || emptyRegions != 0)

@@ -1,4 +1,4 @@
-﻿using DisertationFEPrototype.Model.MeshDataStructure;
+﻿using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace DisertationFEPrototype.Model.Analysis
 {
     /// <summary>
-    /// Element Id is the id which relates the finite element to this particular face.
+    /// Quad4Elem Id is the id which relates the finite element to this particular face.
     /// FaceId represents the kind of shape the face is, so far I know that
     /// a face id of 5 corresponds to a tri 3 wareas a face id of 6 corresponds to a quad 4
     /// </summary>
     class Face
     {
-        Element element;
+        IElement element;
         int faceId;
 
         public int GetId
@@ -24,7 +24,7 @@ namespace DisertationFEPrototype.Model.Analysis
                 return this.faceId;
             }
         }
-        public Element Element{
+        public IElement Element{
             get{
                 return this.element;
             }
@@ -34,7 +34,7 @@ namespace DisertationFEPrototype.Model.Analysis
             }
         }
 
-        public Face(Element element, int faceId)
+        public Face(IElement element, int faceId)
         {
             this.element = element;
             this.faceId = faceId;

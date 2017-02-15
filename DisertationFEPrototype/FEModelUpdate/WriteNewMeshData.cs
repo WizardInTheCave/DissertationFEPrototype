@@ -6,9 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Diagnostics;
-using DisertationFEPrototype.Model.MeshDataStructure;
 using System.IO;
 using DisertationFEPrototype.Model.Analysis;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
+using DisertationFEPrototype.Model.Structure;
 
 namespace DisertationFEPrototype.ModelUpdate
 {
@@ -17,7 +18,13 @@ namespace DisertationFEPrototype.ModelUpdate
     /// </summary>
     class WriteNewMeshData
     {
-        
+        //Dictionary<IElement, string> shapeLookup = new Dictionary<IElement, string>()
+        //{
+        //    {Quad4Elem, "quad4" },
+        //    {Hex8Elem, "hex8" }
+
+        //};
+           
         public WriteNewMeshData(MeshData meshData, string lisaPath, string outputFileName)
         {
 
@@ -42,13 +49,12 @@ namespace DisertationFEPrototype.ModelUpdate
                 using (fw = new StreamWriter(lisaPath, true)) {
                     fw.WriteLine("<liml8>");
                     fw.WriteLine("  <analysis type=\"S30\" />");
-
                     writeNodes(fw, meshData.Nodes.Values.ToList());
-                    writeElements(fw, meshData.Elements, meshData.TheMaterial.GetName);
-                    fw.WriteLine("  <fix selection=\"Unnamed\" />");
-                    writeForce(fw, meshData.TheForce);
-                    writeMaterials(fw, meshData.TheMaterial);
-                    writeFaceSections(fw, meshData.TheFaceSelections);
+                    writeElements(fw, meshData.Elements, meshData.Material.GetName);
+                    meshData.FixSelections.ForEach(fix => fw.WriteLine("  <fix selection=\"" + fix.Selection.GetName + "\" />"));
+                    writeForce(fw, meshData.Force);
+                    writeMaterials(fw, meshData.Material);
+                    writeFaceSections(fw, meshData.FaceSelections);
 
                     fw.WriteLine("  <solution>");
                     fw.WriteLine("    <analysis type=\"S30\"/>");
@@ -83,39 +89,10 @@ namespace DisertationFEPrototype.ModelUpdate
             fw.WriteLine("      <fieldvalue>disply</fieldvalue>");
             fw.WriteLine("      <fieldvalue>displz</fieldvalue>");
 
-            // at the moment I am just interested in displacement
-            //fw.WriteLine("      <fieldvalue>rotx</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>roty</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>rotz</fieldvalue>");
-
-            //fw.WriteLine("      <fieldvalue>momentu</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>momentv</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>momentuv</fieldvalue>");
-
-            //fw.WriteLine("      <fieldvalue>shearuw</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>shearvw</fieldvalue>");
-
-            //fw.WriteLine("      <fieldvalue>vonmisesb</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>vonmisesu</fieldvalue>");
-
-            //fw.WriteLine("      <fieldvalue>principal1u</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>principal2u</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>principal1b</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>principal2b</fieldvalue>");
-
-            //fw.WriteLine("      <fieldvalue>stressuu</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>stressvv</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>stressuv</fieldvalue>");
-
-            //fw.WriteLine("      <fieldvalue>vonmisesm</fieldvalue>");
-
-            //fw.WriteLine("      <fieldvalue>principal1m</fieldvalue>");
-            //fw.WriteLine("      <fieldvalue>principal2m</fieldvalue>");
             fw.WriteLine("      <fieldvalue>displmag</fieldvalue>");
 
             // elem values results only in data from the element analysis being outputted, 
             //we are interested in displacement which is associeated with Nodes
-
             //fw.WriteLine("      <elementvalues />");
             fw.WriteLine("      <coordinates />");
 
@@ -141,7 +118,7 @@ namespace DisertationFEPrototype.ModelUpdate
                 + node.GetZ.ToString() + "\" />");
             }
         }
-        private void writeElements(StreamWriter fw, List<Element> elements, string materialName)
+        private void writeElements(StreamWriter fw, List<IElement> elements, string materialName)
         {
             fw.WriteLine("  <elset name=\"Default\" color=\"-6710887\" material=\"" + materialName + "\" >");
             foreach (var elem in elements)
@@ -150,11 +127,37 @@ namespace DisertationFEPrototype.ModelUpdate
                 if (elem.Id != null)
                 {
                     fw.WriteLine("    <elem eid=\"" + elem.Id.ToString() + "\" shape=\""
-                        + elem.Shape + "\" nodes=\"" + nodesString + "\" />");
+                        + getElemString(elem) + "\" nodes=\"" + nodesString + "\" />");
                 }
             }
             fw.WriteLine("  </elset >");
         }
+
+        private string getElemString(IElement elem)
+        {
+            //Type elemType = elem.GetType(); 
+
+            const string QUAD4_SHAPE = "quad4";
+            const string HEX8_SHAPE = "hex8";
+
+            string shape;
+
+            if (elem is Quad4Elem)
+            {
+                shape = QUAD4_SHAPE;
+            }
+            else if(elem is Hex8Elem)
+            {
+                shape = HEX8_SHAPE;
+            }
+            else
+            {
+                throw new Exception("IElement is not of a class that can be handed back to LISA currently");
+            }
+            return shape;
+
+        }
+        
         private void writeMaterials(StreamWriter fw, Material theMaterial)
         {
             //< mat mid = "1" name = "Material" >
@@ -191,6 +194,10 @@ namespace DisertationFEPrototype.ModelUpdate
         {
             var nodeIds = nodes.Select(x => x.Id);
 
+            if (nodes.Count < 4)
+            {
+                Console.WriteLine("What???");
+            }
 
             if (nodeIds.Contains(13) && nodeIds.Contains(12) && nodeIds.Contains(14) && nodeIds.Contains(15))
             {

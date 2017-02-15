@@ -1,5 +1,4 @@
 c:\users\jack\documents\visual studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\DisertationFEPrototype.exe.config
-C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.csprojResolveAssemblyReference.cache
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.Form1.resources
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.Properties.Resources.resources
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.csproj.GenerateResource.Cache
@@ -7,3 +6,4 @@ C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\Diser
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\DisertationFEPrototype.pdb
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.exe
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.pdb
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.csprojResolveAssemblyReference.cache

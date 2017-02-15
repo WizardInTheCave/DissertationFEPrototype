@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 using System.Xml;
 using System.IO;
-using DisertationFEPrototype.Model.MeshDataStructure;
 using DisertationFEPrototype.Model;
 using DisertationFEPrototype.FEModelUpdate.Read;
 using DisertationFEPrototype.Model.Analysis;
 using DisertationFEPrototype.Model.Analysis.MaterialProps;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 
 namespace DisertationFEPrototype.FEModelUpdate
 {
@@ -43,9 +43,10 @@ namespace DisertationFEPrototype.FEModelUpdate
                 this.meshData = new MeshData();
                 this.meshData.Nodes = ReadNodes.readAllNodes(xmlString);
                 this.meshData.Elements= ReadElements.readAllElements(xmlString, meshData);
-                this.meshData.TheForce = readForce(xmlString);
-                this.meshData.TheMaterial = readMaterial(xmlString);
-                this.meshData.TheFaceSelections = readFaceSelections(xmlString);
+                this.meshData.Force = readForce(xmlString);
+                this.meshData.Material = readMaterial(xmlString);
+                this.meshData.FaceSelections = readFaceSelections(xmlString);
+                this.meshData.FixSelections = readFixSelections(xmlString);
 
             }
             else
@@ -53,17 +54,44 @@ namespace DisertationFEPrototype.FEModelUpdate
                 throw new FileNotFoundException("Could not load the lisa mesh file to rebuild model");
             }  
         }
+        private List<FixSelection> readFixSelections(string xmlString)
+        {
+            const string fixSelectTag = "fix";
+            List<FixSelection> fixSelections = new List<FixSelection>();
+
+            using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+            {
+
+                while (reader.ReadToFollowing(fixSelectTag))
+                {
+
+                    const string selection = "selection";
+                    string selectionName = reader[selection];
+                    var allSelections = meshData.FaceSelections.Where(faceSelection => faceSelection.GetName == selectionName);
+
+                    if (allSelections.Count() == 1)
+                    {
+                        fixSelections.Add(new FixSelection(allSelections.ToArray()[0]));
+                    }
+                    else
+                    {
+                        throw new Exception("We shouldn't have more than one face selection object per fixed selection");
+                    }
+                }
+            }
+            return fixSelections;
+        }
 
         private List<FaceSelection> readFaceSelections(string xmlString)
         {
-            const string elemTag = "faceselection";
+            const string faceSelectTag = "faceselection";
 
             List<FaceSelection> faceSelections = new List<FaceSelection>();
 
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
             {
 
-                while (reader.ReadToFollowing(elemTag))
+                while (reader.ReadToFollowing(faceSelectTag))
                 {
 
 
@@ -87,12 +115,12 @@ namespace DisertationFEPrototype.FEModelUpdate
                                 int faceId = Convert.ToInt16(innerSubtree["faceid"]);
 
 
-                                List<Element> elements = this.meshData.Elements.Where(e => e.Id == elemId).ToList();
+                                List<IElement> elements = meshData.Elements.Where(e => e.Id == elemId).ToList();
                                 if (elements.Count > 1)
                                 {
                                     throw new IOException("ReadLisaData.readFaceSelections: Face seems to have more than one element when reading select elements");
                                 }
-                                Element elem = elements[0];
+                                IElement elem = elements[0];
 
                                 faceSelectionFaces.Add(new Face(elem, faceId));
                             }
@@ -140,8 +168,7 @@ namespace DisertationFEPrototype.FEModelUpdate
                 }
                 catch
                 {
-                    throw;
-                    //throw new Exception("Could not read force data from xml correctly");
+                    Console.WriteLine("LOL WHAT??");
                 }
             }
             return force;

@@ -1,5 +1,8 @@
 ﻿using DisertationFEPrototype.Model.Analysis;
-using DisertationFEPrototype.Model.MeshDataStructure;
+using DisertationFEPrototype.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
+
+using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +18,11 @@ namespace DisertationFEPrototype.Model
     class MeshData
     {
         Dictionary<Tuple<double, double, double>, Node> nodes;
-        List<Element> elements;
+        List<IElement> elements;
         Force force;
         Material material;
         List<FaceSelection> faceSelections;
+        List<FixSelection> fixSelections;
 
         //string lisaFile;
 
@@ -27,59 +31,70 @@ namespace DisertationFEPrototype.Model
         {
             get
             {
-                return this.nodes;
+                return nodes;
             }
             set
             {
-                this.nodes = value;
+                nodes = value;
             }
         }
 
-        public List<Element> Elements
+        public List<IElement> Elements
         {
             get
             {
-                return this.elements;
+                return elements;
             }
             set
             {
-                this.elements = value;
+                elements = value;
             }
 
         }
-        public Force TheForce
+        public Force Force
         {
             get
             {
-                return this.force;
+                return force;
             }
             set
             {
-                this.force = value;
+                force = value;
             }
 
         }
-        public Material TheMaterial
+        public Material Material
         {
             get
             {
-                return this.material;
+                return material;
             }
             set
             {
-                this.material = value;
+                material = value;
             }
 
         }
-        public List<FaceSelection> TheFaceSelections
+        public List<FaceSelection> FaceSelections
         {
             get
             {
-                return this.faceSelections;
+                return faceSelections;
             }
             set
             {
-                this.faceSelections = value;
+                faceSelections = value;
+            }
+        }
+        public List<FixSelection> FixSelections
+        {
+            get
+            {
+                return fixSelections;
+            }
+            set
+            {
+                fixSelections = value;
             }
         }
         public MeshData()
@@ -95,12 +110,12 @@ namespace DisertationFEPrototype.Model
         /// <param name="node"></param>
         /// <param name="elements"></param>
         /// <returns></returns>
-        public List<Element> findElems(Node node)
+        public List<IElement> findElems(Node node)
         {
-            List<Element> nodeElems = new List<Element>();
+            List<IElement> nodeElems = new List<IElement>();
 
             // find out what element our start is a part of
-            foreach (Element elem in this.elements)
+            foreach (IElement elem in elements)
             {
                 // this will only select the first element that is found which is not actually what we want
                 foreach (Node aNode in elem.Nodes)

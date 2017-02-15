@@ -1,4 +1,4 @@
-﻿using DisertationFEPrototype.Model.MeshDataStructure;
+﻿using DisertationFEPrototype.Model.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,116 +14,21 @@ namespace DisertationFEPrototype.FEModelUpdate
     {
 
         /// <summary>
-        /// work out on what planes in 3d space a pair of nodes have in common 
+        /// Get the euclidean distance between two nodes (Points)
         /// </summary>
-        /// <param name="a">first node</param>
-        /// <param name="b">second node</param>
-        /// <returns>list of bools with pos 0 representing x plane, 1 representing y plane and z representing z plane</returns>
-        //public static bool[] whichPlanesCommon(Node a, Node b)
-        //{
-
-        //    bool[] sameVals = new bool[3] { false, false, false };
-
-        //    if (a.GetX == b.GetX)
-        //    {
-        //        sameVals[0] = true;
-
-        //    }
-        //    if (a.GetY == b.GetY)
-        //    {
-        //        sameVals[1] = true;
-
-        //    }
-        //    if (a.GetZ == b.GetZ)
-        //    {
-        //        sameVals[2] = true;
-        //    }
-
-        //    return sameVals;
-        //}
+        /// <param name="a">Node a</param>
+        /// <param name="b">Node b</param>
+        /// <returns></returns>
         public static double distanceBetweenPoints(Node a, Node b)
         {
-            return Math.Sqrt(Math.Pow((a.GetX - b.GetX), 2) + Math.Pow((a.GetY - b.GetY), 2) + Math.Pow((a.GetZ - b.GetZ), 2));
-        }
-
-        /// <summary>
-        /// Determine if two nodes within an element are adjactent to one another based on their euclidean distance
-        /// </summary>
-        /// <param name="firstNode">Node we are want to check if the second node is adjacent to</param>
-        /// <param name="secondNode">The second node which may or may not be adjacent</param>
-        /// <param name="elem">The element that both nodes are contained within</param>
-        /// <returns></returns>
-        public static bool isAdjacent(Node firstNode, Node secondNode, Element elem)
-        {
-
-            double maxDistance = elem.Nodes.Select(elemNode => distanceBetweenPoints(firstNode, elemNode)).Max();
-            return distanceBetweenPoints(firstNode, secondNode) < maxDistance;
-
-            //bool[] sameVals = GeneralGeomMethods.whichPlanesCommon(firstNode, secondNode);
-            //int commonAxisVals = sameVals.Count(b => b == true);
-            //return commonAxisVals == 2;
-        }
-        ///// <summary>
-        ///// function override for if we have already computed same vals outside
-        ///// </summary>
-        ///// <param name="sameVals"></param>
-        ///// <returns></returns>
-        //public static bool isAdjacent(bool[] sameVals)
-        //{
-        //    int commonAxisVals = sameVals.Count(b => b == true);
-        //    return commonAxisVals == 2;
-        //}
-
-        /// <summary>
-        /// this method will sort the match nodes into an order such that when an element is generated
-        /// </summary>
-        public static List<Node> sortMatchedNodes(Element elem)
-        {
-            List<Node> nodes = elem.Nodes;
-            List<Node> sortMatchedNodes = new List<Node>();
-
-            Node currentNode = nodes[0];
-            sortMatchedNodes.Add(currentNode);
-
-            // List<Node> remainingNodes = nodes.Skip(1).ToList();
-
-            const int  NODES_IN_QUAD_FOUR = 4;
-
-            while (sortMatchedNodes.Count < NODES_IN_QUAD_FOUR)
-            {
-                int currentIdx = nodes.IndexOf(currentNode);
-                List<int> nums = new List<int>() { 0, 1, 2, 3 };
-                nums.Remove(currentIdx);
-
-                var nodeComp1 = nodes[nums[0]];
-                var nodeComp2 = nodes[nums[1]];
-                var nodeComp3 = nodes[nums[2]];
-
-                // basically checking if it's not diagonal and wheter or not we have already encountered it
-                if (GeneralGeomMethods.isAdjacent(currentNode, nodeComp1, elem) && !sortMatchedNodes.Contains(nodeComp1))
-                {
-                    //.Clone() as Node
-                    sortMatchedNodes.Add(nodeComp1);
-                    currentNode = nodeComp1;
-                }
-                else if (GeneralGeomMethods.isAdjacent(currentNode, nodeComp2, elem) && !sortMatchedNodes.Contains(nodeComp2))
-                {
-                    //.Clone() as Node
-                    sortMatchedNodes.Add(nodeComp2);
-                    currentNode = nodeComp2;
-                }
-                else if (GeneralGeomMethods.isAdjacent(currentNode, nodeComp3, elem) && !sortMatchedNodes.Contains(nodeComp3))
-                {
-                    // .Clone() as Node
-                    sortMatchedNodes.Add(nodeComp3);
-                    currentNode = nodeComp3;
-                }
-                else
-                {
-                    break;
-                }
+            try {
+                return Math.Sqrt(Math.Pow((a.GetX - b.GetX), 2) + Math.Pow((a.GetY - b.GetY), 2) + Math.Pow((a.GetZ - b.GetZ), 2));
             }
-            return sortMatchedNodes;
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                throw e;
+            }
         }
 
         public static double dotProduct(Node a, Node b)
@@ -139,6 +44,12 @@ namespace DisertationFEPrototype.FEModelUpdate
             return a[0] * b.Item1 + a[1] * b.Item2 + a[2] * b.Item3;
         }
 
+        /// <summary>
+        /// Compute the cross product using two nodes a and b
+        /// </summary>
+        /// <param name="a">Node a</param>
+        /// <param name="b">Node b</param>
+        /// <returns></returns>
         public static Tuple<double, double, double> crossProduct(Node a, Node b)
         {
             double x = a.GetY * b.GetZ - a.GetZ * b.GetY;
@@ -146,6 +57,14 @@ namespace DisertationFEPrototype.FEModelUpdate
             double z = a.GetX * b.GetY - a.GetY * b.GetX;
             return new Tuple<double, double, double>(x, y, z);
         }
+
+        /// <summary>
+        /// Calculate the normal of a plane defined by three points, currently we are just using this to compute the normal of elements within the model
+        /// </summary>
+        /// <param name="a">Point A</param>
+        /// <param name="b">Point B</param>
+        /// <param name="c">Point C</param>
+        /// <returns>a tuple representing a point in the x, y, z space which is one a distance of one away on the normal of the plane</returns>
         public static Tuple<double, double, double> unitNormal(Node a, Node b, Node c)
         {
 
@@ -161,6 +80,11 @@ namespace DisertationFEPrototype.FEModelUpdate
             return new Tuple<double, double, double>(x/magnitude, y/magnitude, z/magnitude);
 
         }
+        /// <summary>
+        /// Compute the determinant of a matrix a
+        /// </summary>
+        /// <param name="a">matrix</param>
+        /// <returns></returns>
         public static double matrixDeterminant(double[,] a)
         {
             return a[0, 0] * a[1, 1] * a[2, 2] +

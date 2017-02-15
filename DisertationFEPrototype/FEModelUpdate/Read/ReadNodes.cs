@@ -1,4 +1,4 @@
-﻿using DisertationFEPrototype.Model.MeshDataStructure;
+﻿using DisertationFEPrototype.Model.Structure;
 using System;
 using System.Collections.Generic;
 using System.IO;

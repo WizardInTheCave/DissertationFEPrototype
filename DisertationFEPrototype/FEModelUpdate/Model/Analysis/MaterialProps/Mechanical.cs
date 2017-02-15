@@ -12,28 +12,11 @@ namespace DisertationFEPrototype.Model.Analysis.MaterialProps
         long youngsModulus;
         double poissonRatio;
 
+        public string GetMechanicalType { get { return this.type; } }
 
-        public string GetMechanicalType
-        {
-            get
-            {
-                return this.type;
-            }
-        }
-        public double GetYoungsModulus
-        {
-            get
-            {
-                return this.youngsModulus;
-            }
-        }
-        public double GetPoissonRatio
-        {
-            get
-            {
-                return this.poissonRatio;
-            }
-        }
+        public double GetYoungsModulus { get { return this.youngsModulus; } }
+
+        public double GetPoissonRatio {  get { return this.poissonRatio; } }
 
 
         public Mechanical(string type, long youngsModulus, double poissonRatio)
