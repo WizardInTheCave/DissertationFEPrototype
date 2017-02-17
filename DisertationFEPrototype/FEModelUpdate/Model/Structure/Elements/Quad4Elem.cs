@@ -77,9 +77,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
         public List<IElement> Children
         {
-              
             get{
-                // try {
                 if (childElements != null)
                 {
                     return childElements.Cast<IElement>().ToList();
@@ -87,14 +85,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 else
                 {
                     return null;
-                }
-                    
-                //}
-                //catch(Exception e)
-                //{
-                //    Console.WriteLine(e.ToString());
-                //    throw e;
-                //}
+                }   
             }
             set
             {
@@ -193,10 +184,13 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             maxCornerAngle = propCalcs.computeMaxCornerAngle();
             maxParallelDev = propCalcs.computeMaxparallelDev();
  
-            longestEdge = propCalcs.computeLongestEdge(SHORTEST_EDGE_DEFAULT);
-            shortestEdge = propCalcs.computeShortestEdge(LONGEST_EDGE_DEFAULT);
+            longestEdge = GeneralRefinementMethods.computeLongestEdge(nodes, SHORTEST_EDGE_DEFAULT);
+            shortestEdge = GeneralRefinementMethods.computeShortestEdge(nodes, LONGEST_EDGE_DEFAULT);
             aspectRatio = propCalcs.computeAspectRatio(longestEdge, shortestEdge);
-            area = propCalcs.computeArea(longestEdge, shortestEdge);
+
+            area = GeneralRefinementMethods.computeFaceArea(nodes, longestEdge, shortestEdge);
+
+            // propCalcs.computeArea(longestEdge, shortestEdge);
 
         }
 

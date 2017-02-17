@@ -173,7 +173,7 @@ namespace DisertationFEPrototype.Optimisations
             ////for(int ii = 0; ii < stressRefineCount; ii++)
             ////{
             stressGradientDrivenRemesh(elements, analysisData);
-            ILPEdgeDrivenRefinement(0);
+            // ILPEdgeDrivenRefinement(0);
             ////}
             //for (int ii = 0; ii < ILPRefineCount; ii++)
             //{

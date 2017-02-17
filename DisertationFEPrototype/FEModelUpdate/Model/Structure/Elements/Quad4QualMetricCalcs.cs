@@ -32,36 +32,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             return aspectRatio;
         }
 
-
-        /// <summary>
-        /// For the nodes in the element get the cross product for each pair and add to total
-        /// </summary>
-        /// <param name="nodes"></param>
-        /// <returns></returns>
-        private static double[] getTotalCrossProduct(List<Node> nodes)
-        {
-            double[] total = new double[] { 0, 0, 0 };
-            for (int ii = 0; ii < nodes.Count; ii++)
-            {
-                Node vi1 = nodes[ii];
-                Node vi2;
-
-                if (ii == nodes.Count - 1)
-                {
-                    vi2 = nodes[0];
-                }
-                else
-                {
-                    vi2 = nodes[ii + 1];
-                }
-                Tuple<double, double, double> product = GeneralGeomMethods.crossProduct(vi1, vi2);
-                total[0] += product.Item1;
-                total[1] += product.Item2;
-                total[2] += product.Item3;
-            }
-            return total;
-        }
-
         // area3D_Polygon(): computes the area of a 3D planar polygon
         //    Input:  int n = the number of vertices in the polygon
         //            Point[] V = an array of n+2 vertices in a plane
@@ -92,40 +62,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         }
 
 
-        /// <summary>
-        /// using the method suggested here currently
-        /// http://stackoverflow.com/questions/2350604/get-the-surface-area-of-a-polyhedron-3d-object
-        /// </summary>
-        /// <param name="nodes"></param>
-        /// <returns></returns>
-        public double computeArea(double longestEdge, double shortestEdge)
-        {
-            // element has no area (not polygon)
-            if (this.nodes.Count < 3)
-            {
-                return 0;
-            }
-
-            double[] total = getTotalCrossProduct(this.nodes);
-            var elemNormal = GeneralGeomMethods.unitNormal(this.nodes[0], this.nodes[1], this.nodes[2]);
-
-            double result = GeneralGeomMethods.dotProduct(total, elemNormal);
-
-            // just width * height in this case
-            if (double.IsNaN(result))
-            {
-                double b = shortestEdge;
-                double h = longestEdge;
-
-                result = b * h;
-
-            }
-            else
-            {
-                result = Math.Abs(result / 2);
-            }
-            return result;
-        }
+        
 
 
         /// <summary>
@@ -281,55 +218,5 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             }
             return maxAngle;
         }
-
-
-        /// <summary>
-        /// Compute the longest edge for an element
-        /// </summary>
-        /// <returns></returns>
-        public double computeLongestEdge(double shortestEdgeDefault)
-        {
-            double longestEdge = shortestEdgeDefault;
-
-            // this is a bit inefficent because going over each edge twice, but most edges we are going to have is 4 so
-            // it doesn't matter too much, may write it better later
-            foreach (Node nodeA in this.nodes)
-            {
-                foreach (Node nodeB in this.nodes)
-                {
-                    //bool[] commonPlanes = GeneralGeomMethods.whichPlanesCommon(nodeA, nodeB);
-                    //if (GeneralGeomMethods.isAdjacent(commonPlanes))
-
-                    double edgeLength = GeneralGeomMethods.distanceBetweenPoints(nodeA, nodeB);
-                    if (edgeLength > longestEdge)
-                    {
-                        longestEdge = edgeLength;
-                    }
-
-                }
-            }
-            return longestEdge;
-        }
-        public double computeShortestEdge(double longestEdgeDefault)
-        {
-            double shortestEdge = longestEdgeDefault;
-
-            // this is a bit inefficent because going over each edge twice, but most edges we are going to have is 4 so
-            // it doesn't matter too much, may write it better later
-            foreach (Node nodeA in this.nodes)
-            {
-                foreach (Node nodeB in this.nodes)
-                {
-                    double edgeLength = GeneralGeomMethods.distanceBetweenPoints(nodeA, nodeB);
-                    if (edgeLength < shortestEdge)
-                    {
-                        shortestEdge = edgeLength;
-                    }
-                }
-            }
-            return shortestEdge;
-        }
-
-
     }
 }

@@ -75,6 +75,8 @@ namespace DisertationFEPrototype.Optimisations
             return node;
         }
 
+     
+
         /// <summary>
         /// Make a new node half way along the edge of an element side
         /// </summary>
@@ -140,6 +142,117 @@ namespace DisertationFEPrototype.Optimisations
 
             // is the node we are trying to place next to it less then the max distance, if so then it is adjacent
             return distanceBetweenFirstAndSecond < maxDistanceInElement;
+        }
+
+        /// <summary>
+        /// using the method suggested here currently
+        /// http://stackoverflow.com/questions/2350604/get-the-surface-area-of-a-polyhedron-3d-object
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <returns></returns>
+        public static double computeFaceArea(List<Node> faceNodes, double longestEdge, double shortestEdge)
+        {
+            // element has no area (not polygon)
+            if (faceNodes.Count < 3)
+            {
+                return 0;
+            }
+
+            double[] total = getTotalCrossProduct(faceNodes);
+            var elemNormal = GeneralGeomMethods.unitNormal(faceNodes[0], faceNodes[1], faceNodes[2]);
+
+            double result = GeneralGeomMethods.dotProduct(total, elemNormal);
+
+            // just width * height in this case
+            if (double.IsNaN(result))
+            {
+                double b = shortestEdge;
+                double h = longestEdge;
+
+                result = b * h;
+
+            }
+            else
+            {
+                result = Math.Abs(result / 2);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// For the nodes in the element get the cross product for each pair and add to total
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <returns></returns>
+        private static double[] getTotalCrossProduct(List<Node> nodes)
+        {
+            double[] total = new double[] { 0, 0, 0 };
+            for (int ii = 0; ii < nodes.Count; ii++)
+            {
+                Node vi1 = nodes[ii];
+                Node vi2;
+
+                if (ii == nodes.Count - 1)
+                {
+                    vi2 = nodes[0];
+                }
+                else
+                {
+                    vi2 = nodes[ii + 1];
+                }
+                Tuple<double, double, double> product = GeneralGeomMethods.crossProduct(vi1, vi2);
+                total[0] += product.Item1;
+                total[1] += product.Item2;
+                total[2] += product.Item3;
+            }
+            return total;
+        }
+
+        /// <summary>
+        /// Compute the longest edge for an element
+        /// </summary>
+        /// <returns></returns>
+        public static double computeLongestEdge(List<Node> nodes, double shortestEdgeDefault)
+        {
+            double longestEdge = shortestEdgeDefault;
+
+            // this is a bit inefficent because going over each edge twice, but most edges we are going to have is 4 so
+            // it doesn't matter too much, may write it better later
+            foreach (Node nodeA in nodes)
+            {
+                foreach (Node nodeB in nodes)
+                {
+                    //bool[] commonPlanes = GeneralGeomMethods.whichPlanesCommon(nodeA, nodeB);
+                    //if (GeneralGeomMethods.isAdjacent(commonPlanes))
+
+                    double edgeLength = GeneralGeomMethods.distanceBetweenPoints(nodeA, nodeB);
+                    if (edgeLength > longestEdge)
+                    {
+                        longestEdge = edgeLength;
+                    }
+
+                }
+            }
+            return longestEdge;
+        }
+        internal static double computeShortestEdge(List<Node> nodes, double longestEdgeDefault)
+        {
+            double shortestEdge = longestEdgeDefault;
+
+            // this is a bit inefficent because going over each edge twice, but most edges we are going to have is 4 so
+            // it doesn't matter too much, may write it better later
+            foreach (Node nodeA in nodes)
+            {
+                foreach (Node nodeB in nodes)
+                {
+                    double edgeLength = GeneralGeomMethods.distanceBetweenPoints(nodeA, nodeB);
+                    if (edgeLength < shortestEdge)
+                    {
+                        shortestEdge = edgeLength;
+                    }
+                }
+            }
+            return shortestEdge;
         }
 
 
@@ -222,10 +335,10 @@ namespace DisertationFEPrototype.Optimisations
         {
 
 
-            if (nodes.Length < 4)
-            {
-                Console.WriteLine("What???");
-            }
+            //if (nodes.Length < 4)
+            //{
+            //    Console.WriteLine("What???");
+            //}
             
 
             if (nodes.Contains(queryNode)) {
@@ -233,10 +346,10 @@ namespace DisertationFEPrototype.Optimisations
                 List<Node> sortedNodes = sortFourNodes(fourNodes);
 
 
-                if (sortedNodes.Count < 4)
-                {
-                    Console.WriteLine("What???");
-                }
+                //if (sortedNodes.Count < 4)
+                //{
+                //    Console.WriteLine("What???");
+                //}
 
                 int diagIndex = (sortedNodes.IndexOf(queryNode) + 2) % 4;
                 Node diagNode = sortedNodes[diagIndex];

@@ -9,32 +9,143 @@ using DisertationFEPrototype.Optimisations;
 
 namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
+    /// <summary>
+    /// Decided to Make a seperate class for the refinement process for Hex8 since it is a bit more complex 
+    /// </summary>
     class Hex8Refinement
     {
-        Node[] inputNodes;
-        private Dictionary<Tuple<double, double, double>, Node> allModelNodes;
 
-        List<Hex8Elem> childNodes;
 
-        List<Hex8Elem> ChildNodes { get { return childNodes; } }
 
-        public Hex8Refinement(Dictionary<Tuple<double, double, double>, Node> allModelNodes)
+        //Node[] inputNodes;
+        //private Dictionary<Tuple<double, double, double>, Node> allModelNodes;
+
+        //List<Hex8Elem> childNodes;
+
+
+        public List<IElement> SubElems
         {
-            this.allModelNodes = allModelNodes;
-            childNodes = createChildElements(allModelNodes);
-
+            get
+            {
+                if (newSubElems != null)
+                {
+                    return newSubElems.Cast<IElement>().ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                // downcast to quad4 elems
+                newSubElems = value.Select(x => (Hex8Elem)x).ToList();
+            }
         }
 
-        /// <summary>
-        /// Need to be split up Hex8 elements for structures where volume is important
-        /// </summary>
-        /// <param name="elem">Hex element we want to split into four sub elements using h-refinement</param>
-        /// <param name="nodes">Lookup of all nodes in the current model</param>
-        /// <returns>A new set of elements which comprise</returns>
-        public List<Hex8Elem> createChildElements(Dictionary<Tuple<double, double, double>, Node> nodes)
-        {
-            List<Hex8Elem> newElements = new List<Hex8Elem>();
+       //  public List<IElement> SubElems { get { return newSubElems; } }
 
+        List<Hex8Elem> newSubElems = new List<Hex8Elem>();
+
+        Node hexCentre;
+        List<Node> xPositive;
+        List<Node> xNegative;
+
+        List<Node> yPositive;
+        List<Node> yNegative;
+
+        List<Node> zPositive;
+        List<Node> zNegative;
+
+
+        public Hex8Refinement(Node hexCentre, List<Node> xPositive, List<Node> xNegative, List<Node> yPositive,
+            List<Node> yNegative, List<Node> zPositive, List<Node> zNegative)
+        {
+            this.hexCentre = hexCentre;
+
+            this.xPositive = xPositive;
+            this.xNegative = xNegative;
+
+            this.yPositive = yPositive;
+            this.yNegative = yNegative;
+
+            this.zPositive = zPositive;
+            this.zNegative = zNegative;
+
+            const int MAX_FACE_NODES = 9;
+
+            if (this.xPositive.Count > MAX_FACE_NODES ||
+                this.xNegative.Count > MAX_FACE_NODES ||
+                this.yPositive.Count > MAX_FACE_NODES ||
+                this.yNegative.Count > MAX_FACE_NODES ||
+                this.zPositive.Count > MAX_FACE_NODES ||
+                this.zNegative.Count > MAX_FACE_NODES
+                )
+            {
+                Console.WriteLine("Wir Haben Problem");
+            }
+
+            var ref1 = refineCorner1();
+            var ref2 = refineCorner2();
+            var ref3 = refineCorner3();
+            var ref4 = refineCorner4();
+            var ref5 = refineCorner5();
+            var ref6 = refineCorner6();
+            var ref7 = refineCorner7();
+            var ref8 = refineCorner8();
+
+            var hex1 = new Hex8Elem(null, ref1);
+            var hex2 = new Hex8Elem(null, ref2);
+            var hex3 = new Hex8Elem(null, ref3);
+            var hex4 = new Hex8Elem(null, ref4);
+            var hex5 = new Hex8Elem(null, ref5);
+            var hex6 = new Hex8Elem(null, ref6);
+            var hex7 = new Hex8Elem(null, ref7);
+            var hex8 = new Hex8Elem(null, ref8);
+
+            // corners are in the order LISA specifies for elements of type Hex8
+            newSubElems.Add(hex1);
+            newSubElems.Add(hex2);
+            newSubElems.Add(hex3);
+            newSubElems.Add(hex4);
+            newSubElems.Add(hex5);
+            newSubElems.Add(hex6);
+            newSubElems.Add(hex7);
+            newSubElems.Add(hex8);
+            // newSubElems.Add(new Hex8Elem(null, sortNodes(x0y0z0)));
+        }
+
+        private List<Node> refineCorner1()
+        {
+
+            List<Node> x0y1z0 = new List<Node>();
+
+            // closest face
+            var xNegLeastZ = xNegative.OrderBy(x => x.GetZ).Take(6).ToList();
+            var face1 = xNegLeastZ.OrderBy(x => x.GetY).Skip(2).ToList();
+
+            var yPosLeastZ = yPositive.OrderBy(x => x.GetZ).Take(6).ToList();
+            var face2 = yPosLeastZ.OrderBy(x => x.GetX).Take(4).ToList();
+            var face2NonOverlapping = face2.Skip(2);
+
+           
+
+            // on the bottom
+            var zNegLeastX = zNegative.OrderBy(x => x.GetX).Take(6).ToList();
+            var face3 = zNegLeastX.OrderBy(x => x.GetY).Skip(2).ToList();
+
+            var face3NonOverlapping = face3.Take(2).OrderBy(x => x.GetX).Skip(1);
+
+            x0y1z0.Add(hexCentre);
+            x0y1z0.AddRange(face1);
+            x0y1z0.AddRange(face2NonOverlapping);
+            x0y1z0.AddRange(face3NonOverlapping);
+
+            return x0y1z0;
+        }
+
+        internal static Node[][] getFacesSplitFromPointCloud(List<Node> nodes)
+        {
             Node[][] faces = new Node[6][];
 
 
@@ -44,193 +155,315 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             // four faces round size of Hex
             // find the four nodes with greatest x values
-            faces[0] = inputNodes.OrderByDescending(n => n.GetX).Take(4).ToArray();
+            faces[0] = nodes.OrderByDescending(n => n.GetX).Take(4).ToArray();
 
             // find four with smallest x values
-            faces[1] = inputNodes.OrderBy(n => n.GetX).Take(4).ToArray();
+            faces[1] = nodes.OrderBy(n => n.GetX).Take(4).ToArray();
 
             // find four with greatest y values
-            faces[2] = inputNodes.OrderByDescending(n => n.GetY).Take(4).ToArray();
+            faces[2] = nodes.OrderByDescending(n => n.GetY).Take(4).ToArray();
 
             // find four with smallest y values
-            faces[3] = inputNodes.OrderBy(n => n.GetY).Take(4).ToArray();
+            faces[3] = nodes.OrderBy(n => n.GetY).Take(4).ToArray();
 
             // top of the Hex
             // of all the nodes find the four that have the highest z values
-            faces[4] = inputNodes.OrderByDescending(n => n.GetZ).Take(4).ToArray();
+            faces[4] = nodes.OrderByDescending(n => n.GetZ).Take(4).ToArray();
 
             // bottom, find the four with the lowest z values
-            faces[5] = inputNodes.OrderBy(n => n.GetZ).Take(4).ToArray();
+            faces[5] = nodes.OrderBy(n => n.GetZ).Take(4).ToArray();
 
-            Node hexCentre = getHexCentre(faces, nodes);
-
-            Node[][] xPosSubs = getSubSquares(faces[0], nodes);
-            Node[][] xNegSubs = getSubSquares(faces[1], nodes);
-            Node[][] yPosSubs = getSubSquares(faces[2], nodes);
-            Node[][] yNegSubs = getSubSquares(faces[3], nodes);
-
-            Node[][] topSubs = getSubSquares(faces[4], nodes);
-            Node[][] bottomSubs = getSubSquares(faces[4], nodes);
-
-            // make four new smaller hexes inside the main hex
-
-            // make subHex in top right hand corner
-            makeNewHex(hexCentre, xPosSubs, yPosSubs, topSubs);
-
-            // need to do this for each face on the Hex8
-
-            return newElements;
+            return faces;
         }
 
-        /// <summary>
-        /// Make a new Hex Quad4Elem, by making a new Quad4Elem object with the right ordering for the input nodes
-        /// And the right element type
-        /// </summary>
-        /// <returns>new hex element for that quadrent of the previous hex</returns>
-        private Hex8Elem makeNewHex(Node hexCentre, Node[][] xPosSubs, Node[][] yPosSubs, Node[][] topSubs)
+        private List<Node> refineCorner2()
         {
 
-            List<Node> hexNodes = new List<Node>();
+            List<Node> x0y0z0 = new List<Node>();
 
-            // this ordering is specified by LISA for Hex8 Elements under the create 
-            // Quad4Elem window within the GUI application
-            hexNodes[0] = yPosSubs[0][2];
-            hexNodes[1] = hexCentre;
-            hexNodes[2] = xPosSubs[0][2];
+            var yNegLeastZ = yNegative.OrderBy(x => x.GetZ).Take(6);
+            var face1 = yNegLeastZ.OrderBy(x => x.GetX).Take(4);
 
-            Console.WriteLine("X subsquares: ");
-            Console.WriteLine("Sub1 Node1: " + xPosSubs[0][0]);
-            Console.WriteLine("Sub1 Node2: " + xPosSubs[0][1]);
-            Console.WriteLine("Sub1 Node3: " + xPosSubs[0][2]);
-            Console.WriteLine("Sub1 Node4: " + xPosSubs[0][3]);
-            Console.WriteLine("");
-            Console.WriteLine("Sub2 Node1: " + xPosSubs[1][0]);
-            Console.WriteLine("Sub2 Node2: " + xPosSubs[1][1]);
-            Console.WriteLine("Sub2 Node3: " + xPosSubs[1][2]);
-            Console.WriteLine("Sub2 Node4: " + xPosSubs[1][3]);
-            Console.WriteLine("");
-            Console.WriteLine("Sub3 Node1: " + xPosSubs[2][0]);
-            Console.WriteLine("Sub3 Node2: " + xPosSubs[2][1]);
-            Console.WriteLine("Sub3 Node3: " + xPosSubs[2][2]);
-            Console.WriteLine("Sub3 Node4: " + xPosSubs[2][3]);
-            Console.WriteLine("");
-            Console.WriteLine("Sub4 Node1: " + xPosSubs[3][0]);
-            Console.WriteLine("Sub4 Node2: " + xPosSubs[3][1]);
-            Console.WriteLine("Sub4 Node3: " + xPosSubs[3][2]);
-            Console.WriteLine("Sub4 Node4: " + xPosSubs[3][3]);
-            Console.WriteLine("");
-
-
-            Console.WriteLine("Y subsquares: ");
-            Console.WriteLine("Sub1 Node1: " + yPosSubs[0][0]);
-            Console.WriteLine("Sub1 Node2: " + yPosSubs[0][1]);
-            Console.WriteLine("Sub1 Node3: " + yPosSubs[0][2]);
-            Console.WriteLine("Sub1 Node4: " + yPosSubs[0][3]);
-            Console.WriteLine("");
-            Console.WriteLine("Sub2 Node1: " + yPosSubs[1][0]);
-            Console.WriteLine("Sub2 Node2: " + yPosSubs[1][1]);
-            Console.WriteLine("Sub2 Node3: " + yPosSubs[1][2]);
-            Console.WriteLine("Sub2 Node4: " + yPosSubs[1][3]);
-            Console.WriteLine("");
-            Console.WriteLine("Sub3 Node1: " + yPosSubs[2][0]);
-            Console.WriteLine("Sub3 Node2: " + yPosSubs[2][1]);
-            Console.WriteLine("Sub3 Node3: " + yPosSubs[2][2]);
-            Console.WriteLine("Sub3 Node4: " + yPosSubs[2][3]);
-            Console.WriteLine("");
-            Console.WriteLine("Sub4 Node1: " + yPosSubs[3][0]);
-            Console.WriteLine("Sub4 Node2: " + yPosSubs[3][1]);
-            Console.WriteLine("Sub4 Node3: " + yPosSubs[3][2]);
-            Console.WriteLine("Sub4 Node4: " + yPosSubs[3][3]);
-            Console.WriteLine("");
-
-            Console.WriteLine("Z subsquares: ");
-            Console.WriteLine("Sub1 Node1: " + topSubs[0][0]);
-            Console.WriteLine("Sub1 Node2: " + topSubs[0][1]);
-            Console.WriteLine("Sub1 Node3: " + topSubs[0][2]);
-            Console.WriteLine("Sub1 Node4: " + topSubs[0][3]);
-            Console.WriteLine("");
-            Console.WriteLine("Sub2 Node1: " + topSubs[1][0]);
-            Console.WriteLine("Sub2 Node2: " + topSubs[1][1]);
-            Console.WriteLine("Sub2 Node3: " + topSubs[1][2]);
-            Console.WriteLine("Sub2 Node4: " + topSubs[1][3]);
-            Console.WriteLine("");
-            Console.WriteLine("Sub3 Node1: " + topSubs[2][0]);
-            Console.WriteLine("Sub3 Node2: " + topSubs[2][1]);
-            Console.WriteLine("Sub3 Node3: " + topSubs[2][2]);
-            Console.WriteLine("Sub3 Node4: " + topSubs[2][3]);
-            Console.WriteLine("");
-            Console.WriteLine("Sub4 Node1: " + topSubs[3][0]);
-            Console.WriteLine("Sub4 Node2: " + topSubs[3][1]);
-            Console.WriteLine("Sub4 Node3: " + topSubs[3][2]);
-            Console.WriteLine("Sub4 Node4: " + topSubs[3][3]);
-            Console.WriteLine("");
-
-            //hexNodees[3] = yPosSubs
-
-            return new Hex8Elem(null, hexNodes);
-        }
-
-        private static Node getHexCentre(Node[][] faces, Dictionary<Tuple<double, double, double>, Node> nodes)
-        {
-            // each of the sub divided sections, now need to sew up
-            var xFront = getSubSquares(faces[0], nodes);
-            var xBack = getSubSquares(faces[1], nodes);
-            var yFront = getSubSquares(faces[2], nodes);
-            var yBack = getSubSquares(faces[3], nodes);
-
-            var top = getSubSquares(faces[4], nodes);
-            var bottom = getSubSquares(faces[5], nodes);
-
-            Node xFrontCenter = xFront[0][2];
-            Node xBackCenter = xBack[0][2];
-
-            Node yFrontCenter = yFront[0][2];
-            Node yBackCenter = yBack[0][2];
-
-            Node topCenter = top[0][2];
-            Node bottomCentre = bottom[0][2];
-
-            int newID = nodes.Count + 1;
-
-            double x = (xFrontCenter.GetX + xBackCenter.GetX) / 2;
-            double y = (yFrontCenter.GetY + yBackCenter.GetY) / 2;
-            double z = (topCenter.GetZ + bottomCentre.GetZ) / 2;
-
-            Node hexCentre = new Node(newID, x, y, z);
-            return hexCentre;
-        }
-
-
-
-        /// <summary>
-        /// Get given a set of corner nodes for a Quad4 element create nodes along the edges and a node in the centre
-        /// So that the space can be split up into sub elements
-        /// </summary>
-        /// <returns>array of sub element points</returns>
-        private static Node[][] getSubSquares(Node[] cornerNodes, Dictionary<Tuple<double, double, double>, Node> allNodes)
-        {
-
-            var subNodeTup = GeneralRefinementMethods.createMidpointNodes(cornerNodes, allNodes);
-
-            List<Node[]> elementEdgeTrios = subNodeTup.Item1;
-            List<Node> midpointLineNodes = subNodeTup.Item2;
-
-            // get the new center node which will be a corner for each of the four new elements
-            Node centerNode = GeneralRefinementMethods.createCenterNode(midpointLineNodes, allNodes);
-
-            Node[][] subSquares = new Node[4][];
-
-            int ii = 0;
-            foreach (Node[] trio in elementEdgeTrios)
+            // trim the top three nodes
+            var xNegLeastZ = xNegative.OrderBy(x => x.GetZ).Take(6).ToList();
+            var face2 = yNegLeastZ.OrderBy(x => x.GetY).Take(4).ToList();
+            if (face2[0] == xNegLeastZ[0])
             {
-                // add the centre node to get the smaller element
-                trio[2] = centerNode;
-                subSquares[ii] = trio;
-                ii++;
+                face2.RemoveAt(0);
             }
-            return subSquares;
-            // 
 
+            // This one is the bottom of the cube
+            var zNegLeastX = xNegative.OrderBy(x => x.GetX).Take(6).ToList();
+            var face3 = zNegLeastX.OrderBy(x => x.GetY).Take(4).ToList();
+            if (face3[0] == zNegLeastX[0])
+            {
+                face2.RemoveAt(0);
+            }
+
+            // fom the new closest corner Hex8 Element
+            x0y0z0.Add(hexCentre);
+            x0y0z0.AddRange(face1);
+            x0y0z0.AddRange(face2);
+            x0y0z0.AddRange(face3);
+
+            return x0y0z0;
         }
-    }
+        private List<Node> refineCorner3()
+        {
+            List<Node> x1y0z0 = new List<Node>();
+
+
+            var yNegLeastZ = xPositive.OrderBy(x => x.GetZ).Take(6);
+            var face1 = yNegLeastZ.OrderBy(x => x.GetY).Take(4);
+
+           
+            var xNegLeastZ = yNegative.OrderBy(x => x.GetZ).Take(6).ToList();
+            var face2 = yNegative.OrderBy(x => x.GetY).Skip(2).ToList();
+            if (face2[0] == xNegLeastZ[0])
+            {
+                face2.RemoveAt(0);
+            }
+
+            // This one is the bottom of the cube
+            var zNegLeastY = zNegative.OrderBy(x => x.GetY).Take(6).ToList();
+            var face3 = zNegLeastY.OrderBy(x => x.GetX).Skip(2).ToList();
+            if (face3[0] == zNegLeastY[0])
+            {
+                face2.RemoveAt(0);
+            }
+
+            x1y0z0.Add(hexCentre);
+            x1y0z0.AddRange(face1);
+            x1y0z0.AddRange(face2);
+            x1y0z0.AddRange(face3);
+
+            return x1y0z0;
+        }
+
+        private List<Node> refineCorner4()
+        {
+            List<Node> x1y1z0 = new List<Node>();
+
+
+            var yPosLeastZ = yPositive.OrderBy(x => x.GetZ).Take(6);
+            var face1 = yPosLeastZ.OrderBy(x => x.GetX).Skip(2);
+
+
+            var xPosLeastZ = xPositive.OrderBy(x => x.GetZ).Take(6).ToList();
+            var face2 = xPosLeastZ.OrderBy(x => x.GetY).Skip(2).ToList();
+            if (face2[0] == xPosLeastZ[0])
+            {
+                face2.RemoveAt(0);
+            }
+
+            // This one is the bottom of the cube
+            var zNegGreatestY = zNegative.OrderBy(x => x.GetY).Skip(3).ToList();
+            var face3 = zNegGreatestY.OrderBy(x => x.GetX).Skip(2).ToList();
+            if (face3[0] == zNegGreatestY[0])
+            {
+                face2.RemoveAt(0);
+            }
+
+            x1y1z0.Add(hexCentre);
+            x1y1z0.AddRange(face1);
+            x1y1z0.AddRange(face2);
+            x1y1z0.AddRange(face3);
+
+            return x1y1z0;
+        }
+
+        private List<Node> refineCorner5()
+        {
+            List<Node> x0y1z1 = new List<Node>();
+
+            var xNegGreatestZ = xNegative.OrderBy(x => x.GetZ).Skip(3);
+            var face1 = xNegGreatestZ.OrderBy(x => x.GetY).Skip(2);
+
+
+            var yPosGreatestZ = yPositive.OrderBy(x => x.GetZ).Skip(3).ToList();
+            var face2 = yPosGreatestZ.OrderBy(x => x.GetX).Take(4).ToList();
+
+            if (face2[0] == yPosGreatestZ[0])
+            {
+                face2.RemoveAt(0);
+            }
+
+            var zPosLeastX = zNegative.OrderBy(x => x.GetX).Take(6).ToList();
+            var face3 = zPosLeastX.OrderBy(x => x.GetY).Skip(2).ToList();
+            if (face3[0] == zPosLeastX[0])
+            {
+                face3.RemoveAt(0);
+            }
+
+            x0y1z1.Add(hexCentre);
+            x0y1z1.AddRange(face1);
+            x0y1z1.AddRange(face2);
+            x0y1z1.AddRange(face3);
+
+            return x0y1z1;
+        }
+
+        private List<Node> refineCorner6()
+        {
+            List<Node> x0y0z1 = new List<Node>();
+
+
+            // This is the closest face to us looking on
+            var xNegGreatestZ = xNegative.OrderBy(x => x.GetZ).Skip(3);
+            var face1 = xNegGreatestZ.OrderBy(x => x.GetY).Take(4);
+
+            // This is the right side face.
+            var yNegGreatestZ = yNegative.OrderBy(x => x.GetZ).Skip(3).ToList();
+            var face2 = yNegGreatestZ.OrderBy(x => x.GetX).Take(4).ToList();
+
+            if (face2[0] == yNegGreatestZ[0])
+            {
+                face2.RemoveAt(0);
+            }
+
+
+            var zPosLeastX = zPositive.OrderBy(x => x.GetX).Take(6).ToList();
+            var face3 = zPosLeastX.OrderBy(x => x.GetY).Take(4).ToList();
+            if (face3[0] == zPosLeastX[0])
+            {
+                face3.RemoveAt(0);
+            }
+
+            x0y0z1.Add(hexCentre);
+            x0y0z1.AddRange(face1);
+            x0y0z1.AddRange(face2);
+            x0y0z1.AddRange(face3);
+
+            return x0y0z1;
+        }
+
+        private List<Node> refineCorner7()
+        {
+            List<Node> x1y0z1 = new List<Node>();
+
+            // This is the furthest on cube
+            var xPosGreatestZ = xPositive.OrderBy(x => x.GetZ).Skip(3);
+            var face1 = xPosGreatestZ.OrderBy(x => x.GetY).Take(4);
+
+            // top face
+            var yPosGreatestZ = zPositive.OrderBy(x => x.GetX).Skip(3).ToList();
+            var face2 = yPosGreatestZ.OrderBy(x => x.GetY).Take(4).ToList();
+            if (face2[0] == yPosGreatestZ[0])
+            {
+                face2.RemoveAt(0);
+            }
+
+            var zPosLeastX = yNegative.OrderBy(x => x.GetX).Skip(3).ToList();
+            var face3 = zPosLeastX.OrderBy(x => x.GetZ).Skip(2).ToList();
+
+            if (face3[0] == zPosLeastX[0])
+            {
+                face3.RemoveAt(0);
+            }
+
+            x1y0z1.Add(hexCentre);
+            x1y0z1.AddRange(face1);
+            x1y0z1.AddRange(face2);
+            x1y0z1.AddRange(face3);
+
+            return x1y0z1;
+        }
+
+        private List<Node> refineCorner8()
+        {
+            List<Node> x1y1z1 = new List<Node>();
+
+            // This is the furthest on cube
+            var yPosGreatestZ = yPositive.OrderBy(x => x.GetZ).Skip(3);
+            var face1 = yPosGreatestZ.OrderBy(x => x.GetX).Skip(2);
+
+            // top face
+            var zPosGreatestx = zPositive.OrderBy(x => x.GetX).Skip(3).ToList();
+            var face2 = yPosGreatestZ.OrderBy(x => x.GetY).Skip(2).ToList();
+            if (face2[0] == zPosGreatestx[0])
+            {
+                face2.RemoveAt(0);
+            }
+
+
+            var xPosGreatestZ = xPositive.OrderBy(x => x.GetZ).Skip(3).ToList();
+            var face3 = xPosGreatestZ.OrderBy(x => x.GetZ).Skip(2).ToList();
+
+            if (face3[0] == xPosGreatestZ[0])
+            {
+                face3.RemoveAt(0);
+            }
+
+            x1y1z1.Add(hexCentre);
+            x1y1z1.AddRange(face1);
+            x1y1z1.AddRange(face2);
+            x1y1z1.AddRange(face3);
+
+            return x1y1z1;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private static Node[] sortHex8Tier(IEnumerable<Node> nodeTier)
+        {
+            Node[] nodes = new Node[4];
+
+            var XOrdered = nodeTier.OrderBy(node => node.GetX);
+
+            var lowerXs = XOrdered.Take(2);
+            var lxsYOrdering = lowerXs.OrderBy(node => node.GetY).ToArray();
+
+            nodes[0] = (lxsYOrdering[0]);
+
+            var upperXs = XOrdered.Skip(2);
+            var uxsYOrdering = upperXs.OrderBy(node => node.GetY).ToArray();
+            nodes[1] = (uxsYOrdering[0]);
+            nodes[2] = (uxsYOrdering[1]);
+
+            nodes[3] = (lxsYOrdering[1]);
+
+
+            //var HigherX = XOrdered.Skip(2);
+
+            //var topLowerXSortedY = LowerX.OrderBy(node => node.GetY).ToArray();
+
+            //nodes[0] = (topLowerXSortedY[1]);
+            //nodes[1] = (topLowerXSortedY[0]);
+
+            //HigherX.OrderBy(node => node.GetY).ToArray();
+
+            //nodes[2] = (topLowerXSortedY[0]);
+            //nodes[3] = (topLowerXSortedY[1]);
+
+            return nodes;
+        }
+        /// <summary>
+        /// Sorts the list of nodes associated with this element into the correct arangement for LISA
+        /// </summary>
+        /// <returns>The 8 nodes in the Hex8 Element now sorted so that they are accepted by LISA</returns>
+        public static List<Node> sortNodes(List<Node> nodes)
+        {
+            var topBottomOrdered = nodes.OrderBy(node => node.GetZ).ToArray();
+
+            var topFour = topBottomOrdered.Skip(4).ToArray();
+            var topTierSorted = sortHex8Tier(topFour).ToArray();
+
+            var bottomFour = topBottomOrdered.Take(4).ToArray();
+            var bottomTierSorted = sortHex8Tier(bottomFour).ToArray();
+
+            List<Node> sortedNodes = bottomTierSorted.Concat(topTierSorted).ToList();
+
+            //Node topFourx0y1 = 
+
+            //var sortedBottomFour = GeneralRefinementMethods.sortFourNodes(bottomFour.ToList());
+            //var sortedTopFour = GeneralRefinementMethods.sortFourNodes(topFour.ToList());
+
+            return sortedNodes;
+        }
+
+
+    }      
 }

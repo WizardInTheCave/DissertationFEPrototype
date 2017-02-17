@@ -23,7 +23,7 @@ namespace DisertationFEPrototype
         public Control() {
 
             //string lisaFile = @"D:\Documents\DissertationWork\models\newBlockTestSquareNodes.liml";  
-            string lisaFile = "bridge.liml";
+            string lisaFile = "SingleCube.liml";
             //string solveFile = @"D:\Documents\DissertationWork\secondTest.csv";
             bool isNodeOutput = true;
 
@@ -46,7 +46,7 @@ namespace DisertationFEPrototype
             int ii = 0;
             List<NodeAnalysisData> analysisData;
 
-            MeshQualityAssessment meshQualityAssessment = null;
+            // MeshQualityAssessment meshQualityAssessment = null;
             List<MeshQualityAssessment> meshAssessments = new List<MeshQualityAssessment>();
 
             while (evaluationFunction(ii) == false)
@@ -57,13 +57,7 @@ namespace DisertationFEPrototype
                 analysisData = analysisDataReader.getAnalysisData();
 
 
-                foreach (IElement elem in meshData.Elements)
-                {
-                    if (elem.Nodes.Count < 4)
-                    {
-                        Console.WriteLine("What???");
-                    }
-                }
+               
                 // assuming we have different mesh data should get a new set of edges.
                 OptimisationManager optimisation = new OptimisationManager(meshData, analysisData, ii);
                 
@@ -72,18 +66,9 @@ namespace DisertationFEPrototype
                 optimisation.refineMesh(meshAssessments);
                 MeshData refinedMesh = optimisation.GetUpdatedMesh;
 
-                foreach(IElement elem in refinedMesh.Elements)
-                {
-                    if (elem.Nodes.Count < 4)
-                    {
-                        Console.WriteLine("What???");
-                    }             
-                }
-
-
-                meshQualityAssessment = new MeshQualityAssessment(refinedMesh);
-                meshQualityAssessment.assessMesh();
-                meshAssessments.Add(meshQualityAssessment);
+               // meshQualityAssessment = new MeshQualityAssessment(refinedMesh);
+               // meshQualityAssessment.assessMesh();
+               // meshAssessments.Add(meshQualityAssessment);
 
 
                 // update the lisa file we are now working on (we next want to solve the updated file)
@@ -119,7 +104,7 @@ namespace DisertationFEPrototype
         /// <returns></returns>
         private bool evaluationFunction(int ii)
         {
-            return ii > 3;
+            return ii > 1;
         }
     }
 }
