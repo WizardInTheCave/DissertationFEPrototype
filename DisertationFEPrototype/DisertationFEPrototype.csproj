@@ -54,6 +54,7 @@
     <Compile Include="FEModelUpdate\GeneralGeomMethods.cs" />
     <Compile Include="FEModelUpdate\Model\Analysis\NodeAnalysisData.cs" />
     <Compile Include="FEModelUpdate\Model\Analysis\FixSelection.cs" />
+    <Compile Include="FEModelUpdate\Model\Structure\Elements\GeneralMetricCalcMethods.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\Hex8QualMetricCalcs.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\IElement.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\Hex8Elem.cs" />
@@ -88,7 +89,7 @@
     <Compile Include="Optimisations\ILPRules\EdgeIdentifier.cs" />
     <Compile Include="Optimisations\ILPRules\EdgeRelation.cs" />
     <Compile Include="Optimisations\ILPRules\RuleManager.cs" />
-    <Compile Include="Optimisations\GeneralRefinementMethods.cs" />
+    <Compile Include="FEModelUpdate\Model\Structure\Elements\GeneralRefinementMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

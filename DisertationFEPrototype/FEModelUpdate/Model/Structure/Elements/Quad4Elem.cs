@@ -10,6 +10,7 @@ using System.Collections;
 using System.Linq.Expressions;
 
 using DisertationFEPrototype.Optimisations;
+using DisertationFEPrototype.Model.Structure.Elements;
 
 namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
@@ -141,23 +142,9 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 trio[2] = centerNode;
                 List<Node> orderedTrio = trio.ToList();
 
-                //if (orderedTrio.Count < 4)
-                //{
-                //    Console.WriteLine("What???");
-                //}
-
                 newElements.Add(new Quad4Elem(null, orderedTrio));
             }
 
-
-            //foreach(IElement elem in newElements)
-            //{
-            //    if (elem.Nodes.Count < 4)
-            //    {
-            //        Console.WriteLine("What???");
-            //    }
-            //}
-          
             return newElements;
         }
 
@@ -170,6 +157,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             //{
             //    Console.WriteLine("What???");
             //}
+            
 
             this.id = id;
             this.nodes = GeneralRefinementMethods.sortFourNodes(nodes);
@@ -184,8 +172,8 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             maxCornerAngle = propCalcs.computeMaxCornerAngle();
             maxParallelDev = propCalcs.computeMaxparallelDev();
  
-            longestEdge = GeneralRefinementMethods.computeLongestEdge(nodes, SHORTEST_EDGE_DEFAULT);
-            shortestEdge = GeneralRefinementMethods.computeShortestEdge(nodes, LONGEST_EDGE_DEFAULT);
+            longestEdge = propCalcs.computeLongestEdge(nodes, SHORTEST_EDGE_DEFAULT);
+            shortestEdge = propCalcs.computeShortestEdge(nodes, LONGEST_EDGE_DEFAULT);
             aspectRatio = propCalcs.computeAspectRatio(longestEdge, shortestEdge);
 
             area = GeneralRefinementMethods.computeFaceArea(nodes, longestEdge, shortestEdge);
@@ -193,7 +181,5 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             // propCalcs.computeArea(longestEdge, shortestEdge);
 
         }
-
-       
     }
 }

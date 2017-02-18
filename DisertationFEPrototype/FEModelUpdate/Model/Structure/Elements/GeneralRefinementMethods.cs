@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using DisertationFEPrototype.Model;
 using DisertationFEPrototype.FEModelUpdate;
 
 using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 using DisertationFEPrototype.Model.Structure;
 
-namespace DisertationFEPrototype.Optimisations
+namespace DisertationFEPrototype.Model.Structure.Elements
 {
     /// <summary>
     /// note this method currently only works for finite element, 
@@ -53,7 +51,7 @@ namespace DisertationFEPrototype.Optimisations
         /// </summary>
         /// <param name="node">the node we want to check the presence of in the model</param>
         /// <returns>the safe node reference</returns>
-        private static Node createNode(double x, double y, double z, Dictionary<Tuple<double, double, double>, Node> nodes)
+        public static Node createNode(double x, double y, double z, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
             var key = new Tuple<double, double, double>(x, y, z);
 
@@ -94,7 +92,7 @@ namespace DisertationFEPrototype.Optimisations
         }
 
         /// <summary>
-        /// creates the node in the middle of the new set of four elements which we join the others too
+        /// Creates the node in the middle of the new set of four elements which we join the others too
         /// </summary>
         /// <param name="midpointLineNodes"></param>
         /// <returns>centeral node object</returns>
@@ -144,68 +142,9 @@ namespace DisertationFEPrototype.Optimisations
             return distanceBetweenFirstAndSecond < maxDistanceInElement;
         }
 
-        /// <summary>
-        /// using the method suggested here currently
-        /// http://stackoverflow.com/questions/2350604/get-the-surface-area-of-a-polyhedron-3d-object
-        /// </summary>
-        /// <param name="nodes"></param>
-        /// <returns></returns>
-        public static double computeFaceArea(List<Node> faceNodes, double longestEdge, double shortestEdge)
+        internal static double computeFaceArea(List<Node> nodes, double longestEdge, double shortestEdge)
         {
-            // element has no area (not polygon)
-            if (faceNodes.Count < 3)
-            {
-                return 0;
-            }
-
-            double[] total = getTotalCrossProduct(faceNodes);
-            var elemNormal = GeneralGeomMethods.unitNormal(faceNodes[0], faceNodes[1], faceNodes[2]);
-
-            double result = GeneralGeomMethods.dotProduct(total, elemNormal);
-
-            // just width * height in this case
-            if (double.IsNaN(result))
-            {
-                double b = shortestEdge;
-                double h = longestEdge;
-
-                result = b * h;
-
-            }
-            else
-            {
-                result = Math.Abs(result / 2);
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// For the nodes in the element get the cross product for each pair and add to total
-        /// </summary>
-        /// <param name="nodes"></param>
-        /// <returns></returns>
-        private static double[] getTotalCrossProduct(List<Node> nodes)
-        {
-            double[] total = new double[] { 0, 0, 0 };
-            for (int ii = 0; ii < nodes.Count; ii++)
-            {
-                Node vi1 = nodes[ii];
-                Node vi2;
-
-                if (ii == nodes.Count - 1)
-                {
-                    vi2 = nodes[0];
-                }
-                else
-                {
-                    vi2 = nodes[ii + 1];
-                }
-                Tuple<double, double, double> product = GeneralGeomMethods.crossProduct(vi1, vi2);
-                total[0] += product.Item1;
-                total[1] += product.Item2;
-                total[2] += product.Item3;
-            }
-            return total;
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -235,7 +174,7 @@ namespace DisertationFEPrototype.Optimisations
             }
             return longestEdge;
         }
-        internal static double computeShortestEdge(List<Node> nodes, double longestEdgeDefault)
+        public static double computeShortestEdge(List<Node> nodes, double longestEdgeDefault)
         {
             double shortestEdge = longestEdgeDefault;
 
@@ -268,11 +207,6 @@ namespace DisertationFEPrototype.Optimisations
         {
             List<Node> sortMatchedNodes = new List<Node>();
 
-            if (nodes.Count < 4)
-            {
-                Console.WriteLine("What???");
-            }
-
             // add the first node in the current list
             Node currentNode = nodes[0];
             sortMatchedNodes.Add(currentNode);
@@ -292,8 +226,8 @@ namespace DisertationFEPrototype.Optimisations
                 Node nodeComp2 = nodes[nums[1]];
                 Node nodeComp3 = nodes[nums[2]];
 
-                List<double> smallDist1 = new List<double>(); 
-                List<Node> nearNode1 = new List<Node>(); 
+                List<double> smallDist1 = new List<double>();
+                List<Node> nearNode1 = new List<Node>();
 
                 if (isAdjacentQuad4(currentNode, nodeComp1, nodes) && !sortMatchedNodes.Contains(nodeComp1))
                 {
@@ -308,7 +242,7 @@ namespace DisertationFEPrototype.Optimisations
                 if (isAdjacentQuad4(currentNode, nodeComp3, nodes) && !sortMatchedNodes.Contains(nodeComp3))
                 {
                     smallDist1.Add(GeneralGeomMethods.distanceBetweenPoints(currentNode, nodeComp3));
-                    nearNode1.Add(nodeComp3); 
+                    nearNode1.Add(nodeComp3);
                 }
 
                 // This bit of code here deals with issues where the diagonal isn't actually the longest distance from the currentNode, 
@@ -318,38 +252,22 @@ namespace DisertationFEPrototype.Optimisations
                 sortMatchedNodes.Add(currentNode);
 
             }
-            //if (sortMatchedNodes.Count < 4)
-            //{
-            //    Console.WriteLine("What???"); 
-            //}
+
             return sortMatchedNodes;
         }
 
         /// <summary>
         /// for a Quad4 element get Node which is diagonal
         /// </summary>
-        /// <param name="nodes"></param>
-        /// <param name="queryNode"></param>
+        /// <param name="nodes">ndoes within the element</param>
+        /// <param name="queryNode">Node we want to find the diagonal from</param>
         /// <returns></returns>
         public static Node getDiagonalNode(Node[] nodes, Node queryNode)
         {
 
-
-            //if (nodes.Length < 4)
-            //{
-            //    Console.WriteLine("What???");
-            //}
-            
-
             if (nodes.Contains(queryNode)) {
                 var fourNodes = nodes.ToList();
                 List<Node> sortedNodes = sortFourNodes(fourNodes);
-
-
-                //if (sortedNodes.Count < 4)
-                //{
-                //    Console.WriteLine("What???");
-                //}
 
                 int diagIndex = (sortedNodes.IndexOf(queryNode) + 2) % 4;
                 Node diagNode = sortedNodes[diagIndex];
@@ -371,8 +289,6 @@ namespace DisertationFEPrototype.Optimisations
         {
             List<Node[]> elementEdgeTrios = new List<Node[]>();
             List<Node> midEdgeNodes = new List<Node>();
-
-
 
             foreach (Node node in fourNodes)
             {

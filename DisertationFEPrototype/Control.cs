@@ -46,7 +46,7 @@ namespace DisertationFEPrototype
             int ii = 0;
             List<NodeAnalysisData> analysisData;
 
-            // MeshQualityAssessment meshQualityAssessment = null;
+            MeshQualityAssessment meshQualityAssessment = null;
             List<MeshQualityAssessment> meshAssessments = new List<MeshQualityAssessment>();
 
             while (evaluationFunction(ii) == false)
@@ -66,9 +66,9 @@ namespace DisertationFEPrototype
                 optimisation.refineMesh(meshAssessments);
                 MeshData refinedMesh = optimisation.GetUpdatedMesh;
 
-               // meshQualityAssessment = new MeshQualityAssessment(refinedMesh);
-               // meshQualityAssessment.assessMesh();
-               // meshAssessments.Add(meshQualityAssessment);
+                meshQualityAssessment = new MeshQualityAssessment(refinedMesh);
+                meshQualityAssessment.assessMesh();
+                meshAssessments.Add(meshQualityAssessment);
 
 
                 // update the lisa file we are now working on (we next want to solve the updated file)

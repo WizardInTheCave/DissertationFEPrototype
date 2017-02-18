@@ -63,6 +63,8 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         {
             this.hexCentre = hexCentre;
 
+            Console.WriteLine("Hex centre is: " + this.hexCentre);
+
             this.xPositive = xPositive;
             this.xNegative = xNegative;
 
@@ -85,14 +87,16 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 Console.WriteLine("Wir Haben Problem");
             }
 
-            var ref1 = refineCorner1();
-            var ref2 = refineCorner2();
-            var ref3 = refineCorner3();
-            var ref4 = refineCorner4();
-            var ref5 = refineCorner5();
-            var ref6 = refineCorner6();
-            var ref7 = refineCorner7();
-            var ref8 = refineCorner8();
+            var ref1 = splitCorner1();
+            var ref2 = splitCorner2();
+            var ref3 = splitCorner3();
+            var ref4 = splitCorner4();
+            var ref5 = splitCorner5();
+            var ref6 = splitCorner6();
+            var ref7 = splitCorner7();
+            var ref8 = splitCorner8();
+
+
 
             var hex1 = new Hex8Elem(null, ref1);
             var hex2 = new Hex8Elem(null, ref2);
@@ -102,6 +106,31 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             var hex6 = new Hex8Elem(null, ref6);
             var hex7 = new Hex8Elem(null, ref7);
             var hex8 = new Hex8Elem(null, ref8);
+
+            Console.WriteLine("\n");
+            hex1.Nodes.ForEach(x => Console.WriteLine("hex1: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            Console.WriteLine("\n");
+
+            hex2.Nodes.ForEach(x => Console.WriteLine("hex2: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            Console.WriteLine("\n");
+
+            hex3.Nodes.ForEach(x => Console.WriteLine("hex3: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            Console.WriteLine("\n");
+
+            hex4.Nodes.ForEach(x => Console.WriteLine("hex4: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            Console.WriteLine("\n");
+
+            hex5.Nodes.ForEach(x => Console.WriteLine("hex5: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            Console.WriteLine("\n");
+
+            hex6.Nodes.ForEach(x => Console.WriteLine("hex6: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            Console.WriteLine("\n");
+
+            hex7.Nodes.ForEach(x => Console.WriteLine("hex7: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            Console.WriteLine("\n");
+
+            hex8.Nodes.ForEach(x => Console.WriteLine("hex8: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            Console.WriteLine("\n");
 
             // corners are in the order LISA specifies for elements of type Hex8
             newSubElems.Add(hex1);
@@ -113,35 +142,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             newSubElems.Add(hex7);
             newSubElems.Add(hex8);
             // newSubElems.Add(new Hex8Elem(null, sortNodes(x0y0z0)));
-        }
-
-        private List<Node> refineCorner1()
-        {
-
-            List<Node> x0y1z0 = new List<Node>();
-
-            // closest face
-            var xNegLeastZ = xNegative.OrderBy(x => x.GetZ).Take(6).ToList();
-            var face1 = xNegLeastZ.OrderBy(x => x.GetY).Skip(2).ToList();
-
-            var yPosLeastZ = yPositive.OrderBy(x => x.GetZ).Take(6).ToList();
-            var face2 = yPosLeastZ.OrderBy(x => x.GetX).Take(4).ToList();
-            var face2NonOverlapping = face2.Skip(2);
-
-           
-
-            // on the bottom
-            var zNegLeastX = zNegative.OrderBy(x => x.GetX).Take(6).ToList();
-            var face3 = zNegLeastX.OrderBy(x => x.GetY).Skip(2).ToList();
-
-            var face3NonOverlapping = face3.Take(2).OrderBy(x => x.GetX).Skip(1);
-
-            x0y1z0.Add(hexCentre);
-            x0y1z0.AddRange(face1);
-            x0y1z0.AddRange(face2NonOverlapping);
-            x0y1z0.AddRange(face3NonOverlapping);
-
-            return x0y1z0;
         }
 
         internal static Node[][] getFacesSplitFromPointCloud(List<Node> nodes)
@@ -176,7 +176,34 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             return faces;
         }
 
-        private List<Node> refineCorner2()
+        private List<Node> splitCorner1()
+        {
+
+            List<Node> x0y1z0 = new List<Node>();
+
+            // closest face
+            var xNegLeastZ = xNegative.OrderBy(x => x.GetZ).Take(6).ToList();
+            var face1 = xNegLeastZ.OrderBy(x => x.GetY).Skip(2).ToList();
+
+            var yPosLeastZ = yPositive.OrderBy(x => x.GetZ).Take(6).ToList();
+            var face2 = yPosLeastZ.OrderBy(x => x.GetX).Take(4).ToList();
+            var face2NonOverlapping = face2.Skip(2);
+
+
+            // on the bottom
+            var zNegLeastX = zNegative.OrderBy(x => x.GetX).Take(6).ToList();
+            var face3 = zNegLeastX.OrderBy(x => x.GetY).Skip(2).ToList();
+            var face3NonOverlapping = face3.Take(2).OrderBy(x => x.GetX).Skip(1);
+
+            x0y1z0.Add(hexCentre);
+            x0y1z0.AddRange(face1);
+            x0y1z0.AddRange(face2NonOverlapping);
+            x0y1z0.AddRange(face3NonOverlapping);
+
+            return x0y1z0;
+        }
+
+        private List<Node> splitCorner2()
         {
 
             List<Node> x0y0z0 = new List<Node>();
@@ -186,61 +213,61 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             // trim the top three nodes
             var xNegLeastZ = xNegative.OrderBy(x => x.GetZ).Take(6).ToList();
-            var face2 = yNegLeastZ.OrderBy(x => x.GetY).Take(4).ToList();
-            if (face2[0] == xNegLeastZ[0])
-            {
-                face2.RemoveAt(0);
-            }
+            var face2 = xNegLeastZ.OrderBy(x => x.GetY).Take(4).ToList();
+            var face2NonOverlapping = face2.Skip(2);
 
             // This one is the bottom of the cube
-            var zNegLeastX = xNegative.OrderBy(x => x.GetX).Take(6).ToList();
+            var zNegLeastX = zNegative.OrderBy(x => x.GetX).Take(6).ToList();
             var face3 = zNegLeastX.OrderBy(x => x.GetY).Take(4).ToList();
-            if (face3[0] == zNegLeastX[0])
-            {
-                face2.RemoveAt(0);
-            }
+            var face3NonOverlapping = face3.Skip(2).OrderBy(x => x.GetX).Skip(1);
+
 
             // fom the new closest corner Hex8 Element
             x0y0z0.Add(hexCentre);
             x0y0z0.AddRange(face1);
-            x0y0z0.AddRange(face2);
-            x0y0z0.AddRange(face3);
+            x0y0z0.AddRange(face2NonOverlapping);
+            x0y0z0.AddRange(face3NonOverlapping);
 
             return x0y0z0;
         }
-        private List<Node> refineCorner3()
+        private List<Node> splitCorner3()
         {
             List<Node> x1y0z0 = new List<Node>();
 
 
-            var yNegLeastZ = xPositive.OrderBy(x => x.GetZ).Take(6);
-            var face1 = yNegLeastZ.OrderBy(x => x.GetY).Take(4);
+           
+
+
+            // back face
+            var xNegLeastZ = xPositive.OrderBy(x => x.GetZ).Take(6);
+            var face1 = xNegLeastZ.OrderBy(x => x.GetY).Take(4);
 
            
-            var xNegLeastZ = yNegative.OrderBy(x => x.GetZ).Take(6).ToList();
-            var face2 = yNegative.OrderBy(x => x.GetY).Skip(2).ToList();
-            if (face2[0] == xNegLeastZ[0])
-            {
-                face2.RemoveAt(0);
-            }
+            // right face
+            var yNegLeastZ = yNegative.OrderBy(x => x.GetZ).Take(6).ToList();
+            var face2 = yNegLeastZ.OrderBy(x => x.GetX).Skip(2).ToList();
+            var face2NonOverlapping = face2.Take(2).ToList();
+            
 
             // This one is the bottom of the cube
             var zNegLeastY = zNegative.OrderBy(x => x.GetY).Take(6).ToList();
             var face3 = zNegLeastY.OrderBy(x => x.GetX).Skip(2).ToList();
-            if (face3[0] == zNegLeastY[0])
-            {
-                face2.RemoveAt(0);
-            }
+            var face3NonOverlapping = face3.Take(2).OrderBy(x => x.GetY).Skip(1);
+
+
+
+         
+
 
             x1y0z0.Add(hexCentre);
             x1y0z0.AddRange(face1);
-            x1y0z0.AddRange(face2);
-            x1y0z0.AddRange(face3);
+            x1y0z0.AddRange(face2NonOverlapping);
+            x1y0z0.AddRange(face3NonOverlapping);
 
             return x1y0z0;
         }
 
-        private List<Node> refineCorner4()
+        private List<Node> splitCorner4()
         {
             List<Node> x1y1z0 = new List<Node>();
 
@@ -251,59 +278,46 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             var xPosLeastZ = xPositive.OrderBy(x => x.GetZ).Take(6).ToList();
             var face2 = xPosLeastZ.OrderBy(x => x.GetY).Skip(2).ToList();
-            if (face2[0] == xPosLeastZ[0])
-            {
-                face2.RemoveAt(0);
-            }
+            var face2NonOverlapping = face2.Take(2);
 
             // This one is the bottom of the cube
             var zNegGreatestY = zNegative.OrderBy(x => x.GetY).Skip(3).ToList();
             var face3 = zNegGreatestY.OrderBy(x => x.GetX).Skip(2).ToList();
-            if (face3[0] == zNegGreatestY[0])
-            {
-                face2.RemoveAt(0);
-            }
+            var face3NonOverlapping = face3.Take(2).OrderBy(x => x.GetY).Take(1);
 
             x1y1z0.Add(hexCentre);
             x1y1z0.AddRange(face1);
-            x1y1z0.AddRange(face2);
-            x1y1z0.AddRange(face3);
+            x1y1z0.AddRange(face2NonOverlapping);
+            x1y1z0.AddRange(face3NonOverlapping);
 
             return x1y1z0;
         }
 
-        private List<Node> refineCorner5()
+        private List<Node> splitCorner5()
         {
             List<Node> x0y1z1 = new List<Node>();
 
             var xNegGreatestZ = xNegative.OrderBy(x => x.GetZ).Skip(3);
             var face1 = xNegGreatestZ.OrderBy(x => x.GetY).Skip(2);
 
-
             var yPosGreatestZ = yPositive.OrderBy(x => x.GetZ).Skip(3).ToList();
             var face2 = yPosGreatestZ.OrderBy(x => x.GetX).Take(4).ToList();
+            var face2NonOverlapping = face2.Skip(2);
 
-            if (face2[0] == yPosGreatestZ[0])
-            {
-                face2.RemoveAt(0);
-            }
-
-            var zPosLeastX = zNegative.OrderBy(x => x.GetX).Take(6).ToList();
+            var zPosLeastX = zPositive.OrderBy(x => x.GetX).Take(6).ToList();
             var face3 = zPosLeastX.OrderBy(x => x.GetY).Skip(2).ToList();
-            if (face3[0] == zPosLeastX[0])
-            {
-                face3.RemoveAt(0);
-            }
+            var face3NonOverlapping = face3.Take(2).OrderBy(x => x.GetX).Skip(1);
+
 
             x0y1z1.Add(hexCentre);
             x0y1z1.AddRange(face1);
-            x0y1z1.AddRange(face2);
-            x0y1z1.AddRange(face3);
+            x0y1z1.AddRange(face2NonOverlapping);
+            x0y1z1.AddRange(face3NonOverlapping);
 
             return x0y1z1;
         }
 
-        private List<Node> refineCorner6()
+        private List<Node> splitCorner6()
         {
             List<Node> x0y0z1 = new List<Node>();
 
@@ -315,29 +329,22 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             // This is the right side face.
             var yNegGreatestZ = yNegative.OrderBy(x => x.GetZ).Skip(3).ToList();
             var face2 = yNegGreatestZ.OrderBy(x => x.GetX).Take(4).ToList();
-
-            if (face2[0] == yNegGreatestZ[0])
-            {
-                face2.RemoveAt(0);
-            }
+            var face2NonOverlapping = face2.Skip(2);
 
 
             var zPosLeastX = zPositive.OrderBy(x => x.GetX).Take(6).ToList();
             var face3 = zPosLeastX.OrderBy(x => x.GetY).Take(4).ToList();
-            if (face3[0] == zPosLeastX[0])
-            {
-                face3.RemoveAt(0);
-            }
+            var face3NonOverlapping = face3.Skip(2).OrderBy(x => x.GetY).Skip(1);
 
             x0y0z1.Add(hexCentre);
             x0y0z1.AddRange(face1);
-            x0y0z1.AddRange(face2);
-            x0y0z1.AddRange(face3);
+            x0y0z1.AddRange(face2NonOverlapping);
+            x0y0z1.AddRange(face3NonOverlapping);
 
             return x0y0z1;
         }
 
-        private List<Node> refineCorner7()
+        private List<Node> splitCorner7()
         {
             List<Node> x1y0z1 = new List<Node>();
 
@@ -345,31 +352,29 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             var xPosGreatestZ = xPositive.OrderBy(x => x.GetZ).Skip(3);
             var face1 = xPosGreatestZ.OrderBy(x => x.GetY).Take(4);
 
+
+            var yNegGreatestX = yNegative.OrderBy(x => x.GetX).Skip(3).ToList();
+
+            var face2 = yNegGreatestX.OrderBy(x => x.GetZ).Skip(2).ToList();
+
+            var face2NonOverlapping = face2.OrderBy(x => x.GetX).Take(2).ToList();
+
             // top face
-            var yPosGreatestZ = zPositive.OrderBy(x => x.GetX).Skip(3).ToList();
-            var face2 = yPosGreatestZ.OrderBy(x => x.GetY).Take(4).ToList();
-            if (face2[0] == yPosGreatestZ[0])
-            {
-                face2.RemoveAt(0);
-            }
+            var zPosGreatestX = zPositive.OrderBy(x => x.GetX).Skip(3).ToList();
+            var face3 = zPosGreatestX.OrderBy(x => x.GetY).Take(4).ToList();
+            var face3NonOverlapping = face3.Skip(2).OrderBy(x => x.GetX).Take(1).ToList();
+           
 
-            var zPosLeastX = yNegative.OrderBy(x => x.GetX).Skip(3).ToList();
-            var face3 = zPosLeastX.OrderBy(x => x.GetZ).Skip(2).ToList();
-
-            if (face3[0] == zPosLeastX[0])
-            {
-                face3.RemoveAt(0);
-            }
 
             x1y0z1.Add(hexCentre);
             x1y0z1.AddRange(face1);
-            x1y0z1.AddRange(face2);
-            x1y0z1.AddRange(face3);
+            x1y0z1.AddRange(face2NonOverlapping);
+            x1y0z1.AddRange(face3NonOverlapping);
 
             return x1y0z1;
         }
 
-        private List<Node> refineCorner8()
+        private List<Node> splitCorner8()
         {
             List<Node> x1y1z1 = new List<Node>();
 
@@ -377,27 +382,31 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             var yPosGreatestZ = yPositive.OrderBy(x => x.GetZ).Skip(3);
             var face1 = yPosGreatestZ.OrderBy(x => x.GetX).Skip(2);
 
-            // top face
-            var zPosGreatestx = zPositive.OrderBy(x => x.GetX).Skip(3).ToList();
-            var face2 = yPosGreatestZ.OrderBy(x => x.GetY).Skip(2).ToList();
-            if (face2[0] == zPosGreatestx[0])
-            {
-                face2.RemoveAt(0);
-            }
-
 
             var xPosGreatestZ = xPositive.OrderBy(x => x.GetZ).Skip(3).ToList();
-            var face3 = xPosGreatestZ.OrderBy(x => x.GetZ).Skip(2).ToList();
+            var face2 = xPosGreatestZ.OrderBy(x => x.GetY).Skip(2).ToList();
+            var face2NonOverlapping = face2.Take(2).ToList();
 
-            if (face3[0] == xPosGreatestZ[0])
-            {
-                face3.RemoveAt(0);
-            }
+            //xPosGreatestZ.ForEach(x => Console.WriteLine("xPos skip3: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            //Console.WriteLine("\n");
+
+            //face2.ForEach(x => Console.WriteLine("xPos face2: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            //Console.WriteLine("\n");
+
+            //face2NonOverlapping.ForEach(x => Console.WriteLine("face2NonOverlapping: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            //Console.WriteLine("\n");
+
+
+
+            // top face
+            var zPosGreatestx = zPositive.OrderBy(x => x.GetX).Skip(3).ToList();
+            var face3 = zPosGreatestx.OrderBy(x => x.GetY).Skip(2).ToList();
+            var face3NonOverlapping = face3.Take(2).OrderBy(x => x.GetX).Take(1);
 
             x1y1z1.Add(hexCentre);
             x1y1z1.AddRange(face1);
-            x1y1z1.AddRange(face2);
-            x1y1z1.AddRange(face3);
+            x1y1z1.AddRange(face2NonOverlapping);
+            x1y1z1.AddRange(face3NonOverlapping);
 
             return x1y1z1;
         }
@@ -420,23 +429,11 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             var upperXs = XOrdered.Skip(2);
             var uxsYOrdering = upperXs.OrderBy(node => node.GetY).ToArray();
+
             nodes[1] = (uxsYOrdering[0]);
             nodes[2] = (uxsYOrdering[1]);
 
             nodes[3] = (lxsYOrdering[1]);
-
-
-            //var HigherX = XOrdered.Skip(2);
-
-            //var topLowerXSortedY = LowerX.OrderBy(node => node.GetY).ToArray();
-
-            //nodes[0] = (topLowerXSortedY[1]);
-            //nodes[1] = (topLowerXSortedY[0]);
-
-            //HigherX.OrderBy(node => node.GetY).ToArray();
-
-            //nodes[2] = (topLowerXSortedY[0]);
-            //nodes[3] = (topLowerXSortedY[1]);
 
             return nodes;
         }
@@ -455,11 +452,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             var bottomTierSorted = sortHex8Tier(bottomFour).ToArray();
 
             List<Node> sortedNodes = bottomTierSorted.Concat(topTierSorted).ToList();
-
-            //Node topFourx0y1 = 
-
-            //var sortedBottomFour = GeneralRefinementMethods.sortFourNodes(bottomFour.ToList());
-            //var sortedTopFour = GeneralRefinementMethods.sortFourNodes(topFour.ToList());
 
             return sortedNodes;
         }

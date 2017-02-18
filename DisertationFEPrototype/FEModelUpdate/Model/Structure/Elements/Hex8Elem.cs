@@ -88,7 +88,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             
             this.id = id;
 
-            
+            // sort the nodes when a new element is first made.
             this.nodes = Hex8Refinement.sortNodes(nodes);
 
             faces = Hex8Refinement.getFacesSplitFromPointCloud(this.nodes);
@@ -97,14 +97,15 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             //// all three of these methods use 
 
-            //maxCornerAngle = propCalcs.computeMaxCornerAngle();
-            //maxParallelDev = propCalcs.computeMaxparallelDev();
+            maxCornerAngle = propCalcs.computeMaxCornerAngle();
+            maxParallelDev = propCalcs.computeMaxparallelDev();
 
-            
-            //longestEdge = GeneralRefinementMethods.computeLongestEdge(this.nodes, SHORTEST_EDGE_DEFAULT);
-            //shortestEdge = GeneralRefinementMethods.computeShortestEdge(this.nodes, LONGEST_EDGE_DEFAULT);
-            //aspectRatio = propCalcs.computeAspectRatio(longestEdge, shortestEdge);
-            //area = propCalcs.computeArea(faces, longestEdge, shortestEdge);
+
+            longestEdge = GeneralRefinementMethods.computeLongestEdge(this.nodes, SHORTEST_EDGE_DEFAULT);
+            shortestEdge = GeneralRefinementMethods.computeShortestEdge(this.nodes, LONGEST_EDGE_DEFAULT);
+            aspectRatio = propCalcs.computeAspectRatio(longestEdge, shortestEdge);
+
+            area = propCalcs.computeArea(faces, longestEdge, shortestEdge);
 
         }
 
@@ -134,6 +135,11 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         {
             List<Node> nodesNoDups = new List<Node>();
 
+            Console.WriteLine("\n\n");
+            nodeArray2d.SelectMany(x => x).ToList()
+                .ForEach(x => Console.WriteLine("before remove: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+
+            
             Node[] firstArray = nodeArray2d[0];
             nodesNoDups.AddRange(firstArray);
 
@@ -146,7 +152,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             {
                 foreach(Node node in nodeArray2d[ii])
                 {
-                    Console.WriteLine(node.GetX + ", " + node.GetY + ", " + node.GetZ);
+                    // Console.WriteLine(node.GetX + ", " + node.GetY + ", " + node.GetZ);
                     if (!nodeAlreadyExists(node, nodesNoDups))
                     {
                         nodesNoDups.Add(node);
@@ -156,6 +162,8 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             // nodesNoDups.ForEach( x => Console.WriteLine(x.GetX + ", " + x.GetY + ", " + x.GetZ));
             Console.WriteLine("\n");
+
+            nodesNoDups.ForEach(x => Console.WriteLine("after remove: " + x.GetX + " " + x.GetY + " " + x.GetZ));
 
             return nodesNoDups;
         }
@@ -173,12 +181,19 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             Node hexCentre = getHexCentre(faces, nodes);
 
             Node[][] xPosSubs = getSubSquares(faces[0], nodes);
+
             Node[][] xNegSubs = getSubSquares(faces[1], nodes);
+
+            //foreach(Node[] sub in xNegSubs)
+            //{
+            //    sub.ToList().ForEach(x => Console.WriteLine("xNeg: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            //}
+
             Node[][] yPosSubs = getSubSquares(faces[2], nodes);
             Node[][] yNegSubs = getSubSquares(faces[3], nodes);
 
             Node[][] zPosSubs = getSubSquares(faces[4], nodes);
-            Node[][] ZNegSubs = getSubSquares(faces[5], nodes);
+            Node[][] zNegSubs = getSubSquares(faces[5], nodes);
 
             List<Node> xPositive = faceNodesWithoutDuplicates(xPosSubs);
             List<Node> xNegative = faceNodesWithoutDuplicates(xNegSubs);
@@ -187,7 +202,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             List<Node> yNegative = faceNodesWithoutDuplicates(yNegSubs);
 
             List<Node> zPositive = faceNodesWithoutDuplicates(zPosSubs);
-            List<Node> zNegative = faceNodesWithoutDuplicates(ZNegSubs);
+            List<Node> zNegative = faceNodesWithoutDuplicates(zNegSubs);
 
             // make four new smaller hexes inside the main hex
             // make subHex in top right hand corner
@@ -302,14 +317,13 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             Node topCenter = top[0][2];
             Node bottomCentre = bottom[0][2];
 
-            int newID = nodes.Count + 1;
+        
 
             double x = (xFrontCenter.GetX + xBackCenter.GetX) / 2;
             double y = (yFrontCenter.GetY + yBackCenter.GetY) / 2;
             double z = (topCenter.GetZ + bottomCentre.GetZ) / 2;
 
-            Node hexCentre = new Node(newID, x, y, z);
-            return hexCentre;
+            return GeneralRefinementMethods.createNode(x, y, z, nodes);
         }
 
 
@@ -341,6 +355,13 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 subSquares[ii] = trio;
                 ii++;
             }
+
+            var flatNodes = subSquares.SelectMany(x => x);
+            //flatNodes.ToList().ForEach(x => Console.WriteLine("xNeg: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            //Console.WriteLine("\n\n");
+
+            //Console.WriteLine("wut");
+
             return subSquares;
         }
 

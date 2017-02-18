@@ -51,10 +51,10 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// <returns></returns>
         //internal double computeArea(Node[][] faces, double longestEdge, double shortestEdge)
         //{
-            
-           
+
+
         //    return faces
         //        .Select(face => GeneralRefinementMethods.computeFaceArea(face.ToList(),)).Sum();
-        //} 
+        //}
     }
 }
