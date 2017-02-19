@@ -12,36 +12,38 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
     class Hex8QualMetricCalcs
     {
 
-        List<Node> nodes;
+        readonly double LONGEST_EDGE_DEFAULT = 0.0;
+        readonly double SHORTEST_EDGE_DEFAULT = 1000000.0;
 
-        public Hex8QualMetricCalcs(List<Node> nodes)
+        public Hex8QualMetricCalcs(){}
+
+        internal double computeMaxCornerAngle(Node[][] nodes)
         {
-            this.nodes = nodes;
+            return nodes.Select(x => GeneralMetricCalcMethods.computeMaxCornerAngle(x.ToList())).Max();
+
+            // throw new NotImplementedException();
         }
 
-        internal double computeMaxCornerAngle()
+        internal double computeMaxparallelDev(List<Tuple<Node, Node>[]> faceEdgePairings)
         {
-            throw new NotImplementedException();
-        }
-
-        internal double computeMaxparallelDev()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal double computeLongestEdge(double sHORTEST_EDGE_DEFAULT)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal double computeShortestEdge(double lONGEST_EDGE_DEFAULT)
-        {
-            throw new NotImplementedException();
+            double maxParrallelDev = faceEdgePairings
+                .Select(x => GeneralMetricCalcMethods.computeMaxparallelDev(x)).Max();
+            return maxParrallelDev;
         }
 
         internal double computeAspectRatio(double longestEdge, double shortestEdge)
         {
-            throw new NotImplementedException();
+            return GeneralMetricCalcMethods.computeAspectRatio(longestEdge, shortestEdge);
+        }
+
+        internal double computeLongestEdge(Tuple<Node, Node>[] nodePairings, double LONGEST_EDGE_DEFAULT)
+        {
+            return GeneralMetricCalcMethods.computeLongestEdge(nodePairings, LONGEST_EDGE_DEFAULT);
+        }
+
+        internal double computeShortestEdge(Tuple<Node, Node>[] nodePairings, double SHORTEST_EDGE_DEFAULT)
+        {
+            return GeneralMetricCalcMethods.computeShortestEdge(nodePairings, SHORTEST_EDGE_DEFAULT);
         }
 
         /// <summary>
@@ -49,12 +51,20 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// </summary>
         /// <param name="faces"></param>
         /// <returns></returns>
-        //internal double computeArea(Node[][] faces, double longestEdge, double shortestEdge)
-        //{
+        internal double computeArea(List<Tuple<Node, Node>[]> lengthsForFace)
+        {
+            double totalArea = 0;
 
+            foreach(var face in lengthsForFace)
+            {
+                // get the area for each face then sum these
+                double longestEdge = GeneralMetricCalcMethods.computeLongestEdge(face, LONGEST_EDGE_DEFAULT);
+                double shortestEdge = GeneralMetricCalcMethods.computeShortestEdge(face, SHORTEST_EDGE_DEFAULT);
 
-        //    return faces
-        //        .Select(face => GeneralRefinementMethods.computeFaceArea(face.ToList(),)).Sum();
-        //}
+                double faceArea = longestEdge * shortestEdge;
+                totalArea += faceArea;
+            }
+            return totalArea;
+        }
     }
 }

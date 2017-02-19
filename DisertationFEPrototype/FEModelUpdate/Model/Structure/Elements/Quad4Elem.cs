@@ -152,11 +152,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
         public Quad4Elem(int? id, List<Node> nodes)
         {
-
-            //if (nodes.Count < 4)
-            //{
-            //    Console.WriteLine("What???");
-            //}
             
 
             this.id = id;
@@ -165,15 +160,17 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             this.childElements = null;
 
             // make another object responsible for calculating the elements metrics
-            propCalcs = new Quad4QualMetricCalcs(nodes);
+            propCalcs = new Quad4QualMetricCalcs();
 
             // all three of these methods use 
-          
-            maxCornerAngle = propCalcs.computeMaxCornerAngle();
-            maxParallelDev = propCalcs.computeMaxparallelDev();
+
+            Tuple<Node, Node>[] nodePairings = GeneralMetricCalcMethods.getEdgePairingsForNode(nodes);
+
+            maxCornerAngle = propCalcs.computeMaxCornerAngle(nodes);
+            maxParallelDev = propCalcs.computeMaxparallelDev(nodePairings); 
  
-            longestEdge = propCalcs.computeLongestEdge(nodes, SHORTEST_EDGE_DEFAULT);
-            shortestEdge = propCalcs.computeShortestEdge(nodes, LONGEST_EDGE_DEFAULT);
+            longestEdge = propCalcs.computeLongestEdge(nodePairings, SHORTEST_EDGE_DEFAULT);
+            shortestEdge = propCalcs.computeShortestEdge(nodePairings, LONGEST_EDGE_DEFAULT);
             aspectRatio = propCalcs.computeAspectRatio(longestEdge, shortestEdge);
 
             area = GeneralRefinementMethods.computeFaceArea(nodes, longestEdge, shortestEdge);

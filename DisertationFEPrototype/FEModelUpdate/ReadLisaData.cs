@@ -199,16 +199,17 @@ namespace DisertationFEPrototype.FEModelUpdate
                 {
                     var innerSubtree = reader.ReadSubtree();
 
-                    innerSubtree.ReadToDescendant("geometric");
+                    innerSubtree.ReadToFollowing("geometric");
                     string geomType = innerSubtree["type"];
                     double thickness = Convert.ToDouble(innerSubtree["thickness"]);
                     double planestrain = Convert.ToDouble(innerSubtree["planestrain"]);
-                    
+
 
                     innerSubtree.ReadToFollowing("mechanical");
                     string mechType = innerSubtree["type"];
                     long youngsModulus = Convert.ToInt64(innerSubtree["youngsmodulus"]);
                     double poissonRatio = Convert.ToDouble(innerSubtree["poissonratio"]);
+
 
                     var geometric = new Geometric(geomType, thickness, planestrain);
                     var mechanical = new Mechanical(mechType, youngsModulus, poissonRatio);

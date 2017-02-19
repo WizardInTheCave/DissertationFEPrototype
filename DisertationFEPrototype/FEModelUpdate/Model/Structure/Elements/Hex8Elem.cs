@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using DisertationFEPrototype.Model.Structure;
 using DisertationFEPrototype.Optimisations;
+using DisertationFEPrototype.Model.Structure.Elements;
 
 namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
@@ -31,8 +32,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         double area;
         // int flatPlaneIndex;
 
-        readonly double LONGEST_EDGE_DEFAULT = 0.0;
-        readonly double SHORTEST_EDGE_DEFAULT = 1000000.0;
 
         double longestEdge = 0.0;
         double shortestEdge = 1000000.0;
@@ -93,19 +92,30 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             faces = Hex8Refinement.getFacesSplitFromPointCloud(this.nodes);
 
-            //propCalcs = new Hex8QualMetricCalcs(nodes);
+            propCalcs = new Hex8QualMetricCalcs();
 
             //// all three of these methods use 
 
-            maxCornerAngle = propCalcs.computeMaxCornerAngle();
-            maxParallelDev = propCalcs.computeMaxparallelDev();
+            maxCornerAngle = propCalcs.computeMaxCornerAngle(faces);
+        
 
+            List<Tuple<Node, Node>[]> nodePairingsfacePairings = faces.Select(x => GeneralMetricCalcMethods
+            .getEdgePairingsForNode(x.ToList())).ToList();
 
-            longestEdge = GeneralRefinementMethods.computeLongestEdge(this.nodes, SHORTEST_EDGE_DEFAULT);
-            shortestEdge = GeneralRefinementMethods.computeShortestEdge(this.nodes, LONGEST_EDGE_DEFAULT);
+            maxParallelDev = propCalcs.computeMaxparallelDev(nodePairingsfacePairings);
+
+            // get a single Tuple<Node, Node>[] with the lengths of all the edges in the Hex8 not caring about which face
+            // they are associated with.
+            Tuple<Node, Node>[] nodePairingsAll = nodePairingsfacePairings
+                .Aggregate(new Tuple<Node, Node>[12], (mergedArr, nextArr) => mergedArr.Concat(nextArr).ToArray());
+
+            
+
+            //longestEdge = propCalcs.computeLongestEdge(nodePairingsAll, SHORTEST_EDGE_DEFAULT);
+            //shortestEdge = propCalcs.computeShortestEdge(nodePairingsAll, LONGEST_EDGE_DEFAULT);
             aspectRatio = propCalcs.computeAspectRatio(longestEdge, shortestEdge);
 
-            area = propCalcs.computeArea(faces, longestEdge, shortestEdge);
+            area = propCalcs.computeArea(nodePairingsfacePairings);
 
         }
 

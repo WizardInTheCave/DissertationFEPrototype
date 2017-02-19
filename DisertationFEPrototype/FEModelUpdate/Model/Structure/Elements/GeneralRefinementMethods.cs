@@ -147,52 +147,52 @@ namespace DisertationFEPrototype.Model.Structure.Elements
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Compute the longest edge for an element
-        /// </summary>
-        /// <returns></returns>
-        public static double computeLongestEdge(List<Node> nodes, double shortestEdgeDefault)
-        {
-            double longestEdge = shortestEdgeDefault;
+        ///// <summary>
+        ///// Compute the longest edge for an element
+        ///// </summary>
+        ///// <returns></returns>
+        //public static double computeLongestEdge(List<Node> nodes, double shortestEdgeDefault)
+        //{
+        //    double longestEdge = shortestEdgeDefault;
 
-            // this is a bit inefficent because going over each edge twice, but most edges we are going to have is 4 so
-            // it doesn't matter too much, may write it better later
-            foreach (Node nodeA in nodes)
-            {
-                foreach (Node nodeB in nodes)
-                {
-                    //bool[] commonPlanes = GeneralGeomMethods.whichPlanesCommon(nodeA, nodeB);
-                    //if (GeneralGeomMethods.isAdjacent(commonPlanes))
+        //    // this is a bit inefficent because going over each edge twice, but most edges we are going to have is 4 so
+        //    // it doesn't matter too much, may write it better later
+        //    foreach (Node nodeA in nodes)
+        //    {
+        //        foreach (Node nodeB in nodes)
+        //        {
+        //            //bool[] commonPlanes = GeneralGeomMethods.whichPlanesCommon(nodeA, nodeB);
+        //            //if (GeneralGeomMethods.isAdjacent(commonPlanes))
 
-                    double edgeLength = GeneralGeomMethods.distanceBetweenPoints(nodeA, nodeB);
-                    if (edgeLength > longestEdge)
-                    {
-                        longestEdge = edgeLength;
-                    }
+        //            double edgeLength = GeneralGeomMethods.distanceBetweenPoints(nodeA, nodeB);
+        //            if (edgeLength > longestEdge)
+        //            {
+        //                longestEdge = edgeLength;
+        //            }
 
-                }
-            }
-            return longestEdge;
-        }
-        public static double computeShortestEdge(List<Node> nodes, double longestEdgeDefault)
-        {
-            double shortestEdge = longestEdgeDefault;
+        //        }
+        //    }
+        //    return longestEdge;
+        //}
+        //public static double computeShortestEdge(List<Node> nodes, double longestEdgeDefault)
+        //{
+        //    double shortestEdge = longestEdgeDefault;
 
-            // this is a bit inefficent because going over each edge twice, but most edges we are going to have is 4 so
-            // it doesn't matter too much, may write it better later
-            foreach (Node nodeA in nodes)
-            {
-                foreach (Node nodeB in nodes)
-                {
-                    double edgeLength = GeneralGeomMethods.distanceBetweenPoints(nodeA, nodeB);
-                    if (edgeLength < shortestEdge)
-                    {
-                        shortestEdge = edgeLength;
-                    }
-                }
-            }
-            return shortestEdge;
-        }
+        //    // this is a bit inefficent because going over each edge twice, but most edges we are going to have is 4 so
+        //    // it doesn't matter too much, may write it better later
+        //    foreach (Node nodeA in nodes)
+        //    {
+        //        foreach (Node nodeB in nodes)
+        //        {
+        //            double edgeLength = GeneralGeomMethods.distanceBetweenPoints(nodeA, nodeB);
+        //            if (edgeLength < shortestEdge)
+        //            {
+        //                shortestEdge = edgeLength;
+        //            }
+        //        }
+        //    }
+        //    return shortestEdge;
+        //}
 
 
 

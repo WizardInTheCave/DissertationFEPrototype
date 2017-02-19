@@ -23,6 +23,32 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         }
 
 
+        public static double computeLongestEdge(Tuple<Node, Node>[] nodes, double LONGEST_EDGE_DEFAULT)
+        {
+            double currentlyLongestEdge = LONGEST_EDGE_DEFAULT;
+
+            double lengthsMax = nodes.Select(x => GeneralGeomMethods.distanceBetweenPoints(x.Item1, x.Item2)).Max();
+            if (lengthsMax > LONGEST_EDGE_DEFAULT)
+            {
+                currentlyLongestEdge = lengthsMax;
+            }
+            return currentlyLongestEdge;
+        }
+
+        public static double computeShortestEdge(Tuple<Node, Node>[] nodes, double SHORTEST_EDGE_DEFAULT)
+        {
+
+            double currentlyShortestEdge = SHORTEST_EDGE_DEFAULT;
+            double lengthsMin = nodes.Select(x => GeneralGeomMethods.distanceBetweenPoints(x.Item1, x.Item2)).Min();
+            if (lengthsMin < SHORTEST_EDGE_DEFAULT)
+            {
+                currentlyShortestEdge = lengthsMin;
+            }
+            return currentlyShortestEdge;
+        }
+
+
+
         /// <summary>
         /// For the nodes in the element get the cross product for each pair and add to total
         /// </summary>
@@ -91,7 +117,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// get a set of tuples which represent each of the edges within the element
         /// </summary>
         /// <returns></returns>
-        public static Tuple<Node, Node>[] getedgePairingsForNode(List<Node> nodes)
+        public static Tuple<Node, Node>[] getEdgePairingsForNode(List<Node> nodes)
         {
 
             var edges = new Tuple<Node, Node>[4];
@@ -149,11 +175,8 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// I want to work out for all the pairs of opposite edges in the node what is the maximum deviation from parrallell
         /// </summary>
         /// <returns>The maximum deviation angle between two opposite edges within the element</returns>
-        public static double computeMaxparallelDev(List<Node> nodes)
+        public static double computeMaxparallelDev(Tuple<Node, Node>[] edges)
         {
-
-            Tuple<Node, Node>[] edges = getedgePairingsForNode(nodes);
-
             double dev1 = getDevOnEdgePair(edges[0], edges[3]);
             double dev2 = getDevOnEdgePair(edges[1], edges[2]);
             return dev1 > dev2 ? dev1 : dev2;

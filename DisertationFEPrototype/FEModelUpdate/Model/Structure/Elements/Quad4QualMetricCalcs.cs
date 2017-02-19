@@ -13,14 +13,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
     {
 
 
-        
-
-        List<Node> nodes;
-
-        public Quad4QualMetricCalcs(List<Node> nodes)
-        {
-            this.nodes = nodes;
-        }
+        public Quad4QualMetricCalcs(){}
 
        
         // area3D_Polygon(): computes the area of a 3D planar polygon
@@ -31,24 +24,32 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         //    Return: the (float) area of the polygon
 
 
+
+       
+
+        public double computeAspectRatio(double longestEdge, double shortestEdge)
+        {
+            return GeneralMetricCalcMethods.computeAspectRatio(longestEdge, shortestEdge);
+        }
+
         internal double computeMaxCornerAngle(List<Node> fourPlaneNodes)
         {
             return GeneralMetricCalcMethods.computeMaxCornerAngle(fourPlaneNodes);
         }
 
-        internal double computeLongestEdge(List<Node> nodes, double sHORTEST_EDGE_DEFAULT)
+        internal double computeMaxparallelDev(Tuple<Node, Node>[] edges)
         {
-            throw new NotImplementedException();
+            return GeneralMetricCalcMethods.computeMaxparallelDev(edges);
         }
 
-        internal double computeShortestEdge(List<Node> nodes, double lONGEST_EDGE_DEFAULT)
+        internal double computeLongestEdge(Tuple<Node, Node>[] nodePairings, double LONGEST_EDGE_DEFAULT)
         {
-            throw new NotImplementedException();
+            return GeneralMetricCalcMethods.computeLongestEdge(nodePairings, LONGEST_EDGE_DEFAULT);
         }
 
-        internal double computeAspectRatio(double longestEdge, double shortestEdge)
+        internal double computeShortestEdge(Tuple<Node, Node>[] nodePairings, double SHORTEST_EDGE_DEFAULT)
         {
-            throw new NotImplementedException();
+            return GeneralMetricCalcMethods.computeShortestEdge(nodePairings, SHORTEST_EDGE_DEFAULT);
         }
     }
 }

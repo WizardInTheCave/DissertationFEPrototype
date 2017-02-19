@@ -127,17 +127,6 @@ namespace DisertationFEPrototype.Optimisations
             // try a basic mesh refinement by creating more elements first
             List<IElement> elements = meshData.Elements;
 
-
-            foreach (IElement elem in elements)
-            {
-                if (elem.Nodes.Count < 4)
-                {
-                    Console.WriteLine("What???");
-                }
-            }
-
-
-
             nodes = meshData.Nodes;
 
             // var elem = elements.Select(x => x.Id);
