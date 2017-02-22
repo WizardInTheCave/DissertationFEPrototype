@@ -20,21 +20,19 @@ namespace DisertationFEPrototype
         /// main loop which drives iteration until we have a FE model which meets the requirements, simple!
         /// </summary>
         /// <param name="lisaString"></param>
-        public Control() {
+        public Control(string experimentFolder, Tuple<short, short> experimentVals) {
 
             //string lisaFile = @"D:\Documents\DissertationWork\models\newBlockTestSquareNodes.liml";  
-            string lisaFile = "SingleCube.liml";
-            //string solveFile = @"D:\Documents\DissertationWork\secondTest.csv";
+            string lisaFile = "bridgeAdvanced.liml";
+           
             bool isNodeOutput = true;
 
             string lisaFileName = Path.GetFileNameWithoutExtension(lisaFile);
             string outputCSVname = lisaFileName + "Out.csv";
 
-            string lisaFolderPath = @"D:\Documents\DissertationWork\models\";
-
             // only need to do this once to get the inital mesh, after that should try and drive it
             // purely with the solve data
-            Directory.SetCurrentDirectory(lisaFolderPath);
+            Directory.SetCurrentDirectory(experimentFolder);
 
             var meshDataReader = new ReadMeshData(lisaFile);
             MeshData meshData = meshDataReader.GetMeshData;
@@ -57,9 +55,8 @@ namespace DisertationFEPrototype
                 analysisData = analysisDataReader.getAnalysisData();
 
 
-               
                 // assuming we have different mesh data should get a new set of edges.
-                OptimisationManager optimisation = new OptimisationManager(meshData, analysisData, ii);
+                OptimisationManager optimisation = new OptimisationManager(meshData, analysisData, ii, experimentVals.Item1, experimentVals.Item2);
                 
                 // hand quality assessment down to the refinement method so we can apply apply either rule based
                 // or traditional meshing further
@@ -104,7 +101,7 @@ namespace DisertationFEPrototype
         /// <returns></returns>
         private bool evaluationFunction(int ii)
         {
-            return ii > 1;
+            return ii > 3;
         }
     }
 }

@@ -144,7 +144,8 @@ namespace DisertationFEPrototype.Model.Structure.Elements
 
         internal static double computeFaceArea(List<Node> nodes, double longestEdge, double shortestEdge)
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
+            return longestEdge * shortestEdge;
         }
 
         ///// <summary>

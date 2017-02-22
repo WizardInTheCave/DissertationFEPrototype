@@ -69,14 +69,15 @@ namespace DisertationFEPrototype.FEModelUpdate
                     string selectionName = reader[selection];
                     var allSelections = meshData.FaceSelections.Where(faceSelection => faceSelection.GetName == selectionName);
 
-                    if (allSelections.Count() == 1)
-                    {
-                        fixSelections.Add(new FixSelection(allSelections.ToArray()[0]));
-                    }
-                    else
-                    {
-                        throw new Exception("We shouldn't have more than one face selection object per fixed selection");
-                    }
+                    // if (allSelections.Count() == 1)
+                   // {
+
+                    fixSelections.Add(new FixSelection(allSelections.ToArray()[0]));
+                    //}
+                    //else
+                    //{
+                    //    throw new Exception("We shouldn't have more than one face selection object per fixed selection");
+                    //}
                 }
             }
             return fixSelections;

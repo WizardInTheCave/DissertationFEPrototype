@@ -171,9 +171,9 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             }
 
             // nodesNoDups.ForEach( x => Console.WriteLine(x.GetX + ", " + x.GetY + ", " + x.GetZ));
-            Console.WriteLine("\n");
+            // Console.WriteLine("\n");
 
-            nodesNoDups.ForEach(x => Console.WriteLine("after remove: " + x.GetX + " " + x.GetY + " " + x.GetZ));
+            // nodesNoDups.ForEach(x => Console.WriteLine("after remove: " + x.GetX + " " + x.GetY + " " + x.GetZ));
 
             return nodesNoDups;
         }

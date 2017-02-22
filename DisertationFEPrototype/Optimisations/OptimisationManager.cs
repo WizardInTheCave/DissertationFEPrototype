@@ -39,11 +39,14 @@ namespace DisertationFEPrototype.Optimisations
             }
         }
          
-        public OptimisationManager(MeshData meshData, List<NodeAnalysisData> analysisData, int iterationCount)
+        public OptimisationManager(MeshData meshData, List<NodeAnalysisData> analysisData, int iterationCount, short ILPRefineCount, short stressRefineCount)
         {
             this.meshData = meshData;
             this.analysisData = analysisData;
             this.ruleManager = new RuleManager(meshData, iterationCount);
+
+            this.ILPRefineCount = ILPRefineCount;
+            this.stressRefineCount = stressRefineCount; 
         }
 
         /// <summary>
@@ -159,23 +162,16 @@ namespace DisertationFEPrototype.Optimisations
 
 
             // depending on how heavily we want to perform each type of meshing run that type of meshing
-            ////for(int ii = 0; ii < stressRefineCount; ii++)
-            ////{
-            stressGradientDrivenRemesh(elements, analysisData);
+            for (int ii = 0; ii < stressRefineCount; ii++)
+            {
+                stressGradientDrivenRemesh(elements, analysisData);
             // ILPEdgeDrivenRefinement(0);
-            ////}
-            //for (int ii = 0; ii < ILPRefineCount; ii++)
-            //{
-            // ILPEdgeDrivenRefinement(0);
-            //}
+            }
+            for (int ii = 0; ii < ILPRefineCount; ii++)
+            {
+                ILPEdgeDrivenRefinement(0);
+            }
 
-            //foreach (IElement elem in elements)
-            //{
-            //    if (elem.Nodes.Count < 4)
-            //    {
-            //        Console.WriteLine("What???");
-            //    }
-            //}
 
 
 
@@ -191,20 +187,9 @@ namespace DisertationFEPrototype.Optimisations
             //List<double> maxCornerAngles = meshQualityAssessment.ElemQualMetrics.MaxCornerAngles;
 
 
-
-
-
-
             // now flatten the tree structure
             List<IElement> flatElemTree = getNewElementList(elements);
 
-            //foreach (IElement elem in flatElemTree)
-            //{
-            //    if (elem.Nodes.Count < 4)
-            //    {
-            //        Console.WriteLine("What???");
-            //    }
-            //}
             //List<Node> all_nodes = getAllNodes(flatElemTree);
 
             // update the ids on nodes which don't have ids
@@ -237,23 +222,9 @@ namespace DisertationFEPrototype.Optimisations
             {
                 int elemCount = edge.ElementCount;
 
-                if(ii == 2 && elemCount > 0)
-                {
-                    Console.WriteLine("DADA!!!");
-                }
                 List<Node> nodePath = edge.NodePath;
                 // for each node on the path get its elements and mesh those
                 List<IElement> allRemeshingElems = nodePath.SelectMany(np => meshData.findElems(np)).ToList();
-
-                foreach (IElement elem in allRemeshingElems)
-                {
-                    if (elem.Nodes.Count < 4)
-                    {
-                        Console.WriteLine("What???");
-                    }
-                }
-
-
 
                 remesh(allRemeshingElems, 0, edge.ElementCount);
             }
@@ -271,12 +242,6 @@ namespace DisertationFEPrototype.Optimisations
                 foreach (IElement elem in elements)
                 {
 
-                    
-                    //if (elem.Nodes.Count < 4)
-                    //{
-                    //    Console.WriteLine("What???");
-                    //}
-                    
                     List<IElement> refined;
 
                     refined = elem.createChildElements(nodes);
@@ -323,7 +288,6 @@ namespace DisertationFEPrototype.Optimisations
                     elem.Children = children;
                 }
             }
-            Console.WriteLine("done all");
         }
         
       
@@ -359,10 +323,6 @@ namespace DisertationFEPrototype.Optimisations
 
             foreach (IElement elem in rootElements)
             {
-                if (elem.Nodes.Count < 4)
-                {
-                    Console.WriteLine("What???");
-                }
 
                 // this is the bottom of the tree
                 if (elem.Children == null)
@@ -391,15 +351,6 @@ namespace DisertationFEPrototype.Optimisations
 
                 }
             }
-
-            foreach(IElement elem in flatElemTree)
-            {
-                if (elem.Nodes.Count < 4)
-                {
-                    Console.WriteLine("What???");
-                }
-            
-            }
             // this.meshData.TheFaceSelections
             return flatElemTree;
         }
@@ -422,6 +373,7 @@ namespace DisertationFEPrototype.Optimisations
                     subElems.ForEach(sub => newConstraintFaces.Add(new Face(sub, 6)));
 
                     Face[] tempFaces = faceSelection.Faces.Where(f => f.Element == elem).ToArray();
+
                     if (tempFaces.Length > 1)
                     {
                         throw new Exception("There should never be two faces here!");
