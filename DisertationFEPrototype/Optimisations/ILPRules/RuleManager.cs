@@ -53,7 +53,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             }
 
             fileLines.Add("PAUSE");
-            System.IO.File.WriteAllLines(@"D:\Documents\DissertationWork\models\ruleResults.txt", fileLines.ToArray());
+            // System.IO.File.WriteAllLines(@"D:\Documents\DissertationWork\models\ruleResults.txt", fileLines.ToArray());
 
         }
 

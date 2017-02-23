@@ -12,33 +12,45 @@ using DisertationFEPrototype.MeshQualityMetrics;
 using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 using System;
 
+using System.Linq;
+
 namespace DisertationFEPrototype
 {
     class Control
     {
+
+
+        // make a lock so file IO isn't a problem when running experiments on lots of threads
+        //private Object fileIOLock = new Object();
+
         /// <summary>
         /// main loop which drives iteration until we have a FE model which meets the requirements, simple!
         /// </summary>
         /// <param name="lisaString"></param>
         public Control(string experimentFolder, Tuple<short, short> experimentVals) {
 
-            //string lisaFile = @"D:\Documents\DissertationWork\models\newBlockTestSquareNodes.liml";  
-            string lisaFile = "bridgeAdvanced.liml";
+            string experimentFolderLocal = experimentFolder;
            
             bool isNodeOutput = true;
 
-            string lisaFileName = Path.GetFileNameWithoutExtension(lisaFile);
-            string outputCSVname = lisaFileName + "Out.csv";
+            string lisaFile = "bridgeAdvanced.liml";
+
+            string lisaFileName = "bridgeAdvanced";
+
+            string outputCSVPath = Path.Combine(experimentFolderLocal, lisaFileName + "Out.csv");
+            string lisaFilePath = Path.Combine(experimentFolderLocal, lisaFile);
+            
 
             // only need to do this once to get the inital mesh, after that should try and drive it
             // purely with the solve data
-            Directory.SetCurrentDirectory(experimentFolder);
+            
 
-            var meshDataReader = new ReadMeshData(lisaFile);
+            var meshDataReader = new ReadMeshData(lisaFilePath);
+
             MeshData meshData = meshDataReader.GetMeshData;
 
             // read data from the solve
-            var analysisDataReader = new ReadAnalysisData(outputCSVname, isNodeOutput);
+            var analysisDataReader = new ReadAnalysisData(outputCSVPath, isNodeOutput);
 
 
             int ii = 0;
@@ -48,15 +60,17 @@ namespace DisertationFEPrototype
             List<MeshQualityAssessment> meshAssessments = new List<MeshQualityAssessment>();
 
             while (evaluationFunction(ii) == false)
-            {    
-                solve(lisaFile);
+            {
+               
+                solve(lisaFile, experimentFolderLocal);
 
                 // read data from the solve
                 analysisData = analysisDataReader.getAnalysisData();
 
-
+                short ILPRefinem = experimentVals.Item1;
+                short stressRefineCount = experimentVals.Item2;
                 // assuming we have different mesh data should get a new set of edges.
-                OptimisationManager optimisation = new OptimisationManager(meshData, analysisData, ii, experimentVals.Item1, experimentVals.Item2);
+                OptimisationManager optimisation = new OptimisationManager(meshData, analysisData, ii, ILPRefinem, stressRefineCount);
                 
                 // hand quality assessment down to the refinement method so we can apply apply either rule based
                 // or traditional meshing further
@@ -67,31 +81,69 @@ namespace DisertationFEPrototype
                 meshQualityAssessment.assessMesh();
                 meshAssessments.Add(meshQualityAssessment);
 
-
                 // update the lisa file we are now working on (we next want to solve the updated file)
                 lisaFile = lisaFileName + ii.ToString() + ".liml";
-                outputCSVname = lisaFileName + "Out" + ii.ToString() + ".csv";
-                WriteNewMeshData meshWriter = new WriteNewMeshData(refinedMesh, lisaFile, outputCSVname);
-                analysisDataReader.SolveFile = outputCSVname;
+                lisaFilePath = Path.Combine(experimentFolderLocal, lisaFile);
+                // update the location to the next analysis folder which will be read for the following iteration.
 
+                
+                outputCSVPath = Path.Combine(experimentFolderLocal, lisaFileName + "Out" + ii.ToString() + ".csv");
+                WriteNewMeshData meshWriter = new WriteNewMeshData(refinedMesh, lisaFilePath, outputCSVPath);
+                analysisDataReader.SolveFile = outputCSVPath;
+               
 
                 // update the model for the next iteration
                 meshData = refinedMesh;
                 ii++;
             }
 
+            writeAssessmentSummary(experimentFolder, meshAssessments);
         }
+
+        /// <summary>
+        /// Write out a summary of the Assessments for this experiment so we can compare variations in how effective the two methods are
+        /// </summary>
+        private void writeAssessmentSummary(string experimentFoler, List<MeshQualityAssessment> meshAssessments)
+        {
+
+           
+                string analysisFile = Path.Combine(experimentFoler, "analysisData.txt");
+
+                StreamWriter file = new StreamWriter(analysisFile);
+
+                int ii = 0;
+                foreach (MeshQualityAssessment assessment in meshAssessments)
+                {
+                file.WriteLine("////////////////////////////Results for iteration " + ii.ToString() + "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+                    file.WriteLine("\nGlobal Metrics");
+                    file.WriteLine("ElemCount score: " + assessment.ElemCountScore.ToString());
+                    file.WriteLine("Element Quality score: " + assessment.ElemQualityScore.ToString());
+                    file.WriteLine("Overall Quality Improvement score: " + assessment.OvarallQualityImprovement.ToString());
+                    file.WriteLine("");
+                    file.WriteLine("ElementMetrics");
+                    file.WriteLine("Average Max Angle: " + assessment.ElemQualMetrics.MaxCornerAngles.Average());
+                    file.WriteLine("Average Max parallel dev: " + assessment.ElemQualMetrics.MaxParrallelDevs.Average());
+                    file.WriteLine("Average AspectRatio: " + assessment.ElemQualMetrics.AspectRatios.Average());
+                    file.WriteLine("");
+                file.WriteLine("////////////////////////////---------------------\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+                ii++;
+                }
+                file.Close();
+        }
+
         /// <summary>
         /// Tells lisa to run a solve on the lisa file which will produce some output
         /// </summary>
         /// <param name="lisaFile"></param>
-        public void solve(string lisaFile)
+        private void solve(string lisaFile, string experimentFolderLocal)
         {
-            using (Process lisaProcess = Process.Start("lisa8", lisaFile + " solve"))
+            string executeString = Path.GetFileName(experimentFolderLocal) + "\\" +  lisaFile + " solve";
+            using (Process lisaProcess = Process.Start("lisa8", executeString))
             {
                 lisaProcess.StartInfo.RedirectStandardOutput = true;
                 lisaProcess.WaitForExit();
             }
+            
         }
 
         /// <summary>

@@ -25,7 +25,7 @@ namespace DisertationFEPrototype.ModelUpdate
 
         //};
            
-        public WriteNewMeshData(MeshData meshData, string lisaPath, string outputFileName)
+        public WriteNewMeshData(MeshData meshData, string newLisaModelPath, string analysisOutputPath)
         {
 
             // Directory.SetCurrentDirectory(lisaFolderPath);
@@ -46,7 +46,7 @@ namespace DisertationFEPrototype.ModelUpdate
             try
             {
                 StreamWriter fw;
-                using (fw = new StreamWriter(lisaPath, true)) {
+                using (fw = new StreamWriter(newLisaModelPath, true)) {
                     fw.WriteLine("<liml8>");
                     fw.WriteLine("  <analysis type=\"S30\" />");
                     writeNodes(fw, meshData.Nodes.Values.ToList());
@@ -60,7 +60,7 @@ namespace DisertationFEPrototype.ModelUpdate
                     fw.WriteLine("    <analysis type=\"S30\"/>");
                     fw.WriteLine("    <elset name=\"Default\" color=\"-6710887\"/>");
                     fw.WriteLine("    <table>");
-                    writeTableSetup(fw, outputFileName);
+                    writeTableSetup(fw, analysisOutputPath);
                     fw.WriteLine("    </table>");
                     fw.WriteLine("  </solution>");
                     fw.WriteLine("</liml8 >");
