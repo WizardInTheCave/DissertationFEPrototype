@@ -9,6 +9,7 @@ using DisertationFEPrototype.Optimisations.ILPRules;
 using DisertationFEPrototype.MeshQualityMetrics;
 using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 using DisertationFEPrototype.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate;
 
 namespace DisertationFEPrototype.Optimisations
 {
@@ -39,11 +40,11 @@ namespace DisertationFEPrototype.Optimisations
             }
         }
          
-        public OptimisationManager(MeshData meshData, List<NodeAnalysisData> analysisData, int iterationCount, short ILPRefineCount, short stressRefineCount)
+        public OptimisationManager(MeshData meshData, List<NodeAnalysisData> analysisData, int iterationCount, short ILPRefineCount, short stressRefineCount, RuleManager ruleMan)
         {
             this.meshData = meshData;
             this.analysisData = analysisData;
-            this.ruleManager = new RuleManager(meshData, iterationCount);
+            this.ruleManager = ruleMan;
 
             this.ILPRefineCount = ILPRefineCount;
             this.stressRefineCount = stressRefineCount; 
@@ -52,44 +53,43 @@ namespace DisertationFEPrototype.Optimisations
         /// <summary>
         /// get the derivatives
         /// </summary>
-        private List<double> getDerivatives(double[] values)
-        {
-            List<double> devs = new List<double>();
-            for(int ii = 0; ii < values.Count() - 2; ii++)
-            {
-                var item1 = values[ii];
-                var item2 = values[ii + 1];
-                devs.Add(item2 - item1);
-            }   
+        //private List<double> getDerivatives(double[] values)
+        //{
+        //    List<double> devs = new List<double>();
+        //    for (int ii = 0; ii < values.Count() - 2; ii++)
+        //    {
+        //        var item1 = values[ii];
+        //        var item2 = values[ii + 1];
+        //        devs.Add(item2 - item1);
+        //    }
+        //    return devs;
 
-            return devs;
+        //    //var countScoreLast = elemCountScores[elemCountScores.Count() - 1];
+        //    //var countScorePenultimate = elemCountScores[elemCountScores.Count() - 2];
+        //    //var countScoreRateOfChange = Math.Abs(countScoreLast - countScorePenultimate);
+        //    //bool countImprove = countScoreLast < countScorePenultimate;
 
-            //var countScoreLast = elemCountScores[elemCountScores.Count() - 1];
-            //var countScorePenultimate = elemCountScores[elemCountScores.Count() - 2];
-            //var countScoreRateOfChange = Math.Abs(countScoreLast - countScorePenultimate);
-            //bool countImprove = countScoreLast < countScorePenultimate;
-
-        }
+        //}
 
         /// <summary>
         /// Compute how much the current weighting is improving the results for a particular metric.
         /// </summary>
         /// <param name="metricVals">The values recorded for each iteration of the refinement process for a particular metric</param>
         /// <returns>Rate of change of improvement</returns>
-        private double getImprovementForMethodOnMetric(double[] metricVals)
-        {
-            // We want to keep having a negative derivatives
-            List<double> elemCountScoresDevs = getDerivatives(metricVals);
+        //private double getImprovementForMethodOnMetric(double[] metricVals)
+        //{
+        //    // We want to keep having a negative derivatives
+        //    // List<double> elemCountScoresDevs = getDerivatives(metricVals);
 
-            // if these are negative then there is improvement in the optimisation between each iteration of LISA
-            // each derivative represents the rate of improvement for that iteration
-            double penultimateDev = elemCountScoresDevs[elemCountScoresDevs.Count - 2];
-            double finalDev = elemCountScoresDevs[elemCountScoresDevs.Count - 1];
+        //    // if these are negative then there is improvement in the optimisation between each iteration of LISA
+        //    // each derivative represents the rate of improvement for that iteration
+        //    double penultimateDev = elemCountScoresDevs[elemCountScoresDevs.Count - 2];
+        //    double finalDev = elemCountScoresDevs[elemCountScoresDevs.Count - 1];
 
-            // we want to see if the rate of change of improvement is increasing or decreasing to do this we take the second derivative essentially
-            double secondDev = finalDev - penultimateDev;
-            return secondDev;
-        }
+        //    // we want to see if the rate of change of improvement is increasing or decreasing to do this we take the second derivative essentially
+        //    double secondDev = finalDev - penultimateDev;
+        //    return secondDev;
+        //}
 
         /// <summary>
         /// Take a the derivatives for both the linear functions representing the metric changes over the iterations.
@@ -162,14 +162,14 @@ namespace DisertationFEPrototype.Optimisations
 
 
             // depending on how heavily we want to perform each type of meshing run that type of meshing
-            for (int ii = 0; ii < stressRefineCount; ii++)
-            {
-                stressGradientDrivenRemesh(elements, analysisData);
-            // ILPEdgeDrivenRefinement(0);
-            }
+            //for (int ii = 0; ii < stressRefineCount; ii++)
+            //{
+            //    stressGradientDrivenRemesh(elements, analysisData);
+            //// ILPEdgeDrivenRefinement(0);
+            //}
             for (int ii = 0; ii < ILPRefineCount; ii++)
             {
-                ILPEdgeDrivenRefinement(0);
+                ILPEdgeDrivenRefinement(ii);
             }
 
 
@@ -208,44 +208,56 @@ namespace DisertationFEPrototype.Optimisations
 
         }
 
-    
+  
         /// <summary>
         /// This method will use information derived from running the ILP rules that determine how much meshing should occur around each edge.
         /// Data for the edges has already been computed in the EdgeIdentification module.
         /// </summary>
         private void ILPEdgeDrivenRefinement(int ii)
         {
-            // the edges which had been assigned an amount for remeshing
-            List<Edge> meshingEdges = this.ruleManager.GetEdges;
+           // List<Edge> redefinedEdges = new List<Edge>();
 
+            // the edges which had been assigned an amount for remeshing
+            List<Edge> meshingEdges = this.ruleManager.Edges;
+
+            // for every edge discovered remesh the elements along that edge.
             foreach (Edge edge in meshingEdges)
             {
                 int elemCount = edge.ElementCount;
 
                 List<Node> nodePath = edge.NodePath;
+
                 // for each node on the path get its elements and mesh those
                 List<IElement> allRemeshingElems = nodePath.SelectMany(np => meshData.findElems(np)).ToList();
 
-                remesh(allRemeshingElems, 0, edge.ElementCount);
+                // edge
+                // Edge newEdge = 
+                remesh(allRemeshingElems, ii, edge.ElementCount);
+               // redefinedEdges.Add(newEdge);
             }
+            // this.ruleManager.Edges = redefinedEdges;
         }
 
-       /// <summary>
-       /// for each edge that was detected remesh a specified amount of times recursively
-       /// </summary>
-       /// <param name="elements"></param>
-       /// <param name="ii"></param>
-       /// <param name="elemCount"></param>
+
+        /// <summary>
+        /// for each edge that was detected remesh all the elements along that edge 
+        /// and return a new edge where the node path has been updated so that on the next iteration more meshing of the edge
+        /// based on the rules can be performed
+        /// </summary>
+        /// <param name="elements">Elements which are being remeshed, not going to do recursively now because adds unnecessary complexity</param>
+        /// <returns>a new Edge for which the node path has been updated. </returns>
+       
+        // (List<IElement> elements, Edge edge
         private void remesh(List<IElement> elements, int ii, int elemCount)
         {
-            if (ii < elemCount) {
+            if (ii < elemCount)
+            {
                 foreach (IElement elem in elements)
                 {
 
                     List<IElement> refined;
-
                     refined = elem.createChildElements(nodes);
-                    
+
 
                     elem.Children = refined;
 
@@ -255,13 +267,14 @@ namespace DisertationFEPrototype.Optimisations
                 }
             }
         }
+        
 
     
         /// <summary>
         /// we want to use the data from the previous analyis that we have to refine our mesh specificially in areas with high stress values
         /// </summary>
-        /// <param name="elements"></param>
-        /// <param name="analysisData"></param>
+        /// <param name="elements">All the elements within the model</param>
+        /// <param name="analysisData">Analysis data describing the stresses induced upon the model from the pervious iteration of the experiment</param>
         private void stressGradientDrivenRemesh(List<IElement> elements, List<NodeAnalysisData> analysisData)
         {
 

@@ -7,13 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DisertationFEPrototype.Optimisations;
-
 namespace DisertationFEPrototype.Optimisations.ILPRules
 {
     /// <summary>
-    /// This class is responsible for containing code that identifies edges within the mesh structure, by finding edges it is then
-    /// Possible to apply Dolsaks ILP rules. 
+    /// This class contains some code I wrote with the intended purpose of identifying edges of interest within the model.
+    /// Dolsak Et al do not do this however and provide some indication of the different edges they know are of interest to the program based on
+    /// real life experiance with similar problems. Hence for my examples I have resored to reading in this data from a file rather than trying
+    /// To cleverly identifiy the edges in the model algorithmicly
+    /// 
+    /// What this module currently tries to do essentially is start at corner nodes within the model, then traverse across a path of nodes until another
+    /// corner node is found thus generating an edge, the edge is then classified into one of the categories described by dolsak in his paper 
+    /// "Application of Inductive logic programming to finite element mesh design" so that the rules he specifies can be run over the different kinds of edge.
+    /// 
+    /// To be honest for a robust implementation of this alone which can be shown to work well would constitude a dissertation project in its own right
     /// </summary>
     class EdgeIdentifier
     {
@@ -31,21 +37,21 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
         List<Edge> foundEdges;
 
         /// <summary>
-        /// using the mesh model build a set of edges that we can apply rules to and then map back into the mesh data domain
+        /// Using the mesh model build a set of edges that we can apply rules to and then map back into the mesh data domain
         /// based on what I can tell from the paper "Mesh generation expert system for engineering analyses with FEM", (the earlier paper by Bojan Dolsak)
-        /// an edge is defined as anywhere on the model where the outside of the structure meets the inside of the structure that isn't a plane
+        /// an edge is loosely defined as anywhere on the model where the outside of the structure meets the inside of the structure that isn't a plane, 
+        /// that being said not all edges are of interest as some are distant to the regions of the model under high stress.
         /// </summary>
         /// <param name="mesh">MeshData object</param>
         /// <returns>edges built out of the mesh data</returns>
         public EdgeIdentifier(MeshData mesh)
         {
+
             this.internalCornerNodes = new List<Node>();
             this.internalEdgeNodes = new List<Node>();
 
             this.externalCornerNodes = new List<Node>();
             this.externalEdgeNodes = new List<Node>();
-
-
 
             // populate the above lists so that the code for identifing edges within the structure has some information is can search through
             findEdgeNodes(mesh);
@@ -97,8 +103,8 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             // build the edge
             List<Node> ourEdge = findNodeChain(cornerNode, otherEdgeNodes, mesh);
 
-            Edge.EdgeType et = determineEdgeType(ourEdge, modelEdges, mesh);
-            Edge.BoundaryType bt = determineBoundaryType(ourEdge, modelEdges, mesh);
+            Edge.EdgeType et = determineEdgeType(ourEdge, modelEdges);
+            Edge.BoundaryType bt = determineBoundaryType(ourEdge, modelEdges);
             Edge.LoadingType lt = determineLoadingType(ourEdge, modelEdges, mesh);
 
             // get element for starting node
@@ -106,7 +112,13 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             totalEdgeCount++;
             return newEdge;
         }
-        private Edge.EdgeType determineEdgeType(List<Node> ourEdge, List<Edge> currentEdges, MeshData mesh)
+        /// <summary>
+        /// Try to establish the type of edge this new edge might be
+        /// </summary>
+        /// <param name="ourEdge">The potential new edge as a path of nodes across the structure</param>
+        /// <param name="currentEdges"></param>
+        /// <returns></returns>
+        private Edge.EdgeType determineEdgeType(List<Node> ourEdge, List<Edge> currentEdges)
         {
             Edge.EdgeType et;
 
@@ -126,7 +138,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             }
             return et;
         }
-        private Edge.BoundaryType determineBoundaryType(List<Node> ourEdge, List<Edge> currentEdges, MeshData mesh)
+        private Edge.BoundaryType determineBoundaryType(List<Node> ourEdge, List<Edge> currentEdges)
         {
             Edge.BoundaryType bt;
             bt = Edge.BoundaryType.fixedCompletely;
@@ -276,7 +288,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 if (intersects.Count() > 0)
                 {
 
-                    
+
                     List<Node> diags = intersects[0].getDiagonalNodes(currentNode);
 
                     // Node nodeCopy = new Node(otherEdgeNodes[ii]);
@@ -346,7 +358,8 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                         double yDelta = Math.Abs(node.GetY - node2.GetY);
                         double zDelta = Math.Abs(node.GetZ - node2.GetZ);
 
-                        if (xDelta < xTol && yDelta < yTol && zDelta < zTol) {
+                        if (xDelta < xTol && yDelta < yTol && zDelta < zTol)
+                        {
 
                             if (node.GetX < node2.GetX && node.GetY < node2.GetY && node.GetZ < node2.GetZ)
                             {

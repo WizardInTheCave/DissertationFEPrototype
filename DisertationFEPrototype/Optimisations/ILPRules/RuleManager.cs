@@ -21,17 +21,28 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
         readonly double SAME_DISTANCE_TOLERANCE = 0.1;
         List<Edge> edges;
 
-        public List<Edge> GetEdges { get { return this.edges; } }
+        public List<Edge> Edges {
+
+            get{
+                return this.edges;
+            }
+            set
+            {
+                this.edges = value;
+            }
+        }
 
         public int iterationCount;
-        public int lookingFor = 3;
-        public List<string> fileLines = new List<string>();
+        //  public int lookingFor = 3;
+        // public List<string> fileLines = new List<string>();
 
-        public RuleManager(MeshData mesh, int iterationCount)
+        // int iterationCount
+        public RuleManager(MeshData mesh, string localEdgesFile)
         {
 
-            this.iterationCount = iterationCount;
-            EdgeIdentifier edgeIdentifier = new EdgeIdentifier(mesh);
+            // we shouldn't identify new edges for each iteration, we should just use edgess that we have already identified but extend them
+            // this.iterationCount = iterationCount;
+            EdgeGenerator edgeIdentifier = new EdgeGenerator(mesh, localEdgesFile);
             edges = edgeIdentifier.Edges;
 
             // build a set of edges out of the mesh data
@@ -39,6 +50,8 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             // do comparisons between all of the different edges in the model.
             foreach (Edge edge in edges)
             {
+
+
                 rule4(edge);
                 foreach (Edge otherEdge in edges)
                 {
@@ -52,7 +65,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 }
             }
 
-            fileLines.Add("PAUSE");
+            // fileLines.Add("PAUSE");
             // System.IO.File.WriteAllLines(@"D:\Documents\DissertationWork\models\ruleResults.txt", fileLines.ToArray());
 
         }
@@ -84,10 +97,10 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 edgeB.ElementCount = INVOLVED_EDGES;
             }
 
-            if (iterationCount == lookingFor)
-            {
-                fileLines.Add("Main edge is " + edgeA.ID + "Rule 1: " + b1 + " " + b2 + " " + b3 + " " + b4);
-            }
+            //if (iterationCount == lookingFor)
+            //{
+            //    fileLines.Add("Main edge is " + edgeA.ID + "Rule 1: " + b1 + " " + b2 + " " + b3 + " " + b4);
+            //}
         }
 
         private void rule2(Edge edgeA, Edge edgeB)
@@ -104,10 +117,10 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 edgeA.ElementCount = INVOLVED_EDGES;
                 edgeB.ElementCount = INVOLVED_EDGES;
             }
-            if (iterationCount == lookingFor)
-            {
-                fileLines.Add("Main edge is " + edgeA.ID + "Rule 2: " + b1 + " " + b2 + " " + b3 + " " + b4);
-            }
+            //if (iterationCount == lookingFor)
+            //{
+            //    fileLines.Add("Main edge is " + edgeA.ID + "Rule 2: " + b1 + " " + b2 + " " + b3 + " " + b4);
+            //}
         }
 
         private void rule3(Edge edgeA, Edge edgeB)
@@ -124,14 +137,13 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 edgeA.ElementCount = INVOLVED_EDGES;
                 edgeB.ElementCount = INVOLVED_EDGES;
             }
-            if (iterationCount == lookingFor)
-            {
-                fileLines.Add("Main edge is " + edgeA.ID + "Rule 3: " + b1 + " " + b2 + " " + b3 + " " + b4);
-            }
+            //if (iterationCount == lookingFor)
+            //{
+            //    fileLines.Add("Main edge is " + edgeA.ID + "Rule 3: " + b1 + " " + b2 + " " + b3 + " " + b4);
+            //}
         }
         private void rule4(Edge edgeA)
         {
-
             const int INVOLVED_EDGES = 2;
 
             bool b1 = edgeA.GetBoundaryType() == Edge.BoundaryType.free;
@@ -141,10 +153,10 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             {
                 edgeA.ElementCount = INVOLVED_EDGES;
             }
-            if (iterationCount == lookingFor)
-            {
-                fileLines.Add("Main edge is " + edgeA.ID + "Rule 4: " + b1 + " " + b2);
-            }
+            //if (iterationCount == lookingFor)
+            //{
+            //    fileLines.Add("Main edge is " + edgeA.ID + "Rule 4: " + b1 + " " + b2);
+            //}
         }
         private void rule5(Edge edgeA, Edge edgeB)
         {

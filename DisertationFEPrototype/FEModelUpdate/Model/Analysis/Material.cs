@@ -19,13 +19,7 @@ namespace DisertationFEPrototype.Model.Analysis
         public string GetName{ get{ return this.name; } }
 
         public Geometric Geometric{ get {return this.geometric; } }
-        public Mechanical Mechanical
-        {
-            get
-            {
-                return this.mechanical;
-            }
-        }
+        public Mechanical Mechanical { get { return this.mechanical; } }
 
         public Material(int id, string name, Geometric geometric, Mechanical mechanical)
         {

@@ -13,6 +13,7 @@ using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 using System;
 
 using System.Linq;
+using DisertationFEPrototype.Optimisations.ILPRules;
 
 namespace DisertationFEPrototype
 {
@@ -59,6 +60,10 @@ namespace DisertationFEPrototype
             MeshQualityAssessment meshQualityAssessment = null;
             List<MeshQualityAssessment> meshAssessments = new List<MeshQualityAssessment>();
 
+
+            string localEdgesFile = Path.Combine(experimentFolderLocal, "modelEdges.json");
+            RuleManager ruleMan = new RuleManager(meshData, localEdgesFile);
+
             while (evaluationFunction(ii) == false)
             {
                
@@ -70,7 +75,7 @@ namespace DisertationFEPrototype
                 short ILPRefinem = experimentVals.Item1;
                 short stressRefineCount = experimentVals.Item2;
                 // assuming we have different mesh data should get a new set of edges.
-                OptimisationManager optimisation = new OptimisationManager(meshData, analysisData, ii, ILPRefinem, stressRefineCount);
+                OptimisationManager optimisation = new OptimisationManager(meshData, analysisData, ii, ILPRefinem, stressRefineCount, ruleMan);
                 
                 // hand quality assessment down to the refinement method so we can apply apply either rule based
                 // or traditional meshing further
@@ -114,7 +119,7 @@ namespace DisertationFEPrototype
                 int ii = 0;
                 foreach (MeshQualityAssessment assessment in meshAssessments)
                 {
-                file.WriteLine("////////////////////////////Results for iteration " + ii.ToString() + "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+                file.WriteLine("////////////////////////////Results for iteration " + ii.ToString() + @"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
                     file.WriteLine("\nGlobal Metrics");
                     file.WriteLine("ElemCount score: " + assessment.ElemCountScore.ToString());
                     file.WriteLine("Element Quality score: " + assessment.ElemQualityScore.ToString());

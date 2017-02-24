@@ -108,7 +108,6 @@ namespace DisertationFEPrototype.FEModelUpdate
                         while (innerSubtree.Read())
                         {
                             var face = innerSubtree["face"];
-                            //Console.WriteLine(innerSubtree.NodeType + ": " + innerSubtree.Name);
 
                             if (innerSubtree.NodeType == XmlNodeType.Element && innerSubtree.Name == "face")
                             {
@@ -169,7 +168,7 @@ namespace DisertationFEPrototype.FEModelUpdate
                 }
                 catch
                 {
-                    Console.WriteLine("LOL WHAT??");
+                    throw new IOException("Could not read force data from the xml file correctly");
                 }
             }
             return force;
@@ -219,7 +218,7 @@ namespace DisertationFEPrototype.FEModelUpdate
                 }
                 catch
                 {
-                    throw new Exception("Could not read force data from xml correctly");
+                    throw new IOException("Could not read material data from xml correctly");
                 }
             }  
         }

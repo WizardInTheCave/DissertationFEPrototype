@@ -37,6 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -83,10 +87,13 @@
     <Compile Include="FEModelUpdate\Model\Structure\Node.cs" />
     <Compile Include="MeshQualityMetrics\ElementQualityMetrics.cs" />
     <Compile Include="MeshQualityMetrics\MeshQualityAssessment.cs" />
+    <Compile Include="Optimisations\ILPRules\DeserializedEdgeGroup.cs" />
+    <Compile Include="Optimisations\ILPRules\EdgeIdentifier.cs" />
+    <Compile Include="Optimisations\ILPRules\JsonEdge.cs" />
     <Compile Include="Optimisations\ILPRules\Rules.cs" />
     <Compile Include="Optimisations\OptimisationManager.cs" />
     <Compile Include="Optimisations\ILPRules\Edge.cs" />
-    <Compile Include="Optimisations\ILPRules\EdgeIdentifier.cs" />
+    <Compile Include="Optimisations\ILPRules\EdgeGenerator.cs" />
     <Compile Include="Optimisations\ILPRules\EdgeRelation.cs" />
     <Compile Include="Optimisations\ILPRules\RuleManager.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\GeneralRefinementMethods.cs" />
@@ -104,6 +111,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

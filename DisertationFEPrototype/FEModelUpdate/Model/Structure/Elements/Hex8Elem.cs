@@ -153,10 +153,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             Node[] firstArray = nodeArray2d[0];
             nodesNoDups.AddRange(firstArray);
 
-            //if(nodesNoDups.Count < 4)
-            //{
-            //    Console.WriteLine("WHAT??");
-            //}
             // loop through the others
             for(int ii=1; ii < nodeArray2d.Length; ii++)
             {
@@ -169,11 +165,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                     }
                 }
             }
-
-            // nodesNoDups.ForEach( x => Console.WriteLine(x.GetX + ", " + x.GetY + ", " + x.GetZ));
-            // Console.WriteLine("\n");
-
-            // nodesNoDups.ForEach(x => Console.WriteLine("after remove: " + x.GetX + " " + x.GetY + " " + x.GetZ));
 
             return nodesNoDups;
         }

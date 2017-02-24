@@ -27,18 +27,16 @@ namespace DisertationFEPrototype
         static void runAllExperiments()
         {
 
-
-
             List<Tuple<short, short>> experimentVals = new List<Tuple<short, short>>();
 
             string modelFile = "bridgeAdvanced.liml";
             string modelAnalysisFileName = "bridgeAdvancedOut.csv";
-
+            string edgeDefinitionFile = "modelEdges.json";
 
             // create permutations to try for the different methods.
-            for (short ii = 0; ii < 3; ii++)
+            for (short ii = 0; ii < 2; ii++)
             {
-                for (short jj = 0; jj < 3; jj++)
+                for (short jj = 0; jj < 2; jj++)
                 {
                     experimentVals.Add(new Tuple<short, short>(ii, jj));
                 }
@@ -65,7 +63,10 @@ namespace DisertationFEPrototype
                 string analysisDestFile = Path.Combine(experimentFolder, modelAnalysisFileName);
                 File.Copy(sourceAnalysisData, analysisDestFile, true);
 
-   
+                string edgeDefFile = Path.Combine(topLevelFolder, edgeDefinitionFile);
+                string edgeDefLocal = Path.Combine(experimentFolder, edgeDefinitionFile);
+                File.Copy(edgeDefFile, edgeDefLocal, true);
+
                 Thread thread = new Thread(() => runExperiment(experimentFolder, experimentVal));
                 thread.Name = String.Format("{0}", kk);
 
@@ -74,7 +75,12 @@ namespace DisertationFEPrototype
                 kk++;
             }
         }
-  
+    
+        /// <summary>
+        /// Run an Individual experiment by creating a new Control object.
+        /// </summary>
+        /// <param name="experimentFolder">Folder that iterations for this threads particular experiment will run within</param>
+        /// <param name="experimentVal">values to use for this the particular experiment running on this thread</param>
         static void runExperiment(string experimentFolder, Tuple<short, short> experimentVal)
         {
             
