@@ -57,6 +57,7 @@ namespace DisertationFEPrototype.FEModelUpdate
             double z = a.GetX * b.GetY - a.GetY * b.GetX;
             return new Tuple<double, double, double>(x, y, z);
         }
+   
 
         /// <summary>
         /// Calculate the normal of a plane defined by three points, currently we are just using this to compute the normal of elements within the model

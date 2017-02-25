@@ -96,6 +96,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Read
                         }
                     }
                 }
+               
                 // try {
 
                 IElement newElement;

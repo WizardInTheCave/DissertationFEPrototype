@@ -53,6 +53,9 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
 
 
                 rule4(edge);
+                rule9(edge);
+                rule10(edge);
+                rule11(edge);
                 foreach (Edge otherEdge in edges)
                 {
                     if (edge.ID != otherEdge.ID)
@@ -61,6 +64,8 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                         rule1(edge, otherEdge);
                         rule2(edge, otherEdge);
                         rule3(edge, otherEdge);
+                        rule5(edge, otherEdge);
+                        rule7(edge, otherEdge);
                     }
                 }
             }
@@ -96,11 +101,6 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 edgeA.ElementCount = INVOLVED_EDGES;
                 edgeB.ElementCount = INVOLVED_EDGES;
             }
-
-            //if (iterationCount == lookingFor)
-            //{
-            //    fileLines.Add("Main edge is " + edgeA.ID + "Rule 1: " + b1 + " " + b2 + " " + b3 + " " + b4);
-            //}
         }
 
         private void rule2(Edge edgeA, Edge edgeB)
@@ -117,10 +117,6 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 edgeA.ElementCount = INVOLVED_EDGES;
                 edgeB.ElementCount = INVOLVED_EDGES;
             }
-            //if (iterationCount == lookingFor)
-            //{
-            //    fileLines.Add("Main edge is " + edgeA.ID + "Rule 2: " + b1 + " " + b2 + " " + b3 + " " + b4);
-            //}
         }
 
         private void rule3(Edge edgeA, Edge edgeB)
@@ -137,10 +133,6 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 edgeA.ElementCount = INVOLVED_EDGES;
                 edgeB.ElementCount = INVOLVED_EDGES;
             }
-            //if (iterationCount == lookingFor)
-            //{
-            //    fileLines.Add("Main edge is " + edgeA.ID + "Rule 3: " + b1 + " " + b2 + " " + b3 + " " + b4);
-            //}
         }
         private void rule4(Edge edgeA)
         {
@@ -153,10 +145,6 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             {
                 edgeA.ElementCount = INVOLVED_EDGES;
             }
-            //if (iterationCount == lookingFor)
-            //{
-            //    fileLines.Add("Main edge is " + edgeA.ID + "Rule 4: " + b1 + " " + b2);
-            //}
         }
         private void rule5(Edge edgeA, Edge edgeB)
         {
@@ -173,12 +161,6 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                 edgeA.ElementCount = INVOLVED_EDGES;
             }
         }
-
-        //private void rule6(Edge edgeA, Edge edgeB)
-        //{
-        //    bool b1 = areSame(edgeA, edgeC);
-        //}
-
         private void rule7(Edge edgeA, Edge edgeB)
         {
 

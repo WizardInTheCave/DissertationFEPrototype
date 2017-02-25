@@ -142,7 +142,16 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 trio[2] = centerNode;
                 List<Node> orderedTrio = trio.ToList();
 
-                newElements.Add(new Quad4Elem(null, orderedTrio));
+
+                //if (trio.Any(x => x == null))
+                //{
+                //    Console.Write("WHAT???");
+                //}
+
+                Quad4Elem elem = new Quad4Elem(null, orderedTrio);
+                
+
+                newElements.Add(elem);
             }
 
             return newElements;

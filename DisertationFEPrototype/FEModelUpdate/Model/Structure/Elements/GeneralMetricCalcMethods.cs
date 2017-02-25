@@ -225,7 +225,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             foreach (Node nodeB in nodes)
             {
            
-                if (GeneralRefinementMethods.isAdjacentQuad4(nodeA, nodeB, nodes) && nodeA != nodeB)
+                if (GeneralRefinementMethods.isLessThanMaxDistance(nodeA, nodeB, nodes) && nodeA != nodeB)
                 {
                     commonNodes[ii] = nodeB;
                     ii++;

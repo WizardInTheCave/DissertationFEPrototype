@@ -45,7 +45,6 @@ namespace DisertationFEPrototype
             // only need to do this once to get the inital mesh, after that should try and drive it
             // purely with the solve data
             
-
             var meshDataReader = new ReadMeshData(lisaFilePath);
 
             MeshData meshData = meshDataReader.GetMeshData;

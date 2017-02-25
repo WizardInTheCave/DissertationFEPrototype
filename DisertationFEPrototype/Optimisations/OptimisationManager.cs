@@ -51,77 +51,6 @@ namespace DisertationFEPrototype.Optimisations
         }
 
         /// <summary>
-        /// get the derivatives
-        /// </summary>
-        //private List<double> getDerivatives(double[] values)
-        //{
-        //    List<double> devs = new List<double>();
-        //    for (int ii = 0; ii < values.Count() - 2; ii++)
-        //    {
-        //        var item1 = values[ii];
-        //        var item2 = values[ii + 1];
-        //        devs.Add(item2 - item1);
-        //    }
-        //    return devs;
-
-        //    //var countScoreLast = elemCountScores[elemCountScores.Count() - 1];
-        //    //var countScorePenultimate = elemCountScores[elemCountScores.Count() - 2];
-        //    //var countScoreRateOfChange = Math.Abs(countScoreLast - countScorePenultimate);
-        //    //bool countImprove = countScoreLast < countScorePenultimate;
-
-        //}
-
-        /// <summary>
-        /// Compute how much the current weighting is improving the results for a particular metric.
-        /// </summary>
-        /// <param name="metricVals">The values recorded for each iteration of the refinement process for a particular metric</param>
-        /// <returns>Rate of change of improvement</returns>
-        //private double getImprovementForMethodOnMetric(double[] metricVals)
-        //{
-        //    // We want to keep having a negative derivatives
-        //    // List<double> elemCountScoresDevs = getDerivatives(metricVals);
-
-        //    // if these are negative then there is improvement in the optimisation between each iteration of LISA
-        //    // each derivative represents the rate of improvement for that iteration
-        //    double penultimateDev = elemCountScoresDevs[elemCountScoresDevs.Count - 2];
-        //    double finalDev = elemCountScoresDevs[elemCountScoresDevs.Count - 1];
-
-        //    // we want to see if the rate of change of improvement is increasing or decreasing to do this we take the second derivative essentially
-        //    double secondDev = finalDev - penultimateDev;
-        //    return secondDev;
-        //}
-
-        /// <summary>
-        /// Take a the derivatives for both the linear functions representing the metric changes over the iterations.
-        /// this provides an indication of the improvement overall for the iteration.
-        /// </summary>
-        /// <param name="meshQualityAssessments"></param>
-        /// <returns>score combining both the metrics, negative value means the last iteration improved the quality of the mesh
-        /// taking into account both the time in which to execute it and it's quality for producing accurate results</returns>
-        //private double getOverallImprovementScore(List<MeshQualityAssessment> meshQualityAssessments)
-        //{
-        //    var elemCountScores = meshQualityAssessments.Select(x => x.ElemCountScore).ToArray();
-
-        //    // this metric basically represents whether the improvement has made improved the mesh from a time to solve standpoint
-        //    double elemCountImprovement = getImprovementForMethodOnMetric(elemCountScores);
-        //    var elemQualScores = meshQualityAssessments.Select(x => x.ElemQualityScore).ToArray();
-
-        //    // this metric tells us if the quality of the mesh has improved which will allow for more accurate prediction
-        //    double elemQualImprovement = getImprovementForMethodOnMetric(elemQualScores);
-
-        //    double combinedImprovementValue = elemCountImprovement + elemQualImprovement;
-
-        //    // conclude the overall global rate of improvement considering the two metrics, for this improvement we want to append the global calculated
-        //    meshQualityAssessments[meshQualityAssessments.Count - 1].OvarallQualityImprovement = combinedImprovementValue;
-        //    var improvementsForEachIteration = meshQualityAssessments.Select(x => x.OvarallQualityImprovement).ToArray();
-
-        //    // if this is negative then things are improving 
-        //    double overallImprovementScore = getImprovementForMethodOnMetric(improvementsForEachIteration);
-
-        //    return overallImprovementScore;
-        //}
-
-        /// <summary>
         /// Main method for refining the mesh, this method has control over how to apply each of the two sub methods in order to get a better hybrid refinement
         /// </summary>
         /// <param name="meshQualityAssessments">Assessments of the mesh quality calculated using the metrics provided in Dittmers paper</param>
@@ -132,45 +61,24 @@ namespace DisertationFEPrototype.Optimisations
 
             nodes = meshData.Nodes;
 
-            // var elem = elements.Select(x => x.Id);
-
-            // if these are going down then carry on applying the same strategy that we are currently
-            // otherwise change it
-
-            // vary element count score to get an element quality score 
-            // can't assume the two values are directly related though
-
-            //var funElemCountScores = MathNet.Numerics.Interpolation.LinearSpline.Interpolate(, elemCountScores);
-            //var funElemQualScores = MathNet.Numerics.Interpolation.LinearSpline.Interpolate(, elemQualScores);
-            //linearInterpolation.Differentiate()
-
-
-            // if this is negative then things are improving 
-
-            ////double overallImprovementScore = getOverallImprovementScore(meshQualityAssessments);
-            ////// revert to previous method which produced a good score
-            ////if(overallImprovementScore > 0)
-            ////{
-            ////    // change the weightings
-            ////    // meshQualityAssessments.
-            ////}
-            ////else
-            ////{
-
-            ////}
-
-
 
             // depending on how heavily we want to perform each type of meshing run that type of meshing
-            //for (int ii = 0; ii < stressRefineCount; ii++)
-            //{
-            //    stressGradientDrivenRemesh(elements, analysisData);
-            //// ILPEdgeDrivenRefinement(0);
-            //}
-            for (int ii = 0; ii < ILPRefineCount; ii++)
+            for (int ii = 0; ii < stressRefineCount; ii++)
             {
-                ILPEdgeDrivenRefinement(ii);
+                stressGradientDrivenRemesh(elements, analysisData);
             }
+            // this.meshData.Elements = getNewElementList(elements);
+            // now flatten the tree structure
+
+            for (int jj = 0; jj < ILPRefineCount; jj++)
+            {
+                ILPEdgeDrivenRefinement();
+                
+            }
+            this.meshData.Elements = getNewElementList(elements);
+
+            //for (int jj = 0; jj < ii; jj++)
+            //{
 
 
 
@@ -187,8 +95,7 @@ namespace DisertationFEPrototype.Optimisations
             //List<double> maxCornerAngles = meshQualityAssessment.ElemQualMetrics.MaxCornerAngles;
 
 
-            // now flatten the tree structure
-            List<IElement> flatElemTree = getNewElementList(elements);
+
 
             //List<Node> all_nodes = getAllNodes(flatElemTree);
 
@@ -198,7 +105,7 @@ namespace DisertationFEPrototype.Optimisations
             var newMeshDataNodes = meshData.Nodes;
 
             var newmeshData = new MeshData();
-            newmeshData.Elements = flatElemTree;
+            newmeshData.Elements = meshData.Elements;
             newmeshData.Nodes = newMeshDataNodes;
             newmeshData.Force = meshData.Force;
             newmeshData.Material = meshData.Material;
@@ -213,7 +120,7 @@ namespace DisertationFEPrototype.Optimisations
         /// This method will use information derived from running the ILP rules that determine how much meshing should occur around each edge.
         /// Data for the edges has already been computed in the EdgeIdentification module.
         /// </summary>
-        private void ILPEdgeDrivenRefinement(int ii)
+        private void ILPEdgeDrivenRefinement()
         {
            // List<Edge> redefinedEdges = new List<Edge>();
 
@@ -230,9 +137,21 @@ namespace DisertationFEPrototype.Optimisations
                 // for each node on the path get its elements and mesh those
                 List<IElement> allRemeshingElems = nodePath.SelectMany(np => meshData.findElems(np)).ToList();
 
+               
+                foreach (IElement elem in allRemeshingElems)
+                {
+                    List<IElement> children = elem.createChildElements(nodes);
+                    // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
+                    elem.Children = children;
+                        
+                }
+                    
+               
+
+
                 // edge
                 // Edge newEdge = 
-                remesh(allRemeshingElems, ii, edge.ElementCount);
+                // remesh(allRemeshingElems, ii, edge.ElementCount);
                // redefinedEdges.Add(newEdge);
             }
             // this.ruleManager.Edges = redefinedEdges;
@@ -248,25 +167,25 @@ namespace DisertationFEPrototype.Optimisations
         /// <returns>a new Edge for which the node path has been updated. </returns>
        
         // (List<IElement> elements, Edge edge
-        private void remesh(List<IElement> elements, int ii, int elemCount)
-        {
-            if (ii < elemCount)
-            {
-                foreach (IElement elem in elements)
-                {
-
-                    List<IElement> refined;
-                    refined = elem.createChildElements(nodes);
+        //private void remesh(List<IElement> elements, int ii, int elemCount)
+        //{
+        //    if (ii < elemCount)
+        //    {
+        //        foreach (IElement elem in elements)
+        //        {
 
 
-                    elem.Children = refined;
+        //            List<IElement> refined;
+        //            refined = elem.createChildElements(nodes);
 
-                    ii++;
-                    // mesh another level
-                    remesh(refined, ii, elemCount);
-                }
-            }
-        }
+        //            elem.Children = refined;
+
+        //            ii++;
+        //            // mesh another level
+        //            remesh(refined, ii, elemCount);
+        //        }
+        //    }
+        //}
         
 
     
@@ -340,10 +259,6 @@ namespace DisertationFEPrototype.Optimisations
                 // this is the bottom of the tree
                 if (elem.Children == null)
                 {
-                    if (elem.Id == 12)
-                    {
-                        Console.WriteLine("current id: " + elem.Id + "new id: " + flatStructElemId);
-                    }
                     
                     elem.Id = flatStructElemId;
                     flatElemTree.Add(elem);
