@@ -118,7 +118,7 @@ namespace DisertationFEPrototype.Model
             foreach (IElement elem in elements)
             {
                 // this will only select the first element that is found which is not actually what we want
-                foreach (Node aNode in elem.Nodes)
+                foreach (Node aNode in elem.getNodes())
                 {
                     if (aNode == node)
                     {

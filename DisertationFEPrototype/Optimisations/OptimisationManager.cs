@@ -141,20 +141,21 @@ namespace DisertationFEPrototype.Optimisations
                 foreach (IElement elem in allRemeshingElems)
                 {
                     List<IElement> children = elem.createChildElements(nodes);
-                    // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
-                    elem.Children = children;
-                        
-                }
+
+
+                    // realised near the end of the project I either have to update the origin value for all the nodes here
+                    // or pass the value through about 5 functions to the point where the new Node is initialised
+                    foreach(IElement child in children)
+                    {
+                        child.getNodes().ForEach(node => node.NodeOrigin = Node.Origin.Heuristic);
+                    }
+                     
                     
-               
-
-
-                // edge
-                // Edge newEdge = 
-                // remesh(allRemeshingElems, ii, edge.ElementCount);
-               // redefinedEdges.Add(newEdge);
+                    // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
+                    elem.setChildren(children);
+                        
+                }  
             }
-            // this.ruleManager.Edges = redefinedEdges;
         }
 
 
@@ -202,11 +203,11 @@ namespace DisertationFEPrototype.Optimisations
             // ruleRefinement();
             foreach (var elem in elements)
             {
-                List<Node> elemNodes = elem.Nodes;
+                List<Node> elemNodes = elem.getNodes();
                 List<int> elemNodesIds = elemNodes.Select(node => node.Id).ToList();
 
                 // get the analysis data objecs for this particular element
-                List<NodeAnalysisData> nodeAnalysisData = analysisData.Where(d => elemNodesIds.Contains(d.NodeId)).ToList();
+                List<NodeAnalysisData> nodeAnalysisData = analysisData.Where(d => elemNodesIds.Contains(d.Id)).ToList();
 
                 // get the average displacement for the element based on the nodal displacements
                 double avgDispMag = nodeAnalysisData.Select(nad => nad.DispMag).Average();
@@ -214,10 +215,16 @@ namespace DisertationFEPrototype.Optimisations
 
                 if (avgDispMag > remeshThreshold)
                 {
-                    Console.WriteLine("Remeshed elements: " + elem.Id.ToString());
+                    Console.WriteLine("Remeshed elements: " + elem.getId().ToString());
                     List<IElement> children = elem.createChildElements(nodes);
-                        // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
-                    elem.Children = children;
+
+                    foreach (IElement child in children)
+                    {
+                        child.getNodes().ForEach(node => node.NodeOrigin = Node.Origin.Stress);
+                    }
+
+                    // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
+                    elem.setChildren(children);
                 }
             }
         }
@@ -257,10 +264,10 @@ namespace DisertationFEPrototype.Optimisations
             {
 
                 // this is the bottom of the tree
-                if (elem.Children == null)
+                if (elem.getChildren() == null)
                 {
                     
-                    elem.Id = flatStructElemId;
+                    elem.setId(flatStructElemId);
                     flatElemTree.Add(elem);
 
                     //updateFaceSelection(elem, new List<Quad4Elem>() { elem });
@@ -272,7 +279,7 @@ namespace DisertationFEPrototype.Optimisations
                 {
                     // this element we have recursed through is in a face selection, 
                     // therefore all it's children should be under that same face selection
-                    List<IElement> subElems = getNewElementList(elem.Children);
+                    List<IElement> subElems = getNewElementList(elem.getChildren());
                     updateFaceSelection(elem, subElems);
 
                     flatElemTree.AddRange(subElems);
@@ -324,7 +331,7 @@ namespace DisertationFEPrototype.Optimisations
 
             foreach(IElement elem in flatElemTree)
             {
-                foreach(Node node in elem.Nodes)
+                foreach(Node node in elem.getNodes())
                 {
                     modelNodes.Add(node);
                 }

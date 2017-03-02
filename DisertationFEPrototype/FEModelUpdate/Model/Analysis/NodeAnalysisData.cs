@@ -9,7 +9,7 @@ namespace DisertationFEPrototype.Model
 
     class NodeAnalysisData
     {
-        int node;
+        int id;
 
         double x;
         double y;
@@ -21,27 +21,15 @@ namespace DisertationFEPrototype.Model
 
         double dispMag;
 
-        public int NodeId
-        {
-            get
-            {
-                return this.node;
-            }
-        }
+        public int Id { get { return this.id; } }
 
-        public double DispMag
-        {
-            get
-            {
-                return this.dispMag;
-            }
-        }
+        public double DispMag { get { return this.dispMag; } }
 
 
-        public NodeAnalysisData(int node, double x, double y, double z, 
+        public NodeAnalysisData(int nodeId, double x, double y, double z, 
             double dispX, double dispY, double dispZ, double dispMag)
         {
-            this.node = node;
+            this.id = nodeId;
 
             this.x = x;
             this.y = y;

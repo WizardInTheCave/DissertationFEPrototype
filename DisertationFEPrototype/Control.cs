@@ -59,7 +59,6 @@ namespace DisertationFEPrototype
             MeshQualityAssessment meshQualityAssessment = null;
             List<MeshQualityAssessment> meshAssessments = new List<MeshQualityAssessment>();
 
-
             string localEdgesFile = Path.Combine(experimentFolderLocal, "modelEdges.json");
             RuleManager ruleMan = new RuleManager(meshData, localEdgesFile);
 
@@ -81,7 +80,7 @@ namespace DisertationFEPrototype
                 optimisation.refineMesh(meshAssessments);
                 MeshData refinedMesh = optimisation.GetUpdatedMesh;
 
-                meshQualityAssessment = new MeshQualityAssessment(refinedMesh);
+                meshQualityAssessment = new MeshQualityAssessment(refinedMesh, analysisData);
                 meshQualityAssessment.assessMesh();
                 meshAssessments.Add(meshQualityAssessment);
 
@@ -123,6 +122,7 @@ namespace DisertationFEPrototype
                     file.WriteLine("ElemCount score: " + assessment.ElemCountScore.ToString());
                     file.WriteLine("Element Quality score: " + assessment.ElemQualityScore.ToString());
                     file.WriteLine("Overall Quality Improvement score: " + assessment.OvarallQualityImprovement.ToString());
+                    file.WriteLine("Heuristic Quality Score: " + assessment.HeuristuicQualityScore.ToString());
                     file.WriteLine("");
                     file.WriteLine("ElementMetrics");
                     file.WriteLine("Average Max Angle: " + assessment.ElemQualMetrics.MaxCornerAngles.Average());

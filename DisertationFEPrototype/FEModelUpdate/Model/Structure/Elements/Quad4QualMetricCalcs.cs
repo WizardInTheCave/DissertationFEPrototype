@@ -1,5 +1,4 @@
 ﻿using DisertationFEPrototype.Model.Structure;
-using DisertationFEPrototype.Model.Structure.Elements;
 using DisertationFEPrototype.Optimisations;
 using System;
 using System.Collections.Generic;
@@ -12,8 +11,11 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
     class Quad4QualMetricCalcs
     {
 
-
-        public Quad4QualMetricCalcs(){}
+        Quad4Elem elem;
+        public Quad4QualMetricCalcs(Quad4Elem elem)
+        {
+            this.elem = elem;
+        }
 
        
         // area3D_Polygon(): computes the area of a 3D planar polygon
@@ -24,32 +26,29 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         //    Return: the (float) area of the polygon
 
 
-
-       
-
         public double computeAspectRatio(double longestEdge, double shortestEdge)
         {
-            return GeneralMetricCalcMethods.computeAspectRatio(longestEdge, shortestEdge);
+            return elem.computeAspectRatio(longestEdge, shortestEdge);
         }
 
         internal double computeMaxCornerAngle(List<Node> fourPlaneNodes)
         {
-            return GeneralMetricCalcMethods.computeMaxCornerAngle(fourPlaneNodes);
+            return elem.computeMaxCornerAngle(fourPlaneNodes);
         }
 
         internal double computeMaxparallelDev(Tuple<Node, Node>[] edges)
         {
-            return GeneralMetricCalcMethods.computeMaxparallelDev(edges);
+            return elem.computeMaxparallelDev(edges);
         }
 
         internal double computeLongestEdge(Tuple<Node, Node>[] nodePairings, double LONGEST_EDGE_DEFAULT)
         {
-            return GeneralMetricCalcMethods.computeLongestEdge(nodePairings, LONGEST_EDGE_DEFAULT);
+            return elem.computeLongestEdge(nodePairings, LONGEST_EDGE_DEFAULT);
         }
 
         internal double computeShortestEdge(Tuple<Node, Node>[] nodePairings, double SHORTEST_EDGE_DEFAULT)
         {
-            return GeneralMetricCalcMethods.computeShortestEdge(nodePairings, SHORTEST_EDGE_DEFAULT);
+            return elem.computeShortestEdge(nodePairings, SHORTEST_EDGE_DEFAULT);
         }
     }
 }

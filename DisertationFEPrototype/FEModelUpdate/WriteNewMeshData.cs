@@ -123,10 +123,10 @@ namespace DisertationFEPrototype.ModelUpdate
             fw.WriteLine("  <elset name=\"Default\" color=\"-6710887\" material=\"" + materialName + "\" >");
             foreach (var elem in elements)
             {
-                string nodesString = getNodesString(elem.Nodes);
-                if (elem.Id != null)
+                string nodesString = getNodesString(elem.getNodes());
+                if (elem.getId() != null)
                 {
-                    fw.WriteLine("    <elem eid=\"" + elem.Id.ToString() + "\" shape=\""
+                    fw.WriteLine("    <elem eid=\"" + elem.getId().ToString() + "\" shape=\""
                         + getElemString(elem) + "\" nodes=\"" + nodesString + "\" />");
                 }
             }
@@ -184,7 +184,7 @@ namespace DisertationFEPrototype.ModelUpdate
                 fw.WriteLine("  <faceselection name=\"" + faceSelection.GetName +  "\">");
                 foreach(Face face in faceSelection.Faces)
                 {
-                    fw.WriteLine("    <face eid=\"" + face.Element.Id + "\" faceid=\"" + face.GetId + "\" />");
+                    fw.WriteLine("    <face eid=\"" + face.Element.getId() + "\" faceid=\"" + face.GetId + "\" />");
                 }
                 fw.WriteLine("  </faceselection>");
             }

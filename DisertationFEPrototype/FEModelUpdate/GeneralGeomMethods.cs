@@ -12,52 +12,11 @@ namespace DisertationFEPrototype.FEModelUpdate
     /// </summary>
     class GeneralGeomMethods
     {
-
-        /// <summary>
-        /// Get the euclidean distance between two nodes (Points)
-        /// </summary>
-        /// <param name="a">Node a</param>
-        /// <param name="b">Node b</param>
-        /// <returns></returns>
-        public static double distanceBetweenPoints(Node a, Node b)
-        {
-            try {
-                return Math.Sqrt(Math.Pow((a.GetX - b.GetX), 2) + Math.Pow((a.GetY - b.GetY), 2) + Math.Pow((a.GetZ - b.GetZ), 2));
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.ToString());
-                throw e;
-            }
-        }
-
-        public static double dotProduct(Node a, Node b)
-        {
-            return a.GetX * b.GetX + a.GetY * b.GetY + a.GetZ * b.GetZ;
-        }
-        public static double dotProduct(Node a, Tuple<double, double, double> b)
-        {
-            return a.GetX * b.Item1 + a.GetY * b.Item2 + a.GetZ * b.Item3;
-        }
         public static double dotProduct(double[] a, Tuple<double, double, double> b)
         {
             return a[0] * b.Item1 + a[1] * b.Item2 + a[2] * b.Item3;
         }
 
-        /// <summary>
-        /// Compute the cross product using two nodes a and b
-        /// </summary>
-        /// <param name="a">Node a</param>
-        /// <param name="b">Node b</param>
-        /// <returns></returns>
-        public static Tuple<double, double, double> crossProduct(Node a, Node b)
-        {
-            double x = a.GetY * b.GetZ - a.GetZ * b.GetY;
-            double y = a.GetZ * b.GetX - a.GetX * b.GetZ;
-            double z = a.GetX * b.GetY - a.GetY * b.GetX;
-            return new Tuple<double, double, double>(x, y, z);
-        }
-   
 
         /// <summary>
         /// Calculate the normal of a plane defined by three points, currently we are just using this to compute the normal of elements within the model

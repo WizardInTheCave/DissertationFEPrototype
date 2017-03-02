@@ -82,10 +82,8 @@ namespace DisertationFEPrototype
         /// <param name="experimentFolder">Folder that iterations for this threads particular experiment will run within</param>
         /// <param name="experimentVal">values to use for this the particular experiment running on this thread</param>
         static void runExperiment(string experimentFolder, Tuple<short, short> experimentVal)
-        {
-            
-            var control = new Control(experimentFolder, experimentVal);
-           
+        {   
+            var control = new Control(experimentFolder, experimentVal);  
         }
     }
 }

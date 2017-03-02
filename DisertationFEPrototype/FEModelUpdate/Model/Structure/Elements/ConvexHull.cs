@@ -11,10 +11,17 @@ using System.Threading.Tasks;
 
 namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
+    /// <summary>
+    /// Note: I did not write this algorithm and do not take credit for it, it was taken fromt the following website:
+    /// http://loyc.net/2014/2d-convex-hull-in-cs.html 
+    /// 
+    /// very cool algorithm though
+    /// </summary>
     class ConvexHull
     {
-        /// <summary>Computes the convex hull of a polygon, in clockwise order in a Y-up 
-        /// coordinate system (counterclockwise in a Y-down coordinate system).</summary>
+        /// <summary>
+        /// Computes the convex hull of a polygon, in clockwise order in a Y-up 
+        /// coordinate system (counterclockwise in a Y-down coordinate system).
         /// <remarks>Uses the Monotone Chain algorithm, a.k.a. Andrew's Algorithm.</remarks>
         public static IListSource<ConvexHullPoint> ComputeConvexHull(IEnumerable<ConvexHullPoint> ConvexHullPoints)
         {
@@ -55,7 +62,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 if (U != 0) // share the ConvexHullPoint added above, except in the first iteration
                     hull.PushFirst(p);
                 U++;
-                // Debug.Assert(U + L == hull.Count + 1);
             }
             hull.RemoveAt(hull.Count - 1);
 
@@ -63,7 +69,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             {
                 // Console.WriteLine("What???");
             }
-
             return hull;
         }
     }

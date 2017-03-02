@@ -90,7 +90,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             const int INVOLVED_EDGES = 2;
 
             bool b1 = edgeA.GetEdgeType() == Edge.EdgeType.importantShort;
-            bool b2 = areNeighbours(edgeA, edgeB);
+            bool b2 = edgeA.isNeighbour(edgeB);
             bool b3 = edgeB.GetBoundaryType() == Edge.BoundaryType.fixedCompletely;
             bool b4 = edgeB.GetLoadType() == Edge.LoadingType.notLoaded;
             if (b1
@@ -108,7 +108,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             const int INVOLVED_EDGES = 2;
 
             bool b1 = edgeA.GetEdgeType() == Edge.EdgeType.importantShort;
-            bool b2 = areNeighbours(edgeA, edgeB);
+            bool b2 = edgeA.isNeighbour(edgeB);
             bool b3 = edgeB.GetEdgeType() == Edge.EdgeType.notImportant;
             bool b4 = edgeB.GetLoadType() == Edge.LoadingType.notLoaded;
 
@@ -125,7 +125,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
 
             bool b1 = edgeA.GetEdgeType() == Edge.EdgeType.importantShort;
             bool b2 = edgeA.GetBoundaryType() == Edge.BoundaryType.free;
-            bool b3 = areNeighbours(edgeB, edgeA);
+            bool b3 = edgeA.isNeighbour(edgeB);
             bool b4 = edgeB.GetLoadType() == Edge.LoadingType.notLoaded;
 
             if (b1 && b2 && b3 && b4)
@@ -152,7 +152,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             const int INVOLVED_EDGES = 2;
 
             bool b1 = edgeA.GetEdgeType() == Edge.EdgeType.important;
-            bool b2 = areOpposite(edgeA, edgeB);
+            bool b2 = edgeA.isOpposite(edgeB);
             bool b3 = edgeB.GetEdgeType() == Edge.EdgeType.important;
 
 
@@ -168,7 +168,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
 
             bool b1 = edgeA.GetEdgeType() == Edge.EdgeType.important;
             bool b2 = edgeA.GetLoadType() == Edge.LoadingType.notLoaded;
-            bool b3 = areNeighbours(edgeA, edgeB);
+            bool b3 = edgeA.isNeighbour(edgeB);
             bool b4 = edgeB.GetEdgeType() == Edge.EdgeType.importantShort;
 
             if(b1 && b2 && b3 && b4)
@@ -229,92 +229,14 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
         private void rule12(Edge edgeA, Edge edgeB)
         {
             //bool b1 = edgeA.GetLoadType() == Edge.LoadingType.notLoaded;
-            //bool b2 = areSame(edgeA, edgeC);
+            //bool b2 = isSameAs(edgeA, edgeC);
 
             //if(b1 && b2)
             //{
 
             //}
         }
-
-
-        /// <summary>
-        /// Determine if two edges are neighbours to one another
-        /// </summary>
-        /// <param name="edgeA">The first edge</param>
-        /// <param name="edgeB">The second edge</param>
-        /// <returns>true if are neighbours,
-        /// false if not neighbours</returns>
-        private bool areNeighbours(Edge edgeA, Edge edgeB)
-        {
-            bool neighbour = true;
-            return neighbour;
-        }
-
-        /// <summary>
-        /// Check to see if the two edges can be considered opposite from one another
-        /// </summary>
-        /// <param name="edgeA">The first edge</param>
-        /// <param name="edgeB">The second edge</param>
-        /// <returns>true if the edges are opposite from one another
-        /// false if the edges are not opposite from one another</returns>
-        private bool areOpposite(Edge edgeA, Edge edgeB)
-        {
-            bool opposite = false;
-
-            List<Node> aPath = edgeA.NodePath;
-            List<Node> bPath = edgeB.NodePath;
-
-            List<Node> checkingFromPath;
-            List<Node> checkingToPath;
-
-            if (aPath.Count <= bPath.Count)
-            {
-                checkingFromPath = aPath;
-                checkingToPath = bPath;
-            }
-            else
-            {
-                checkingFromPath = bPath;
-                checkingToPath = aPath;
-            }
-            // check that each node is opposite at least one node in the checking to path
-            // the checking from and checking to concept exists for the following scenario
-            // @---@---@
-            // @---@
-
-            List<double> lengths = new List<double>();
-            
-            for (int ii = 0; ii < checkingFromPath.Count - 1; ii++)
-            {
-                Node nodeA = checkingFromPath[ii];
-                Node nodeB = checkingToPath[ii + 1];
-                lengths.Add(GeneralGeomMethods.distanceBetweenPoints(nodeA, nodeB));
-            }
-            double oppositeDistance = lengths[0];
-            opposite = lengths.All(len => Math.Abs(len - oppositeDistance) <= SAME_DISTANCE_TOLERANCE);
-            return opposite;
-        }
-
-        private bool hasSameLength(Edge edgeA, Edge edgeB)
-        {
-           return Math.Abs(edgeA.TotalLength - edgeB.TotalLength) <= SAME_DISTANCE_TOLERANCE;
-        }
-
-        private bool hasSameForm(Edge edgeA, Edge edgeB)
-        {
-            throw new NotImplementedException();
-        }
-        /// <summary>
-        /// is opposite and also has same length or form according to muggleton and Dolsak paper
-        /// </summary>
-        /// <param name="edgeA"></param>
-        /// <param name="edgeB"></param>
-        /// <returns></returns>
-        private bool areSame(Edge edgeA, Edge edgeB)
-        {
-            return areOpposite(edgeA, edgeB) && (hasSameLength(edgeA, edgeB) || hasSameForm(edgeA, edgeB));
-        }
+       
         private void resetEdgeTypes(List<Edge> edges)
         {
             foreach (Edge edge in edges)

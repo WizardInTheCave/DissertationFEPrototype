@@ -115,7 +115,7 @@ namespace DisertationFEPrototype.FEModelUpdate
                                 int faceId = Convert.ToInt16(innerSubtree["faceid"]);
 
 
-                                List<IElement> elements = meshData.Elements.Where(e => e.Id == elemId).ToList();
+                                List<IElement> elements = meshData.Elements.Where(e => e.getId() == elemId).ToList();
                                 if (elements.Count > 1)
                                 {
                                     throw new IOException("ReadLisaData.readFaceSelections: Face seems to have more than one element when reading select elements");

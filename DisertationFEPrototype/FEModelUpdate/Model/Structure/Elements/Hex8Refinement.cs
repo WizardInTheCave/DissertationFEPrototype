@@ -107,31 +107,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             var hex7 = new Hex8Elem(null, ref7);
             var hex8 = new Hex8Elem(null, ref8);
 
-            Console.WriteLine("\n");
-            hex1.Nodes.ForEach(x => Console.WriteLine("hex1: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            Console.WriteLine("\n");
-
-            hex2.Nodes.ForEach(x => Console.WriteLine("hex2: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            Console.WriteLine("\n");
-
-            hex3.Nodes.ForEach(x => Console.WriteLine("hex3: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            Console.WriteLine("\n");
-
-            hex4.Nodes.ForEach(x => Console.WriteLine("hex4: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            Console.WriteLine("\n");
-
-            hex5.Nodes.ForEach(x => Console.WriteLine("hex5: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            Console.WriteLine("\n");
-
-            hex6.Nodes.ForEach(x => Console.WriteLine("hex6: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            Console.WriteLine("\n");
-
-            hex7.Nodes.ForEach(x => Console.WriteLine("hex7: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            Console.WriteLine("\n");
-
-            hex8.Nodes.ForEach(x => Console.WriteLine("hex8: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            Console.WriteLine("\n");
-
             // corners are in the order LISA specifies for elements of type Hex8
             newSubElems.Add(hex1);
             newSubElems.Add(hex2);
@@ -386,17 +361,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             var xPosGreatestZ = xPositive.OrderBy(x => x.GetZ).Skip(3).ToList();
             var face2 = xPosGreatestZ.OrderBy(x => x.GetY).Skip(2).ToList();
             var face2NonOverlapping = face2.Take(2).ToList();
-
-            //xPosGreatestZ.ForEach(x => Console.WriteLine("xPos skip3: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            //Console.WriteLine("\n");
-
-            //face2.ForEach(x => Console.WriteLine("xPos face2: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            //Console.WriteLine("\n");
-
-            //face2NonOverlapping.ForEach(x => Console.WriteLine("face2NonOverlapping: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            //Console.WriteLine("\n");
-
-
 
             // top face
             var zPosGreatestx = zPositive.OrderBy(x => x.GetX).Skip(3).ToList();

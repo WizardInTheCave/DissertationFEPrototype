@@ -1,106 +1,46 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 using DisertationFEPrototype.Model.Structure;
-using DisertationFEPrototype.Optimisations;
-using DisertationFEPrototype.Model.Structure.Elements;
 
 namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
-    class Hex8Elem : IElement
+    class Hex8Elem : SquareBasedElem
     {
-        Expression expression;
 
-        int? id;
+        //int? id;
 
-        // id of nodes which form the element
-        List<Node> nodes;
-        List<Hex8Elem> childElements;
-        Hex8Elem parentElement;
+        //// id of nodes which form the element
+        //List<Node> nodes;
+        //List<Hex8Elem> childElements;
+        //Hex8Elem parentElement;
 
-        double aspectRatio;
-        double maxCornerAngle;
-        double maxParallelDev;
+        //double aspectRatio;
+        //double maxCornerAngle;
+        //double maxParallelDev;
 
         Node[][] faces;
-
-        double area;
-        // int flatPlaneIndex;
-
-
-        double longestEdge = 0.0;
-        double shortestEdge = 1000000.0;
-
-        Hex8Refinement hex8Refinement;
         Hex8QualMetricCalcs propCalcs;
-
-        public int? Id
-        {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                this.id = value;
-            }
-        }
-
-        public double Area { get { return this.area; } }
-
-        public double AspectRatio { get { return this.aspectRatio; } }
-
-        public double MaxCornerAngle { get { return this.maxCornerAngle; } }
-
-        public double MaxParallelDev { get { return this.maxParallelDev; } }
-
-        public List<Node> Nodes { get { return nodes; } }
-
-        public List<IElement> Children
-        {
-            get
-            {
-                if (childElements != null)
-                {
-                    return childElements.Cast<IElement>().ToList();
-                }
-                else
-                {
-                    return null;
-                }
-            }
-
-            set
-            {
-                // downcast to hex8 elems
-                childElements = value.Select(x => (Hex8Elem)x).ToList();
-            }
-        }
-
+        
+        Hex8Refinement hex8Refinement;
+       
         public Hex8Elem(int? id, List<Node> nodes)
         {
             
-            this.id = id;
+            this.Id = id;
 
             // sort the nodes when a new element is first made.
             this.nodes = Hex8Refinement.sortNodes(nodes);
 
             faces = Hex8Refinement.getFacesSplitFromPointCloud(this.nodes);
 
-            propCalcs = new Hex8QualMetricCalcs();
+            propCalcs = new Hex8QualMetricCalcs(this);
 
             //// all three of these methods use 
-
             maxCornerAngle = propCalcs.computeMaxCornerAngle(faces);
         
-
-            List<Tuple<Node, Node>[]> nodePairingsfacePairings = faces.Select(x => GeneralMetricCalcMethods
-            .getEdgePairingsForNode(x.ToList())).ToList();
+            List<Tuple<Node, Node>[]> nodePairingsfacePairings = faces.Select(x => this.getEdgePairingsForNode(x.ToList())).ToList();
 
             maxParallelDev = propCalcs.computeMaxparallelDev(nodePairingsfacePairings);
 
@@ -168,7 +108,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             return nodesNoDups;
         }
-      
+
         /// <summary>
         /// Need to be split up Hex8 elements for structures where volume is important
         /// Call this method to create four sub Hex8 elems within the current Hex8 elem
@@ -176,7 +116,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// <param name="elem">Hex element we want to split into four sub elements using h-refinement</param>
         /// <param name="nodes">Lookup of all nodes in the current model</param>
         /// <returns>A new set of elements which comprise</returns>
-        public List<IElement> createChildElements(Dictionary<Tuple<double, double, double>, Node> nodes)
+        public override List<IElement> createChildElements(Dictionary<Tuple<double, double, double>, Node> nodes)
         {
 
             Node hexCentre = getHexCentre(faces, nodes);
@@ -298,7 +238,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             //hexNodees[3] = yPosSubs
 
 
-        private static Node getHexCentre(Node[][] faces, Dictionary<Tuple<double, double, double>, Node> nodes)
+        private Node getHexCentre(Node[][] faces, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
             // each of the sub divided sections, now need to sew up
             var xFront = getSubSquares(faces[0], nodes);
@@ -324,7 +264,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             double y = (yFrontCenter.GetY + yBackCenter.GetY) / 2;
             double z = (topCenter.GetZ + bottomCentre.GetZ) / 2;
 
-            return GeneralRefinementMethods.createNode(x, y, z, nodes);
+            return createNode(x, y, z, nodes);
         }
 
 
@@ -334,16 +274,20 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// So that the space can be split up into sub elements
         /// </summary>
         /// <returns>array of sub element points</returns>
-        private static Node[][] getSubSquares(Node[] cornerNodes, Dictionary<Tuple<double, double, double>, Node> allNodes)
+        private Node[][] getSubSquares(Node[] cornerNodes, Dictionary<Tuple<double, double, double>, Node> allNodes)
         {
 
-            var subNodeTup = GeneralRefinementMethods.createMidpointNodes(cornerNodes, allNodes);
+           
+            
+            var subNodeTup = createMidpointNodes(cornerNodes, allNodes);
 
             List<Node[]> elementEdgeTrios = subNodeTup.Item1;
             List<Node> midpointLineNodes = subNodeTup.Item2;
 
+            
+
             // get the new center node which will be a corner for each of the four new elements
-            Node centerNode = GeneralRefinementMethods.createCenterNode(midpointLineNodes, allNodes);
+            Node centerNode = createCenterNode(midpointLineNodes, allNodes);
 
             Node[][] subSquares = new Node[4][];
 
@@ -367,7 +311,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         }
 
 
-        public List<Node> getDiagonalNodes(Node currentNode)
+        public override List<Node> getDiagonalNodes(Node currentNode)
         {
             throw new NotImplementedException();
         }

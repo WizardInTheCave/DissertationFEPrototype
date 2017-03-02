@@ -27,9 +27,9 @@ namespace DisertationFEPrototype.MeshQualityMetrics
 
         public ElementQualityMetrics(List<IElement> elements)
         {
-            aspectRatios = elements.Select(elem => elem.AspectRatio).ToList();
-            maxCornerAngles = elements.Select(elem => elem.MaxCornerAngle).ToList();
-            maxParallelDevs = elements.Select(elem => elem.MaxParallelDev).ToList();
+            aspectRatios = elements.Select(elem => elem.getAspectRatio()).ToList();
+            maxCornerAngles = elements.Select(elem => elem.getMaxCornerAngle()).ToList();
+            maxParallelDevs = elements.Select(elem => elem.getMaxParallelDev()).ToList();
         }
 
         /// <summary>
