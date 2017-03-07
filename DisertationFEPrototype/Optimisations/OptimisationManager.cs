@@ -137,24 +137,77 @@ namespace DisertationFEPrototype.Optimisations
                 // for each node on the path get its elements and mesh those
                 List<IElement> allRemeshingElems = nodePath.SelectMany(np => meshData.findElems(np)).ToList();
 
-               
+
+                List<Node> newNodePath = new List<Node>();
+                // for each element in all the elements we are remeshing remesh it then remesh the child elements again until ii is
                 foreach (IElement elem in allRemeshingElems)
                 {
-                    List<IElement> children = elem.createChildElements(nodes);
+                    // get the nodes for the element which sit directly on the edge
+                    var pathNodes = edge.GetNodePath().Intersect(elem.getNodes()).ToArray();
 
+                    // assuming each element only has two nodes on the path currently.
+                    newNodePath.Add(pathNodes[0]);
 
-                    // realised near the end of the project I either have to update the origin value for all the nodes here
-                    // or pass the value through about 5 functions to the point where the new Node is initialised
-                    foreach(IElement child in children)
+                    List<IElement> refined;
+                    refined = elem.createChildElements(nodes);
+
+                    // We want to add the new refined node that is closest to the other nodes already in the path
+                    var distances = new List<double>();
+
+                    var theNewNodes = refined.SelectMany(x => x.getNodes()).ToArray();
+
+                    int ii = 0;
+                    // this is kind of painful but the simplest way I can think to do it which is guarenteed to work
+                    foreach (Node pathNode in pathNodes)
                     {
-                        child.getNodes().ForEach(node => node.NodeOrigin = Node.Origin.Heuristic);
+                        // Get the distance between this and all other nodes
+                        List<double> distancesToOthers = theNewNodes.Select(x => x.distanceTo(pathNode)).ToList();
+
+                        if (ii == 0)
+                        {
+                            distances = distancesToOthers.ToList();
+                        }
+                        else
+                        {
+                            // keep summing the total distances, we want to find the one with the smallestcombined distance to two points
+                            distances = distances.Zip(distancesToOthers, (x, y) => x + y).ToList();
+                        }
+
+                        ii++;
                     }
+                    Node newPathNode = theNewNodes[distances.IndexOf(distances.Min())];
+
+                    newNodePath.Add(newPathNode);
+                    newNodePath.Add(pathNodes[1]);
+
+                    elem.setChildren(refined);
+
+                    //ii++;
+                    // mesh another level
+                    //remesh(refined, ii, elemCount);
+                }
+
+
+
+
+
+                //foreach (IElement elem in allRemeshingElems)
+                //{
+                //    List<IElement> children = elem.createChildElements(nodes);
+
+
+                //    // realised near the end of the project I either have to update the origin value for all the nodes here
+                //    // or pass the value through about 5 functions to the point where the new Node is initialised
+                //    foreach(IElement child in children)
+                //    {
+                //        child.getNodes().ForEach(node => node.NodeOrigin = Node.Origin.Heuristic);
+                //    }
                      
                     
-                    // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
-                    elem.setChildren(children);
+                //    // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
+                //    elem.setChildren(children);
                         
-                }  
+                //}  
             }
         }
 
@@ -166,7 +219,6 @@ namespace DisertationFEPrototype.Optimisations
         /// </summary>
         /// <param name="elements">Elements which are being remeshed, not going to do recursively now because adds unnecessary complexity</param>
         /// <returns>a new Edge for which the node path has been updated. </returns>
-       
         // (List<IElement> elements, Edge edge
         //private void remesh(List<IElement> elements, int ii, int elemCount)
         //{
@@ -174,13 +226,9 @@ namespace DisertationFEPrototype.Optimisations
         //    {
         //        foreach (IElement elem in elements)
         //        {
-
-
         //            List<IElement> refined;
         //            refined = elem.createChildElements(nodes);
-
         //            elem.Children = refined;
-
         //            ii++;
         //            // mesh another level
         //            remesh(refined, ii, elemCount);

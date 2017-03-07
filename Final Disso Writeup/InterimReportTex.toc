@@ -1,0 +1,27 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {section}{\numberline {2}Motivation and Background}{2}{section.2}
+\contentsline {section}{\numberline {3}Related Work}{3}{section.3}
+\contentsline {subsection}{\numberline {3.1}Traditional Stress refinement methods}{3}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Uses of Artificial Intelligence and Machine Learning}{4}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Quality metrics}{5}{subsection.3.3}
+\contentsline {section}{\numberline {4}Description of the work}{6}{section.4}
+\contentsline {subsection}{\numberline {4.1}Aims and Objectives}{6}{subsection.4.1}
+\contentsline {section}{\numberline {5}System specification}{6}{section.5}
+\contentsline {section}{\numberline {6}Functional Requirements}{6}{section.6}
+\contentsline {section}{\numberline {7}Non-Functional Requirements}{7}{section.7}
+\contentsline {section}{\numberline {8}System Design}{7}{section.8}
+\contentsline {section}{\numberline {9}Progress and Current Prototypes}{8}{section.9}
+\contentsline {subsection}{\numberline {9.1}Third Party FE application}{8}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}LISA}{8}{subsection.9.2}
+\contentsline {subsection}{\numberline {9.3}Languages and platforms}{9}{subsection.9.3}
+\contentsline {subsection}{\numberline {9.4}Prototypes}{9}{subsection.9.4}
+\contentsline {subsection}{\numberline {9.5}LISA API}{9}{subsection.9.5}
+\contentsline {subsection}{\numberline {9.6}Implementation of hierarchical refinement for re meshing}{10}{subsection.9.6}
+\contentsline {subsection}{\numberline {9.7}Re meshing using Dolsaks ILP knowledge base}{11}{subsection.9.7}
+\contentsline {subsection}{\numberline {9.8}Mesh Quality Assessment}{11}{subsection.9.8}
+\contentsline {section}{\numberline {10}Project Management}{12}{section.10}
+\contentsline {subsection}{\numberline {10.1}Methodology}{12}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2}Time Management}{12}{subsection.10.2}
+\contentsline {subsection}{\numberline {10.3}Project Plan}{12}{subsection.10.3}
+\contentsline {section}{\numberline {11}Personal Reflections}{13}{section.11}
+\contentsline {section}{References}{15}{section.11}

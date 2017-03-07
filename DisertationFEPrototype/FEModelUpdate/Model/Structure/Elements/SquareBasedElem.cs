@@ -157,18 +157,15 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 while (sortMatchedNodes.Count < nodes_in_quad_four)
                 {
 
-                    List<double> smalldist1 = new List<double>();
-                    List<Node> nearnode1 = new List<Node>();
-
 
                     // third node should be one which is furtherst from the original
                     if (ii == 1)
                     {
-                        Node originnode = sortMatchedNodes[0];
+                        Node originNode = sortMatchedNodes[0];
                         // && !sortmatchednodes.contains(nodecomp1)
 
-                        double dist1 = originnode.distanceTo(removableNodes[0]);
-                        double dist2 = originnode.distanceTo(removableNodes[1]);
+                        double dist1 = originNode.distanceTo(removableNodes[0]);
+                        double dist2 = originNode.distanceTo(removableNodes[1]);
 
                         if (dist1 > dist2)
                         {
@@ -248,10 +245,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                         }
                     }
                 }
-                //if (subElemNodes.Any(x => x == null))
-                //{
-                //    Console.Write("WHAT???");
-                //}
+
                 elementEdgeTrios.Add(subElemNodes);
 
                 if (ii == 3 && subElemNodes[3] == null)
@@ -472,8 +466,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             return currentlyShortestEdge;
         }
 
-
-
         /// <summary>
         /// For the nodes in the element get the cross product for each pair and add to total
         /// </summary>
@@ -509,7 +501,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// </summary>
         /// <param name="nodes"></param>
         /// <returns></returns>
-        protected  double computeFaceArea(List<Node> faceNodes, double longestEdge, double shortestEdge)
+        public double computeFaceArea(List<Node> faceNodes, double longestEdge, double shortestEdge)
         {
             // element has no area (not polygon)
             if (faceNodes.Count < 3)
@@ -603,9 +595,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// <param name="secondNode">The second node which may or may not be adjacent</param>
         /// <param name="elem">The element that both nodes are contained within</param>
         /// <returns></returns>
-        /// 
-   
-        protected bool isLessThanMaxDistance(Node firstNode, Node secondNode, List<Node> allElemNodes)
+        public bool isLessThanMaxDistance(Node firstNode, Node secondNode, List<Node> allElemNodes)
         {
             List<double> distancesBetweenFirstNodeAndOthers = allElemNodes.Select(elemNode => firstNode.distanceTo(elemNode)).ToList();
             double maxDistanceInElement = distancesBetweenFirstNodeAndOthers.Max();

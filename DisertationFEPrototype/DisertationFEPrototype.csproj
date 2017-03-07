@@ -36,6 +36,26 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Loyc.Collections, Version=2.4.3.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Loyc.Collections.24.3.0\lib\net45\Loyc.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Loyc.Essentials, Version=2.4.3.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Loyc.Essentials.24.3.0\lib\net45\Loyc.Essentials.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Loyc.Math, Version=2.4.3.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Loyc.Math.24.3.0\lib\net45\Loyc.Math.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Loyc.Syntax, Version=2.4.3.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Loyc.Syntax.24.3.0\lib\net45\Loyc.Syntax.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Loyc.Utilities, Version=2.4.3.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Loyc.Utilities.24.3.0\lib\net45\Loyc.Utilities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -58,12 +78,15 @@
     <Compile Include="FEModelUpdate\GeneralGeomMethods.cs" />
     <Compile Include="FEModelUpdate\Model\Analysis\NodeAnalysisData.cs" />
     <Compile Include="FEModelUpdate\Model\Analysis\FixSelection.cs" />
+    <Compile Include="FEModelUpdate\Model\Structure\Elements\ConvexHullPoint.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\GeneralMetricCalcMethods.cs" />
+    <Compile Include="FEModelUpdate\Model\Structure\Elements\ConvexHull.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\Hex8QualMetricCalcs.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\IElement.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\Hex8Elem.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\Hex8Refinement.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\Quad4QualMetricCalcs.cs" />
+    <Compile Include="FEModelUpdate\Model\Structure\Elements\SquareBasedElem.cs" />
     <Compile Include="FEModelUpdate\Read\ReadElements.cs" />
     <Compile Include="FEModelUpdate\ReadLisaData.cs" />
     <Compile Include="FEModelUpdate\ReadAnalysisData.cs" />
@@ -94,9 +117,7 @@
     <Compile Include="Optimisations\OptimisationManager.cs" />
     <Compile Include="Optimisations\ILPRules\Edge.cs" />
     <Compile Include="Optimisations\ILPRules\EdgeGenerator.cs" />
-    <Compile Include="Optimisations\ILPRules\EdgeRelation.cs" />
     <Compile Include="Optimisations\ILPRules\RuleManager.cs" />
-    <Compile Include="FEModelUpdate\Model\Structure\Elements\GeneralRefinementMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

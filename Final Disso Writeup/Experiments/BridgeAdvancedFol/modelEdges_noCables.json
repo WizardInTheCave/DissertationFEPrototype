@@ -1,0 +1,12 @@
+{
+	"Edges": [{
+		"Id": 1,
+		"edgeType": "circuit",
+		"loadType": "oneSideLoaded",
+		"boundaryType": "free",
+		"nodePath": [42, 111, 89, 41]
+	}
+    ]
+}
+
+

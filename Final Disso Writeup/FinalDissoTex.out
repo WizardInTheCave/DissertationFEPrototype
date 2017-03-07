@@ -1,0 +1,50 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Motivation and Background}{}% 2
+\BOOKMARK [1][-]{section.3}{Related Work}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Traditional Stress refinement methods}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Uses of Artificial Intelligence and Machine Learning}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Quality metrics}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Description of the work}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Aims and Objectives}{section.4}% 8
+\BOOKMARK [1][-]{section.5}{System specification}{}% 9
+\BOOKMARK [1][-]{section.6}{Functional Requirements}{}% 10
+\BOOKMARK [1][-]{section.7}{Non-Functional Requirements}{}% 11
+\BOOKMARK [1][-]{section.8}{System Design}{}% 12
+\BOOKMARK [2][-]{subsection.8.1}{System Overview}{section.8}% 13
+\BOOKMARK [2][-]{subsection.8.2}{Modular Architecture}{section.8}% 14
+\BOOKMARK [2][-]{subsection.8.3}{Input Files}{section.8}% 15
+\BOOKMARK [2][-]{subsection.8.4}{Multi Threading}{section.8}% 16
+\BOOKMARK [1][-]{section.9}{Software Implementation}{}% 17
+\BOOKMARK [2][-]{subsection.9.1}{Third Party FE Application}{section.9}% 18
+\BOOKMARK [2][-]{subsection.9.2}{LISA}{section.9}% 19
+\BOOKMARK [2][-]{subsection.9.3}{Languages and platforms}{section.9}% 20
+\BOOKMARK [2][-]{subsection.9.4}{Implementation Methodology}{section.9}% 21
+\BOOKMARK [2][-]{subsection.9.5}{Implementation of Subsystems}{section.9}% 22
+\BOOKMARK [3][-]{subsubsection.9.5.1}{Re-meshing using hierarchical refinement}{subsection.9.5}% 23
+\BOOKMARK [3][-]{subsubsection.9.5.2}{Stress Based Refinement}{subsection.9.5}% 24
+\BOOKMARK [3][-]{subsubsection.9.5.3}{Rule Based Refinement}{subsection.9.5}% 25
+\BOOKMARK [3][-]{subsubsection.9.5.4}{Interfacing with LISA and the FE data model}{subsection.9.5}% 26
+\BOOKMARK [3][-]{subsubsection.9.5.5}{Mesh Quality Assessment}{subsection.9.5}% 27
+\BOOKMARK [2][-]{subsection.9.6}{Modelling Real World problems}{section.9}% 28
+\BOOKMARK [3][-]{subsubsection.9.6.1}{Suspension Bridge structure}{subsection.9.6}% 29
+\BOOKMARK [3][-]{subsubsection.9.6.2}{Validating system against previously obtained research results}{subsection.9.6}% 30
+\BOOKMARK [2][-]{subsection.9.7}{Implementation Issues}{section.9}% 31
+\BOOKMARK [3][-]{subsubsection.9.7.1}{Sorting Element Nodes in 3d space using convex hull Algorithm}{subsection.9.7}% 32
+\BOOKMARK [3][-]{subsubsection.9.7.2}{Attempts to Automatically Define edges within models}{subsection.9.7}% 33
+\BOOKMARK [3][-]{subsubsection.9.7.3}{}{subsection.9.7}% 34
+\BOOKMARK [1][-]{section.10}{Evaluation of Project}{}% 35
+\BOOKMARK [1][-]{section.11}{Functional testing}{}% 36
+\BOOKMARK [1][-]{section.12}{Non functional testing}{}% 37
+\BOOKMARK [2][-]{subsection.12.1}{Increase in performance through parallel execution}{section.12}% 38
+\BOOKMARK [2][-]{subsection.12.2}{Quality}{section.12}% 39
+\BOOKMARK [2][-]{subsection.12.3}{Documentation}{section.12}% 40
+\BOOKMARK [2][-]{subsection.12.4}{Maintainability}{section.12}% 41
+\BOOKMARK [3][-]{subsubsection.12.4.1}{Evaluation Issues}{subsection.12.4}% 42
+\BOOKMARK [2][-]{subsection.12.5}{Evaluation of overall project}{section.12}% 43
+\BOOKMARK [2][-]{subsection.12.6}{Evaluation summary}{section.12}% 44
+\BOOKMARK [2][-]{subsection.12.7}{Successes and Limitations}{section.12}% 45
+\BOOKMARK [1][-]{section.13}{Further Work}{}% 46
+\BOOKMARK [2][-]{subsection.13.1}{Gathering feedback from experienced engineers}{section.13}% 47
+\BOOKMARK [2][-]{subsection.13.2}{Improving usability through a web interface}{section.13}% 48
+\BOOKMARK [1][-]{section.14}{Personal Reflections and Summary}{}% 49
+\BOOKMARK [1][-]{section.14}{References}{}% 50

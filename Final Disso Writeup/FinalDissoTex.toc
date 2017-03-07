@@ -1,0 +1,50 @@
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
+\contentsline {section}{\numberline {2}Motivation and Background}{3}{section.2}
+\contentsline {section}{\numberline {3}Related Work}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}Traditional Stress refinement methods}{4}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Uses of Artificial Intelligence and Machine Learning}{5}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Quality metrics}{6}{subsection.3.3}
+\contentsline {section}{\numberline {4}Description of the work}{7}{section.4}
+\contentsline {subsection}{\numberline {4.1}Aims and Objectives}{7}{subsection.4.1}
+\contentsline {section}{\numberline {5}System specification}{7}{section.5}
+\contentsline {section}{\numberline {6}Functional Requirements}{7}{section.6}
+\contentsline {section}{\numberline {7}Non-Functional Requirements}{8}{section.7}
+\contentsline {section}{\numberline {8}System Design}{9}{section.8}
+\contentsline {subsection}{\numberline {8.1}System Overview}{9}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Modular Architecture}{9}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Input Files}{9}{subsection.8.3}
+\contentsline {subsection}{\numberline {8.4}Multi Threading}{9}{subsection.8.4}
+\contentsline {section}{\numberline {9}Software Implementation}{9}{section.9}
+\contentsline {subsection}{\numberline {9.1}Third Party FE Application}{9}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}LISA}{10}{subsection.9.2}
+\contentsline {subsection}{\numberline {9.3}Languages and platforms}{11}{subsection.9.3}
+\contentsline {subsection}{\numberline {9.4}Implementation Methodology}{11}{subsection.9.4}
+\contentsline {subsection}{\numberline {9.5}Implementation of Subsystems}{11}{subsection.9.5}
+\contentsline {subsubsection}{\numberline {9.5.1}Re-meshing using hierarchical refinement}{11}{subsubsection.9.5.1}
+\contentsline {subsubsection}{\numberline {9.5.2}Stress Based Refinement}{12}{subsubsection.9.5.2}
+\contentsline {subsubsection}{\numberline {9.5.3}Rule Based Refinement}{12}{subsubsection.9.5.3}
+\contentsline {subsubsection}{\numberline {9.5.4}Interfacing with LISA and the FE data model}{12}{subsubsection.9.5.4}
+\contentsline {subsubsection}{\numberline {9.5.5}Mesh Quality Assessment}{14}{subsubsection.9.5.5}
+\contentsline {subsection}{\numberline {9.6}Modelling Real World problems}{14}{subsection.9.6}
+\contentsline {subsubsection}{\numberline {9.6.1}Suspension Bridge structure}{14}{subsubsection.9.6.1}
+\contentsline {subsubsection}{\numberline {9.6.2}Validating system against previously obtained research results}{14}{subsubsection.9.6.2}
+\contentsline {subsection}{\numberline {9.7}Implementation Issues}{15}{subsection.9.7}
+\contentsline {subsubsection}{\numberline {9.7.1}Sorting Element Nodes in 3d space using convex hull Algorithm}{15}{subsubsection.9.7.1}
+\contentsline {subsubsection}{\numberline {9.7.2}Attempts to Automatically Define edges within models}{17}{subsubsection.9.7.2}
+\contentsline {subsubsection}{\numberline {9.7.3}}{18}{subsubsection.9.7.3}
+\contentsline {section}{\numberline {10}Evaluation of Project}{18}{section.10}
+\contentsline {section}{\numberline {11}Functional testing}{18}{section.11}
+\contentsline {section}{\numberline {12}Non functional testing}{18}{section.12}
+\contentsline {subsection}{\numberline {12.1}Increase in performance through parallel execution}{18}{subsection.12.1}
+\contentsline {subsection}{\numberline {12.2}Quality}{18}{subsection.12.2}
+\contentsline {subsection}{\numberline {12.3}Documentation}{18}{subsection.12.3}
+\contentsline {subsection}{\numberline {12.4}Maintainability}{19}{subsection.12.4}
+\contentsline {subsubsection}{\numberline {12.4.1}Evaluation Issues}{19}{subsubsection.12.4.1}
+\contentsline {subsection}{\numberline {12.5}Evaluation of overall project}{19}{subsection.12.5}
+\contentsline {subsection}{\numberline {12.6}Evaluation summary}{19}{subsection.12.6}
+\contentsline {subsection}{\numberline {12.7}Successes and Limitations}{19}{subsection.12.7}
+\contentsline {section}{\numberline {13}Further Work}{19}{section.13}
+\contentsline {subsection}{\numberline {13.1}Gathering feedback from experienced engineers}{19}{subsection.13.1}
+\contentsline {subsection}{\numberline {13.2}Improving usability through a web interface}{19}{subsection.13.2}
+\contentsline {section}{\numberline {14}Personal Reflections and Summary}{20}{section.14}
+\contentsline {section}{References}{22}{section.14}

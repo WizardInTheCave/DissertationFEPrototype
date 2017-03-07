@@ -1,0 +1,27 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Motivation and Background}{}% 2
+\BOOKMARK [1][-]{section.3}{Related Work}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Traditional Stress refinement methods}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Uses of Artificial Intelligence and Machine Learning}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Quality metrics}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Description of the work}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Aims and Objectives}{section.4}% 8
+\BOOKMARK [1][-]{section.5}{System specification}{}% 9
+\BOOKMARK [1][-]{section.6}{Functional Requirements}{}% 10
+\BOOKMARK [1][-]{section.7}{Non-Functional Requirements}{}% 11
+\BOOKMARK [1][-]{section.8}{System Design}{}% 12
+\BOOKMARK [1][-]{section.9}{Progress and Current Prototypes}{}% 13
+\BOOKMARK [2][-]{subsection.9.1}{Third Party FE application}{section.9}% 14
+\BOOKMARK [2][-]{subsection.9.2}{LISA}{section.9}% 15
+\BOOKMARK [2][-]{subsection.9.3}{Languages and platforms}{section.9}% 16
+\BOOKMARK [2][-]{subsection.9.4}{Prototypes}{section.9}% 17
+\BOOKMARK [2][-]{subsection.9.5}{LISA API}{section.9}% 18
+\BOOKMARK [2][-]{subsection.9.6}{Implementation of hierarchical refinement for re meshing}{section.9}% 19
+\BOOKMARK [2][-]{subsection.9.7}{Re meshing using Dolsaks ILP knowledge base}{section.9}% 20
+\BOOKMARK [2][-]{subsection.9.8}{Mesh Quality Assessment}{section.9}% 21
+\BOOKMARK [1][-]{section.10}{Project Management}{}% 22
+\BOOKMARK [2][-]{subsection.10.1}{Methodology}{section.10}% 23
+\BOOKMARK [2][-]{subsection.10.2}{Time Management}{section.10}% 24
+\BOOKMARK [2][-]{subsection.10.3}{Project Plan}{section.10}% 25
+\BOOKMARK [1][-]{section.11}{Personal Reflections}{}% 26
+\BOOKMARK [1][-]{section.11}{References}{}% 27

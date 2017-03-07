@@ -9,3 +9,13 @@ C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\Diser
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.csprojResolveAssemblyReference.cache
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Collections.dll
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Essentials.dll
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Math.dll
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Syntax.dll
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Utilities.dll
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Collections.xml
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Essentials.xml
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Math.xml
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Syntax.xml
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Utilities.xml
