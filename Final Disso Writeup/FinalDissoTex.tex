@@ -145,7 +145,6 @@ Using this information ILP is capable of hypothesising rules by determining whic
 \noindent
 Dolsak's choice of metadata for the ILP method to generate mesh rules is based on the classification of edges within the FE model which he knew to be crucial to determining their strength. For example if it is know that an edge within the model has a force applied close to it based on the initial model conditions then other edges that intersect it should be meshed to have a greater concerntration of adjacent elements prior to model execution. \cite{DolsakPaper91} \cite{appOfILPToFEMeshDesign}.\\ 
 
-
 \noindent
 The format of the rules make them attractive for experimenting with as part of a hybrid method since the method determines how to refine the mesh based on the arrangement of edges. This detail of analysis of the mesh is at a comparable detail to that of a traditional splitting method such as h-refinement which will likely to improve the ease at which the two methods can be combined simultaneously in the latter stages of the project. \\ 
 
@@ -153,7 +152,7 @@ The format of the rules make them attractive for experimenting with as part of a
 \noindent
 Finally work has also been done on establishing valid metrics for assessing the quality of a mesh automatically \cite{DittmerMeshQualityMet, NeuralNetworks} Metrics for meshes have been research far more extensively that AI methods due to their use for comparing different stress based refinements. There are also cases of common metrics being used for industrial meshing applications \cite{DittmerMeshQualityMet}. Although there are metrics for assessing a mesh on a global level such as element count score \cite{DittmerMeshQualityMet} the consensus is that due to the variation in meshes this is less reliable than assessing quality based on the properties of individual elements within the mesh \cite{DittmerMeshQualityMet} \\
 
-\begin{figure}[!h]
+\begin{figure}
   \centerline{\includegraphics[width=120mm, scale=1]{MeshQualityDeterioration.png}}
   \caption{Example of how elements can be distorted in order to fit a geometry which will result in deterioration of gradient quality (image source: \cite{PoorFEElementShapes})}
 \end{figure}
@@ -332,168 +331,7 @@ Unfortunately Triangular meshes also generally incur a higher computational cost
 From an implementation standpoint writing a square based remeshing algorithm is also substantially easier as given an initial mesh made just of square elements the only task is to repeatedly divide each element into four sub elements, by contrast methods uses to re mesh triangular meshes vary greatly are typically more complex and have corresponding initial meshes that are harder to generate manually by human operators \cite{HandMeshing}.
 
 
-
-\subsubsection{Stress Based Refinement}
-To focus meshing in areas of high stress each iteration needed to parse the results file from the previous iterations execution of LISA. LISA result files are in csv format by default and contain the displacements and stresses associated with each node within the model once it has been solved.
-
-Once the data in the output file has been parsed meshing can be conducted for high stress areas by averaging the stresses across the whole model and then cross referencing the node Ids in the results which have stresses above the average against the main data model allows a list of elements that can be instructed to refine themselves.
-
-
-\subsubsection{Rule Based Refinement}
-Having successfully implemented an simple stress refinement method the next key step of the systems development was to write a framework for executing each of the ILP rules published by Dolsak in his papers \cite{DolsakPaper91, DolsakPaper94, appOfILPToFEMeshDesign} \cite{ConsultRuleIntelltSystemFE}.
-
-Each rule is represented by a function within the final solution, this closely resembles their represented by Dolsak in his papers. Each of the rules resides within the ``RuleManager" class and takes a number of the defined edges as parameters. Each rule then checks the properties of a particular edge against properties which have been identified through the ILP learning mechanism as being important when the model executes. In cases where the rule takes more than one edge as an argument comparison for the properties of each edge are performed. Where a rule detects a relationship in the model the edge is assigned a value corresponding to its criticality, the value is then used by the meshing procedure to determine how many times it should repeatedly re mesh the elements along that edge.
-
-
- the significance of elements along a particular type of edge in determining the accuracy of the model. Some rules look for highly critical relationships  which if found have a high importance assigned to them, 
-
-indicate that additional meshing needs to occur for all elements that border the edge. The amount of meshing that occurs for each of the elements along those edges is specified within each of the rules.
-
-The properties that can exist between two edges when compared are the following:
-
-\begin{itemize}
-\item Edges opposite one another - the edges run alongside one another closely
-\item Edges posses the same form - 
-%finish this
-
-\item Edges are considered the same - to meet this requirement both edges must be almost the same length, opposite one another and posses the same form.
-
-\end{itemize}
-
-
-
-\subsubsection{Interfacing with LISA and the FE data model}
-Writing an API for LISA was the first stage of development for my project. The API was crucial in order to  which rely on the existence of different operations in order to easily manipulate the mesh. When the first re-meshing iteration occurs the system reads the .liml file into an equivalent class model, diagrams for which can be seen in figure 4 below. Each class in this model contains corresponding data and methods used to represent and manipulate the model. These methods are then used by the different refinement methods to generate a mesh which is ideally more optimal for the given problem, this adapted mesh can then be assessed by the module responsible for validating the meshes quality and written back to a .liml file for LISA to solve on the subsequent iteration. When designing the data model to represent the FE models state it was desirable to maintain coherence with the structure specified by LISA within the input XML files as closely as possible, this allowed for the data model to more easily be serialised when communicating with LISA. 
-
-\begin{figure}[!h]
-\centering
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{DissoFEProto-Model.jpg}
-  \caption{Model classes}
-  \label{fig:sub1}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{DissoFEProto-ElemNode.jpg}
-  \caption{Element and Node classes}
-  \label{fig:sub2}
-\end{subfigure}
-\label{fig:test}
-\end{figure}
-
-\begin{figure}
-\centering
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{DissoFEProto-ModelAnalysis.jpg}
-  \caption{Model Analysis classes}
-  \label{fig:sub1}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{DissoFEProto-MaterialProps.jpg}
-  \caption{Material Property classes}
-  \label{fig:sub2}
-\end{subfigure}
-\label{fig:test}
-\caption{Class model to represent .liml file structure used by LISA}
-\end{figure}
-
-\clearpage
-\noindent
-One aspect of the data models design which greatly adds to the systems flexibility is the hierarchical design for representing the various Element types. At the root of this structure is the IElement interface, all new Element types must adhere to this in order for the various refinement methods to run. Implementing the interface are a range of abstract classes such as ``SquareBasedElem" and ``TriangleBasedElem" These classes are designed to contain methods that are generally applicable for calculating metrics and re meshing individual elements for elements of this type that are both in two and three dimensions. This is powerful since computing this for a 3d element is simply a reduction of the method for a 2d element over every face which comprises the 3d one. Finally underneath this level are the concrete classes which represent each specific type of element that can exist.
-
-
-
-\subsubsection{Mesh Quality Assessment}
-Dittmers rules for computing the quality of both individual elements and the entire mesh are built into their own ``MeshQualtyAssessments" and ``ElementQualityMetrics" classes, the latter of which is encapsulated within an element object, like with refinement this allows each element to assess its own quality removing the need for additional utility classes containing static methods. 
-
-%not sure about the last sentence here
-Since each element is initialised with the nodes that comprise it, it is also possible to derive all the geometric characteristics and thus its quality metrics upon its initialisation. This allows the metrics for each node to also be calculated upon its initialisation removing the risk of elements returning null when asked for them.
-
-
-\subsection{Modelling Real World problems}
-Although the main implementation for this project was the system capable of performing the tasks described above on very simple structures such as a cantilever beam, to demonstrate general applicability with regards to real engineering problems demanded the creation of several models resembling basic equivalents of structures that FE methods would be used on within real engineering analysis.
-
-\subsubsection{Suspension Bridge structure}
-
-\noindent
-The primary model for which work on the latter half of the project was based upon was the following suspension bridge model:
-
-
-\begin{figure}[!h]
-  \centerline{\includegraphics[width=150mm, scale=1]{BasicBridge.jpeg}}
-  \caption{Diagram representing the general structure of the system with interactions between non internal entities such as files and LIA shown using dashed lines}
-  \label{fig:h-refinementImp}
-\end{figure}
-
-
-
-
-The initial model which was constructed manually using LISA's graphical user interface given some basic measurements for such a bridge in real \cite{}life consists of 196 elements and 212 nodes, which is very coarse for a FE mesh structure. The bridge is constrained at the base of each pillar, meaning all forces must exit the model through one of the four pillars. When
-
-One of the bridge models strengths was it provided high versatility when testing the software solution for m since simulation could be run with forces placed on a range of different faces with corresponding edge rules and a range of varying results obtained. For example a force on the desk of the bridge could be used to simulate the weight of a vehicle moving over it while forces placed sideways on the towers and cables could be used to model stress induced from strong crosswinds, 
-
-\colorbox{yellow}{both of these scenarios when used to evaluate the effectiveness of the implementation}
-
-
-\subsubsection{Validating system against previously obtained research results}
-Due to a lack of specific implementation details provided by Dolsak and Muggleton in their papers for generating meshes it was important to demonstrate that the underlying implementation was essentially equivalent. 
-
-To do this Models produced by Dolsak used to train his initial ILP system which generated the rules running within my system were created. This allowed my to run my resulting system on the models and verify that the generated output resembled those published in the current research literiture \cite{DolsakPaper91}.
-
-
-\begin{figure}
-\centering
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{PaperMillDolsak.jpeg}
-  \caption{Paper Mill input provided by Dolsak}
-  \label{fig:sub1}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=0.9\linewidth]{PaperMillWithinLisa.jpeg}
-  \caption{Representation of basic paper mill within LISA before applying meshing rules}
-  \label{fig:sub2}
-\end{subfigure}
-\label{fig:test}
-\caption{Class model to represent .liml file structure used by LISA}
-\end{figure}
-
-
-\begin{figure}
-\centering
-\begin{subfigure}{.5\textwidth}[!h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{DolsakCylinderWithEdges.jpeg}
-  \caption{Cylinder model used by Dolsak with edges labeled, each labelling corresponds to a rule generated by the Golem algorithm \cite{DolsakPaper91}}
-  \label{fig:sub1}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}[!h]
-  \centering
-  \includegraphics[width=0.9\linewidth]{DolsakCylinderWithEdges.jpeg}
-  \caption{Diagram representing the general structure of the system with interactions between non internal entities such as files and LIA shown using dashed lines}
-  \label{fig:sub2}
-\end{subfigure}
-\label{fig:test}
-\caption{Class model to represent .liml file structure used by LISA}
-\end{figure}
-
-
-\begin{figure}[!h]
-  \centerline{\includegraphics[width=70mm, scale=1]{}}
-  \caption{}
-  \label{fig:h-refinementImp}
-\end{figure}
-
-
-\subsection{Implementation Issues}
-Implementation of the design was not without its difficulties, many of which arising as a consequence of unforeseeable complications when implementing the well understood theoretical aspects.
-
-
-\subsubsection{Sorting Element Nodes in 3d space using convex hull Algorithm}
+\subsubsection{hierarchical refinement meshing issue}
 A significant issue encountered when working with LISA on the project was an interface requirement specified by LISA requiring nodes for each type of element to be sorted in a specific geometric order. The general rule for node ordering within LISA is to order the nodes as a perimeter around an element in 3d space without paths between nodes crossing one another internal to the element. When first addressing this problem for simple models using elements of Quad4 type the obvious approach was to think of a simple quadrilateral resembling a square, write an algorithm to handle that as a base case before considering a more complex case. The resulting approach was the following:
 
 %do pseudo code for initial approach here
@@ -548,8 +386,94 @@ Despite the existence of algorithms for generating a convex hull in three dimens
 \noindent
 This method has O(n log n) time complexity however due to the size of n being 4 in all cases the complexity of sorting an individual element is constant, with the overall complexity of sorting all elements in the model being O(n) where n is the number of elements.
 
+
+\subsubsection{Stress Based Refinement}
+To focus meshing in areas of high stress each iteration needed to parse the results file from the previous iterations execution of LISA. LISA result files are in csv format by default and contain the displacements and stresses associated with each node within the model once it has been solved.
+
+Once the data in the output file has been parsed meshing can be conducted for high stress areas by averaging the stresses across the whole model and then cross referencing the node Ids in the results which have stresses above the average against the main data model allows a list of elements that can be instructed to refine themselves.
+
+
+\subsubsection{Rule Based Refinement}
+Having successfully implemented an simple stress refinement method the next key step of the systems development was to write a framework for executing each of the ILP rules published by Dolsak in his papers \cite{DolsakPaper91, DolsakPaper94, appOfILPToFEMeshDesign} \cite{ConsultRuleIntelltSystemFE}.
+
+Each rule is represented by a function within the final solution, this closely resembles their represented by Dolsak in his papers. Each of the rules resides within the ``RuleManager" class and takes a number of the defined edges as parameters. Each rule then checks the properties of a particular edge against properties which have been identified through the ILP learning mechanism as being important when the model executes. In cases where the rule takes more than one edge as an argument comparison for the properties of each edge are performed. Where a rule detects a relationship in the model the edge is assigned a value corresponding to its criticality, the value is then used by the meshing procedure to determine how many times it should repeatedly re mesh the elements along that edge.
+
+
+ the significance of elements along a particular type of edge in determining the accuracy of the model. Some rules look for highly critical relationships  which if found have a high importance assigned to them, 
+
+indicate that additional meshing needs to occur for all elements that border the edge. The amount of meshing that occurs for each of the elements along those edges is specified within each of the rules.
+
+The properties that can exist between two edges when compared are the following:
+
+\begin{itemize}
+\item Edges opposite one another - the edges run alongside one another closely
+\item Edges posses the same form - 
+%finish this
+
+\item Edges are considered the same - to meet this requirement both edges must be almost the same length, opposite one another and posses the same form.
+
+\end{itemize}
+
+\subsubsection{Interfacing with LISA and the FE data model}
+Writing an API for LISA was the first stage of development for my project. The API was crucial in order to  which rely on the existence of different operations in order to easily manipulate the mesh. When the first re-meshing iteration occurs the system reads the .liml file into an equivalent class model, diagrams for which can be seen in figure 4 below. Each class in this model contains corresponding data and methods used to represent and manipulate the model. These methods are then used by the different refinement methods to generate a mesh which is ideally more optimal for the given problem, this adapted mesh can then be assessed by the module responsible for validating the meshes quality and written back to a .liml file for LISA to solve on the subsequent iteration. When designing the data model to represent the FE models state it was desirable to maintain coherence with the structure specified by LISA within the input XML files as closely as possible, this allowed for the data model to more easily be serialised when communicating with LISA. 
+
+\begin{figure}[!h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{DissoFEProto-Model.jpg}
+  \caption{Model classes}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{DissoFEProto-ElemNode.jpg}
+  \caption{Element and Node classes}
+  \label{fig:sub2}
+\end{subfigure}
+\label{fig:test}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{DissoFEProto-ModelAnalysis.jpg}
+  \caption{Model Analysis classes}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{DissoFEProto-MaterialProps.jpg}
+  \caption{Material Property classes}
+  \label{fig:sub2}
+\end{subfigure}
+\label{fig:test}
+\caption{Class model to represent .liml file structure used by LISA}
+\end{figure}
+
+\clearpage
+\noindent
+One aspect of the data models design which greatly adds to the systems flexibility is the hierarchical design for representing the various Element types. At the root of this structure is the IElement interface, all new Element types must adhere to this in order for the various refinement methods to run. Implementing the interface are a range of abstract classes such as ``SquareBasedElem" and ``TriangleBasedElem" These classes are designed to contain methods that are generally applicable for calculating metrics and re meshing individual elements for elements of this type that are both in two and three dimensions. This is powerful since computing this for a 3d element is simply a reduction of the method for a 2d element over every face which comprises the 3d one. Finally underneath this level are the concrete classes which represent each specific type of element that can exist.
+
+
+
+\subsubsection{Mesh Quality Assessment}
+Dittmers rules for computing the quality of both individual elements and the entire mesh are built into their own ``MeshQualtyAssessments" and ``ElementQualityMetrics" classes, the latter of which is encapsulated within an element object, like with refinement this allows each element to assess its own quality removing the need for additional utility classes containing static methods. \\
+
+%not sure about the last sentence here
+Since each element is initialised with the nodes that comprise it, it is also possible to derive all the geometric characteristics and thus its quality metrics upon its initialisation. This allows the metrics for each node to also be calculated upon its initialisation removing the risk of elements returning null when asked for them.
+
+
+\subsection{Implementation Issues}
+Implementation of the design was not without its difficulties, many of which arising as a consequence of unforeseeable complications when implementing the well understood theoretical aspects.
+
+
+\subsubsection{Sorting Element Nodes in 3d space using convex hull Algorithm}
+
+
 \subsubsection{Attempts to Automatically Define edges within models}
-As discussed under evaluation one of the core issues faced when performing analysis of the system is identifying where the system behaves poorly through weakness in the methods or poor design and implementation as opposed to poor output generated as a consequence of poor input by the operator. In order to avoid this issue it was desirable to try and remove user intervention besides the configuration of the initial model. The obvious way by which to do this was automatic identification of interesting edges within the model. A crucial property which made this approach appear promising is the fact that it is known that edge importance directly correlates with the size of the edge and how much force is applied near it, since both this information exists within the data model it should be possible to identify edges from it and generate them automatically for Dolsaks rules to process.
+As discussed under evaluation a core issue faced when conducting analysis of the system was identifying where the system behaves poorly through weakness in the methods or poor design and implementation as opposed to poor output generated as a consequence of poor input by the operator. In order to avoid this issue it was desirable to try and remove user intervention besides the configuration of the initial model. The obvious way by which to do this was automatic identification of interesting edges within the model. A crucial property which made this approach appear promising is the fact that it is known that edge importance directly correlates with the size of the edge and how much force is applied near it, since both this information exists within the data model it should be possible to identify edges from it and generate them automatically for Dolsaks rules to process.
 
 
 \noindent
@@ -563,9 +487,6 @@ Having done so
 % Say something about storage in dictionary
 
 
-\subsubsection{}
-
-
 \section{Evaluation of Project}
 Evaluation has been essential in order to conclude the effectiveness of both the algorithms used to solve the problem and the capability of their implementation within the final software solution. In order to do this evaluation has been conducted at several levels ranging from functional requirements for the software specification at the lowest to high level analysis of the programs output which in many cases is hard to define and varies from model to model.
 
@@ -573,6 +494,124 @@ Evaluation has been essential in order to conclude the effectiveness of both the
 In order to validate the system against many of the functional requirements the system only needs to be run on several basic models with different input configurations, observation of the output demonstrates the systems ability to evaluate the quality of meshes using a range of metrics and refinement occurring as a result of both the stresses induced by the user and on their categorisation of edges. 
 
 \section{Non functional testing}
+
+
+
+\subsection{Evaluation of the system running for various models}
+Although the main implementation for this project was the system capable of performing the tasks described above on very simple structures such as a cantilever beam, to demonstrate general applicability with regards to real engineering problems demanded the creation of several models resembling basic equivalents of structures that FE methods would be used on within real engineering analysis.
+
+\subsubsection{Suspension Bridge structure}
+
+\noindent
+The primary model for which work on the latter half of the project was based upon was the following suspension bridge model:
+
+
+\begin{figure}[!h]
+  \centerline{\includegraphics[width=150mm, scale=1]{BasicBridge.jpeg}}
+  \caption{Diagram representing the general structure of the system with interactions between non internal entities such as files and LIA shown using dashed lines}
+  \label{fig:h-refinementImp}
+\end{figure}
+
+
+\newpage
+\noindent
+The initial model which was constructed manually using LISA's graphical user interface given some basic measurements for such a bridge in real \cite{}life consists of 196 elements and 212 nodes, which is very coarse for a FE mesh structure. The bridge is constrained at the base of each pillar, meaning all forces must exit the model through one of the four pillars. When \\ 
+
+
+\noindent
+One of the bridge models strengths was it provided high versatility when testing the software solution for m since simulation could be run with forces placed on a range of different faces with corresponding edge rules and a range of varying results obtained. For example a force on the desk of the bridge could be used to simulate the weight of a vehicle moving over it while forces placed sideways on the towers and cables could be used to model stress induced from strong crosswinds.
+
+\subsubsection{Evaluation of bridge for crosswinds}
+Simulating crosswinds provided an opportunity  to test the system when simulating a scenario that could feasibly effect the structure.
+
+%typical significance of crosswinds on suspension bridges
+%some general forces and on which part of the bridge are they exerted,
+%Image showing the forces placed on the actual bridge and possibly on a diagram from some engineering company.
+%Where is stress expected to be induced.
+\cite{CrosswindsOnSuspensionBridges}
+
+In order to mesh successfully in order to focus refinement on these areas the following rules can be suggested for the bridge structure when crosswinds are applied from a negative x direction.
+
+
+
+\subsubsection{Evaluation of bridge for base loading}
+Loading the base of a bridge is yet another typical analysis conducted within civil engineering. The loading can be used to represent anything which moves over the bridge that needs to be supported by it such as vehicles or pedestrians. 
+\colorbox{yellow}{Given the size of out bridge as x we  can apply a force representing that of a typical number of vehicles moving over the bridge.} 
+
+
+
+\colorbox{yellow}{both of these scenarios when used to evaluate the effectiveness of the implementation}
+
+\subsubsection{Validating system against previously obtained research results}
+Due to a lack of specific implementation details provided by Dolsak and Muggleton in their papers for generating meshes it was important to demonstrate that the underlying implementation for generating meshes based upon the rules was essentially equivalent. \\ 
+
+
+Dolsak did however provide information about the various models 
+
+this the models used by Dolsak in order to train his initial ILP system responsible for generating the rules were re crated. This allowed for verification of the heuristic component of the project through comparison of both implentations outputs. \cite{DolsakPaper91}.
+
+
+\subsubsection{Paper Mill}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{PaperMillDolsak.jpeg}
+  \caption{Paper Mill presented by Dolsak in his paper as input for training Golem}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{PaperMillWithinLisa.jpeg}
+  \caption{Representation of paper mill within LISA before applying meshing rules to validate}
+  \label{fig:sub2}
+\end{subfigure}
+\label{fig:test}
+\end{figure}
+
+
+
+\subsubsection{Cylinder}
+Obtaining results based on the edge relationships described within the research literature was the first step required when performing evaluation of the cylinder. The rules provided in Dolasks paper used to generate the initial JSON file were the following:
+
+
+
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{DolsakCylinderWithEdges.jpeg}
+  \caption{Cylinder model used by Dolsak with edges labeled, each labelling corresponds to a rule generated by the Golem algorithm \cite{DolsakPaper91}}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{DolsakCylinderMeshed.jpeg}
+  \caption{Diagram representing the general structure of the system with interactions between non internal entities such as files and LIA shown using dashed lines}
+  \label{fig:sub2}
+\end{subfigure}
+\label{fig:test}
+\end{figure}
+
+The resulting mesh generated by the system after increasing numbers of iterations based primarily
+
+
+\subsubsection{Cylinder}
+
+
+\newpage
+
+\section{Evaluation of testing on models}
+Executing the three main models with a range of simulation conditions formed the bulk of my system level testing for the project.
+
+\subsection{Suspension Bridge}
+
+
+
+
+
 
 
 
