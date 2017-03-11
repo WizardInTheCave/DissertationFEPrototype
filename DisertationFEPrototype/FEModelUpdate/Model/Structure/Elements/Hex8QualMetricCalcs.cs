@@ -33,7 +33,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         internal double computeMaxparallelDev(List<Tuple<Node, Node>[]> faceEdgePairings)
         {
             double maxParrallelDev = faceEdgePairings
-                .Select(x => elem.computeMaxparallelDev(x)).Max();
+                .Select(x => elem.computeMaxParallelDev(x)).Max();
             return maxParrallelDev;
         }
 

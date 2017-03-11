@@ -40,7 +40,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             //// all three of these methods use 
             maxCornerAngle = propCalcs.computeMaxCornerAngle(faces);
         
-            List<Tuple<Node, Node>[]> nodePairingsfacePairings = faces.Select(x => this.getEdgePairingsForNode(x.ToList())).ToList();
+            List<Tuple<Node, Node>[]> nodePairingsfacePairings = faces.Select(x => this.computeEdgePairingsForNode(x.ToList())).ToList();
 
             maxParallelDev = propCalcs.computeMaxparallelDev(nodePairingsfacePairings);
 
@@ -119,7 +119,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         public override List<IElement> createChildElements(Dictionary<Tuple<double, double, double>, Node> nodes)
         {
 
-            Node hexCentre = getHexCentre(faces, nodes);
+            Node hexCentre = createHexCentre(faces, nodes);
 
             Node[][] xPosSubs = getSubSquares(faces[0], nodes);
 
@@ -153,11 +153,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
           
         }
 
-        private void secondCorner()
-        {
-
-        }
-
 
 
         /// <summary>
@@ -165,80 +160,10 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// And the right element type
         /// </summary>
         /// <returns>new hex element for that quadrent of the previous hex</returns>
-       
+     
 
 
-            //Console.WriteLine("X subsquares: ");
-            //Console.WriteLine("Sub1 Node1: " + xPosSubs[0][0]);
-            //Console.WriteLine("Sub1 Node2: " + xPosSubs[0][1]);
-            //Console.WriteLine("Sub1 Node3: " + xPosSubs[0][2]);
-            //Console.WriteLine("Sub1 Node4: " + xPosSubs[0][3]);
-            //Console.WriteLine("");
-            //Console.WriteLine("Sub2 Node1: " + xPosSubs[1][0]);
-            //Console.WriteLine("Sub2 Node2: " + xPosSubs[1][1]);
-            //Console.WriteLine("Sub2 Node3: " + xPosSubs[1][2]);
-            //Console.WriteLine("Sub2 Node4: " + xPosSubs[1][3]);
-            //Console.WriteLine("");
-            //Console.WriteLine("Sub3 Node1: " + xPosSubs[2][0]);
-            //Console.WriteLine("Sub3 Node2: " + xPosSubs[2][1]);
-            //Console.WriteLine("Sub3 Node3: " + xPosSubs[2][2]);
-            //Console.WriteLine("Sub3 Node4: " + xPosSubs[2][3]);
-            //Console.WriteLine("");
-            //Console.WriteLine("Sub4 Node1: " + xPosSubs[3][0]);
-            //Console.WriteLine("Sub4 Node2: " + xPosSubs[3][1]);
-            //Console.WriteLine("Sub4 Node3: " + xPosSubs[3][2]);
-            //Console.WriteLine("Sub4 Node4: " + xPosSubs[3][3]);
-            //Console.WriteLine("");
-
-
-            //Console.WriteLine("Y subsquares: ");
-            //Console.WriteLine("Sub1 Node1: " + yPosSubs[0][0]);
-            //Console.WriteLine("Sub1 Node2: " + yPosSubs[0][1]);
-            //Console.WriteLine("Sub1 Node3: " + yPosSubs[0][2]);
-            //Console.WriteLine("Sub1 Node4: " + yPosSubs[0][3]);
-            //Console.WriteLine("");
-            //Console.WriteLine("Sub2 Node1: " + yPosSubs[1][0]);
-            //Console.WriteLine("Sub2 Node2: " + yPosSubs[1][1]);
-            //Console.WriteLine("Sub2 Node3: " + yPosSubs[1][2]);
-            //Console.WriteLine("Sub2 Node4: " + yPosSubs[1][3]);
-            //Console.WriteLine("");
-            //Console.WriteLine("Sub3 Node1: " + yPosSubs[2][0]);
-            //Console.WriteLine("Sub3 Node2: " + yPosSubs[2][1]);
-            //Console.WriteLine("Sub3 Node3: " + yPosSubs[2][2]);
-            //Console.WriteLine("Sub3 Node4: " + yPosSubs[2][3]);
-            //Console.WriteLine("");
-            //Console.WriteLine("Sub4 Node1: " + yPosSubs[3][0]);
-            //Console.WriteLine("Sub4 Node2: " + yPosSubs[3][1]);
-            //Console.WriteLine("Sub4 Node3: " + yPosSubs[3][2]);
-            //Console.WriteLine("Sub4 Node4: " + yPosSubs[3][3]);
-            //Console.WriteLine("");
-
-            //Console.WriteLine("Z subsquares: ");
-            //Console.WriteLine("Sub1 Node1: " + topSubs[0][0]);
-            //Console.WriteLine("Sub1 Node2: " + topSubs[0][1]);
-            //Console.WriteLine("Sub1 Node3: " + topSubs[0][2]);
-            //Console.WriteLine("Sub1 Node4: " + topSubs[0][3]);
-            //Console.WriteLine("");
-            //Console.WriteLine("Sub2 Node1: " + topSubs[1][0]);
-            //Console.WriteLine("Sub2 Node2: " + topSubs[1][1]);
-            //Console.WriteLine("Sub2 Node3: " + topSubs[1][2]);
-            //Console.WriteLine("Sub2 Node4: " + topSubs[1][3]);
-            //Console.WriteLine("");
-            //Console.WriteLine("Sub3 Node1: " + topSubs[2][0]);
-            //Console.WriteLine("Sub3 Node2: " + topSubs[2][1]);
-            //Console.WriteLine("Sub3 Node3: " + topSubs[2][2]);
-            //Console.WriteLine("Sub3 Node4: " + topSubs[2][3]);
-            //Console.WriteLine("");
-            //Console.WriteLine("Sub4 Node1: " + topSubs[3][0]);
-            //Console.WriteLine("Sub4 Node2: " + topSubs[3][1]);
-            //Console.WriteLine("Sub4 Node3: " + topSubs[3][2]);
-            //Console.WriteLine("Sub4 Node4: " + topSubs[3][3]);
-            //Console.WriteLine("");
-
-            //hexNodees[3] = yPosSubs
-
-
-        private Node getHexCentre(Node[][] faces, Dictionary<Tuple<double, double, double>, Node> nodes)
+        private Node createHexCentre(Node[][] faces, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
             // each of the sub divided sections, now need to sew up
             var xFront = getSubSquares(faces[0], nodes);
@@ -276,15 +201,11 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// <returns>array of sub element points</returns>
         private Node[][] getSubSquares(Node[] cornerNodes, Dictionary<Tuple<double, double, double>, Node> allNodes)
         {
-
-           
-            
+ 
             var subNodeTup = createMidpointNodes(cornerNodes, allNodes);
 
             List<Node[]> elementEdgeTrios = subNodeTup.Item1;
             List<Node> midpointLineNodes = subNodeTup.Item2;
-
-            
 
             // get the new center node which will be a corner for each of the four new elements
             Node centerNode = createCenterNode(midpointLineNodes, allNodes);
@@ -302,10 +223,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             }
 
             var flatNodes = subSquares.SelectMany(x => x);
-            //flatNodes.ToList().ForEach(x => Console.WriteLine("xNeg: " + x.GetX + " " + x.GetY + " " + x.GetZ));
-            //Console.WriteLine("\n\n");
-
-            //Console.WriteLine("wut");
 
             return subSquares;
         }

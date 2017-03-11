@@ -38,7 +38,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
         internal double computeMaxparallelDev(Tuple<Node, Node>[] edges)
         {
-            return elem.computeMaxparallelDev(edges);
+            return elem.computeMaxParallelDev(edges);
         }
 
         internal double computeLongestEdge(Tuple<Node, Node>[] nodePairings, double LONGEST_EDGE_DEFAULT)

@@ -43,7 +43,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             if (nodes.Contains(queryNode))
             {
                 var fourNodes = nodes.ToList();
-                List<Node> sortedNodes = sortFourNodes(fourNodes);
+                List<Node> sortedNodes = sortFace(fourNodes);
 
                 // bottomLeft, bottomRight, topRight, topLeft
 
@@ -133,7 +133,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// </summary>
         /// <param name="nodes">Some nodes</param>
         /// <returns>The nodes in an order LISA will accept</returns>
-        protected List<Node> sortFourNodes(List<Node> nodes)
+        protected List<Node> sortFace(List<Node> nodes)
         {
 
             List<Node> sortMatchedNodes = new List<Node>();
@@ -209,13 +209,13 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// </summary>
         /// <param name="elementNodes">four nodes within a particular element</param>
         /// <returns></returns>
-        public Tuple<List<Node[]>, List<Node>> createMidpointNodes(Node[] fourNodes, Dictionary<Tuple<double, double, double>, Node> nodes)
+        public Tuple<List<Node[]>, List<Node>> createMidpointNodes(Node[] cornerNodes, Dictionary<Tuple<double, double, double>, Node> allNodes)
         {
             List<Node[]> elementEdgeTrios = new List<Node[]>();
             List<Node> midEdgeNodes = new List<Node>();
 
             int ii = 0;
-            foreach (Node node in fourNodes)
+            foreach (Node node in cornerNodes)
             {
                 // this array r
                 Node[] subElemNodes = new Node[4];
@@ -224,15 +224,15 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 subElemNodes[0] = node;
 
                 //singleNodeTrio.Add(node);
-                Node diag = getDiagonalNode(fourNodes, node);
+                Node diag = getDiagonalNode(cornerNodes, node);
 
 
-                foreach (Node possibleAdjacentNode in fourNodes)
+                foreach (Node possibleAdjacentNode in cornerNodes)
                 {
                     // if it is one of the nodes on a connecting edge when thinking about it as a square
                     if (possibleAdjacentNode != node && diag != possibleAdjacentNode)
                     {
-                        Node midEdge = makeMidEdgeNode(node, possibleAdjacentNode, nodes);
+                        Node midEdge = makeMidEdgeNode(node, possibleAdjacentNode, allNodes);
                         midEdgeNodes.Add(midEdge);
 
                         // this is important so that the mesh forms correct square elements
@@ -471,7 +471,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// </summary>
         /// <param name="nodes"></param>
         /// <returns></returns>
-        private double[] getTotalCrossProduct(List<Node> nodes)
+        private double[] computeTotalCrossProduct(List<Node> nodes)
         {
             double[] total = new double[] { 0, 0, 0 };
             for (int ii = 0; ii < nodes.Count; ii++)
@@ -521,15 +521,15 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// <summary>
         /// get a set of tuples which represent each of the edges within the element
         /// </summary>
-        /// <returns></returns>
-        public Tuple<Node, Node>[] getEdgePairingsForNode(List<Node> nodes)
+        /// <returns>An array of edge pairings  represented as a tuple of two nodes</returns>
+        public Tuple<Node, Node>[] computeEdgePairingsForNode(List<Node> nodes)
         {
 
             var edges = new Tuple<Node, Node>[4];
 
             Node node = nodes[0];
 
-            Node[] adjNodes = getNonDiagAdjacentNodes(node, nodes);
+            Node[] adjNodes = computeNonDiagAdjacentNodes(node, nodes);
             edges[0] = new Tuple<Node, Node>(node, adjNodes[0]);
             edges[1] = new Tuple<Node, Node>(node, adjNodes[1]);
 
@@ -549,7 +549,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// <param name="edgeA"></param>
         /// <param name="edgeB"></param>
         /// <returns></returns>
-        public double getDevOnEdgePair(Tuple<Node, Node> edgeA, Tuple<Node, Node> edgeB)
+        public double computeDevOnEdgePair(Tuple<Node, Node> edgeA, Tuple<Node, Node> edgeB)
         {
 
             // work out 
@@ -559,7 +559,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             twoCommonNodes[0] = edgeA.Item2;
             twoCommonNodes[1] = edgeB.Item1;
 
-            double angle1 = getAngle(node, twoCommonNodes);
+            double angle1 = computeAngle(node, twoCommonNodes);
 
 
             var node2 = edgeB.Item1;
@@ -567,7 +567,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             twoCommonNodes2[0] = edgeA.Item1;
             twoCommonNodes2[1] = edgeB.Item2;
-            double angle2 = getAngle(node2, twoCommonNodes2);
+            double angle2 = computeAngle(node2, twoCommonNodes2);
 
             double combinedAngles = angle1 + angle2;
 
@@ -575,19 +575,19 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             return Math.Abs(180 - combinedAngles);
         }
 
-
         /// <summary>
         /// I want to work out for all the pairs of opposite edges in the node what is the maximum deviation from parrallell
         /// </summary>
         /// <returns>The maximum deviation angle between two opposite edges within the element</returns>
-        public double computeMaxparallelDev(Tuple<Node, Node>[] edges)
+        public double computeMaxParallelDev(Tuple<Node, Node>[] edges)
         {
-            double dev1 = getDevOnEdgePair(edges[0], edges[3]);
-            double dev2 = getDevOnEdgePair(edges[1], edges[2]);
+            double dev1 = computeDevOnEdgePair(edges[0], edges[3]);
+            double dev2 = computeDevOnEdgePair(edges[1], edges[2]);
             return dev1 > dev2 ? dev1 : dev2;
 
             // throw new NotImplementedException();
         }
+
         /// <summary>
         /// Determine if two nodes within a quad4 element are adjactent to one another based on their euclidean distance
         /// </summary>
@@ -612,7 +612,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// <param name="angleNode">The node in the corner of the angle that is being computed</param>
         /// <param name="twoCommonNodes">Two nodes either side of that node within the element that will be used to compute the angle</param>
         /// <returns></returns>
-        public double getAngle(Node angleNode, Node[] twoCommonNodes)
+        public double computeAngle(Node angleNode, Node[] twoCommonNodes)
         {
             // using method described here: http://stackoverflow.com/questions/19729831/angle-between-3-points-in-3d-space
 
@@ -638,7 +638,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// <param name="nodeA">the node you want to find the non diagonally adjacent nodes for</param>
         /// <param name="nodes">all the nodes in that particular element</param>
         /// <returns></returns>
-        public Node[] getNonDiagAdjacentNodes(Node nodeA, List<Node> nodes)
+        public Node[] computeNonDiagAdjacentNodes(Node nodeA, List<Node> nodes)
         {
             Node[] commonNodes = new Node[2];
             int ii = 0;
@@ -667,9 +667,9 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             double maxAngle = 0;
             foreach (Node nodeA in fourPlaneNodes)
             {
-                Node[] commonNodes = getNonDiagAdjacentNodes(nodeA, fourPlaneNodes);
+                Node[] commonNodes = computeNonDiagAdjacentNodes(nodeA, fourPlaneNodes);
                 // get angle here
-                double angle = getAngle(nodeA, commonNodes);
+                double angle = computeAngle(nodeA, commonNodes);
                 if (angle > maxAngle)
                 {
                     maxAngle = angle;

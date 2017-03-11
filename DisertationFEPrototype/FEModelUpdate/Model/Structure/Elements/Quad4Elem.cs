@@ -76,7 +76,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 
 
             this.Id = id;
-            this.nodes = sortFourNodes(nodes);
+            this.nodes = sortFace(nodes);
             this.parentElement = null;
             this.childElements = null;
 
@@ -85,7 +85,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             // all three of these methods use 
 
-            Tuple<Node, Node>[] nodePairings = this.getEdgePairingsForNode(nodes);
+            Tuple<Node, Node>[] nodePairings = this.computeEdgePairingsForNode(nodes);
 
             maxCornerAngle = propCalcs.computeMaxCornerAngle(nodes);
             maxParallelDev = propCalcs.computeMaxparallelDev(nodePairings); 

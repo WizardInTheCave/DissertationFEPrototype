@@ -19,7 +19,7 @@
   <node nid="17" x="-0.0734731565365591" y="0" z="0.18" />
   <node nid="18" x="0.50320512" y="-2.5113983111863E-16" z="0.3" />
   <node nid="19" x="-0.101127124296868" y="0" z="0.18" />
-  <node nid="20" x="-0.882816" y="1.11836571253798E-16" z="0.6" />
+  <node nid="20" x="-0.887851774692535" y="-0.00692645693197846" z="0.621650099754334" />
   <node nid="21" x="-0.839607909489622" y="-0.272805146906114" z="0.6" />
   <node nid="22" x="-0.714213146906114" y="-0.518906225287832" z="0.6" />
   <node nid="23" x="-0.101127124296868" y="-0.0734731565365591" z="0.18" />
@@ -234,6 +234,10 @@
   <node nid="232" x="-0.25160256" y="3.18734228073325E-17" z="0.18" />
   <node nid="233" x="-0.239288254204542" y="-0.0777494668682424" z="0.18" />
   <node nid="234" x="-0.203550746868242" y="-0.147888274207032" z="0.18" />
+  <node nid="235" x="-1.1" y="1.3934979472413E-16" z="0.62" />
+  <node nid="236" x="-1.1" y="1.3934979472413E-16" z="0.3" />
+  <node nid="237" x="-1.1" y="1.3934979472413E-16" z="0.451" />
+  <node nid="238" x="-1.1" y="-0.157" z="0.451" />
   <elset name="Default" color="-6710887">
     <elem eid="1" shape="quad4" nodes="223 224 204 203" />
     <elem eid="2" shape="quad4" nodes="192 113 190 10" />
@@ -441,7 +445,7 @@
     <elem eid="204" shape="quad4" nodes="220 221 201 200" />
     <elem eid="205" shape="quad4" nodes="221 222 202 201" />
     <elem eid="206" shape="quad4" nodes="222 223 203 202" />
-    <elem eid="207" shape="quad4" nodes="128 231 126 108" />
+    <elem eid="207" shape="quad4" nodes="20 170 158 138" />
     <elem eid="208" shape="quad4" nodes="168 188 208 148" />
     <elem eid="209" shape="quad4" nodes="148 228 231 128" />
     <elem eid="210" shape="quad4" nodes="108 46 150 5" />
@@ -462,9 +466,8 @@
     <elem eid="225" shape="quad4" nodes="61 232 116 62" />
     <elem eid="226" shape="quad4" nodes="218 198 178 158" />
     <elem eid="227" shape="quad4" nodes="64 189 117 118" />
-    <elem eid="228" shape="quad4" nodes="118 117 20 138" />
-    <elem eid="229" shape="quad4" nodes="20 170 158 138" />
-    <elem eid="230" shape="quad4" nodes="64 62 116 189" />
+    <elem eid="228" shape="quad4" nodes="64 62 116 189" />
+    <elem eid="229" shape="quad4" nodes="108 128 231 46" />
   </elset>
   <nodeselection name="CylinderBottomOut">
     <node nid="5" />
@@ -634,6 +637,10 @@
     <node nid="13" />
     <node nid="9" />
     <node nid="10" />
+    <node nid="235" />
+    <node nid="236" />
+    <node nid="237" />
+    <node nid="238" />
   </nodeselection>
   <nodeselection name="InnerLip">
     <node nid="228" />

@@ -10,14 +10,15 @@
 \usepackage{pdflscape}
 \usepackage{wrapfig}
 \usepackage{gensymb}
+\usepackage{graphicx}
 
 \renewcommand{\labelenumii}{\theenumii}
 \renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
 
 \usepackage{enumitem}
 \usepackage{subcaption}
-\usepackage[]{algorithm2e}
-\usepackage{pgffor}
+%\usepackage[]{algorithm2e}
+%\usepackage{pgffor}
 \usepackage[T1]{fontenc}
 \usepackage{xcolor}
 
@@ -39,9 +40,9 @@
 %Prof. Oruklu \hfill Lab Date: XX/XX/XX \\
 %TA: Adam Sumner \hfill Due Date: XX/XX/XX
 
-\title{Interim Report: Hybrid Methods for Finite Element Meshing}
+\title{Dissertation: Hybrid Methods for Finite Element Meshing}
 \author{Jack Bradbrook (psyjb4)}
-\date{November 30, 2016}
+\date{April 5, 2017}
 \maketitle
 
 \tableofcontents
@@ -50,10 +51,10 @@
 
 \section{Introduction}
 
-The overall aim of this project is to perform the task of refining a Finite Element Mesh (FEM) using a stress based method as is typical of FEM refinement in conjunction with an approach that uses techniques from Artificial Intelligence and Machine Learning. \\
+The overall aim of this project is to perform the task of refining a Finite Element Mesh (FEM) using a stress based method as is typical of FEM refinement in conjunction with an approach that uses techniques from Artificial Intelligence and Machine Learning. It should be possible to reason about the quality of a mesh produced using both methods analytically in order to evaluate the success of the approach and potential for continued use.\\
 
 \noindent
-Finite Element Analysis (FEA) is a method widely used across different engineering domains to simulate structures under certain conditions. The method works by taking a geometry defined in continuous terms, discretiseing it into a mesh system before calculating the property values for each of the discrete elements. This allows engineers to observe the effect the conditions have on the entire structure, see figure 1. \\ 
+Finite Element Analysis (FEA) is a method widely used across different engineering domains to simulate structures under certain conditions. The method works by taking a geometry defined in continuous terms, discretize it into a mesh system before calculating the property values for each of the discrete elements. This allows engineers to observe the effect the conditions have on the entire structure, see figure 1. \\ 
 
 \noindent
 Success of the project will be determined by implementation of a system that is able to combine the two approaches described above in order to refine a mesh to of a quality comparable to that of a successful stress based method.
@@ -63,26 +64,45 @@ Success of the project will be determined by implementation of a system that is 
 
 Over the past forty years FEA has emerged as a prominent technology for simulating complex real world engineering problems \cite{cite0, DolsakPaper94}. FEA works by solving a system of differential equations with each equation representing a single element in a geometric mesh. By doing this FEA is able to generate highly accurate approximations for the properties of complex physical systems \cite{DolsakPaper94} \cite{IntroductionToFE}. The method can also be highly computationally expensive with the complexity typically increasing exponentially with the model size \cite{DolsakPaper94}. Analysis therefore proves to be highly time consuming and costly for individuals and organisations to conduct \cite{ConsultRuleIntelltSystemFE}. \cite{cite03}\\
 
-Finite Element Models have several inherent properties which for the most part specified by the engineers who create them, the settings for these properties greatly determine the results obtained from the models execution. The first of these properties of an FE model  begin with there is the mesh which is constructed out of nodes (points which are intersections of edges that form elements) as well as the elements themselves, either a polygon or a polyhedron between the nodes. Nodes and elements are important concepts as they provide the theoretical framework for reasoning about the other properties of a mesh and hence the overall quality of the model \cite{IntroductionToFE}.\\ elements represent
 
-The essence of 
+\subsection{Properties of finite element models}
+Although this dissertation is computer science oriented as opposed to mechanical engineering it's still important to briefly describe the general principals and properties that underlie the FE method in order to have a general appreciation for how the design and evaluation of the final software system was conducted. \\ 
 
-% finite element models comprised of nodes and elements
+\noindent
+Finite Element Models have several key properties that need to be specified by the engineers who create them, the configuration of these properties greatly determine the results obtained from the models execution. The first of these properties that an FE model posesses is the mesh. The mesh is constructed out of nodes, points which act as intersections between the second componet- elements which are either a polygon or a polyhedron between the nodes. Nodes and elements are important concepts as they provide the theoretical framework for reasoning about the other properties of a mesh and hence the overall quality of the model \cite{IntroductionToFE}.\\ 
+
+\noindent
+In addition to the nodes and elements FE models also contain inputs and constraints. Inputs can be thought of as the phenomena which is acting on the structure and consequently inducing some sort of physical effect on it such as a force. These are used to represent the external conditions the structure will be exposed to when present in an environment. \\
 
 % elements can be different types which have different types, typical types
 % triangles and squares. 
 
-% models are solved by applying some force/ input at some point within the model
-
-% model contains constraints at various points at which all of input property must leave throughy
-
-
+\noindent
+Constraints are another fundamental concept important when performing FE analysis that describe where the model is attached to the outside world. When computing stresses induced through the model there needs to be an area through which the stresses are assumed to leave. FEA is only able to calculate the path of the stresses through the model and thus the overall stress at given points using the law of conservation of energy i.e. energy cannot be created or destroyed meaning that any energy provided to the system as input through for example force needs a means by which to leave it, the constraint. \\
 
 \noindent
-An important consideration when conducting FEA is the trade-off of a models accuracy against the time in which it can be solved. A major variable determining this trade-off is the models mesh structure which discretizes the problem so that simulation can be run on it. A mesh that is finer is more computationally expensive but also produces results of greater accuracy. It is therefore desirable to generate a mesh which is fine where accuracy is most needed but coarse where it isn't \cite{cite04}. 
+For example in figure 6 showing a suspension bridge model the simulation is to be run with the forces are induced upon the cables and the towers in the negative x direction as represented by the green vectors. The corresponding constraint area through which the force must leave is specified as the base of each bridge pillar and represented by multiple red arrows on each corresponding corner.\\
 
 \noindent
-In every type of analysis that the FE method is used for (thermal, structural, fluid flow, electrical) there is a specific differential equation associated with each of the elements. In order to achieve overall convergence of the model the equations must be solved simultaneously to achieve a value for each of the discrete elements \cite{IntroductionToFE}. For this dissertation project attention will be given specifically to the problem of FEA meshing in the context of static structural analysis where the value calculated across each element is its stress. It makes sense to work on hybrid mesh refinement in the context of static structural analysis as it is perhaps the most common engineering application of the method and as such has the largest body of research that is relevant \cite{DolsakPaper94}\cite{IntroductionToFE}.\\
+The final piece of information needed in order to calculate the stresses through the model is material data. Material data is associated with the models elements and is usually defined using two main parameters which are:
+
+\begin{itemize}
+\item Youngs Modulus
+\item Poissons ratio
+\end{itemize}
+
+For the sake of simplicity all structures used to evaluate the final software solution have assumed steel as their material property. 
+
+\noindent
+which must be made when conducting
+
+
+\subsection{Limitations and general considerations}
+\noindent
+An important consideration when conducting FEA is the trade-off of a models accuracy against the time in which it can be solved. A major variable determining this trade-off is the models mesh structure which discretizes the problem so that simulation can be run on it. A mesh that is finer is more computationally expensive but also produces results of greater accuracy. It is therefore desirable to generate a mesh which is fine where accuracy is most needed but coarse where it is not \cite{cite04}. \\
+
+\noindent
+In every type of analysis that the FE method is used for (thermal, structural, fluid flow, electrical) there is a specific differential equation associated with each of the elements. In order to achieve overall convergence of the model the equations must be solved simultaneously to achieve a value for each of the discrete elements \cite{IntroductionToFE}. For this dissertation project attention will be given specifically to the problem of FEA meshing in the context of static structural analysis where the value calculated across each element is its stress. It makes sense to work on hybrid mesh refinement in the context of static structural analysis as it is likely the most common engineering application of the method and as such has the largest body of research that is relevant \cite{DolsakPaper94}\cite{IntroductionToFE}.\\
 
 \noindent
 For engineers the value obtained through computing the stresses under a particular set of conditions is feedback on the quality of their design. Ideally the results from an analysis will provide a good understanding of where the design is weak and how concentrated this weakness is. This information is used to either help verify the designs' quality or alternatively inform changes to its geometry or material properties so as to reduce stress on subsequent analysis \cite{cite06}.\\
@@ -245,11 +265,24 @@ Although it has not been developed as part of the project the application respon
 
 
 \subsection{System Overview}
-Determining the overall design of the system was initially hard since it was not clear exactly how many subsystems would be needed to mesh, evaluate and interface with LISA, what was clear was that the system would essentially be performing an optimisation procedure and as such needed to be driven iteratively towards a goal. It was therefore important to ensure the system maintained a modular architecture with well defined interfaces in order to allow for subsystems to be easily added and modified as the project progressed.
+Determining the overall design of the system was initially hard since it was not clear exactly how many subsystems would be needed to mesh, evaluate and interface with LISA, what was clear was that the system would essentially be performing an optimisation procedure and as such needed to be driven iteratively towards a goal. 
+
+ It was therefore important to ensure the system maintained a modular architecture with well defined interfaces in order to allow for subsystems to be easily added and modified as the project progressed.
+
+
+\begin{figure}
+  \centerline{\includegraphics[width=150mm, scale=1]{SystemDesignDiagram.jpeg}}
+  \caption{High level design of the system with its different modules}
+  \label{fig:h-refinementImp}
+\end{figure}
 
 
 \subsection{Modular Architecture}
 The modular architecture allows meshing algorithms and metrics for calculating mesh quality could be swapped interchanged was an important consideration in the design of the system. At best the quality of the output could be predicted for each method before it was integrated into the system and executed in a range of different scenarios. To have tightly coupled these individual components would have rendered the overall system a failure in the event that any one of them performed greatly worse than expected. Instead the loose coupling of the architecture has enabled the system to be considered as more of a framework for testing the effects of combining heuristic knowledge of a Finite element problem with a stress based refinement method.
+
+Although the system was highly modular It was also still desirable to maintain a hierarchy within the classes so that smaller components could be developed independently and contained within the larger ones. Composition was therefore generally favoured over inheritance as a means of building the architecture. 
+
+Static classes and methods were also used when needing to write utility functions that were required by multiple high level subsystems and therefore did no fit especially well into any particular one. Examples of these are generic vector algebra operations such as dot product, matrix determinants and normal vectors.
 
 %\subsection{Mesh improvement Loop}
 %As with many optimisation problems the refinement process is driven iteratively through a loop. Within the main loop all %interfacing with LISA, Mesh refinement and analysis is conducted which results in an updated version of the model that can be %handed to the subsequent iteration.
@@ -274,148 +307,11 @@ To allow allow for better performance when evaluating a range of different weigh
 %what happens for each loop iteration
 
 
-
-\begin{figure}[!h]
-  \centerline{\includegraphics[width=150mm, scale=1]{SystemDesignDiagram.jpeg}}
-  \caption{The basic bridge structure used to performing integration and system testing}
-  \label{fig:h-refinementImp}
-\end{figure}
-
-
-\section{Software Implementation}
-The following subsections detail the implementation of the final software solution that has been written to meet the objectives posed at the beginning of this dissertation.
-
-\subsection{Third Party FE Application}
-In order to demonstrate the potential feasibility of the hybrid approach it was first important to obtain a finite element solver which could be given a FE model containing data about forces, materials and the mesh structure and then execute the model pro grammatically so as to obtain stress results. \\ 
+\subsection{Simulation Data Model}
+Writing an API for LISA was the first clear stage of development for my project for which a design had to be considered. The API was crucial in order to program the more complex aspects using basic operations and avoid having to regularly perform direct string manipulation of the input files in order to manipulate the model. \\
 
 \noindent
-A multitude of commercial FE tools exist with there being a wide variety in both the complexity and cost associated with each tool. 
-Finite element software is typically very expensive due to its high development cost and small customer base. Tools used within industry such as ANSYS typically require a great deal of time in order to become proficient in their usage and can cost in excess of five thousand pounds a year for a single licence \cite{AnsysCost}. It was therefore important to find a tool which was both affordable while also powerful enough to demonstrate a working prototype of the re meshing method.
- 
-\subsection{LISA}
-After reviewing several FE applications used within industry in addition to a variety of less well known ones used within academia and by hobbyists LISA  was selected as the solver application for which to implement  the systems prototypes. \\ 
-
-\noindent
-\textbf{Strengths: }LISA as a FE tool which allows the user to run models of up to 1300 element for free; This was beneficial in allowing me to experiment with the software and gauge the feasibility of my projects concept before requiring a full version. Once at a stage in the project where each problem had been solved for small models containing less than 1300 elements an academic licence for the software was purchased for the projects use.
-
-LISA also provides a GUI which allows visual inspection of the model and its mesh; This is particularly useful for observing the output of the meshing algorithms which can often provide a human with a much better understanding of how the method has performed and whether or not there are obvious bugs. in the implementation of the meshing procedures \\ 
-
-\noindent
-\textbf{Weaknesses: } Due to LISA’s simplicity it does not come with an extensive API allowing for easy programmatic use of its inbuilt features, however it is still possible to interface with LISA through less direct means \cite{LISAManual}. LISA models are stored in .liml files which use XML as a meta mark-up format. The model files contain all the information about the model including the materials used as well as loads and constraints and of course the mesh. It is therefore possible to manipulate a .liml file having parsed its contents before writing a new version of the file which LISA can be called to solve. In order to more easily alter the model it made sense to write a wrapper  for the .liml files to abstract the manipulation of their content.
-
-\subsection{Languages and platforms}
-The final system has been written entirely using the C\# programming language (version 5.0) with Visual Studio 2015 as the development environment on a Windows 10 system. C\# is an application development language built on the .NET framework. Although any number of programming languages could have been used to implement the solution C\# offered a good compromise for developing a system with both structural rigidity through static typing and object orientation in addition to functionality to allow for rapid prototyping. C\# does this well through use of LINQ, a part of the standard library that provides a large number of higher order functions which allow for operations to be performed over any data structure that implements the built in IEnumerable interface. Given that much of the code within the project performs the same operation on collections of nodes and elements stored in Lists arrays and dictionaries which all implement IEnumerable the ability to write much of the project using this capability dramatically reduced the number of errors encountered and increased development speed.
-
-
-\subsection{Implementation Methodology}
-Due to the size of the software, which is now in excess of 14000 lines of code it was important to work systematically in order to continuously drive the project in the right direction and avoid the introduction of unnecessary complexity which would likely have resulted in the creation of bugs or simply increased the difficulty of adding new features.
-
-For the duration of the project the spiral methodology was adhered to. This enforced multiple deliverable stages for the project which were concluded with a supervisor meeting every one or two weeks. Adopting the spiral methodology also provided flexibility regarding the order in which tasks were able to take place outside of a spiral iteration. This was useful is necessary when conducing a research project where direction of work for subsequent iterations was largely driven by the findings of the work in the current iteration.
-
-Tasks were chosen every week for the project, the number of tasks and their complexity was determined using a combination of factors including their complexity, the criticality of the task e.g. did it need to be completed for other important tasks to be started and the time available to me as the individual undertaking the project (More tasks typically performed on weeks when less work was due for other modules.) 
-
-
-
-\subsection{Implementation of Subsystems}
-This section describes the implementation details of the various different subsystems which combine to form the overall solution.
-
-\subsubsection{Re-meshing using hierarchical refinement}
-Elements within FEA can typically be classified as either triangle or square based elements, each of these provide different strengths and weaknesses when required to mesh and solve models. Within industry triangular elements are typically preferable since it is always possible to generate an initial triangular mesh from any arbitrary CAD geometry algorithmically. This is done by simply making smaller triangles until all gaps along the edge of the geometry are filled \cite{}. The same cannot always be said  when meshing using square elements. For proof of the solutions concept however it was concluded that square based elements were preferable to triangular ones with since the steps required for a basic refinement are much simpler. In addition to this Its also significantly easier to define edges which the ILP rules can be applied to when edges naturally form within a structure through a chain of nodes along the edges of square elements.
-
-%The process of re meshing square based elements 
-
-After reviewing both h-refinement \cite{HandPRefinements} and r-refinement \cite{RRefinement} it was concluded h-refinement would be best the best approach to adopt for use in a due to its simplicity and more widespread use \cite{HandPRefinements} despite the fact that the mesh is usually more computationally expensive than it would have been if it was created using r-refinement \cite{RRefinement}\\ 
-
-Unfortunately Triangular meshes also generally incur a higher computational cost than an equivalent square element mesh due to added complexity of performing the calculations required to remesh in addition to requiring more elements over a given area to achieve the same accuracy.
-
-From an implementation standpoint writing a square based remeshing algorithm is also substantially easier as given an initial mesh made just of square elements the only task is to repeatedly divide each element into four sub elements, by contrast methods uses to re mesh triangular meshes vary greatly are typically more complex and have corresponding initial meshes that are harder to generate manually by human operators \cite{HandMeshing}.
-
-
-\subsubsection{hierarchical refinement meshing issue}
-A significant issue encountered when working with LISA on the project was an interface requirement specified by LISA requiring nodes for each type of element to be sorted in a specific geometric order. The general rule for node ordering within LISA is to order the nodes as a perimeter around an element in 3d space without paths between nodes crossing one another internal to the element. When first addressing this problem for simple models using elements of Quad4 type the obvious approach was to think of a simple quadrilateral resembling a square, write an algorithm to handle that as a base case before considering a more complex case. The resulting approach was the following:
-
-%do pseudo code for initial approach here
-\noindent
-This approach was sufficient for the vast majority of elements within the different models, however as model complexity increased multiple iterations of the heuristics resulted in increasingly distorted element shapes, resulting in rejection of elements with incorrectly sorted nodes by LISA. \\
- 
-\noindent
-In order to resolve this issue I needed to research and apply a convex hull algorithm to this problem. The subsequent solution was the following: \\ 
-
-\begin{algorithm}[H]
-	
- \State ${unsortedNodes} =  Node[1 \ldots 4]$\;
- \State ${sortedNodes} =  Node[1 \ldots 4]$\;
- 
- \While{number of sorted nodes \textless number of nodes in element}{
- 
-  Add first node in list that needs sorting to sorted list\;
-  \ForEach {$s \in unsortedNodes $}{
-  	compute distance from most recently sorted to s\;
-  	add to 
-  }
-  
-  \eIf{understand}{
-   go to next section\;
-   current section becomes this one\;
-   }{
-   go back to the beginning of current section\;
-  }
- }
-\caption{Initially Improvised approach}
-\end{algorithm}
-
-\noindent
-Despite the existence of algorithms for generating a convex hull in three dimensions due to the small number of points it made sense to assess the effectiveness of a 2d method first before committing and assess the effectiveness of that for resolving my problem. In order to do this I simply took my Quad4 elements and flattened them to a 2d representation by calculating the maximum delta between the greatest and smallest value on each axis and eliminating the axis with the smallest delta. This proved successful, when applied to the model this successfully removed incorrect ordering from elements that had been particularly skewed. \\ 
-	
-\begin{algorithm}[H]
- \KwData{this text}
- Flatten element to two dimensions\;
- \While{}{
-  read current\;
-  \eIf{understand}{
-   go to next section\;
-   current section becomes this one\;
-   }{
-   go back to the beginning of current section\;
-  }
- }
-\caption{Convex Hull Method}
-
-\end{algorithm}
-
-\noindent
-This method has O(n log n) time complexity however due to the size of n being 4 in all cases the complexity of sorting an individual element is constant, with the overall complexity of sorting all elements in the model being O(n) where n is the number of elements.
-
-
-\subsubsection{Stress Based Refinement}
-To focus meshing in areas of high stress each iteration needed to parse the results file from the previous iterations execution of LISA. LISA result files are in csv format by default and contain the displacements and stresses associated with each node within the model once it has been solved.
-
-Once the data in the output file has been parsed meshing can be conducted for high stress areas by averaging the stresses across the whole model and then cross referencing the node Ids in the results which have stresses above the average against the main data model allows a list of elements that can be instructed to refine themselves.
-
-
-\subsubsection{Rule Based Refinement}
-Having successfully implemented an simple stress refinement method the next key step of the systems development was to write a framework for executing each of the ILP rules published by Dolsak in his papers \cite{DolsakPaper91, DolsakPaper94, appOfILPToFEMeshDesign} \cite{ConsultRuleIntelltSystemFE}.
-
-Each rule is represented by a function within the final solution, this closely resembles their represented by Dolsak in his papers. Each of the rules resides within the ``RuleManager" class and takes a number of the defined edges as parameters. Each rule then checks the properties of a particular edge against properties which have been identified through the ILP learning mechanism as being important when the model executes. In cases where the rule takes more than one edge as an argument comparison for the properties of each edge are performed. Where a rule detects a relationship in the model the edge is assigned a value corresponding to its criticality, the value is then used by the meshing procedure to determine how many times it should repeatedly re mesh the elements along that edge.
-
-
- the significance of elements along a particular type of edge in determining the accuracy of the model. Some rules look for highly critical relationships  which if found have a high importance assigned to them, 
-
-indicate that additional meshing needs to occur for all elements that border the edge. The amount of meshing that occurs for each of the elements along those edges is specified within each of the rules.
-
-The properties that can exist between two edges when compared are the following:
-
-\begin{itemize}
-\item Edges opposite one another - the edges run alongside one another closely
-\item Edges posses the same form - 
-%finish this
-
-\item Edges are considered the same - to meet this requirement both edges must be almost the same length, opposite one another and posses the same form.
-
-\end{itemize}
-
-\subsubsection{Interfacing with LISA and the FE data model}
-Writing an API for LISA was the first stage of development for my project. The API was crucial in order to  which rely on the existence of different operations in order to easily manipulate the mesh. When the first re-meshing iteration occurs the system reads the .liml file into an equivalent class model, diagrams for which can be seen in figure 4 below. Each class in this model contains corresponding data and methods used to represent and manipulate the model. These methods are then used by the different refinement methods to generate a mesh which is ideally more optimal for the given problem, this adapted mesh can then be assessed by the module responsible for validating the meshes quality and written back to a .liml file for LISA to solve on the subsequent iteration. When designing the data model to represent the FE models state it was desirable to maintain coherence with the structure specified by LISA within the input XML files as closely as possible, this allowed for the data model to more easily be serialised when communicating with LISA. 
+When the first re-meshing iteration occurs the system needs to read the input .liml file into an equivalent class model, diagrams for which can be seen in figure 4 below. Each class in this model contains corresponding data and methods used to represent and manipulate the model. These methods are then used by the different refinement methods that exist in the different optimisation classes to alter the mesh, this adapted version of the mesh represented as a data model can then be assessed by the module responsible for validating mesh quality before finally being written back to a .liml file for LISA to solve on the subsequent iteration. When designing the data model to represent the state within LISA it was desirable to maintain coherence with the structure specified by LISA as closely as possible, this allowed for the data model to more easily be serialised when communicating with LISA without errors resulting from inconsistencies between the two representations. 
 
 \begin{figure}[!h]
 \centering
@@ -454,7 +350,138 @@ Writing an API for LISA was the first stage of development for my project. The A
 
 \clearpage
 \noindent
-One aspect of the data models design which greatly adds to the systems flexibility is the hierarchical design for representing the various Element types. At the root of this structure is the IElement interface, all new Element types must adhere to this in order for the various refinement methods to run. Implementing the interface are a range of abstract classes such as ``SquareBasedElem" and ``TriangleBasedElem" These classes are designed to contain methods that are generally applicable for calculating metrics and re meshing individual elements for elements of this type that are both in two and three dimensions. This is powerful since computing this for a 3d element is simply a reduction of the method for a 2d element over every face which comprises the 3d one. Finally underneath this level are the concrete classes which represent each specific type of element that can exist.
+One aspect of the data models design which greatly adds to the systems flexibility is the hierarchical design for representing the various Element types. At the root of this structure is the IElement interface, all new Element types must adhere to this in order for the various refinement methods to run. Implementing the interface are a range of abstract classes such as ``SquareBasedElem" and ``TriangleBasedElem" These classes are designed to contain methods that are generally applicable for calculating metrics and re meshing individual elements for elements of this type that are both in two and three dimensions. This is powerful since computing this for a 3d element is simply a reduction of the method for a 2d element over every face which comprises the 3d one. Finally underneath this level are the concrete classes which represent each specific type of element with its own bespoke characteristics. \\ 
+
+\begin{figure}
+  \centerline{\includegraphics[width=150mm, scale=1]{ElementHigerarchyDiagram2.png}}
+  \caption{Class diagram showing the hierarchy of element classification within the data model, due to time limitations I was not able to implement the respective classes for trangle and line based elements, to see image representations of each element type within this class diagram refer to element type appendix}
+  \label{fig:h-refinementImp}
+\end{figure}
+
+
+\section{Software Implementation}
+The following subsections detail the implementation of the final software solution that has been written to meet the objectives posed at the beginning of this dissertation.
+
+\subsection{Third Party FE Application}
+In order to demonstrate the potential feasibility of the hybrid approach it was first important to obtain a finite element solver which could be given a FE model containing data about forces, materials and the mesh structure and then execute the model pro grammatically so as to obtain stress results. \\ 
+
+\noindent
+A multitude of commercial FE tools exist with there being a wide variety in both the complexity and cost associated with each tool. 
+Finite element software is typically very expensive due to its high development cost and small customer base. Tools used within industry such as ANSYS typically require a great deal of time in order to become proficient in their usage and can cost in excess of five thousand pounds a year for a single licence \cite{AnsysCost}. It was therefore important to find a tool which was both affordable while also powerful enough to demonstrate a working prototype of the re meshing method.
+ 
+\subsection{LISA}
+After reviewing several FE applications used within industry in addition to a variety of less well known ones used within academia and by hobbyists LISA  was selected as the solver application for which to implement  the systems prototypes. \\ 
+
+\noindent
+\textbf{Strengths: }LISA as a FE tool which allows the user to run models of up to 1300 element for free; This was beneficial in allowing me to experiment with the software and gauge the feasibility of my projects concept before requiring a full version. Once at a stage in the project where each problem had been solved for small models containing less than 1300 elements an academic licence for the software was purchased for the projects use.
+
+LISA also provides a GUI which allows visual inspection of the model and its mesh; This is particularly useful for observing the output of the meshing algorithms which can often provide a human with a much better understanding of how the method has performed and whether or not there are obvious bugs. in the implementation of the meshing procedures \\ 
+
+\noindent
+\textbf{Weaknesses: } Due to LISA’s simplicity it does not come with an extensive API allowing for easy programmatic use of its inbuilt features, however it is still possible to interface with LISA through less direct means \cite{LISAManual}. LISA models are stored in .liml files which use XML as a meta mark-up format. The model files contain all the information about the model including the materials used as well as loads and constraints and of course the mesh. It is therefore possible to manipulate a .liml file having parsed its contents before writing a new version of the file which LISA can be called to solve. In order to more easily alter the model it made sense to write a wrapper  for the .liml files to abstract the manipulation of their content.
+
+\subsection{Languages and platforms}
+The final system has been written entirely using the C\# programming language (version 5.0) with Visual Studio 2015 as the development environment on a Windows 10 system. C\# is an application development language built on the .NET framework. Although any number of programming languages could have been used to implement the solution C\# offered a good compromise for developing a system with both structural rigidity through static typing and object orientation in addition to functionality to allow for rapid prototyping. C\# does this well through use of LINQ, a part of the standard library that provides a large number of higher order functions which allow for operations to be performed over any data structure that implements the built in IEnumerable interface. Given that much of the code within the project performs the same operation on collections of nodes and elements stored in Lists arrays and dictionaries which all implement IEnumerable the ability to write much of the project using this capability dramatically reduced the number of errors encountered and increased development speed.
+
+
+\subsection{Implementation Methodology}
+Due to the size of the software, which is now in excess of 14000 lines of code it was important to work systematically in order to continuously drive the project in the right direction and avoid the introduction of unnecessary complexity. Through regular reviewal and re factoring this was achieved which dramatically helped to reduced the amount of bugs introduced. \\
+
+\noindent
+For the duration of the project the spiral methodology was adhered to. This enforced multiple deliverable stages that were concluded with a supervisor meeting every one or two weeks. Adopting the spiral methodology also provided flexibility regarding the order in which tasks were able to take place outside of a spiral iteration. This was necessary when conducing a research driven project where direction of work for subsequent development iterations was largely driven by the  findings of the work in the previous ones. \\
+
+
+\noindent
+Tasks were chosen every week for the project, the number of tasks and their complexity was determined using a combination of factors including their complexity, the criticality of the task e.g. Did it need to be completed for other important tasks to be started and the time available to me as the individual undertaking the project (More tasks typically performed on weeks when less work was due for other modules.
+
+\subsection{Implementation of Subsystems}
+This section describes the implementation details of the various different subsystems which combine to form the overall solution.
+
+\subsubsection{Re-meshing using hierarchical refinement}
+Elements within traditional FEA can typically be classified as either triangle or square based elements, each of these provide different strengths and weaknesses when required to mesh and solve models. Within industry triangular elements are typically preferable since it is always possible to generate an initial triangular mesh from any arbitrary CAD geometry algorithmically. This is done by simply making smaller triangles until all gaps along the edge of the geometry are filled \cite{}. The same cannot always be said  when meshing using square elements. For proof of the solutions concept however it was concluded that square based elements were preferable to triangular ones with since the steps required for a basic refinement are much simpler. In addition to this Its also significantly easier to define edges which the ILP rules can be applied to when edges naturally form within a structure through a chain of nodes along the edges of square elements.
+
+%The process of re meshing square based elements 
+
+After reviewing both h-refinement \cite{HandPRefinements} and r-refinement \cite{RRefinement} it was concluded h-refinement would be best the best approach to adopt for use in a due to its simplicity and more widespread use \cite{HandPRefinements} despite the fact that the mesh is usually more computationally expensive than it would have been if it was created using r-refinement \cite{RRefinement}\\ 
+
+Unfortunately Triangular meshes also generally incur a higher computational cost than an equivalent square element mesh due to added complexity of performing the calculations required to remesh in addition to requiring more elements over a given area to achieve the same accuracy.
+
+From an implementation standpoint writing a square based remeshing algorithm is also substantially easier as given an initial mesh made just of square elements the only task is to repeatedly divide each element into four sub elements, by contrast methods uses to re mesh triangular meshes vary greatly are typically more complex and have corresponding initial meshes that are harder to generate manually by human operators \cite{HandMeshing}.
+
+\subsection{Fast node lookup and update of nodes}
+A key requirement for the design of the data model generated by the hierarchical re meshing process was the need to perform fast lookup of nodes already present in the mesh. Lookup is important within the meshing methods as a means of checking whether a node that is about to be created already exists within the model, in the event that no such node already exists a new one can be created however if it does then instead of creating a new node the node that already exists needs to be connected to a node in an adjacent element that is currently being refined. \\
+
+\noindent
+This issue arose as a result of subdivision for every individual element being a responsibility of that element. From a software engineering perspective was very good since it meant the low level meshing process for each different type of element could be written within that elements class thus avoiding the need for much heavier generalised refinement classes. Most likely these generalised classes would would need to know how to perform the meshing for all elements in the model at once and for each of the different potential element types passed to it as a parameter which is pretty messy. \\ 
+
+\noindent
+Consequently despite each Element being capable of meshing itself perfectly when refined elements adjacent to that element also requiring refinement needed the ability to reconnect the new nodes along their edges to those already created by the adjacent element. \colorbox{yellow}{This can be seen below in figure x} \\ 
+
+
+\begin{figure}
+  \centerline{\includegraphics[width=100mm , scale=1]{nodeLinking.png}}
+  \caption{The need for an element to check for existing adjacent nodes when subdividing itself during refinement,\\
+  	Orange Nodes - An original node for one or more elements \\
+	Red Nodes - new nodes made by Elem A \\
+	Purple Nodes - new nodes made by Elem B \\
+  }
+  \label{fig:h-refinementImp}
+\end{figure}
+
+
+\noindent
+The solution to this problem was to store all the nodes in the mesh model within a C\# dictionary structure a reference to which is passed to each element within the model. The dictionary can be indexed using a Tuple of the x, y and z coordinates for the new potential element which will either return a node already at that location or indicate that no such node exists, in which case that element is then responsible for creating the node as its first instance. Dictionaries in C\# represent a generalised instance of a hash table ensuring that lookup and insert are both constant time on average.
+
+
+\subsubsection{hierarchical refinement meshing issue}
+A significant issue encountered when working with LISA on the project was an interface requirement specified by LISA requiring nodes for each type of element to be sorted in a specific geometric order. The general rule for node ordering within LISA is to order the nodes as a perimeter around an element in 3d space without paths between nodes crossing one another internal to the element. When first addressing this problem for simple models using elements of Quad4 type the obvious approach was to think of a simple quadrilateral resembling a square, write an algorithm to handle that as a base case before considering a more complex case. The resulting approach was the following approach:
+
+%do pseudo code for initial approach here
+\noindent
+This approach was sufficient for the vast majority of elements within the different models, however as model complexity increased multiple iterations of the heuristics resulted in increasingly distorted element shapes, resulting in rejection of elements with incorrectly sorted nodes by LISA. \\
+ 
+\noindent
+In order to resolve this issue I needed to research and apply a convex hull algorithm to this problem. The subsequent solution was the following: \\ 
+
+%algo 1
+
+\noindent
+Despite the existence of algorithms for generating a convex hull in three dimensions due to the small number of points it made sense to assess the effectiveness of a 2d method first before committing and assess the effectiveness of that for resolving my problem. In order to do this I simply took my Quad4 elements and flattened them to a 2d representation by calculating the maximum delta between the greatest and smallest value on each axis and eliminating the axis with the smallest delta. This proved successful, when applied to the model this successfully removed incorrect ordering from elements that had been particularly skewed. \\ 
+	
+%algo 2
+
+\noindent
+This method has O(n log n) time complexity however due to the size of n being 4 in all cases the complexity of sorting an individual element is constant, with the overall complexity of sorting all elements in the model being O(n) where n is the number of elements.
+
+
+\subsubsection{Stress Based Refinement}
+To focus meshing in areas of high stress each iteration needed to parse the results file from the previous iterations execution of LISA. LISA result files are in csv format by default and contain the displacements and stresses associated with each node within the model once it has been solved.
+
+Once the data in the output file has been parsed meshing can be conducted for high stress areas by averaging the stresses across the whole model and then cross referencing the node Ids in the results which have stresses above the average against the main data model allows a list of elements that can be instructed to refine themselves.
+
+
+\subsubsection{Rule Based Refinement}
+Having successfully implemented an simple stress refinement method the next key step of the systems development was to write a framework for executing each of the ILP rules published by Dolsak in his papers \cite{DolsakPaper91, DolsakPaper94, appOfILPToFEMeshDesign} \cite{ConsultRuleIntelltSystemFE}.
+
+Each rule is represented by a function within the final solution, this closely resembles their represented by Dolsak in his papers. Each of the rules resides within the ``RuleManager" class and takes a number of the defined edges as parameters. Each rule then checks the properties of a particular edge against properties which have been identified through the ILP learning mechanism as being important when the model executes. In cases where the rule takes more than one edge as an argument comparison for the properties of each edge are performed. Where a rule detects a relationship in the model the edge is assigned a value corresponding to its criticality, the value is then used by the meshing procedure to determine how many times it should repeatedly re mesh the elements along that edge.
+
+
+ the significance of elements along a particular type of edge in determining the accuracy of the model. Some rules look for highly critical relationships  which if found have a high importance assigned to them, 
+
+indicate that additional meshing needs to occur for all elements that border the edge. The amount of meshing that occurs for each of the elements along those edges is specified within each of the rules.
+
+The properties that can exist between two edges when compared are the following:
+
+\begin{itemize}
+\item Edges opposite one another - the edges run alongside one another closely
+\item Edges posses the same form - 
+%finish this
+
+\item Edges are considered the same - to meet this requirement both edges must be almost the same length, opposite one another and posses the same form.
+
+\end{itemize}
+
+
 
 
 
@@ -477,7 +504,7 @@ As discussed under evaluation a core issue faced when conducting analysis of the
 
 
 \noindent
-In practice there are multiple complications to doing this however, several of these arise from ambiguity in Dolsaks paper regarding what constitutes a an edge which is for example "long", "important" and  does not provide clear definitions for 
+In practice there are multiple complications surrounding this, several of these arise from ambiguity in Dolsaks paper regarding what constitutes a an edge which is for example "long" or "important". As a result edges are only able to be defined to the extent that a user has confidence in their understanding of these concepts.
 
 
 Having considered a method using these properties of the mesh several days were then spent attempting to implement it.
@@ -490,23 +517,30 @@ Having done so
 \section{Evaluation of Project}
 Evaluation has been essential in order to conclude the effectiveness of both the algorithms used to solve the problem and the capability of their implementation within the final software solution. In order to do this evaluation has been conducted at several levels ranging from functional requirements for the software specification at the lowest to high level analysis of the programs output which in many cases is hard to define and varies from model to model.
 
-\section{Functional testing}
+\subsection{testing}
 In order to validate the system against many of the functional requirements the system only needs to be run on several basic models with different input configurations, observation of the output demonstrates the systems ability to evaluate the quality of meshes using a range of metrics and refinement occurring as a result of both the stresses induced by the user and on their categorisation of edges. 
 
-\section{Non functional testing}
+\subsection{Non functional testing}
 
 
 
 \subsection{Evaluation of the system running for various models}
-Although the main implementation for this project was the system capable of performing the tasks described above on very simple structures such as a cantilever beam, to demonstrate general applicability with regards to real engineering problems demanded the creation of several models resembling basic equivalents of structures that FE methods would be used on within real engineering analysis.
+Although the main implementation for this project was the system capable of performing the tasks described above on very simple structures such as a cantilever beam, to demonstrate general applicability with regards to real engineering problems demanded the creation of several models resembling basic equivalents of structures that FE methods would be used on within real engineering analysis. In order to do this and validate the heuristic component against the results obtained in academic papers two of the three models were based on those previously used by Dolsak (Paper mill and Cylinder structures) The third suspension bridge model which was developed specifically to demonstrate its potential capabilities beyond that of the simplistic verification structures.
+
+These initial models were constructed manually using LISA's graphical user interface given some basic measurements by Dolsak and in the case of the suspension bridge from documents available on the web \cite{Dolsak91} \cite{SuspensionBridgeMeasurements}.
 
 \subsubsection{Suspension Bridge structure}
+
+
+\noindent
+The basic bridge structure consists of 196 elements and 212 nodes, which is very coarse for a FE mesh structure. \\
+
 
 \noindent
 The primary model for which work on the latter half of the project was based upon was the following suspension bridge model:
 
 
-\begin{figure}[!h]
+\begin{figure}
   \centerline{\includegraphics[width=150mm, scale=1]{BasicBridge.jpeg}}
   \caption{Diagram representing the general structure of the system with interactions between non internal entities such as files and LIA shown using dashed lines}
   \label{fig:h-refinementImp}
@@ -514,8 +548,6 @@ The primary model for which work on the latter half of the project was based upo
 
 
 \newpage
-\noindent
-The initial model which was constructed manually using LISA's graphical user interface given some basic measurements for such a bridge in real \cite{}life consists of 196 elements and 212 nodes, which is very coarse for a FE mesh structure. The bridge is constrained at the base of each pillar, meaning all forces must exit the model through one of the four pillars. When \\ 
 
 
 \noindent
@@ -571,7 +603,6 @@ this the models used by Dolsak in order to train his initial ILP system responsi
 \end{figure}
 
 
-
 \subsubsection{Cylinder}
 Obtaining results based on the edge relationships described within the research literature was the first step required when performing evaluation of the cylinder. The rules provided in Dolasks paper used to generate the initial JSON file were the following:
 
@@ -597,8 +628,24 @@ Obtaining results based on the edge relationships described within the research 
 
 The resulting mesh generated by the system after increasing numbers of iterations based primarily
 
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{DolsakCylinderWithinLisa.jpeg}
+  \caption{Cylinder cross section initial construction within Lisa \cite{DolsakPaper91}}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{DolsakCylinderMeshed.jpeg}
+  \caption{Diagram representing the general structure of the system with interactions between non internal entities such as files and LIA shown using dashed lines}
+  \label{fig:sub2}
+\end{subfigure}
+\label{fig:test}
+\end{figure}
 
-\subsubsection{Cylinder}
+
 
 
 \newpage
@@ -606,12 +653,32 @@ The resulting mesh generated by the system after increasing numbers of iteration
 \section{Evaluation of testing on models}
 Executing the three main models with a range of simulation conditions formed the bulk of my system level testing for the project.
 
-\subsection{Suspension Bridge}
+
+
+
+\subsection{Evaluation of Subsystems based on model evaluation}
+Having run the system on the range of models described above it was possible to begin assessing it's ability to mesh and the use of Dittmers metrics for assessing 
+the quality of each mesh.
+
+\subsubsection{Analysis of Dittmer mesh quality metrics}
+When evaluating Dittmers metrics for distinguishing between meshes of different qualities there were several key observations about the metrics in particular which resulted in re assessment of how to evaluate the mesh qualities in general.
+Central to these observations was that although metrics provided by Dittmer give a clear indication of the general accuracy of stress across a mesh or a particular element in the majority of cases they give no further insight into the strengths of the particular element arrangement within a given mesh. Consequently it was possible to demonstrate that the meshes produced as a result of the methods retailed general quality that is desired within general meshes but not that the mesh was especially good given the particular model it was based on. \\
+
+
+\noindent
+After evaluating these initial results it became clear that demonstrating the quality of mesh tailoring would be a harder task than originally conceived requiring. It became clear that a metric for demonstrating this property would involve calculating the similarity of the resulting mesh to some hypothetical ideal for the model.
+
+Additional research revealed that generally this conclusion was generally agreed upon by both academics and industrial users of mesh quality metrics. With the difficulty lying in the design of metrics which are consistent indicators of quality across a wide range of geometries they are typically used as a means of validating a is not of poor quality although not necessarily of high.
+
+As the first known system that performs this type of hybrid remeshing it therefore made sense to attempt development of a metric which although could not be used to compare the quality of resulting meshes to those produces by different tools would be useful for contrasting the quality of the meshes that were produced by the system.
+
+
+%Subsequent research suggested
 
 
 
 
-
+\subsubsection{Evaluation of stress based remeshing}
 
 
 
