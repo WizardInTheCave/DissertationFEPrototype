@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DisertationFEPrototype.Model.Analysis
 {
-    class Force
+    public class Force
     {
         string selection;
         double x;

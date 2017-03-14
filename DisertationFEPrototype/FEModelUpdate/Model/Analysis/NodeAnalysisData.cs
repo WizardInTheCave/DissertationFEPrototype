@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DisertationFEPrototype.Model
 {
 
-    class NodeAnalysisData
+    public class NodeAnalysisData
     {
         int id;
 

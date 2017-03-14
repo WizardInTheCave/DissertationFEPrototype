@@ -1,5 +1,4 @@
-﻿using DisertationFEPrototype.Model.Structure;
-using DisertationFEPrototype.Optimisations;
+﻿using DisertationFEPrototype.Optimisations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
-    class Quad4QualMetricCalcs
+    public class Quad4QualMetricCalcs
     {
 
         Quad4Elem elem;

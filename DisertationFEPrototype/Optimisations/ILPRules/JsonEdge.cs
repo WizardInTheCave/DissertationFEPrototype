@@ -14,12 +14,6 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
         public string boundaryType { get; set; }
         public List<int> nodePath { get; set; }
 
-
-        //public enum LoadingType
-        //{
-        //    notLoaded, oneSideLoaded, twoSidesLoaded, ContinuiousLoading, noneSet
-        //};
-
         public Edge.LoadingType  getConvertedLoadingType()
         {
             Edge.LoadingType returnType = Edge.LoadingType.noneSet;

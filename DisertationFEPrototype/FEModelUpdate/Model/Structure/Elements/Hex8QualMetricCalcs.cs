@@ -1,4 +1,4 @@
-﻿using DisertationFEPrototype.Model.Structure;
+﻿using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using DisertationFEPrototype.Optimisations;
 
 namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
-    class Hex8QualMetricCalcs
+    public class Hex8QualMetricCalcs
     {
 
         readonly double LONGEST_EDGE_DEFAULT = 0.0;

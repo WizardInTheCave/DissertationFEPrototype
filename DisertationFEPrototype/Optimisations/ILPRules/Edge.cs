@@ -1,11 +1,9 @@
 ﻿
+using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using DisertationFEPrototype.FEModelUpdate;
-using DisertationFEPrototype.Model.Structure;
 
 namespace DisertationFEPrototype.Optimisations.ILPRules
 {

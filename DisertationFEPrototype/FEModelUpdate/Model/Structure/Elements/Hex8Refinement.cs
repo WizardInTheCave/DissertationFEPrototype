@@ -1,4 +1,4 @@
-﻿using DisertationFEPrototype.Model.Structure;
+﻿using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +12,13 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
     /// <summary>
     /// Decided to Make a seperate class for the refinement process for Hex8 since it is a bit more complex 
     /// </summary>
-    class Hex8Refinement
+    public class Hex8Refinement
     {
-
-
 
         //Node[] inputNodes;
         //private Dictionary<Tuple<double, double, double>, Node> allModelNodes;
 
         //List<Hex8Elem> childNodes;
-
-
         public List<IElement> SubElems
         {
             get

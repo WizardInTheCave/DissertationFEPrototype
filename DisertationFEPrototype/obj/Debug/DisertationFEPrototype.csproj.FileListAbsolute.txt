@@ -6,7 +6,6 @@ C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\Diser
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\DisertationFEPrototype.pdb
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.exe
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.pdb
-C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.csprojResolveAssemblyReference.cache
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Collections.dll
@@ -19,3 +18,4 @@ C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\Diser
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Math.xml
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Syntax.xml
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\Loyc.Utilities.xml
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\DisertationFEPrototype\obj\Debug\DisertationFEPrototype.csprojResolveAssemblyReference.cache

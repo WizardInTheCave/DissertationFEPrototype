@@ -1,4 +1,4 @@
-﻿using DisertationFEPrototype.Model.Structure;
+﻿using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DisertationFEPrototype.Model.Analysis.MaterialProps
 {
-    class Geometric
+    public class Geometric
     {
         string type;
         double thickness;

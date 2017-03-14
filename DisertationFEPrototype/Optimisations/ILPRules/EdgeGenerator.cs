@@ -1,6 +1,4 @@
 ﻿using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
-using DisertationFEPrototype.Model;
-using DisertationFEPrototype.Model.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +9,8 @@ using System.Diagnostics;
 using DisertationFEPrototype.Optimisations;
 using Newtonsoft.Json;
 using System.IO;
+using DisertationFEPrototype.FEModelUpdate.Model;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 
 namespace DisertationFEPrototype.Optimisations.ILPRules
 {

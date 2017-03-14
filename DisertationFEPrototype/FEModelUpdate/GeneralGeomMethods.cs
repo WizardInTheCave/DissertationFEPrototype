@@ -1,4 +1,4 @@
-﻿using DisertationFEPrototype.Model.Structure;
+﻿using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace DisertationFEPrototype.FEModelUpdate
     /// <summary>
     /// this class contains any geometry based methods which are used within different sections of the codebase
     /// </summary>
-    class GeneralGeomMethods
+    public class GeneralGeomMethods
     {
         public static double dotProduct(double[] a, Tuple<double, double, double> b)
         {

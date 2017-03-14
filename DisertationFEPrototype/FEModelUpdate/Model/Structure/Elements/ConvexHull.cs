@@ -1,4 +1,4 @@
-﻿using DisertationFEPrototype.Model.Structure;
+﻿using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 using DisertationFEPrototYpe.FEModelUpdate.Model.Structure.Elements;
 using Loyc.Collections;
 using Loyc.Geometry;
@@ -17,7 +17,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
     /// 
     /// very cool algorithm though
     /// </summary>
-    class ConvexHull
+    public class ConvexHull
     {
         /// <summary>
         /// Computes the convex hull of a polygon, in clockwise order in a Y-up 

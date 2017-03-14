@@ -8,8 +8,9 @@ using DisertationFEPrototype.Model.Analysis;
 using DisertationFEPrototype.Optimisations.ILPRules;
 using DisertationFEPrototype.MeshQualityMetrics;
 using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
-using DisertationFEPrototype.Model.Structure;
 using DisertationFEPrototype.FEModelUpdate;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate.Model;
 
 namespace DisertationFEPrototype.Optimisations
 {
@@ -93,9 +94,6 @@ namespace DisertationFEPrototype.Optimisations
 
             //List<double> aspectRatios = meshQualityAssessment.ElemQualMetrics.AspectRatios;
             //List<double> maxCornerAngles = meshQualityAssessment.ElemQualMetrics.MaxCornerAngles;
-
-
-
 
             //List<Node> all_nodes = getAllNodes(flatElemTree);
 

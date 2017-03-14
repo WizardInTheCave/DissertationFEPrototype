@@ -13,7 +13,7 @@ namespace DisertationFEPrototype.MeshQualityMetrics
     /// to Control Mesh Creation Parameters
     /// Jeremy P.Dittmer1, C.Greg Jensen1, Michael Gottschalk3 and Thomas Almy4
     /// </summary>
-    class ElementQualityMetrics
+    public class ElementQualityMetrics
     {
         List<double> aspectRatios;
         List<double> maxCornerAngles;

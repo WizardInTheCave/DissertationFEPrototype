@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace DisertationFEPrototype.Model.Analysis
 {
-    class FixSelection
+    public class FixSelection
     {
         FaceSelection selection;
         public FaceSelection Selection{
             get{
                 return this.selection;
             }
-
         }
 
         /// <summary>

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DisertationFEPrototype.Model.Structure;
 using DisertationFEPrototYpe.FEModelUpdate.Model.Structure.Elements;
 
 namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
-    abstract class SquareBasedElem : IElement
+    public abstract class SquareBasedElem : IElement
     {
+
 
         // was int?
         protected int? Id;
@@ -442,11 +442,11 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         }
 
 
-        public double computeLongestEdge(Tuple<Node, Node>[] nodes, double LONGEST_EDGE_DEFAULT)
+        public double computeLongestEdge(Tuple<Node, Node>[] edges, double LONGEST_EDGE_DEFAULT)
         {
             double currentlyLongestEdge = LONGEST_EDGE_DEFAULT;
 
-            double lengthsMax = nodes.Select(x => x.Item1.distanceTo(x.Item2)).Max();
+            double lengthsMax = edges.Select(x => x.Item1.distanceTo(x.Item2)).Max();
             if (lengthsMax > LONGEST_EDGE_DEFAULT)
             {
                 currentlyLongestEdge = lengthsMax;
@@ -454,11 +454,11 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             return currentlyLongestEdge;
         }
 
-        public double computeShortestEdge(Tuple<Node, Node>[] nodes, double SHORTEST_EDGE_DEFAULT)
+        public double computeShortestEdge(Tuple<Node, Node>[] edges, double SHORTEST_EDGE_DEFAULT)
         {
 
             double currentlyShortestEdge = SHORTEST_EDGE_DEFAULT;
-            double lengthsMin = nodes.Select(x => x.Item1.distanceTo(x.Item2)).Min();
+            double lengthsMin = edges.Select(x => x.Item1.distanceTo(x.Item2)).Min();
             if (lengthsMin < SHORTEST_EDGE_DEFAULT)
             {
                 currentlyShortestEdge = lengthsMin;

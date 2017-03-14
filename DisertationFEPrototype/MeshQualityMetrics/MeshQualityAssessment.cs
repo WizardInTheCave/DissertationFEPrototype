@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DisertationFEPrototype.Model;
 using DisertationFEPrototype.MeshQualityMetrics;
-using DisertationFEPrototype.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate.Model;
 
 namespace DisertationFEPrototype.MeshQualityMetrics
 {
@@ -13,7 +14,7 @@ namespace DisertationFEPrototype.MeshQualityMetrics
     /// Currently these mesh quality metrics are taken from the following paper:
     /// "Mesh Optimization Using a Genetic Algorithm  to Control Mesh Creation Parameters" by
     /// </summary>
-    class MeshQualityAssessment
+    public class MeshQualityAssessment
     {
         MeshData meshData;
 

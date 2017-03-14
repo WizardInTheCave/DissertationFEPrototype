@@ -1,4 +1,4 @@
-﻿using DisertationFEPrototype.Model.Structure;
+﻿using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DisertationFEPrototYpe.FEModelUpdate.Model.Structure.Elements
 {
-    class ConvexHullPoint
+    public class ConvexHullPoint
     {
-
         public double X;
         public double Y;
         public Node node3d;

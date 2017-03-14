@@ -14,6 +14,7 @@ using System;
 
 using System.Linq;
 using DisertationFEPrototype.Optimisations.ILPRules;
+using DisertationFEPrototype.FEModelUpdate.Model;
 
 namespace DisertationFEPrototype
 {

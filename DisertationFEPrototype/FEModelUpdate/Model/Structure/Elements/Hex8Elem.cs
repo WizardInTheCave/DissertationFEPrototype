@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using DisertationFEPrototype.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 
 namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
-    class Hex8Elem : SquareBasedElem
+    public class Hex8Elem : SquareBasedElem
     {
 
         //int? id;

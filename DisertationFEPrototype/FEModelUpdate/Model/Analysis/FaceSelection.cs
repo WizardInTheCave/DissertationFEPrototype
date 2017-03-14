@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DisertationFEPrototype.Model.Analysis
 {
-    class FaceSelection
+    public class FaceSelection
     {
         string name;
         List<Face> faces;

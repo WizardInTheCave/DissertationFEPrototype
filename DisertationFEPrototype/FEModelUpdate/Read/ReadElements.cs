@@ -8,10 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using DisertationFEPrototype.Model;
-
 using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
-using DisertationFEPrototype.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate.Model;
 
 namespace DisertationFEPrototype.FEModelUpdate.Read
 {

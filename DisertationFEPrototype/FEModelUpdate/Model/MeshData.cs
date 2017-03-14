@@ -1,5 +1,4 @@
 ﻿using DisertationFEPrototype.Model.Analysis;
-using DisertationFEPrototype.Model.Structure;
 using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 
 using DisertationFEPrototype.FEModelUpdate.Model.Structure;
@@ -10,12 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DisertationFEPrototype.Model
+namespace DisertationFEPrototype.FEModelUpdate.Model
 {
     /// <summary>
     /// This class is a representation of
     /// </summary>
-    class MeshData
+    public class MeshData
     {
         Dictionary<Tuple<double, double, double>, Node> nodes;
         List<IElement> elements;

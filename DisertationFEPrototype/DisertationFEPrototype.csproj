@@ -79,7 +79,6 @@
     <Compile Include="FEModelUpdate\Model\Analysis\NodeAnalysisData.cs" />
     <Compile Include="FEModelUpdate\Model\Analysis\FixSelection.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\ConvexHullPoint.cs" />
-    <Compile Include="FEModelUpdate\Model\Structure\Elements\GeneralMetricCalcMethods.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\ConvexHull.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\Hex8QualMetricCalcs.cs" />
     <Compile Include="FEModelUpdate\Model\Structure\Elements\IElement.cs" />
@@ -113,7 +112,6 @@
     <Compile Include="Optimisations\ILPRules\DeserializedEdgeGroup.cs" />
     <Compile Include="Optimisations\ILPRules\EdgeIdentifier.cs" />
     <Compile Include="Optimisations\ILPRules\JsonEdge.cs" />
-    <Compile Include="Optimisations\ILPRules\Rules.cs" />
     <Compile Include="Optimisations\OptimisationManager.cs" />
     <Compile Include="Optimisations\ILPRules\Edge.cs" />
     <Compile Include="Optimisations\ILPRules\EdgeGenerator.cs" />

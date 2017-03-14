@@ -9,7 +9,8 @@ using System.Diagnostics;
 using System.IO;
 using DisertationFEPrototype.Model.Analysis;
 using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
-using DisertationFEPrototype.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate.Model;
 
 namespace DisertationFEPrototype.ModelUpdate
 {

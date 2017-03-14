@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DisertationFEPrototype.Model.Analysis.MaterialProps
 {
-    class Mechanical
+    public class Mechanical
     {
         string type;
         long youngsModulus;

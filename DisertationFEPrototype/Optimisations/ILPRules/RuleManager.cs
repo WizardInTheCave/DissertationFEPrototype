@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DisertationFEPrototype.Optimisations.ILPRules;
 using DisertationFEPrototype.Model;
 using DisertationFEPrototype.FEModelUpdate;
-using DisertationFEPrototype.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate.Model;
 
 namespace DisertationFEPrototype.Optimisations.ILPRules
 {
@@ -50,8 +50,6 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             // do comparisons between all of the different edges in the model.
             foreach (Edge edge in edges)
             {
-
-
                 rule4(edge);
                 rule9(edge);
                 rule10(edge);
@@ -69,9 +67,6 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
                     }
                 }
             }
-
-            // fileLines.Add("PAUSE");
-            // System.IO.File.WriteAllLines(@"D:\Documents\DissertationWork\models\ruleResults.txt", fileLines.ToArray());
 
         }
 

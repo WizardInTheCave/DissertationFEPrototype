@@ -8,41 +8,64 @@ namespace DisertationFEPrototype
 {
     static class Program
     {
-        static object statObjLocker = new object();
-
 
         /// <summary>
         /// The main entry point for the application.
+        /// Read in possible command line arguments specifying key inoput folders and files so the system can execute
         /// </summary>
-        [STAThread]
-        static void Main()
+        // [STAThread]
+        static void Main(string[] args)
         {
-            runAllExperiments();
+
+            string topLevelFolder = @"..\Experiments\BridgeAdvanced";
+            string modelFile = "bridgeAdvanced.liml";
+            string edgeDefinitionFile = "modelEdges.json";
+            string modelAnalysisFileName = "bridgeAdvancedOut.csv";
+            int k = 2;
+
+            if (args.Length < 0)
+            {
+                topLevelFolder = args[0];
+            }
+            else if (args.Length > 1)
+            {
+                modelFile = args[1];
+            }
+            else if (args.Length > 2)
+            {
+                edgeDefinitionFile = args[2];
+            }
+            else if (args.Length > 3)
+            {
+                edgeDefinitionFile = args[3];
+            }
+            else if (args.Length > 4)
+            {
+                int.TryParse(args[3], out k);
+            }
+
+
+            runAllExperiments(topLevelFolder, modelFile, edgeDefinitionFile, modelAnalysisFileName, k);
         }
 
         /// <summary>
         /// This method runs the system a whole bunch of times with variations on how much each method is used when meshing,
         /// this is so data can be gathered about the effectiveness of each of the different methods
         /// </summary>
-        static void runAllExperiments()
+        static void runAllExperiments(string topLevelFolder, string modelFile, string edgeDefinitionFile, string modelAnalysisFileName, int k)
         {
 
             List<Tuple<short, short>> experimentVals = new List<Tuple<short, short>>();
 
-            string modelFile = "bridgeAdvanced.liml";
-            string modelAnalysisFileName = "bridgeAdvancedOut.csv";
-            string edgeDefinitionFile = "modelEdges.json";
-
-            // create permutations to try for the different methods.
-            for (short ii = 0; ii < 2; ii++)
+      
+            // create combinations to try for the different methods.
+            for (short ii = 0; ii < k; ii++)
             {
-                for (short jj = 0; jj < 2; jj++)
+                for (short jj = 0; jj < k; jj++)
                 {
                     experimentVals.Add(new Tuple<short, short>(ii, jj));
                 }
             }
-
-            string topLevelFolder = @"D:\Documents\DissertationWork\models\Experiments\BridgeAdvancedFol";
 
             Directory.SetCurrentDirectory(topLevelFolder);
 

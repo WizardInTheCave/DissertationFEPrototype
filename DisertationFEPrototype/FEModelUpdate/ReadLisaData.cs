@@ -12,6 +12,7 @@ using DisertationFEPrototype.FEModelUpdate.Read;
 using DisertationFEPrototype.Model.Analysis;
 using DisertationFEPrototype.Model.Analysis.MaterialProps;
 using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
+using DisertationFEPrototype.FEModelUpdate.Model;
 
 namespace DisertationFEPrototype.FEModelUpdate
 {

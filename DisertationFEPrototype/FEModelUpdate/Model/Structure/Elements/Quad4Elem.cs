@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DisertationFEPrototype.FEModelUpdate;
 using DisertationFEPrototype;
-using DisertationFEPrototype.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure;
 using System.Collections;
 using System.Linq.Expressions;
 
@@ -13,7 +13,7 @@ using DisertationFEPrototype.Optimisations;
 
 namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
-    class Quad4Elem : SquareBasedElem
+    public class Quad4Elem : SquareBasedElem
     {
 
         Quad4QualMetricCalcs propCalcs;

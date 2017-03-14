@@ -8,7 +8,7 @@ using DisertationFEPrototype.Model.Analysis.MaterialProps;
 
 namespace DisertationFEPrototype.Model.Analysis
 {
-    class Material
+    public class Material
     {
         int id;
         string name;

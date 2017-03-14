@@ -1,0 +1,62 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Motivation and Background}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Properties of finite element models}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Limitations and general considerations}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Related Work}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Traditional Stress refinement methods}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Uses of Artificial Intelligence and Machine Learning}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Quality metrics}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Description of the work}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Aims and Objectives}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{System specification}{}% 11
+\BOOKMARK [1][-]{section.6}{Functional Requirements}{}% 12
+\BOOKMARK [1][-]{section.7}{Non-Functional Requirements}{}% 13
+\BOOKMARK [1][-]{section.8}{System Design}{}% 14
+\BOOKMARK [2][-]{subsection.8.1}{System Overview}{section.8}% 15
+\BOOKMARK [2][-]{subsection.8.2}{Modular Architecture}{section.8}% 16
+\BOOKMARK [2][-]{subsection.8.3}{Input Files}{section.8}% 17
+\BOOKMARK [2][-]{subsection.8.4}{Simulation Data Model}{section.8}% 18
+\BOOKMARK [2][-]{subsection.8.5}{Remeshing methods approach}{section.8}% 19
+\BOOKMARK [3][-]{subsubsection.8.5.1}{Combining methods}{subsection.8.5}% 20
+\BOOKMARK [3][-]{subsubsection.8.5.2}{Multi Threading}{subsection.8.5}% 21
+\BOOKMARK [1][-]{section.9}{Software Implementation}{}% 22
+\BOOKMARK [2][-]{subsection.9.1}{Third Party FE Application}{section.9}% 23
+\BOOKMARK [2][-]{subsection.9.2}{LISA}{section.9}% 24
+\BOOKMARK [2][-]{subsection.9.3}{Languages and platforms}{section.9}% 25
+\BOOKMARK [2][-]{subsection.9.4}{Implementation Methodology}{section.9}% 26
+\BOOKMARK [2][-]{subsection.9.5}{Implementation of Subsystems}{section.9}% 27
+\BOOKMARK [3][-]{subsubsection.9.5.1}{Re-meshing using hierarchical refinement}{subsection.9.5}% 28
+\BOOKMARK [2][-]{subsection.9.6}{Fast node lookup and update of nodes}{section.9}% 29
+\BOOKMARK [2][-]{subsection.9.7}{Sorting Element Nodes in 3d space using convex hull Algorithm}{section.9}% 30
+\BOOKMARK [2][-]{subsection.9.8}{Stress Based Refinement}{section.9}% 31
+\BOOKMARK [2][-]{subsection.9.9}{Rule Based Refinement}{section.9}% 32
+\BOOKMARK [2][-]{subsection.9.10}{Mesh Quality Assessment}{section.9}% 33
+\BOOKMARK [2][-]{subsection.9.11}{Implementation Issues}{section.9}% 34
+\BOOKMARK [3][-]{subsubsection.9.11.1}{Attempts to Automatically Define edges within models}{subsection.9.11}% 35
+\BOOKMARK [1][-]{section.10}{Evaluation of Project}{}% 36
+\BOOKMARK [2][-]{subsection.10.1}{Validation against Functional Requirements}{section.10}% 37
+\BOOKMARK [2][-]{subsection.10.2}{Validation against Non Functional}{section.10}% 38
+\BOOKMARK [2][-]{subsection.10.3}{Evaluation of the system running for various models}{section.10}% 39
+\BOOKMARK [3][-]{subsubsection.10.3.1}{Suspension Bridge structure}{subsection.10.3}% 40
+\BOOKMARK [3][-]{subsubsection.10.3.2}{Evaluation of bridge for sideways loading}{subsection.10.3}% 41
+\BOOKMARK [3][-]{subsubsection.10.3.3}{Evaluation of bridge for base loading}{subsection.10.3}% 42
+\BOOKMARK [3][-]{subsubsection.10.3.4}{Validating system against previously obtained research results}{subsection.10.3}% 43
+\BOOKMARK [3][-]{subsubsection.10.3.5}{Paper Mill}{subsection.10.3}% 44
+\BOOKMARK [3][-]{subsubsection.10.3.6}{Cylinder}{subsection.10.3}% 45
+\BOOKMARK [2][-]{subsection.10.4}{Evaluation of Subsystems based on model evaluation}{section.10}% 46
+\BOOKMARK [3][-]{subsubsection.10.4.1}{Analysis of Dittmer mesh quality metrics}{subsection.10.4}% 47
+\BOOKMARK [3][-]{subsubsection.10.4.2}{Evaluation of stress based remeshing}{subsection.10.4}% 48
+\BOOKMARK [2][-]{subsection.10.5}{Increase in performance through parallel execution}{section.10}% 49
+\BOOKMARK [2][-]{subsection.10.6}{Quality}{section.10}% 50
+\BOOKMARK [2][-]{subsection.10.7}{Documentation}{section.10}% 51
+\BOOKMARK [2][-]{subsection.10.8}{Maintainability}{section.10}% 52
+\BOOKMARK [3][-]{subsubsection.10.8.1}{Evaluation Issues}{subsection.10.8}% 53
+\BOOKMARK [2][-]{subsection.10.9}{Evaluation of overall project}{section.10}% 54
+\BOOKMARK [2][-]{subsection.10.10}{Evaluation summary}{section.10}% 55
+\BOOKMARK [1][-]{section.11}{Further Work}{}% 56
+\BOOKMARK [2][-]{subsection.11.1}{Gathering feedback from experienced engineers}{section.11}% 57
+\BOOKMARK [2][-]{subsection.11.2}{Improving usability through a web interface}{section.11}% 58
+\BOOKMARK [1][-]{section.12}{Personal Reflections and Summary}{}% 59
+\BOOKMARK [1][-]{section.12}{References}{}% 60
+\BOOKMARK [1][-]{appendix.A}{Element Types within LISA}{}% 61
+\BOOKMARK [1][-]{appendix.B}{Input and output files}{}% 62

@@ -1,0 +1,79 @@
+\documentclass{article}
+\setcounter{secnumdepth}{0}
+%[a4paper, 11pt]
+\usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
+\usepackage{fullpage} % changes the margin
+
+\usepackage{graphicx}
+%\usepackage{lscape}
+%\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{wrapfig}
+\usepackage{gensymb}
+\usepackage{graphicx} 
+\usepackage[utf8]{inputenc}
+\usepackage{siunitx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+\usepackage{enumitem}
+\usepackage{subcaption}
+%\usepackage[]{algorithm2e}
+%\usepackage{pgffor}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+
+\newcommand{\CMwidth}{-1.7cm}
+\newcommand{\CMheight}{2.7cm}
+
+\usepackage{hyperref}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	filecolor=blue,
+	menucolor=black,
+	urlcolor=blue
+}
+
+
+\setcounter{secnumdepth}{5}% Include \subsubsection in ToC
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+\begin{document}
+%Header-Make sure you update this information!!!!
+%\noindent
+%\large\textbf{Post/Pre-Lab X Report} \hfill \textbf{FirstName LastName} \\
+%\normalsize ECE 100-003 \hfill Teammates: Student1, Student2 \\
+%Prof. Oruklu \hfill Lab Date: XX/XX/XX \\
+%TA: Adam Sumner \hfill Due Date: XX/XX/XX
+
+\title{Dissertation: Hybrid Methods for Finite Element Meshing}
+\author{Jack Bradbrook (psyjb4)}
+\date{April 5, 2017}
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+
+\include{Introduction}
+\include{MotivationAndBackground}
+\include{RelatedWork}
+\include{DescriptionOfWork}
+\include{SystemDesign}
+\include{Implementation}
+\include{Evaluation}
+\include{FurtherWorkAndReferences}
+
+
+\end{document}
+
+

@@ -1,6 +1,6 @@
-﻿using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
-using DisertationFEPrototype.Model;
-using DisertationFEPrototype.Model.Structure;
+﻿using DisertationFEPrototype.FEModelUpdate.Model;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 using System;
 using System.Collections.Generic;
 using System.Linq;

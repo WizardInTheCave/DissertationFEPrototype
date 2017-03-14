@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DisertationFEPrototype.Model.Structure
+namespace DisertationFEPrototype.FEModelUpdate.Model.Structure
 {
     public class Node : ICloneable
     {
@@ -98,7 +98,7 @@ namespace DisertationFEPrototype.Model.Structure
         {
             return this.GetX * b.GetX + this.GetY * b.GetY + this.GetZ * b.GetZ;
         }
-        public double dotProduct(Tuple<double, double, double> b)
+        public double dot(Tuple<double, double, double> b)
         {
             return this.GetX * b.Item1 + this.GetY * b.Item2 + this.GetZ * b.Item3;
         }
