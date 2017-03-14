@@ -17,13 +17,13 @@ namespace DisertationFEPrototype
         static void Main(string[] args)
         {
 
-            string topLevelFolder = @"..\Experiments\BridgeAdvanced";
+            string topLevelFolder = @"C:\Users\Jack\Documents\Visual Studio 2015\Projects\DisertationFEPrototype\Experiments\BridgeAdvanced";
             string modelFile = "bridgeAdvanced.liml";
             string edgeDefinitionFile = "modelEdges.json";
             string modelAnalysisFileName = "bridgeAdvancedOut.csv";
             int k = 2;
 
-            if (args.Length < 0)
+            if (args.Length > 0)
             {
                 topLevelFolder = args[0];
             }

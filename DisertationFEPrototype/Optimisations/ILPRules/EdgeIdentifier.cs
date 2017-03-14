@@ -125,7 +125,7 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             double chainAvg = 0;
             if (currentEdges.Count > 0)
             {
-                chainAvg = currentEdges.Select(edge => edge.GetNodePath().Count).Average();
+                chainAvg = currentEdges.Select(edge => edge.NodePath.Count).Average();
             }
 
             if (ourEdge.Count > chainAvg)

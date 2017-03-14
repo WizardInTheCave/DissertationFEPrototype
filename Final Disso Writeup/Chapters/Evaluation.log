@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.10.17)  13 MAR 2017 14:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.10.17)  14 MAR 2017 20:19
 entering extended mode
 **./Evaluation.tex
 (Evaluation.tex
@@ -231,11 +231,11 @@ Missing character: There is no m in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no r in font nullfont!
 Missing character: There is no [ in font nullfont!
-\citation{Dittmer}
+\citation{DittmerMeshQualityMet}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.3 ... methods provided by Dittmer \cite{Dittmer}
+l.3 ...ded by Dittmer \cite{DittmerMeshQualityMet}
                                                   .
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -244,7 +244,8 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-LaTeX Warning: Citation `Dittmer' on page  undefined on input line 3.
+LaTeX Warning: Citation `DittmerMeshQualityMet' on page  undefined on input lin
+e 3.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no . in font nullfont!
@@ -6389,7 +6390,7 @@ and I'll forget about whatever was undefined.
 \newlabel{fig:test}{{}{}}
 ]
 ! Undefined control sequence.
-l.147 \subsection
+l.143 \subsection
                  {Evaluation of Subsystems based on model evaluation}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6404,7 +6405,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.147 \subsection{E
+l.143 \subsection{E
                    valuation of Subsystems based on model evaluation}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -6609,12 +6610,12 @@ Missing character: There is no s in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 147--150
+Overfull \hbox (20.0pt too wide) in paragraph at lines 143--146
 []
  []
 
 ! Undefined control sequence.
-l.151 \subsubsection
+l.147 \subsubsection
                     {Analysis of Dittmer mesh quality metrics}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -6629,7 +6630,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.151 \subsubsection{A
+l.147 \subsubsection{A
                       nalysis of Dittmer mesh quality metrics}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -7333,13 +7334,13 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 151--154
+Overfull \hbox (20.0pt too wide) in paragraph at lines 147--150
 []
  []
 
 ! Undefined control sequence.
-l.160 \subsubsection
-                    {Evaluation of stress based remeshing}
+l.156 \subsubsection
+                    {Evaluation of stress refinement effectiveness}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -7353,8 +7354,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.160 \subsubsection{E
-                      valuation of stress based remeshing}
+l.156 \subsubsection{E
+                      valuation of stress refinement effectiveness}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -7376,27 +7377,106 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no s in font nullfont!
-Missing character: There is no b in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no d in font nullfont!
 Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
-Missing character: There is no g in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no s in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 160--161
+Overfull \hbox (20.0pt too wide) in paragraph at lines 156--157
 []
  []
 
 ! Undefined control sequence.
-l.163 \subsection
+l.158 \subsubsection
+                    {Evaluation of heuristic refinement effectiveness}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.158 \subsubsection{E
+                      valuation of heuristic refinement effectiveness}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no E in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no s in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 158--159
+[]
+ []
+
+! Undefined control sequence.
+l.162 \subsection
                  {Increase in performance through parallel execution}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -7411,7 +7491,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.163 \subsection{I
+l.162 \subsection{I
                    ncrease in performance through parallel execution}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -7474,7 +7554,7 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no g in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 163--165
+Overfull \hbox (20.0pt too wide) in paragraph at lines 162--164
 []
  []
 
@@ -7485,7 +7565,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.166 T
+l.165 T
        he average speed up (Time of serial execution/ Time of parallel execu...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -7559,7 +7639,7 @@ Missing character: There is no w in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 166--167
+Overfull \hbox (20.0pt too wide) in paragraph at lines 165--166
 []
  []
 
@@ -7570,7 +7650,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.169 T
+l.168 T
        he Efficiency of the parallel execution (speedup / number of processo...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -7707,12 +7787,12 @@ Missing character: There is no d in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 169--170
+Overfull \hbox (20.0pt too wide) in paragraph at lines 168--169
 []
  []
 
 ! Undefined control sequence.
-l.171 \subsection
+l.170 \subsection
                  {Quality}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -7727,7 +7807,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.171 \subsection{Q
+l.170 \subsection{Q
                    uality}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -8119,12 +8199,12 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 171--173
+Overfull \hbox (20.0pt too wide) in paragraph at lines 170--172
 []
  []
 
 ! Undefined control sequence.
-l.175 \subsection
+l.174 \subsection
                  {Documentation}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -8139,7 +8219,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.175 \subsection{D
+l.174 \subsection{D
                    ocumentation}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -8695,12 +8775,12 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 175--177
+Overfull \hbox (20.0pt too wide) in paragraph at lines 174--176
 []
  []
 
 ! Undefined control sequence.
-l.178 \subsection
+l.177 \subsection
                  {Maintainability}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -8715,7 +8795,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.178 \subsection{M
+l.177 \subsection{M
                    aintainability}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -8883,7 +8963,7 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no e in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 178--180
+Overfull \hbox (20.0pt too wide) in paragraph at lines 177--179
 []
  []
 
@@ -8894,7 +8974,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.181 a
+l.180 a
        nd well written documentation the system is for the most part maintai...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -8966,12 +9046,12 @@ Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 181--182
+Overfull \hbox (20.0pt too wide) in paragraph at lines 180--181
 []
  []
 
 ! Undefined control sequence.
-l.184 \subsubsection
+l.183 \subsubsection
                     {Evaluation Issues}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -8986,7 +9066,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.184 \subsubsection{E
+l.183 \subsubsection{E
                       valuation Issues}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -9298,12 +9378,12 @@ Missing character: There is no t in font nullfont!
 Missing character: There is no y in font nullfont!
 Missing character: There is no . in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 184--186
+Overfull \hbox (20.0pt too wide) in paragraph at lines 183--185
 []
  []
 
 ! Undefined control sequence.
-l.187 \subsection
+l.186 \subsection
                  {Evaluation of overall project}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -9318,7 +9398,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.187 \subsection{E
+l.186 \subsection{E
                    valuation of overall project}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -9350,12 +9430,12 @@ Missing character: There is no e in font nullfont!
 Missing character: There is no c in font nullfont!
 Missing character: There is no t in font nullfont!
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 187--188
+Overfull \hbox (20.0pt too wide) in paragraph at lines 186--187
 []
  []
 
 ! Undefined control sequence.
-l.193 \subsection
+l.192 \subsection
                  {Evaluation summary}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -9370,7 +9450,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.193 \subsection{E
+l.192 \subsection{E
                    valuation summary}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -9401,7 +9481,7 @@ Missing character: There is no y in font nullfont!
  
 Here is how much of TeX's memory you used:
  20 strings out of 493334
- 287 string characters out of 3130654
+ 301 string characters out of 3130654
  54242 words of memory out of 3000000
  3647 multiletter control sequences out of 15000+200000
  3948 words of font info for 15 fonts, out of 3000000 for 9000

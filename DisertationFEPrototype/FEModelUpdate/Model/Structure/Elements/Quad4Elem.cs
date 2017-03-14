@@ -16,7 +16,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
     public class Quad4Elem : SquareBasedElem
     {
 
-        Quad4QualMetricCalcs propCalcs;
+        // Quad4QualMetricCalcs propCalcs;
        
         
         /// <summary>
@@ -81,18 +81,18 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             this.childElements = null;
 
             // make another object responsible for calculating the elements metrics
-            propCalcs = new Quad4QualMetricCalcs(this);
+            // propCalcs = new Quad4QualMetricCalcs(this);
 
             // all three of these methods use 
 
-            Tuple<Node, Node>[] nodePairings = this.computeEdgePairingsForNode(nodes);
+           Tuple<Node, Node>[] nodePairings = this.computeEdgePairingsForNode(nodes);
 
-            maxCornerAngle = propCalcs.computeMaxCornerAngle(nodes);
-            maxParallelDev = propCalcs.computeMaxparallelDev(nodePairings); 
+            maxCornerAngle = computeMaxCornerAngle(nodes);
+            maxParallelDev = computeMaxParallelDev(nodePairings); 
  
-            longestEdge = propCalcs.computeLongestEdge(nodePairings, SHORTEST_EDGE_DEFAULT);
-            shortestEdge = propCalcs.computeShortestEdge(nodePairings, LONGEST_EDGE_DEFAULT);
-            aspectRatio = propCalcs.computeAspectRatio(longestEdge, shortestEdge);
+            longestEdge = computeLongestEdge(nodePairings, LONGEST_EDGE_DEFAULT);
+            shortestEdge = computeShortestEdge(nodePairings, SHORTEST_EDGE_DEFAULT);
+            aspectRatio = computeAspectRatio(longestEdge, shortestEdge);
 
             area = computeFaceArea(nodes, longestEdge, shortestEdge);
 

@@ -42,10 +42,13 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
 
         public void SetEdgeType(EdgeType type)
         {
-            //Enum.TryParse(value, out this.edgeType);
             this.edgeType = type;
         }
-        public List<Node> NodePath { get { return this.nodePath; } }
+
+        public List<Node> NodePath {
+            get { return this.nodePath; }
+            set { this.nodePath = value; }
+        }
 
         public BoundaryType GetBoundaryType()
         {
@@ -55,8 +58,6 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
 
         public LoadingType GetLoadType(){ return this.loadType; }
         public double TotalLength{ get{ return this.totalLength; } }
-
-        public List<Node> GetNodePath() { return this.nodePath; }
 
         public void SetLoadType(LoadingType type)
         {

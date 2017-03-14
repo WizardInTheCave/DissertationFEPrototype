@@ -26,7 +26,7 @@ namespace DisertationFEPrototype.Optimisations
         List<NodeAnalysisData> analysisData;
         RuleManager ruleManager;
 
-        Dictionary<Tuple<double, double, double>, Node> nodes;
+        Dictionary<Tuple<double, double, double>, Node> allNodes;
 
         bool firstIteration = true;
 
@@ -60,7 +60,7 @@ namespace DisertationFEPrototype.Optimisations
             // try a basic mesh refinement by creating more elements first
             List<IElement> elements = meshData.Elements;
 
-            nodes = meshData.Nodes;
+            allNodes = meshData.Nodes;
 
 
             // depending on how heavily we want to perform each type of meshing run that type of meshing
@@ -137,54 +137,31 @@ namespace DisertationFEPrototype.Optimisations
 
 
                 List<Node> newNodePath = new List<Node>();
+
+
+                List<Node> allPathNodes = new List<Node>();
+                List<IElement> allRefinedElems = new List<IElement>();
+
                 // for each element in all the elements we are remeshing remesh it then remesh the child elements again until ii is
                 foreach (IElement elem in allRemeshingElems)
                 {
-                    // get the nodes for the element which sit directly on the edge
-                    var pathNodes = edge.GetNodePath().Intersect(elem.getNodes()).ToArray();
-
-                    // assuming each element only has two nodes on the path currently.
-                    newNodePath.Add(pathNodes[0]);
-
                     List<IElement> refined;
-                    refined = elem.createChildElements(nodes);
 
-                    // We want to add the new refined node that is closest to the other nodes already in the path
-                    var distances = new List<double>();
+                    // get the allNodes for the element which sit directly on the edge
+                    var pathNodes = edge.NodePath.Intersect(elem.getNodes()).ToArray();
 
-                    var theNewNodes = refined.SelectMany(x => x.getNodes()).ToArray();
+                    // allPathNodes.AddRange(pathNodes);
 
-                    int ii = 0;
-                    // this is kind of painful but the simplest way I can think to do it which is guarenteed to work
-                    foreach (Node pathNode in pathNodes)
-                    {
-                        // Get the distance between this and all other nodes
-                        List<double> distancesToOthers = theNewNodes.Select(x => x.distanceTo(pathNode)).ToList();
-
-                        if (ii == 0)
-                        {
-                            distances = distancesToOthers.ToList();
-                        }
-                        else
-                        {
-                            // keep summing the total distances, we want to find the one with the smallestcombined distance to two points
-                            distances = distances.Zip(distancesToOthers, (x, y) => x + y).ToList();
-                        }
-
-                        ii++;
-                    }
-                    Node newPathNode = theNewNodes[distances.IndexOf(distances.Min())];
-
-                    newNodePath.Add(newPathNode);
-                    newNodePath.Add(pathNodes[1]);
+                    refined = elem.createChildElements(allNodes);
 
                     elem.setChildren(refined);
+                    allRefinedElems.AddRange(refined);
 
                     //ii++;
                     // mesh another level
                     //remesh(refined, ii, elemCount);
                 }
-
+                relinkNodes(edge, allRefinedElems);
 
 
 
@@ -200,13 +177,161 @@ namespace DisertationFEPrototype.Optimisations
                 //    {
                 //        child.getNodes().ForEach(node => node.NodeOrigin = Node.Origin.Heuristic);
                 //    }
-                     
-                    
+
+
                 //    // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
                 //    elem.setChildren(children);
-                        
+
                 //}  
             }
+        }
+
+
+
+
+        /// <summary>
+        /// Reconnect the allNodes so that the method can be applied multiple times for subsequent iterations.
+        /// </summary>
+        /// <param name="edgeToUpdate">edge from previous iteration that needs to be updated to include the new allNodes just created</param>
+        /// <param name="pathNodes">Nodes that currently form the edge</param>
+        /// <param name="refined">Elements just created through the refinement process which need to now be included in the new path</param>
+        private void relinkNodes(Edge edgeToUpdate, List<IElement> refined)
+        {
+
+            List<Node> newNodePath = new List<Node>();
+
+            // assuming each element only has two allNodes on the path currently.
+
+            // We want to add the new refined node that is closest to the other allNodes already in the path
+            // var distances = new List<double>();
+
+            var theNewNodes = refined.SelectMany(x => x.getNodes());
+            HashSet<Node> refinedNodes = new HashSet<Node>(theNewNodes);
+
+
+            Node[] pathNodes = edgeToUpdate.NodePath.ToArray();
+
+            Node newPathNode;
+
+            Node currentNode;
+
+            // loop through each of the gaps between two allNodes
+            for (int ii = 0; ii + 1 < pathNodes.Length; ii++)
+            {
+                var firstNode = pathNodes[ii];
+                var secondNode = pathNodes[ii + 1];
+
+
+
+                currentNode = firstNode;
+
+                // start with two very high initial values
+                List<double> distancesToSecond = new List<double>() {100000.0, 10000.0};
+
+                // while the currentNode keeps getting closer to the second node and the search doesn't veer off
+                while(distancesToSecond[distancesToSecond.Count - 1]  < distancesToSecond[distancesToSecond.Count - 2])
+                {
+
+                    // Get the distance between the current and all other allNodes
+                    List<Tuple<Node, double>> comparisonsAgainstCurrent = refinedNodes
+                    .Select(x => new Tuple<Node, double>(x, x.distanceTo(currentNode))).ToList();
+
+
+                    List<Tuple<Node, double>> comparisonsAgainstSecond = refinedNodes
+                       .Select(x => new Tuple<Node, double>(x, x.distanceTo(secondNode))).ToList();
+
+
+                    // get the four closest to the first node, which of these is closes to the second
+                    var fourClosestToCurrent = new List<Tuple<Node, double>>(comparisonsAgainstCurrent.OrderBy(x => x.Item2).Take(4));
+
+
+                    List<Tuple<Node, double>> intersections = new List<Tuple<Node, double>>();
+
+                    foreach(var closeToCurr in fourClosestToCurrent)
+                    {
+                        foreach(var compAgainstSec in comparisonsAgainstSecond)
+                        {
+                            if(closeToCurr.Item1.Id == closeToCurr.Item1.Id)
+                            {
+                                intersections.Add(closeToCurr);
+                            }
+                        }
+                    }
+
+                    var closestRoundCurrentToSecond = intersections.OrderBy(x => x.Item2).ToArray()[0];
+
+                    currentNode = closestRoundCurrentToSecond.Item1;
+
+                    // get rid of the node we have just added to the updated edge
+                    refinedNodes.Remove(currentNode);
+
+                    // comparisonsAgainstSecond.Remove(fourClosestToFirstFromSecond[0]);
+
+
+                    distancesToSecond.Add(currentNode.distanceTo(secondNode));
+                }
+            }
+
+
+
+            // loop through each of the gaps between two allNodes
+            // for (int ii = 0; ii + 1 < pathNodes.Length; ii++)
+            //{
+            //    newNodePath.Add(pathNodes[ii]);
+
+            //    var firstNode = pathNodes[ii];
+            //    var secondNode = pathNodes[ii + 1];
+
+            //    // Get the distance between the current and all other allNodes
+            //    List<Tuple<Node, double>> comparisonsAgainstFirst = theNewNodes
+            //        .Select(x => new Tuple<Node, double>(x, x.distanceTo(firstNode))).ToList();
+
+
+            //    List<Tuple<Node, double>> comparisonsAgainstSecond = theNewNodes
+            //       .Select(x => new Tuple<Node, double>(x, x.distanceTo(secondNode))).ToList();
+
+            //    // get the four closest to the first node, which of these is closes to the second
+            //    var fourClosestToFirst = comparisonsAgainstFirst.Take(4);
+
+            //    var fourClosestToFirstFromSecond = comparisonsAgainstSecond.Intersect(fourClosestToFirst).OrderBy(x => x.Item2).ToArray();
+
+            //    Node nextNode = fourClosestToFirstFromSecond[0].Item1;
+
+            //    comparisonsAgainstFirst.Remove(fourClosestToFirstFromSecond[0]);
+            //    comparisonsAgainstSecond.Remove(fourClosestToFirstFromSecond[0]);
+
+
+
+            //    // int newNodeIndex
+
+            //    comparisonsAgainstFirst.OrderBy(x => x.Item2);
+
+            //    comparisonsAgainstFirst.OrderBy(x => x.Item2);
+            //    comparisonsAgainstSecond.Reverse();
+
+            //    int length = (comparisonsAgainstFirst.Count < comparisonsAgainstSecond.Count)
+            //        ? comparisonsAgainstFirst.Count : comparisonsAgainstSecond.Count;
+
+            //    for (int jj = 0; jj < length; jj++)
+            //    {
+            //        // this is the next node to add to the path
+            //        if (comparisonsAgainstFirst[jj].Item1 == comparisonsAgainstSecond[jj].Item1)
+            //        {
+            //            newPathNode = comparisonsAgainstFirst[jj].Item1;
+            //            newNodePath.Add(newPathNode);
+            //        }
+            //        // some kind of discrepancy and things have gone wrong
+            //        else
+            //        {
+            //            Console.WriteLine("Don't want to be here");
+            //            //  throw new Exception("User provided node path is poorly formed, "+ 
+            //            //       "please specify well defined path withouth high deviation in points");
+            //        }
+            //    }
+            //}
+            newNodePath.Add(pathNodes[pathNodes.Length - 1]);
+
+            edgeToUpdate.NodePath = newNodePath;
         }
 
 
@@ -233,9 +358,9 @@ namespace DisertationFEPrototype.Optimisations
         //        }
         //    }
         //}
-        
 
-    
+
+
         /// <summary>
         /// we want to use the data from the previous analyis that we have to refine our mesh specificially in areas with high stress values
         /// </summary>
@@ -262,7 +387,7 @@ namespace DisertationFEPrototype.Optimisations
                 if (avgDispMag > remeshThreshold)
                 {
                     Console.WriteLine("Remeshed elements: " + elem.getId().ToString());
-                    List<IElement> children = elem.createChildElements(nodes);
+                    List<IElement> children = elem.createChildElements(allNodes);
 
                     foreach (IElement child in children)
                     {
