@@ -22,14 +22,28 @@ To use the interface an engineer would simply need to submit a model they have a
 Comparing the current progress of the project against the plan things are on track to be completed as scheduled. So far I am pleased with both my research efforts and the functionality that I have been able to implement. My primary concern at present is that the ILP generated rules may not perform as well as expected when fully implemented or that they perform well but only for a limited set of geometries, which would be disappointing. While conducting research, development and implementation for the project I have worked methodically to best understand each problem as and when they occur and consider each of the possible solutions before committing to one. I feel this approached has saved me much time and has forced me to reach a better view about what exactly each subsystem should do and how to implement it. In hindsight if I were to repeat the first part of the project again I would have organised my time differently to spend less of it focussed on the details of coursework assignments for other modules into making further progress on the implementation of the rule system.
 
 
-%Mention difficulty in initially predicting technbical challenges.
+%Mention difficulty in initially predicting the unforseen technical challenges.
 
 %Describe ambition behind project to challenge both comptuer science skills and improve knowledge of software methods for solving mechanical engineering problems.
 
+%To understand various mechanical engineering problems for which finite element analysis is used and use this knowledge to guide my decisions as a software engineer when implementing the various methods was challenging and often time consuming given that I did not have a particularly deep background of the topics, made correct evaluation of the software towards the end of the project challenging.
+
 
 %Things that went well
-% - organised time well, made a good start
-% - 
+% - Generally organised time well, made a good start at the beginning of the year when there was little coursework to do.
+
+%spent about a month and a half just readings without trying to implement anything - despite there being not that many papers on topics specific to this worked hard to find a wide variery of approaches taken by people and develop a clear understanding of the topic.
+
+
+% - Tried to approach the development of the system as a piece of industrial software, tried to adopt SOLID principals wherever possible which resulted in a system that was actually well structured and highly extendable.
+
+
+%Things I would do better
+%Spend less time working on the initial structuere and design, gone for minimum viable product in the eairly stages of development and then spent more time in the evaluation/ refinement stages in order to try and better understand how to improve the methods for particular scenarios.
+
+% I actually spent much longer doing the groundwork required to implement the cool stuff than I had previously expected, designing the data model and writing the various code required for general meshing proved more problematic than originally anticipated.
+
+% Although very keen to utilise functional programming features as much as possible at the start I realised towards the end of the project that doing this a lot can actually make you as a programmer very lazy and in some cases can make code more challenging to read for those who aren't familiar with the style. Having completed this project I now feel I have a better appreciation of where to use functional programming best and when to best avoid it in order to improve speed and readability.
 
 \newpage
 \pagestyle{empty}
@@ -112,6 +126,13 @@ http://highered.mheducation.com/sites/dl/free/0073398144/934758/\\Ch07TypesOfFin
 \bibitem{DelaunyTriangles} Jonathan Richard Shewchuk \emph{Delaunay Refinement Algorithms
 for Triangular Mesh Generation} \url{https://people.eecs.berkeley.edu/~jrs/papers/2dj.pdf}
 
+\bibitem{RotatingDiskFE} Eliannah Hunderfund and Professor Ernesto Gutierrez-Miravete Rensselaer 
+\emph{Finite Element Analysis of a Rotating Disk}
+
+
+\bibitem{PaperMillSpeeds} \url{http://www.pulpandpapercanada.com/news/coupling-changes-cut-paper-machinery-maintenance-1000108660}
+
+\bibitem{Centripetal} \url{http://www.engineeringtoolbox.com/centripetal-acceleration-d_1285.html}
 
 
 \end{thebibliography}
@@ -173,11 +194,28 @@ Here are shown the the visual specifications LISA provides for the ordering and 
 \label{fig:test}
 \end{figure}
 
+\section{Calculating Centripetal Force For Paper Mill}
+Assuming a constant speed of the paper mill disk at  the following standard calculation was done to compute a forces that could be specified for different elements in order to simulate the effects on the model.
 
+F = m $\omega^2$ r\\ 
+
+where: \\ 
+m - mass of object \\ 
+r - radius from centre \\ 
+$\omega$ - angular velocity (radians per second)
+
+Using the following values for each variable for the plates forming the outside of the paper mill disk the force could be calculated as:
+
+mass- paper mill is made of steel with each plate having a volume of approximately $24cm^3$ which gives a mass of
+188 grams
+
+
+
+
+\cite{Centripetal}
 
 \section{Input and output files}
-Below can be seen the format of the input files for the system (A LISA .liml and a .json edge definition file
-
+Below can be seen the format of the input files for the system (A LISA .liml and a .json edge definition file\\
 
 \begin{figure}[!h]
 \centering

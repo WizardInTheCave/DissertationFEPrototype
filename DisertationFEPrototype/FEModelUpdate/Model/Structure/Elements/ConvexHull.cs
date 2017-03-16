@@ -1,5 +1,5 @@
 ﻿using DisertationFEPrototype.FEModelUpdate.Model.Structure;
-using DisertationFEPrototYpe.FEModelUpdate.Model.Structure.Elements;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 using Loyc.Collections;
 using Loyc.Geometry;
 using System;
@@ -14,7 +14,6 @@ namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
     /// <summary>
     /// Note: I did not write this algorithm and do not take credit for it, it was taken fromt the following website:
     /// http://loyc.net/2014/2d-convex-hull-in-cs.html 
-    /// 
     /// very cool algorithm though
     /// </summary>
     public class ConvexHull

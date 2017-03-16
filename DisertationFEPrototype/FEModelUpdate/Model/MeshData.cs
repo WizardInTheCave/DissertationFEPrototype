@@ -18,7 +18,7 @@ namespace DisertationFEPrototype.FEModelUpdate.Model
     {
         Dictionary<Tuple<double, double, double>, Node> nodes;
         List<IElement> elements;
-        Force force;
+        List<Force> forces;
         Material material;
         List<FaceSelection> faceSelections;
         List<FixSelection> fixSelections;
@@ -50,15 +50,15 @@ namespace DisertationFEPrototype.FEModelUpdate.Model
             }
 
         }
-        public Force Force
+        public List<Force> Forces
         {
             get
             {
-                return force;
+                return forces;
             }
             set
             {
-                force = value;
+                forces = value;
             }
 
         }

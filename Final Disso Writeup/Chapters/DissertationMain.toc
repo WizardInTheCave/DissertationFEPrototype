@@ -44,12 +44,12 @@
 \contentsline {subsubsection}{\numberline {10.4.4}Validating system against previously obtained research results}{23}{subsubsection.10.4.4}
 \contentsline {subsubsection}{\numberline {10.4.5}Paper Mill}{23}{subsubsection.10.4.5}
 \contentsline {subsubsection}{\numberline {10.4.6}Cylinder}{23}{subsubsection.10.4.6}
-\contentsline {subsection}{\numberline {10.5}Evaluation of Subsystems based on model evaluation}{25}{subsection.10.5}
-\contentsline {subsubsection}{\numberline {10.5.1}Analysis of Dittmer mesh quality metrics}{25}{subsubsection.10.5.1}
-\contentsline {subsubsection}{\numberline {10.5.2}Evaluation of stress refinement effectiveness}{25}{subsubsection.10.5.2}
-\contentsline {subsubsection}{\numberline {10.5.3}Evaluation of heuristic refinement effectiveness}{25}{subsubsection.10.5.3}
-\contentsline {subsection}{\numberline {10.6}Increase in performance through parallel execution}{25}{subsection.10.6}
-\contentsline {subsection}{\numberline {10.7}Quality}{25}{subsection.10.7}
+\contentsline {subsection}{\numberline {10.5}Evaluation of Subsystems based on model evaluation}{24}{subsection.10.5}
+\contentsline {subsubsection}{\numberline {10.5.1}Analysis of Dittmer mesh quality metrics}{24}{subsubsection.10.5.1}
+\contentsline {subsubsection}{\numberline {10.5.2}Evaluation of stress refinement effectiveness}{24}{subsubsection.10.5.2}
+\contentsline {subsubsection}{\numberline {10.5.3}Evaluation of heuristic refinement effectiveness}{24}{subsubsection.10.5.3}
+\contentsline {subsection}{\numberline {10.6}Increase in performance through parallel execution}{24}{subsection.10.6}
+\contentsline {subsection}{\numberline {10.7}Quality}{26}{subsection.10.7}
 \contentsline {subsection}{\numberline {10.8}Documentation}{26}{subsection.10.8}
 \contentsline {subsection}{\numberline {10.9}Maintainability}{26}{subsection.10.9}
 \contentsline {subsubsection}{\numberline {10.9.1}Evaluation Issues}{26}{subsubsection.10.9.1}
@@ -61,4 +61,5 @@
 \contentsline {section}{\numberline {12}Personal Reflections and Summary}{27}{section.12}
 \contentsline {section}{References}{29}{section.12}
 \contentsline {section}{\numberline {A}Element Types within LISA}{30}{appendix.A}
-\contentsline {section}{\numberline {B}Input and output files}{30}{appendix.B}
+\contentsline {section}{\numberline {B}Calculating Centripetal Force For Paper Mill}{30}{appendix.B}
+\contentsline {section}{\numberline {C}Input and output files}{31}{appendix.C}

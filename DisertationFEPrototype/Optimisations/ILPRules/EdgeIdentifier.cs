@@ -105,7 +105,8 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
 
             Edge.EdgeType et = determineEdgeType(ourEdge, modelEdges);
             Edge.BoundaryType bt = determineBoundaryType(ourEdge, modelEdges);
-            Edge.LoadingType lt = determineLoadingType(ourEdge, modelEdges, mesh);
+            Edge.LoadingType lt = Edge.LoadingType.noneSet;
+                // determineLoadingType(ourEdge, modelEdges, mesh);
 
             // get element for starting node
             var newEdge = new Edge(totalEdgeCount, et, bt, lt, ourEdge);
@@ -145,44 +146,44 @@ namespace DisertationFEPrototype.Optimisations.ILPRules
             return bt;
 
         }
-        private Edge.LoadingType determineLoadingType(List<Node> ourEdge, List<Edge> currentEdges, MeshData mesh)
-        {
-            Edge.LoadingType lt;
+        //private Edge.LoadingType determineLoadingType(List<Node> ourEdge, List<Edge> currentEdges, MeshData mesh)
+        //{
+        //    Edge.LoadingType lt;
 
-            List<List<IElement>> elementsGrouped = ourEdge.Select(edgeNode => mesh.findElems(edgeNode)).ToList();
-            List<IElement> allNodeElems = elementsGrouped.SelectMany(elems => elems).ToList();
+        //    List<List<IElement>> elementsGrouped = ourEdge.Select(edgeNode => mesh.findElems(edgeNode)).ToList();
+        //    List<IElement> allNodeElems = elementsGrouped.SelectMany(elems => elems).ToList();
 
-            // cross reference the elements in the model which have a force applied to them against 
-            // elements which lie on an edge then intersect the two lists to get the elements which lie on the edge
-            // and have an applied force
-            List<IElement> edgeElemsWithAppliedForce =
-                mesh.FaceSelections
-                .Where(selection => selection.GetName == mesh.Force.Selection)
-                .SelectMany(select => select.Faces)
-                .Select(face => face.Element).Intersect(allNodeElems)
-                .ToList();
+        //    // cross reference the elements in the model which have a force applied to them against 
+        //    // elements which lie on an edge then intersect the two lists to get the elements which lie on the edge
+        //    // and have an applied force
+        //    List<IElement> edgeElemsWithAppliedForce =
+        //        mesh.FaceSelections
+        //        .Where(selection => selection.GetName == mesh.Forces.Selection)
+        //        .SelectMany(select => select.Faces)
+        //        .Select(face => face.Element).Intersect(allNodeElems)
+        //        .ToList();
 
 
-            short numOfLoadedSides = checkNumberOfLoadedSides(elementsGrouped, edgeElemsWithAppliedForce);
+        //    short numOfLoadedSides = checkNumberOfLoadedSides(elementsGrouped, edgeElemsWithAppliedForce);
 
-            if (numOfLoadedSides == 0)
-            {
-                lt = Edge.LoadingType.notLoaded;
-            }
-            else if (numOfLoadedSides == 1)
-            {
-                lt = Edge.LoadingType.oneSideLoaded;
-            }
-            else if (numOfLoadedSides == 2)
-            {
-                lt = Edge.LoadingType.twoSidesLoaded;
-            }
-            else
-            {
-                lt = Edge.LoadingType.notLoaded;
-            }
-            return lt;
-        }
+        //    if (numOfLoadedSides == 0)
+        //    {
+        //        lt = Edge.LoadingType.notLoaded;
+        //    }
+        //    else if (numOfLoadedSides == 1)
+        //    {
+        //        lt = Edge.LoadingType.oneSideLoaded;
+        //    }
+        //    else if (numOfLoadedSides == 2)
+        //    {
+        //        lt = Edge.LoadingType.twoSidesLoaded;
+        //    }
+        //    else
+        //    {
+        //        lt = Edge.LoadingType.notLoaded;
+        //    }
+        //    return lt;
+        //}
 
         /// <summary>
         /// Using the elements along the edge which have a force applied we want to determine how many sides of the edge are loaded

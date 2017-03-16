@@ -19,10 +19,10 @@ namespace DisertationFEPrototype.FEModelUpdate
     class ReadMeshData
     {
         MeshData meshData;
-        
 
-        public MeshData GetMeshData{
-            get{
+
+        public MeshData GetMeshData {
+            get {
                 return this.meshData;
             }
         }
@@ -34,7 +34,7 @@ namespace DisertationFEPrototype.FEModelUpdate
         /// <returns>a MeshData object which represents the model internally so that it can be manipulated</returns>
         public ReadMeshData(string lisaString)
         {
-     
+
             // This text is added only once to the file.
             if (File.Exists(lisaString))
             {
@@ -43,8 +43,8 @@ namespace DisertationFEPrototype.FEModelUpdate
 
                 this.meshData = new MeshData();
                 this.meshData.Nodes = ReadNodes.readAllNodes(xmlString);
-                this.meshData.Elements= ReadElements.readAllElements(xmlString, meshData);
-                this.meshData.Force = readForce(xmlString);
+                this.meshData.Elements = ReadElements.readAllElements(xmlString, meshData);
+                this.meshData.Forces = readForces(xmlString);
                 this.meshData.Material = readMaterial(xmlString);
                 this.meshData.FaceSelections = readFaceSelections(xmlString);
                 this.meshData.FixSelections = readFixSelections(xmlString);
@@ -53,7 +53,7 @@ namespace DisertationFEPrototype.FEModelUpdate
             else
             {
                 throw new FileNotFoundException("Could not load the lisa mesh file to rebuild model");
-            }  
+            }
         }
         private List<FixSelection> readFixSelections(string xmlString)
         {
@@ -71,7 +71,7 @@ namespace DisertationFEPrototype.FEModelUpdate
                     var allSelections = meshData.FaceSelections.Where(faceSelection => faceSelection.GetName == selectionName);
 
                     // if (allSelections.Count() == 1)
-                   // {
+                    // {
 
                     fixSelections.Add(new FixSelection(allSelections.ToArray()[0]));
                     //}
@@ -89,6 +89,8 @@ namespace DisertationFEPrototype.FEModelUpdate
             const string faceSelectTag = "faceselection";
 
             List<FaceSelection> faceSelections = new List<FaceSelection>();
+
+            List<string> alreadyAddedSelections = new List<string>();
 
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
             {
@@ -125,9 +127,13 @@ namespace DisertationFEPrototype.FEModelUpdate
 
                                 faceSelectionFaces.Add(new Face(elem, faceId));
                             }
-
                         }
-                        faceSelections.Add(new FaceSelection(selectionName, faceSelectionFaces));
+                        if (!alreadyAddedSelections.Contains(selectionName))
+                        {
+                            faceSelections.Add(new FaceSelection(selectionName, faceSelectionFaces));
+                            alreadyAddedSelections.Add(selectionName);
+                        }
+
                     }
                     catch
                     {
@@ -138,42 +144,138 @@ namespace DisertationFEPrototype.FEModelUpdate
             }
             return faceSelections;
         }
-        private Force readForce(string xmlString)
-        {
-            const string elemTag = "force";
 
-            Force force = null;
+        /// <summary>
+        /// Create a new force
+        /// </summary>
+        /// <param name="reader">XmlReader capable of obtaining a force</param>
+        /// <returns></returns>
+        private Force getForceData(string theSelection, XmlReader reader)
+        {
+
+            try
+            {
+                reader.ReadToDescendant("x");
+                double x = reader.ReadElementContentAsDouble();
+
+                reader.ReadToFollowing("y");
+                double y = reader.ReadElementContentAsDouble();
+
+                reader.ReadToFollowing("z");
+                double z = reader.ReadElementContentAsDouble();
+
+                return new Force(theSelection, x, y, z);
+            }
+            catch
+            {
+                throw new IOException("Could not read force data from the xml file correctly");
+            }
+
+        }
+
+
+        private List<Force> readForces(string xmlString)
+        {
+
+            List<Force> forces = new List<Force>();
+
+            List<string> alreadyAddedForces = new List<string>();
+
+            const string FACE_FORCE_TAG = "force";
+            const string SELECTION = "selection";
+
+
+
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
             {
-                reader.ReadToFollowing(elemTag);
-                   
-                const string selection = "selection";
-
-                //read in properties from the xml file
-                string theSelection = reader[selection];
-
-                try
+                bool isForceSection = false;
+                while (reader.Read())
                 {
-                    var innerSubtree = reader.ReadSubtree();
+                    if (reader.IsStartElement() && isForceSection && reader.Name != FACE_FORCE_TAG)
+                    {
+                        Console.WriteLine(reader.Name);
+                        break;
+                    }
+                    else if (reader.IsStartElement() && reader.Name == FACE_FORCE_TAG)
+                    {
+                        var theSelection = reader[SELECTION];
+                        // Get element name and switch on it.
+                        Force force = getForceData(theSelection, reader);
 
-                    innerSubtree.ReadToDescendant("x");
-                    double x = innerSubtree.ReadElementContentAsDouble();
-
-                    innerSubtree.ReadToFollowing("y");
-                    double y = innerSubtree.ReadElementContentAsDouble();
-
-                    innerSubtree.ReadToFollowing("z");
-                    double z = innerSubtree.ReadElementContentAsDouble();
-
-                    force = new Force(theSelection, x, y, z);
-                }
-                catch
-                {
-                    throw new IOException("Could not read force data from the xml file correctly");
+                        if (!alreadyAddedForces.Contains(theSelection))
+                        {
+                            forces.Add(force);
+                            alreadyAddedForces.Add(theSelection);
+                        }
+                    }
                 }
             }
-            return force;
-        } 
+            return forces;
+        }
+    
+
+            //using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+            //{
+
+            //    while (reader.ReadToFollowing(FACE_FORCE_TAG))
+            //    {
+            //        string theSelection = reader[SELECTION];
+            //        try
+            //        {
+            //            List<Face> faceSelectionFaces = new List<Face>();
+            //            var innerSubtree = reader.ReadSubtree();
+            //            while (innerSubtree.Read())
+            //            {
+                           
+            //            }
+            //        }
+            //        catch (Exception e)
+            //        {
+            //            throw e;
+            //            //throw new Exception("Could not read force data from xml correctly");
+            //        }
+            //    }
+            //}
+            //return forces;
+       
+
+
+
+
+                    //const string elemTag = "force";
+
+                    //Force force = null;
+                    //using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                    //{
+                    //    reader.ReadToFollowing(elemTag);
+
+                    //    const string selection = "selection";
+
+                    //    //read in properties from the xml file
+                    //    string theSelection = reader[selection];
+
+                    //    try
+                    //    {
+                    //        var innerSubtree = reader.ReadSubtree();
+
+                    //        innerSubtree.ReadToDescendant("x");
+                    //        double x = innerSubtree.ReadElementContentAsDouble();
+
+                    //        innerSubtree.ReadToFollowing("y");
+                    //        double y = innerSubtree.ReadElementContentAsDouble();
+
+                    //        innerSubtree.ReadToFollowing("z");
+                    //        double z = innerSubtree.ReadElementContentAsDouble();
+
+                    //        force = new Force(theSelection, x, y, z);
+                    //    }
+                    //    catch
+                    //    {
+                    //        throw new IOException("Could not read force data from the xml file correctly");
+                    //    }
+                    //}
+                    //return force;
+                
        
         /// <summary>
         /// read material data in from the file and build a material object

@@ -105,7 +105,7 @@ namespace DisertationFEPrototype.Optimisations
             var newmeshData = new MeshData();
             newmeshData.Elements = meshData.Elements;
             newmeshData.Nodes = newMeshDataNodes;
-            newmeshData.Force = meshData.Force;
+            newmeshData.Forces = meshData.Forces;
             newmeshData.Material = meshData.Material;
             newmeshData.FaceSelections = meshData.FaceSelections;
             newmeshData.FixSelections = meshData.FixSelections;
@@ -120,7 +120,7 @@ namespace DisertationFEPrototype.Optimisations
         /// </summary>
         private void ILPEdgeDrivenRefinement()
         {
-           // List<Edge> redefinedEdges = new List<Edge>();
+           
 
             // the edges which had been assigned an amount for remeshing
             List<Edge> meshingEdges = this.ruleManager.Edges;
@@ -135,9 +135,7 @@ namespace DisertationFEPrototype.Optimisations
                 // for each node on the path get its elements and mesh those
                 List<IElement> allRemeshingElems = nodePath.SelectMany(np => meshData.findElems(np)).ToList();
 
-
                 List<Node> newNodePath = new List<Node>();
-
 
                 List<Node> allPathNodes = new List<Node>();
                 List<IElement> allRefinedElems = new List<IElement>();
@@ -150,16 +148,16 @@ namespace DisertationFEPrototype.Optimisations
                     // get the allNodes for the element which sit directly on the edge
                     var pathNodes = edge.NodePath.Intersect(elem.getNodes()).ToArray();
 
-                    // allPathNodes.AddRange(pathNodes);
-
                     refined = elem.createChildElements(allNodes);
+
+                    foreach (IElement child in refined)
+                    {
+                        child.getNodes().ForEach(node => node.NodeOrigin = Node.Origin.Heuristic);
+                    }
 
                     elem.setChildren(refined);
                     allRefinedElems.AddRange(refined);
 
-                    //ii++;
-                    // mesh another level
-                    //remesh(refined, ii, elemCount);
                 }
                 relinkNodes(edge, allRefinedElems);
 
@@ -173,11 +171,7 @@ namespace DisertationFEPrototype.Optimisations
 
                 //    // realised near the end of the project I either have to update the origin value for all the nodes here
                 //    // or pass the value through about 5 functions to the point where the new Node is initialised
-                //    foreach(IElement child in children)
-                //    {
-                //        child.getNodes().ForEach(node => node.NodeOrigin = Node.Origin.Heuristic);
-                //    }
-
+              
 
                 //    // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
                 //    elem.setChildren(children);
@@ -210,8 +204,6 @@ namespace DisertationFEPrototype.Optimisations
 
 
             Node[] pathNodes = edgeToUpdate.NodePath.ToArray();
-
-            Node newPathNode;
 
             Node currentNode;
 

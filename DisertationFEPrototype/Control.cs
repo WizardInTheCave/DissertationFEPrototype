@@ -31,6 +31,7 @@ namespace DisertationFEPrototype
         /// <param name="lisaString"></param>
         public Control(string experimentFolder, Tuple<short, short> experimentVals) {
 
+
             string experimentFolderLocal = experimentFolder;
            
             bool isNodeOutput = true;
@@ -123,7 +124,7 @@ namespace DisertationFEPrototype
                     file.WriteLine("ElemCount score: " + assessment.ElemCountScore.ToString());
                     file.WriteLine("Element Quality score: " + assessment.ElemQualityScore.ToString());
                     file.WriteLine("Overall Quality Improvement score: " + assessment.OvarallQualityImprovement.ToString());
-                    file.WriteLine("Heuristic Quality Score: " + assessment.HeuristuicQualityScore.ToString());
+                    file.WriteLine("Heuristic Quality Score: " + assessment.HeuristicOverlapScore.ToString());
                     file.WriteLine("");
                     file.WriteLine("ElementMetrics");
                     file.WriteLine("Average Max Angle: " + assessment.ElemQualMetrics.MaxCornerAngles.Average());

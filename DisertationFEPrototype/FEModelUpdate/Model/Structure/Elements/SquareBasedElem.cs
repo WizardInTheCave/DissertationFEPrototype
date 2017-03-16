@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DisertationFEPrototYpe.FEModelUpdate.Model.Structure.Elements;
+using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 
 namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {

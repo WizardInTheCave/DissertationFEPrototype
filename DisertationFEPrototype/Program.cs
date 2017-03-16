@@ -21,7 +21,7 @@ namespace DisertationFEPrototype
             string modelFile = "bridgeAdvanced.liml";
             string edgeDefinitionFile = "modelEdges.json";
             string modelAnalysisFileName = "bridgeAdvancedOut.csv";
-            int k = 2;
+            int k = 3;
 
             if (args.Length > 0)
             {
@@ -44,7 +44,6 @@ namespace DisertationFEPrototype
                 int.TryParse(args[3], out k);
             }
 
-
             runAllExperiments(topLevelFolder, modelFile, edgeDefinitionFile, modelAnalysisFileName, k);
         }
 
@@ -57,15 +56,18 @@ namespace DisertationFEPrototype
 
             List<Tuple<short, short>> experimentVals = new List<Tuple<short, short>>();
 
-      
+
             // create combinations to try for the different methods.
-            for (short ii = 0; ii < k; ii++)
-            {
-                for (short jj = 0; jj < k; jj++)
-                {
-                    experimentVals.Add(new Tuple<short, short>(ii, jj));
-                }
-            }
+            //for (short ii = 0; ii < k; ii++)
+            //{
+            //    for (short jj = 0; jj < k; jj++)
+            //    {
+            //        experimentVals.Add(new Tuple<short, short>(ii, jj));
+            //    }
+            //}
+
+
+            experimentVals.Add(new Tuple<short, short>(3, 0));
 
             Directory.SetCurrentDirectory(topLevelFolder);
 
@@ -74,7 +76,7 @@ namespace DisertationFEPrototype
             foreach (var experimentVal in experimentVals)
             {
 
-                string experimentFolder = Path.Combine(topLevelFolder, "Experiment" + kk.ToString());
+                string experimentFolder = Path.Combine(topLevelFolder, "Experiment-" + experimentVal.Item1 + "-" + experimentVal.Item2);
 
                 Directory.CreateDirectory(experimentFolder);
 

@@ -9,6 +9,9 @@ In order to validate the system against many of the functional requirements the 
 output clearly demonstrates the systems ability to evaluate the quality of meshes using a range of metrics and refinement occurring as a result of both the stresses induced by the user and on their categorisation of edges. 
 
 \subsection{Unit Testing}
+Holistic evaluation provided evidence of the overall systems effectiveness however without verification of individual components used to 
+
+
 
 
 \subsection{Validation against Non Functional}
@@ -83,8 +86,14 @@ this the models used by Dolsak in order to train his initial ILP system responsi
 
 
 \subsubsection{Paper Mill}
+Disks are used in multiple places within the paper manufacturing process in order to press the paper as it undergoes pressing and drying. Unlike the bridge example where stresses are for the most part induced by external loading disks within paper mills are primarily stressed as a result of centripetal loading \cite{} Consequently stresses are much more even assuming symmetry in the geometry \cite{RotatingDiskFE}.
 
-\begin{figure}
+
+Assuming a disk is rotating at a particular speed it is possible to calculate the centrifugal force exerted outwards on it. This has been done in the appendix section for various points on the mill to calculate feasible input for the system \cite{RotatingDiskFE}.
+
+
+
+\begin{figure}[!h]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -100,6 +109,8 @@ this the models used by Dolsak in order to train his initial ILP system responsi
 \end{subfigure}
 \label{fig:test}
 \end{figure}
+
+
 
 
 \subsubsection{Cylinder}
@@ -170,8 +181,9 @@ The average speed up (Time of serial execution/ Time of parallel execution) was
 The Efficiency of the parallel execution (speedup / number of processors) with an Intel i5 processor with 4 cores the average efficiency  was calculated as
 
 \subsection{Quality}
-The quality of the design and implementation of the system reflects my ability not only as a computer science undergraduate but as a developer with one year industrial experience, although not directly effecting the execution of the program properties such as appropriate variable naming, loose coupling of classes, use of abstractions and descriptive error messages make the software easier to read and debug for any potential future developers.
+The quality of the design and implementation of the system reflects my experiance not only as a computer science undergraduate but as a developer with one year industrial experience, although not directly effecting the execution of the program properties such as appropriate variable naming, loose coupling of classes, use of abstractions and descriptive error messages make the software easier to read and debug for any potential future developers. 
 
+Using Visual Studio also facilitated calculation of various software quality metrics such as  for the code base automatically. This made it much easier to select parts of the codebase for refactoring when time was allocated for this and 
 
 \subsection{Documentation}
 The process of continuously writing descriptive documentation was important to the success of the project and was treated as an integral part to meeting to the goals of the project development methodology which aimed to reduce the systems complexity and improve readability. Through the writing Doc comments corresponding to every function within the codebase it was possible to generate documentation files automatically through use of the tool Doxygen. This allows anyone with the solution to view descriptions of each of its functions either in the codebase or alternatively through the manual produced automatically by Doxygen.

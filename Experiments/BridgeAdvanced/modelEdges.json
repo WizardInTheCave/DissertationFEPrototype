@@ -28,12 +28,20 @@
 		"nodePath": [197, 207]
 	},
     {
-		"Id": 5,
-		"edgeType": "circuit",
-		"loadType": "continuiousLoading",
-		"boundaryType": "fixedOneSide",
-		"nodePath": [88, 142, 148, 147, 140, 141, 135, 85]
-	}
+      "Id": 5,
+      "edgeType": "circuit",
+      "loadType": "continuiousLoading",
+      "boundaryType": "fixedOneSide",
+      "nodePath": [ 88, 142, 148, 147, 140, 141, 135, 85 ]
+    },
+     {
+      "Id": 6,
+      "edgeType": "important",
+      "loadType": "oneSideLoaded",
+      "boundaryType": "fixedOneSide",
+      "nodePath": [ 42, 198 ]
+    }
+
     ]
 }
 

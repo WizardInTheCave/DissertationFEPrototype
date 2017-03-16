@@ -23,7 +23,7 @@ namespace DisertationFEPrototype.MeshQualityMetrics
         double elemCountScore;
         double elemQualScore;
 
-        double heuristicQualScore;
+        double overlapScore;
         
         double overallQualImprovement;
 
@@ -32,7 +32,7 @@ namespace DisertationFEPrototype.MeshQualityMetrics
         public double ElemCountScore { get { return this.elemCountScore; } }
         public double ElemQualityScore { get { return this.elemQualScore; } }
 
-        public double HeuristuicQualityScore { get { return this.heuristicQualScore;  } }
+        public double HeuristicOverlapScore { get { return this.overlapScore;  } }
 
         public double OvarallQualityImprovement {
             set { overallQualImprovement = value; }
@@ -124,7 +124,7 @@ namespace DisertationFEPrototype.MeshQualityMetrics
 
             // this represents the quality of the general element shapes within the mesh
             elemQualScore = elemQualMetrics.getElemQuality();
-            heuristicQualScore = overlapRating();
+            overlapScore = overlapRating();
         }
         
     }

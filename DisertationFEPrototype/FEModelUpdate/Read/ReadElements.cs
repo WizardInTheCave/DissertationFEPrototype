@@ -70,68 +70,47 @@ namespace DisertationFEPrototype.FEModelUpdate.Read
             string elementId = reader[elementIdAtt];
             string shape = reader[shapeAtt];
             string rawNodes = reader[nodesAtt];
+           
+            int id = Convert.ToInt32(elementId);
 
-            //try
-            //{
-                int id = Convert.ToInt32(elementId);
+            // parse node ids as a string delimited by spaces to a list of ints
+            List<int> elemNodeIds = rawNodes.Split(' ').Select(x => Convert.ToInt32(x)).ToList();
 
-                // parse node ids as a string delimited by spaces to a list of ints
-                List<int> elemNodeIds = rawNodes.Split(' ').Select(x => Convert.ToInt32(x)).ToList();
+            // get the nodes which we have been able to load in already
+            List<Node> matchedNodes = new List<Node>();
 
-                // get the nodes which we have been able to load in already
-                List<Node> matchedNodes = new List<Node>();
+            // iterate through all the stored nodes in the mesh, if we can find the node in the model already
+            // then link it up to the element
 
-                // iterate through all the stored nodes in the mesh, if we can find the node in the model already
-                // then link it up to the element
-
-                // loses order because stored as a dictionary
-                foreach (Node node in meshData.Nodes.Values)
+            // loses order because stored as a dictionary
+            foreach (Node node in meshData.Nodes.Values)
+            {
+                foreach (int elemNodeId in elemNodeIds)
                 {
-                    foreach (int elemNodeId in elemNodeIds)
-                    {
-                        if (node.Id == elemNodeId)
-                        {   
-                            matchedNodes.Add(node);
-                        }
+                    if (node.Id == elemNodeId)
+                    {   
+                        matchedNodes.Add(node);
                     }
                 }
-               
-                // try {
+            }
 
-                IElement newElement;
+            IElement newElement;
 
-                if(shape == HEX8_SHAPE)
-                {
-                    newElement = new Hex8Elem(id, matchedNodes);
-                }
+            if(shape == HEX8_SHAPE)
+            {
+                newElement = new Hex8Elem(id, matchedNodes);
+            }
 
-                else if(shape == QUAD4_SHAPE)
-                {
-                    newElement = new Quad4Elem(id, matchedNodes);
-                }
-                else
-                {
-                    throw new Exception("IElement type created not handled by this program");
-                }
+            else if(shape == QUAD4_SHAPE)
+            {
+                newElement = new Quad4Elem(id, matchedNodes);
+            }
+            else
+            {
+                throw new Exception("IElement type created not handled by this program");
+            }
                   
-                return newElement;
-                // }
-                //catch(Exception e)
-                //{
-                //    List<Node> myNodes = meshData.Nodes.Values.ToList();
-                //    myNodes.ForEach(node => Console.WriteLine("node ID: " + node.Id.ToString()));
-                //    throw e;
-                //}
-                
-
-                
-            //}
-            //catch
-            //{
-            //    throw new Exception("Could not read element data from xml correctly");
-            //}
+            return newElement;
         }
-       
-        
     }
 }

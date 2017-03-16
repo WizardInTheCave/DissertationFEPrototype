@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DisertationFEPrototYpe.FEModelUpdate.Model.Structure.Elements
+namespace DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
     public class ConvexHullPoint
     {

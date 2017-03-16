@@ -19,41 +19,19 @@ namespace DisertationFEPrototype.ModelUpdate
     /// </summary>
     class WriteNewMeshData
     {
-        //Dictionary<IElement, string> shapeLookup = new Dictionary<IElement, string>()
-        //{
-        //    {Quad4Elem, "quad4" },
-        //    {Hex8Elem, "hex8" }
-
-        //};
-           
         public WriteNewMeshData(MeshData meshData, string newLisaModelPath, string analysisOutputPath)
         {
-
-            // Directory.SetCurrentDirectory(lisaFolderPath);
-            // this is how we want to do it in an ideal world however because our object model does not map exactly to
-            // that of the lisa file it may be easier if we just write out strings
-            //try {
-            //    System.Xml.Serialization.XmlSerializer writer =
-            //        new System.Xml.Serialization.XmlSerializer(typeof(MeshData));
-            //    System.IO.FileStream file = System.IO.File.Create(outputFilePath);
-            //    writer.Serialize(file, meshData);
-            //    file.Close();
-            //}
-            //catch(Exception ex)
-            //{
-            //    Debug.WriteLine(ex.InnerException.ToString()); 
-            //}
-
             try
             {
                 StreamWriter fw;
                 using (fw = new StreamWriter(newLisaModelPath, true)) {
                     fw.WriteLine("<liml8>");
                     fw.WriteLine("  <analysis type=\"S30\" />");
+
                     writeNodes(fw, meshData.Nodes.Values.ToList());
                     writeElements(fw, meshData.Elements, meshData.Material.GetName);
                     meshData.FixSelections.ForEach(fix => fw.WriteLine("  <fix selection=\"" + fix.Selection.GetName + "\" />"));
-                    writeForce(fw, meshData.Force);
+                    writeForces(fw, meshData.Forces);
                     writeMaterials(fw, meshData.Material);
                     writeFaceSections(fw, meshData.FaceSelections);
 
@@ -100,13 +78,16 @@ namespace DisertationFEPrototype.ModelUpdate
             fw.WriteLine("      <saveonsolve filename=\"" + outputFileName + "\" />");
         }
 
-        private void writeForce(StreamWriter fw, Force theForce)
+        private void writeForces(StreamWriter fw, List<Force> forces)
         {
-            fw.WriteLine("  <force selection=\"" + theForce.Selection + "\">");
-            fw.WriteLine("    <x>" + theForce.X + "</x>");
-            fw.WriteLine("    <y>" + theForce.Y + "</y>");
-            fw.WriteLine("    <z>" + theForce.Z + "</z>");
-            fw.WriteLine("  </force>");
+            foreach(Force f in forces)
+            {
+                fw.WriteLine("  <force selection=\"" + f.Selection + "\">");
+                fw.WriteLine("    <x>" + f.X + "</x>");
+                fw.WriteLine("    <y>" + f.Y + "</y>");
+                fw.WriteLine("    <z>" + f.Z + "</z>");
+                fw.WriteLine("  </force>");
+            }
         }
 
         private void writeNodes(StreamWriter fw, List<Node> nodes)
