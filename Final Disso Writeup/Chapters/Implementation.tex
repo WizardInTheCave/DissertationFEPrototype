@@ -26,7 +26,7 @@ The final system has been written entirely using the C\# programming language (v
 
 
 \subsection{Implementation Methodology}
-Due to the size of the software, which is now in excess of 14000 lines of code it was important to work systematically to continuously drive the project in the right direction and avoid the introduction of unnecessary complexity. This was achieved through regular reviewal and refactoring which dramatically helped to reduced the amount of bugs introduced. \\
+Growing size of the software meant it was important to work systematically to continuously drive the project in the right direction and avoid the introduction of unnecessary complexity. This was achieved through regularly reviewing and refactoring the code which dramatically helped to reduced the amount of bugs introduced. \\
 
 \noindent
 For the duration of the project the spiral methodology was adhered to. This enforced multiple deliverable stages that were concluded with a supervisor meeting every one or two weeks. Adopting the spiral methodology also provided flexibility regarding the order in which tasks were able to take place outside of a spiral iteration. This was necessary when conducing a research driven project where direction of work for subsequent development iterations was largely driven by the  findings of the work in the previous ones. \\
@@ -115,6 +115,24 @@ The properties that can exist between two edges when compared are the following:
 \item Edges are considered the same - to meet this requirement both edges must be almost the same length, opposite one another and posses the same form.
 
 \end{itemize}
+
+
+\begin{figure}[!h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../Graphics/Rule7Implementation.png}
+  \caption{Code implementation of rule 7 provided by dolsak within the RuleManger class}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{../Graphics/Rule7Dolsak.png}
+  \caption{Rule 7 as stated by dolsak in his papers \cite{appOfILPToFEMeshDesign}}
+  \label{fig:sub2}
+\end{subfigure}
+\label{fig:test}
+\end{figure}
 
 
 \subsection{Mesh Quality Assessment}

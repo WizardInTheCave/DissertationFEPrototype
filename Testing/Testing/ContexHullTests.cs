@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
+using DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 using System.Collections.Generic;
 
 namespace Testing

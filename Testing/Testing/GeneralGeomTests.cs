@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DisertationFEPrototype;
+using DissertationFEPrototype;
+using DissertationFEPrototype.FEModelUpdate.Model.Structure;
 
 namespace Testing
 {
@@ -13,7 +14,7 @@ namespace Testing
 
             var vec1 = new double[3] { 1, 2, 3 };
             var vec2 = new Tuple<double, double, double>(4.0, -5.0, 6);
-            double res = DisertationFEPrototype.FEModelUpdate.GeneralGeomMethods.dotProduct(vec1, vec2);
+            double res = DissertationFEPrototype.FEModelUpdate.GeneralGeomMethods.dotProduct(vec1, vec2);
             // calc with tolerance
             var delta = Math.Abs(res - 12.0);
             Assert.IsTrue(delta < 0.01);
@@ -37,7 +38,7 @@ namespace Testing
         {
 
             var matrix = new double[3, 3] { { 9, 3, 5 }, { -6, -9, 7 }, { -1, -8, 1 } };
-            double res = DisertationFEPrototype.FEModelUpdate.GeneralGeomMethods.matrixDeterminant(matrix);
+            double res = DissertationFEPrototype.FEModelUpdate.GeneralGeomMethods.matrixDeterminant(matrix);
 
 
             var delta = Math.Abs(res - 615.0);

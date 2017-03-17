@@ -19,9 +19,42 @@ To use the interface an engineer would simply need to submit a model they have a
 
 
 \section{Personal Reflections and Summary}
-Comparing the current progress of the project against the plan things are on track to be completed as scheduled. So far I am pleased with both my research efforts and the functionality that I have been able to implement. My primary concern at present is that the ILP generated rules may not perform as well as expected when fully implemented or that they perform well but only for a limited set of geometries, which would be disappointing. While conducting research, development and implementation for the project I have worked methodically to best understand each problem as and when they occur and consider each of the possible solutions before committing to one. I feel this approached has saved me much time and has forced me to reach a better view about what exactly each subsystem should do and how to implement it. In hindsight if I were to repeat the first part of the project again I would have organised my time differently to spend less of it focussed on the details of coursework assignments for other modules into making further progress on the implementation of the rule system.
+%Comparing the current progress of the project against the plan things are on track to be completed as scheduled. So far I am pleased with both my research efforts and the functionality that I have been able to implement. My primary concern at present is that the ILP generated rules may not perform as well as expected when fully implemented or that they perform well but only for a limited set of geometries, which would be disappointing. While conducting research, development and implementation for the project I have worked methodically to best understand each problem as and when they occur and consider each of the possible solutions before committing to one. I feel this approached has saved me much time and has forced me to reach a better view about what exactly each subsystem should do and how to implement it. In hindsight if I were to repeat the first part of the project again I would have organised my time differently to spend less of it focussed on the details of coursework assignments for other modules into making further progress on the implementation of the rule system.
+
+\noindent
+Overall I felt the project was a success. The final software solution was evidently capable of facilitating execution and therefore allowing comparison to be made of both heuristic and stress based mesh refinement techniques. Not only did the final system allow this comparison for the two specific approaches that were coded by me in order to validate the system it provided a flexible framework allowing for a potentially unlimited set of configurations when performing future experimentation. \\ 
+
+\noindent
+From my perspective I wanted to use this project as an opportunity to improve my understanding of a technology that I previously had limited knowledge of through its use on my industrial placement year. My prior experience with with FE analysis was very much confined to that of a typical engineer making use of the method through a licensed desktop application with many of the technicalities that are of most interest to a computer scientist hidden. I therefore found the project highly enjoyable as an opportunity to learn more about the underlying processes through both research and practical experimentation. As a means of facilitating my own learning as an individual I therefore also consider the project a success.
+
+\noindent
+Despite working on larger software projects during my year within industry this was certainly the most complex I have undertaken as an individual. As the lead software developer on my own project I encountered many challenges which as a junior developer within industry were not my responsibility but which I observed team leaders and senior developers encountering regularly. Such tasks were those that required high level analysis of the overall solution in order to continuously steer the project in the right direction and ensure successful delivery within the specified time scales. In many ways the project therefore gave me a good appreciation of the overall difficulties associated with delivering a software project in its entirety and one that has the potential change fluidly throughout.\\ 
+
+\noindent
+In particular I found the research and evaluation phases particularly difficult. Upon completion I came to realise this was largely due to my lack of formal education in mechanical engineering which meant I had to work a lot harder both to understand the initial problems associated with the methods and subsequently to correctly evaluate the results I obtained. Had I chosen a more traditional computer science topic I believe both of these aspects would have been much easier.
+
+Having completed the research too much time was then spent concerned with specifics of the implementation. 
 
 
+
+
+A negative consequence of the bespoke nature of the system was that obtaining details of designs results for comparable systems published by the wider academic community was both challenging and highly time consuming.  \\ 
+
+\noindent
+Throughout the majority of the project I felt organisation of time and planning of activities was done well. Work on the project began early with the goal of easing pressure in the later stages and work continued despite deadlines for coursework associated with other modules. A crucial mistake made was to reduce effort two months before the deadline having completed the software implementation and written much of the initial sections of the dissertation despite not completing evaluation of the results. Evaluation of the software turned out to be substantially more time consuming than expected in additional stresses towards the deadline. \\
+
+\noindent
+Given the chance to redo the project I would have liked to conducted more research to better assess an even wider scope of research surrounding meshing methods. In many cases the academic literature surrounding bespoke meshing techniques became complicated very quickly and was clearly aimed at individuals with a high degree of prior experience.
+
+%A consequence of this was I  opted for the simplest version of the two approaches I could find so as to tesy my
+
+
+By contrast I found the system design and programming components 
+
+
+planning and research components 
+
+managerial architectural aspects which I had not previously had that great an involvement with
 %Mention difficulty in initially predicting the unforseen technical challenges.
 
 %Describe ambition behind project to challenge both comptuer science skills and improve knowledge of software methods for solving mechanical engineering problems.
@@ -134,6 +167,8 @@ for Triangular Mesh Generation} \url{https://people.eecs.berkeley.edu/~jrs/paper
 
 \bibitem{Centripetal} \url{http://www.engineeringtoolbox.com/centripetal-acceleration-d_1285.html}
 
+\bibitem{VisualStudioMaintainIndex} \url{https://msdn.microsoft.com/en-gb/library/bb385914.aspx}
+
 
 \end{thebibliography}
 \appendix
@@ -232,6 +267,22 @@ Below can be seen the format of the input files for the system (A LISA .liml and
   \label{fig:sub2}
 \end{subfigure}
 \label{fig:test}
+\end{figure}
+
+
+\section{Software Quality Metrics}
+
+
+\begin{figure}
+  \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/softwareQualityMetrics.png}}
+  \caption{The metrics calculated by visual studio for all high level modules in the system}
+  \label{fig:boat1}
+\end{figure}
+
+\begin{figure}
+  \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/qualityMetricsExpanded.png}}
+  \caption{The metrics calculated by visual studio for the all classes in the final system}
+  \label{fig:boat1}
 \end{figure}
 
 

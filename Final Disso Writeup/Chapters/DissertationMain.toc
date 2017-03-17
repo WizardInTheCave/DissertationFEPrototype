@@ -33,33 +33,34 @@
 \contentsline {subsection}{\numberline {9.10}Mesh Quality Assessment}{20}{subsection.9.10}
 \contentsline {subsection}{\numberline {9.11}Implementation Issues}{20}{subsection.9.11}
 \contentsline {subsubsection}{\numberline {9.11.1}Attempts to Automatically Define edges within models}{20}{subsubsection.9.11.1}
-\contentsline {section}{\numberline {10}Evaluation of Project}{21}{section.10}
-\contentsline {subsection}{\numberline {10.1}Validation against Functional Requirements}{21}{subsection.10.1}
-\contentsline {subsection}{\numberline {10.2}Unit Testing}{21}{subsection.10.2}
-\contentsline {subsection}{\numberline {10.3}Validation against Non Functional}{21}{subsection.10.3}
-\contentsline {subsection}{\numberline {10.4}Evaluation Of The system For Various Models}{21}{subsection.10.4}
-\contentsline {subsubsection}{\numberline {10.4.1}Suspension Bridge structure}{21}{subsubsection.10.4.1}
-\contentsline {subsubsection}{\numberline {10.4.2}Evaluation of bridge for sideways loading}{23}{subsubsection.10.4.2}
-\contentsline {subsubsection}{\numberline {10.4.3}Evaluation of bridge for base loading}{23}{subsubsection.10.4.3}
-\contentsline {subsubsection}{\numberline {10.4.4}Validating system against previously obtained research results}{23}{subsubsection.10.4.4}
-\contentsline {subsubsection}{\numberline {10.4.5}Paper Mill}{23}{subsubsection.10.4.5}
-\contentsline {subsubsection}{\numberline {10.4.6}Cylinder}{23}{subsubsection.10.4.6}
-\contentsline {subsection}{\numberline {10.5}Evaluation of Subsystems based on model evaluation}{24}{subsection.10.5}
-\contentsline {subsubsection}{\numberline {10.5.1}Analysis of Dittmer mesh quality metrics}{24}{subsubsection.10.5.1}
-\contentsline {subsubsection}{\numberline {10.5.2}Evaluation of stress refinement effectiveness}{24}{subsubsection.10.5.2}
-\contentsline {subsubsection}{\numberline {10.5.3}Evaluation of heuristic refinement effectiveness}{24}{subsubsection.10.5.3}
-\contentsline {subsection}{\numberline {10.6}Increase in performance through parallel execution}{24}{subsection.10.6}
-\contentsline {subsection}{\numberline {10.7}Quality}{26}{subsection.10.7}
-\contentsline {subsection}{\numberline {10.8}Documentation}{26}{subsection.10.8}
-\contentsline {subsection}{\numberline {10.9}Maintainability}{26}{subsection.10.9}
-\contentsline {subsubsection}{\numberline {10.9.1}Evaluation Issues}{26}{subsubsection.10.9.1}
-\contentsline {subsection}{\numberline {10.10}Evaluation of overall project}{26}{subsection.10.10}
-\contentsline {subsection}{\numberline {10.11}Evaluation summary}{26}{subsection.10.11}
-\contentsline {section}{\numberline {11}Further Work}{27}{section.11}
-\contentsline {subsection}{\numberline {11.1}Gathering feedback from experienced engineers}{27}{subsection.11.1}
-\contentsline {subsection}{\numberline {11.2}Improving usability through a web interface}{27}{subsection.11.2}
-\contentsline {section}{\numberline {12}Personal Reflections and Summary}{27}{section.12}
-\contentsline {section}{References}{29}{section.12}
-\contentsline {section}{\numberline {A}Element Types within LISA}{30}{appendix.A}
-\contentsline {section}{\numberline {B}Calculating Centripetal Force For Paper Mill}{30}{appendix.B}
-\contentsline {section}{\numberline {C}Input and output files}{31}{appendix.C}
+\contentsline {section}{\numberline {10}Evaluation of Project}{22}{section.10}
+\contentsline {subsection}{\numberline {10.1}Validation against Functional Requirements}{22}{subsection.10.1}
+\contentsline {subsection}{\numberline {10.2}Unit Testing}{22}{subsection.10.2}
+\contentsline {subsection}{\numberline {10.3}Validation against Non Functional}{22}{subsection.10.3}
+\contentsline {subsection}{\numberline {10.4}Evaluation Of The system For Various Models}{22}{subsection.10.4}
+\contentsline {subsubsection}{\numberline {10.4.1}Suspension Bridge structure}{22}{subsubsection.10.4.1}
+\contentsline {subsubsection}{\numberline {10.4.2}Evaluation of bridge for sideways loading}{24}{subsubsection.10.4.2}
+\contentsline {subsubsection}{\numberline {10.4.3}Evaluation of bridge for base loading}{24}{subsubsection.10.4.3}
+\contentsline {subsubsection}{\numberline {10.4.4}Validating system against previously obtained research results}{24}{subsubsection.10.4.4}
+\contentsline {subsubsection}{\numberline {10.4.5}Paper Mill}{24}{subsubsection.10.4.5}
+\contentsline {subsubsection}{\numberline {10.4.6}Cylinder}{24}{subsubsection.10.4.6}
+\contentsline {subsection}{\numberline {10.5}Evaluation of Subsystems based on model evaluation}{25}{subsection.10.5}
+\contentsline {subsubsection}{\numberline {10.5.1}Analysis of Methods Using Metrics}{25}{subsubsection.10.5.1}
+\contentsline {subsubsection}{\numberline {10.5.2}Evaluation of stress refinement effectiveness}{27}{subsubsection.10.5.2}
+\contentsline {subsubsection}{\numberline {10.5.3}Evaluation of heuristic refinement effectiveness}{27}{subsubsection.10.5.3}
+\contentsline {subsection}{\numberline {10.6}Increase in performance through parallel execution}{27}{subsection.10.6}
+\contentsline {subsection}{\numberline {10.7}Software Quality and Maintainability}{27}{subsection.10.7}
+\contentsline {subsection}{\numberline {10.8}Documentation}{28}{subsection.10.8}
+\contentsline {subsubsection}{\numberline {10.8.1}Evaluation Issues}{28}{subsubsection.10.8.1}
+\contentsline {subsection}{\numberline {10.9}Evaluation of overall project}{28}{subsection.10.9}
+\contentsline {subsection}{\numberline {10.10}Evaluation summary}{28}{subsection.10.10}
+\contentsline {subsection}{\numberline {10.11}Successes and Limitations of project}{28}{subsection.10.11}
+\contentsline {section}{\numberline {11}Further Work}{29}{section.11}
+\contentsline {subsection}{\numberline {11.1}Gathering feedback from experienced engineers}{29}{subsection.11.1}
+\contentsline {subsection}{\numberline {11.2}Improving usability through a web interface}{29}{subsection.11.2}
+\contentsline {section}{\numberline {12}Personal Reflections and Summary}{29}{section.12}
+\contentsline {section}{References}{32}{section.12}
+\contentsline {section}{\numberline {A}Element Types within LISA}{33}{appendix.A}
+\contentsline {section}{\numberline {B}Calculating Centripetal Force For Paper Mill}{34}{appendix.B}
+\contentsline {section}{\numberline {C}Input and output files}{34}{appendix.C}
+\contentsline {section}{\numberline {D}Software Quality Metrics}{34}{appendix.D}

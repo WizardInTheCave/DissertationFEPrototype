@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="DisertationFEPrototype, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\DisertationFEPrototype\DisertationFEPrototype\bin\Debug\DisertationFEPrototype.exe</HintPath>
+      <HintPath>..\..\DissertationFEPrototype\bin\Debug\DisertationFEPrototype.exe</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
