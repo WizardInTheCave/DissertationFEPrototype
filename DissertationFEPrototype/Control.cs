@@ -31,6 +31,11 @@ namespace DissertationFEPrototype
         /// <param name="lisaString"></param>
         public Control(string experimentFolder, Tuple<short, short> experimentVals) {
 
+            List<double> times = new List<double>();
+            List<MeshData> meshes = new List<MeshData>();
+
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             string experimentFolderLocal = experimentFolder;
            
@@ -100,48 +105,117 @@ namespace DissertationFEPrototype
                 // update the model for the next iteration
                 meshData = refinedMesh;
                 ii++;
+
+                times.Add(stopwatch.Elapsed.TotalSeconds);
+                meshes.Add(meshData);
             }
 
-            writeAssessmentSummary(experimentFolder, meshAssessments);
+            stopwatch.Stop();
+
+            writeAssessmentSummary(experimentFolder, meshAssessments, times, meshes);
         }
 
         /// <summary>
         /// Write out a summary of the Assessments for this experiment so we can compare variations in how effective the two methods are
         /// </summary>
-        private void writeAssessmentSummary(string experimentFoler, List<MeshQualityAssessment> meshAssessments)
+        private void writeAssessmentSummary(string experimentFoler, List<MeshQualityAssessment> meshAssessments, List<double> times, List<MeshData> meshes)
         {
 
            
-                string analysisFile = Path.Combine(experimentFoler, "analysisData.txt");
+            string analysisFile = Path.Combine(experimentFoler, "analysisData.txt");
 
-                StreamWriter file = new StreamWriter(analysisFile);
+            StreamWriter file = new StreamWriter(analysisFile);
 
-                int ii = 0;
-                foreach (MeshQualityAssessment assessment in meshAssessments)
-                {
-                file.WriteLine("////////////////////////////Results for iteration " + ii.ToString() + @"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
-                    file.WriteLine("\nGlobal Metrics");
-                    file.WriteLine("ElemCount score: " + assessment.ElemCountScore.ToString());
-                    file.WriteLine("Element Quality score: " + assessment.ElemQualityScore.ToString());
-                    file.WriteLine("Overall Quality Improvement score: " + assessment.OvarallQualityImprovement.ToString());
-                    // file.WriteLine("Heuristic Quality Score: " + assessment.HeuristicOverlapScore.ToString());
-                    file.WriteLine("");
-                file.WriteLine("");
-                        file.WriteLine("Stress Quality Improvement: " + assessment.StressRefinementIncrease);
-                        file.WriteLine("Heuristic Quality Improvement: " + assessment.HeuristicRefinementIncrease);
-                    file.WriteLine("");
-                    file.WriteLine("ElementMetrics");
-                    file.WriteLine("Average Max Angle: " + assessment.ElemQualMetrics.MaxCornerAngles.Average());
-                    file.WriteLine("Average Max parallel dev: " + assessment.ElemQualMetrics.MaxParrallelDevs.Average());
-                    file.WriteLine("Average AspectRatio: " + assessment.ElemQualMetrics.AspectRatios.Average());
-                    file.WriteLine("");
-                file.WriteLine("////////////////////////////---------------------\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+            //  int ii = 0;
+            //foreach (MeshQualityAssessment assessment in meshAssessments)
+            //{
+            //file.WriteLine("////////////////////////////Results for iteration " + ii.ToString() + @"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+            //    file.WriteLine("\nGlobal Metrics");
+            //    file.WriteLine("ElemCount score: " + assessment.ElemCountScore.ToString());
+            //    file.WriteLine("Element Quality score: " + assessment.ElemQualityScore.ToString());
+            //    file.WriteLine("Overall Quality Improvement score: " + assessment.OvarallQualityImprovement.ToString());
+            //    // file.WriteLine("Heuristic Quality Score: " + assessment.HeuristicOverlapScore.ToString());
+            //    file.WriteLine("");
+            //file.WriteLine("");
+            //        file.WriteLine("Stress Quality Improvement: " + assessment.StressRefinementIncrease);
+            //        file.WriteLine("Heuristic Quality Improvement: " + assessment.HeuristicRefinementIncrease);
+            //    file.WriteLine("");
+            //    file.WriteLine("ElementMetrics");
+            //    file.WriteLine("Average Max Angle: " + assessment.ElemQualMetrics.MaxCornerAngles.Average());
+            //    file.WriteLine("Average Max parallel dev: " + assessment.ElemQualMetrics.MaxParrallelDevs.Average());
+            //    file.WriteLine("Average AspectRatio: " + assessment.ElemQualMetrics.AspectRatios.Average());
+            //    file.WriteLine("");
+            //file.WriteLine("////////////////////////////---------------------\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+            //ii++;
+            //}
+
+
+
+            file.WriteLine("TimesForRuns");
+
+            int ii = 0;
+            foreach (double time in times)
+            {
+                file.WriteLine(time.ToString());
                 ii++;
-                }
+            }
 
             file.WriteLine("");
             file.WriteLine("");
-            file.WriteLine("stressImprove");
+
+            file.WriteLine("ElemCount");
+            int jj = 0;
+            foreach (var mesh in meshes) { 
+
+                file.WriteLine(mesh.Elements.Count);
+                jj++;
+            }
+
+
+        file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("Elem Qual Score");
+            foreach (MeshQualityAssessment assessment in meshAssessments)
+            {
+                file.WriteLine(assessment.ElemQualityScore);
+            }
+
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("Element Count Score");
+            foreach (MeshQualityAssessment assessment in meshAssessments)
+            {
+                file.WriteLine(assessment.ElemCountScore);
+            }
+
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("Average Max Angle");
+            foreach (MeshQualityAssessment assessment in meshAssessments)
+            {
+                file.WriteLine(assessment.ElemQualMetrics.MaxCornerAngles.Average());
+            }
+
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("Average Max Parallel Devs");
+            foreach (MeshQualityAssessment assessment in meshAssessments)
+            {
+                file.WriteLine(assessment.ElemQualMetrics.MaxParrallelDevs.Average());
+            }
+
+
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("Average OverallQualScore");
+            foreach (MeshQualityAssessment assessment in meshAssessments)
+            {
+                file.WriteLine(assessment.OvarallQualityImprovement);
+            }
+
+            file.WriteLine("");
+            file.WriteLine("");
+            file.WriteLine("StressImprove");
             foreach (MeshQualityAssessment assessment in meshAssessments)
             {
                 file.WriteLine(assessment.StressRefinementIncrease);
@@ -180,7 +254,7 @@ namespace DissertationFEPrototype
         /// <returns></returns>
         private bool evaluationFunction(int ii)
         {
-            return ii > 7;
+            return ii > 17;
         }
     }
 }

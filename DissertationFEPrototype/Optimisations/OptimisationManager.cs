@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DissertationFEPrototype.Model;
 using DissertationFEPrototype.Model.Analysis;
 using DissertationFEPrototype.Optimisations.ILPRules;
 using DissertationFEPrototype.MeshQualityMetrics;
 using DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
-using DissertationFEPrototype.FEModelUpdate;
 using DissertationFEPrototype.FEModelUpdate.Model.Structure;
 using DissertationFEPrototype.FEModelUpdate.Model;
 
@@ -62,42 +59,19 @@ namespace DissertationFEPrototype.Optimisations
 
             allNodes = meshData.Nodes;
 
-
             // depending on how heavily we want to perform each type of meshing run that type of meshing
             for (int ii = 0; ii < stressRefineCount; ii++)
             {
                 stressGradientDrivenRemesh(elements, analysisData);
             }
-            // this.meshData.Elements = getNewElementList(elements);
-            // now flatten the tree structure
-
+        
             for (int jj = 0; jj < ILPRefineCount; jj++)
             {
                 ILPEdgeDrivenRefinement();
             }
+
+            // now flatten the tree structure
             this.meshData.Elements = getNewElementList(elements);
-
-
-            //for (int jj = 0; jj < ii; jj++)
-            //{
-
-
-
-
-            // we have some derivatives for the straight lines we want to 
-            // keep what we are currently doing if the derivative is equally negative, 
-            // then apply an even more extreme version of what we were doing
-
-            // otherwise one metric has improved, something is going ok but we did something to upset another variable
-            // using an if statement for now but a deligate would ultimately be ideal for doing this.
-            // later on need to do both but with some weighting
-
-            //List<double> aspectRatios = meshQualityAssessment.ElemQualMetrics.AspectRatios;
-            //List<double> maxCornerAngles = meshQualityAssessment.ElemQualMetrics.MaxCornerAngles;
-
-            //List<Node> all_nodes = getAllNodes(flatElemTree);
-
-            // update the ids on nodes which don't have ids
 
             // our mesh should now be refined
             var newMeshDataNodes = meshData.Nodes;
@@ -159,24 +133,7 @@ namespace DissertationFEPrototype.Optimisations
                     allRefinedElems.AddRange(refined);
 
                 }
-                relinkNodes(edge, allRefinedElems);
-
-
-
-
-                //foreach (IElement elem in allRemeshingElems)
-                //{
-                //    List<IElement> children = elem.createChildElements(nodes);
-
-
-                //    // realised near the end of the project I either have to update the origin value for all the nodes here
-                //    // or pass the value through about 5 functions to the point where the new Node is initialised
-              
-
-                //    // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
-                //    elem.setChildren(children);
-
-                //}  
+                relinkNodes(edge, allRefinedElems); 
             }
         }
 
@@ -264,94 +221,10 @@ namespace DissertationFEPrototype.Optimisations
                 }
             }
 
-
-
-            // loop through each of the gaps between two allNodes
-            // for (int ii = 0; ii + 1 < pathNodes.Length; ii++)
-            //{
-            //    newNodePath.Add(pathNodes[ii]);
-
-            //    var firstNode = pathNodes[ii];
-            //    var secondNode = pathNodes[ii + 1];
-
-            //    // Get the distance between the current and all other allNodes
-            //    List<Tuple<Node, double>> comparisonsAgainstFirst = theNewNodes
-            //        .Select(x => new Tuple<Node, double>(x, x.distanceTo(firstNode))).ToList();
-
-
-            //    List<Tuple<Node, double>> comparisonsAgainstSecond = theNewNodes
-            //       .Select(x => new Tuple<Node, double>(x, x.distanceTo(secondNode))).ToList();
-
-            //    // get the four closest to the first node, which of these is closes to the second
-            //    var fourClosestToFirst = comparisonsAgainstFirst.Take(4);
-
-            //    var fourClosestToFirstFromSecond = comparisonsAgainstSecond.Intersect(fourClosestToFirst).OrderBy(x => x.Item2).ToArray();
-
-            //    Node nextNode = fourClosestToFirstFromSecond[0].Item1;
-
-            //    comparisonsAgainstFirst.Remove(fourClosestToFirstFromSecond[0]);
-            //    comparisonsAgainstSecond.Remove(fourClosestToFirstFromSecond[0]);
-
-
-
-            //    // int newNodeIndex
-
-            //    comparisonsAgainstFirst.OrderBy(x => x.Item2);
-
-            //    comparisonsAgainstFirst.OrderBy(x => x.Item2);
-            //    comparisonsAgainstSecond.Reverse();
-
-            //    int length = (comparisonsAgainstFirst.Count < comparisonsAgainstSecond.Count)
-            //        ? comparisonsAgainstFirst.Count : comparisonsAgainstSecond.Count;
-
-            //    for (int jj = 0; jj < length; jj++)
-            //    {
-            //        // this is the next node to add to the path
-            //        if (comparisonsAgainstFirst[jj].Item1 == comparisonsAgainstSecond[jj].Item1)
-            //        {
-            //            newPathNode = comparisonsAgainstFirst[jj].Item1;
-            //            newNodePath.Add(newPathNode);
-            //        }
-            //        // some kind of discrepancy and things have gone wrong
-            //        else
-            //        {
-            //            Console.WriteLine("Don't want to be here");
-            //            //  throw new Exception("User provided node path is poorly formed, "+ 
-            //            //       "please specify well defined path withouth high deviation in points");
-            //        }
-            //    }
-            //}
             newNodePath.Add(pathNodes[pathNodes.Length - 1]);
 
             edgeToUpdate.NodePath = newNodePath;
         }
-
-
-        /// <summary>
-        /// for each edge that was detected remesh all the elements along that edge 
-        /// and return a new edge where the node path has been updated so that on the next iteration more meshing of the edge
-        /// based on the rules can be performed
-        /// </summary>
-        /// <param name="elements">Elements which are being remeshed, not going to do recursively now because adds unnecessary complexity</param>
-        /// <returns>a new Edge for which the node path has been updated. </returns>
-        // (List<IElement> elements, Edge edge
-        //private void remesh(List<IElement> elements, int ii, int elemCount)
-        //{
-        //    if (ii < elemCount)
-        //    {
-        //        foreach (IElement elem in elements)
-        //        {
-        //            List<IElement> refined;
-        //            refined = elem.createChildElements(nodes);
-        //            elem.Children = refined;
-        //            ii++;
-        //            // mesh another level
-        //            remesh(refined, ii, elemCount);
-        //        }
-        //    }
-        //}
-
-
 
         /// <summary>
         /// we want to use the data from the previous analyis that we have to refine our mesh specificially in areas with high stress values
@@ -406,9 +279,35 @@ namespace DissertationFEPrototype.Optimisations
 
             List<double> allDisps = analysisData.Select(ad => ad.DispMag).ToList();
 
-            threshold = allDisps.Average();
+            threshold = Percentile(allDisps.ToArray(), 0.94);
+
+           //  var average = allDisps.Average();
+
+            
 
             return threshold;
+        }
+
+        /// <summary>
+        /// taken from here, needed to compare heursitics against stress refinement http://stackoverflow.com/questions/8137391/percentile-calculation
+        /// </summary>
+        /// <param name="sequence"></param>
+        /// <param name="excelPercentile"></param>
+        /// <returns></returns>
+        public double Percentile(double[] sequence, double excelPercentile)
+        {
+            Array.Sort(sequence);
+            int N = sequence.Length;
+            double n = (N - 1) * excelPercentile + 1;
+            // Another method: double n = (N + 1) * excelPercentile;
+            if (n == 1d) return sequence[0];
+            else if (n == N) return sequence[N - 1];
+            else
+            {
+                int k = (int)n;
+                double d = n - k;
+                return sequence[k - 1] + d * (sequence[k] - sequence[k - 1]);
+            }
         }
 
         int flatStructElemId = 1;

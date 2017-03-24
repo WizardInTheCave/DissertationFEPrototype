@@ -140,12 +140,162 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             List<Node> removableNodes = new List<Node>(nodes);
 
-            var convexHullVals = convexHull(nodes);
 
 
+            // get two axis with greatest dev
+
+            //double xMax = -1.0;      
+            //double xMin = 10000000.0;
+
+            //double yMax = -1.0;
+            //double yMin = 10000000.0;
+
+            //double zMax = -1.0;
+            //double zMin = 10000000.0;     
+
+            //foreach (var node in nodes)
+            //{
+            //    if(node.GetX > xMax)
+            //    {
+            //        xMax = node.GetX;
+            //    }
+            //    if (node.GetX < xMin)
+            //    {
+            //        xMin = node.GetX;
+            //    }
+
+
+            //    if (node.GetY > yMax)
+            //    {
+            //        yMax = node.GetY;
+            //    }
+            //    if (node.GetX < yMin)
+            //    {
+            //        yMin = node.GetY;
+            //    }
+
+
+            //    if (node.GetZ > zMax)
+            //    {
+            //        zMax = node.GetZ;
+            //    }
+            //    if (node.GetZ < zMin)
+            //    {
+            //        zMin = node.GetZ;
+            //    }
+            //}
+
+            //var xDev = new Tuple<string, double>("X", xMax - xMin);
+            //var yDev = new Tuple<string, double>("Y", yMax - yMin);
+            //var zDev = new Tuple<string, double>("Z", zMax - zMin);
+
+            //var twoAxisToUse = new Tuple<string, double>[] { xDev, zDev, zDev }.OrderBy(x => x.Item2).Skip(1).ToArray();
+
+
+            //Node[] topTwo = null;
+            //Node[] bottomTwo = null;;
+
+            //if (twoAxisToUse[0].Item1 == "X")
+            //{
+            //    var sortedOnX = nodes.OrderBy(x => x.GetX);
+
+            //    topTwo = sortedOnX.Take(2).ToArray();
+            //    bottomTwo = sortedOnX.Skip(2).ToArray();
+            //}
+
+            //else if (twoAxisToUse[0].Item1 == "Y")
+            //{
+            //    var sortedOnY = nodes.OrderBy(x => x.GetY);
+
+            //    topTwo = sortedOnY.Take(2).ToArray();
+            //    bottomTwo = sortedOnY.Skip(2).ToArray();
+            //}
+
+
+            //if (twoAxisToUse[0].Item1 == "Z")
+            //{
+            //    var sortedOnZ = nodes.OrderBy(x => x.GetZ);
+
+            //    topTwo = sortedOnZ.Take(2).ToArray();
+            //    bottomTwo = sortedOnZ.Skip(2).ToArray();
+            //}
+
+            //// second divding axis
+
+            //Node topLeft = null;
+            //Node topRight = null;
+            //Node bottomLeft = null;
+            //Node bottomRight = null;
+
+            //if (topTwo != null && bottomTwo != null) {
+
+            //    if (twoAxisToUse[1].Item1 == "X")
+            //    {
+            //        var bottomTwoOnX = bottomTwo.OrderBy(x => x.GetX).ToArray();
+
+            //        bottomLeft = bottomTwoOnX[0];
+            //        bottomRight = bottomTwoOnX[1];
+
+            //        var topTwoOnX = topTwo.OrderBy(x => x.GetX).ToArray();
+
+            //        topLeft = topTwoOnX[0];
+            //        topRight = topTwoOnX[1];
+            //    }
+
+            //    else if (twoAxisToUse[1].Item1 == "Y")
+            //    {
+            //        var bottomTwoOnY = bottomTwo.OrderBy(x => x.GetY).ToArray();
+
+            //        bottomLeft = bottomTwoOnY[0];
+            //        bottomRight = bottomTwoOnY[1];
+
+            //        var topTwoOnY = topTwo.OrderBy(x => x.GetY).ToArray();
+
+            //        topLeft = topTwoOnY[0];
+            //        topRight = topTwoOnY[1];
+            //    }
+
+            //    if (twoAxisToUse[1].Item1 == "Z")
+            //    {
+            //        var bottomTwoOnZ = bottomTwo.OrderBy(x => x.GetZ).ToArray();
+
+            //        bottomLeft = bottomTwoOnZ[0];
+            //        bottomRight = bottomTwoOnZ[1];
+
+            //        var topTwoOnZ = topTwo.OrderBy(x => x.GetZ).ToArray();
+
+            //        topLeft = topTwoOnZ[0];
+            //        topRight = topTwoOnZ[1];
+            //    }
+
+            //    if (topLeft != null && topRight != null && bottomLeft != null && bottomRight != null)
+            //    {
+            //        sortMatchedNodes.Add(bottomLeft);
+            //        sortMatchedNodes.Add(bottomRight);
+            //        sortMatchedNodes.Add(topRight);
+            //        sortMatchedNodes.Add(topLeft);
+
+            //    }
+            //    else
+            //    {
+            //        throw new Exception("Could nod successfully sub divide nodes within the element");
+            //    }
+            //}
+
+            //v
+
+            //var xSplitOnLargeY = smallestTwoY.OrderBy(x => x.GetX).ToArray();
+
+            //Node topLeft = xSplitOnLargeY[0];
+            //Node topRight = xSplitOnLargeY[1];
+
+
+
+
+            // var convexHullVals = convexHull(nodes);
             // try my method
-            if (convexHullVals.Count < 4)
-            {
+           // if (convexHullVals.Count < 4)
+            // {
                 Node currentnode = removableNodes[0];
                 sortMatchedNodes.Add(currentnode);
 
@@ -167,6 +317,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                         double dist1 = originNode.distanceTo(removableNodes[0]);
                         double dist2 = originNode.distanceTo(removableNodes[1]);
 
+                        // was other way around
                         if (dist1 > dist2)
                         {
                             currentnode = removableNodes[0];
@@ -193,11 +344,11 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
                     ii++;
                 }
-            }
-            else
-            {
-                sortMatchedNodes = convexHullVals;
-            }
+           // }
+            //else
+            //{
+           //     sortMatchedNodes = convexHullVals;
+          //  }
 
             return sortMatchedNodes;
 
@@ -223,9 +374,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 // add the corner node to the trio
                 subElemNodes[0] = node;
 
-                //singleNodeTrio.Add(node);
                 Node diag = getDiagonalNode(cornerNodes, node);
-
 
                 foreach (Node possibleAdjacentNode in cornerNodes)
                 {
@@ -245,6 +394,10 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                         }
                     }
                 }
+                //if (subElemNodes[2].Id == subElemNodes[3].Id)
+                //{
+                //    Console.WriteLine("wut");
+                //}
 
                 elementEdgeTrios.Add(subElemNodes);
 
@@ -625,9 +778,11 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             double v2mag = Math.Sqrt(v2[0] * v2[0] + v2[1] * v2[1] + v2[2] * v2[2]);
             double[] v2norm = { v2[0] / v2mag, v2[1] / v2mag, v2[2] / v2mag };
 
-
             double result = v1norm[0] * v2norm[0] + v1norm[1] * v2norm[1] + v1norm[2] * v2norm[2];
-            double angle = Math.Acos(result);
+
+            // convert from radians as is returned by Math.Acos to degrees
+            double angle = Math.Acos(result) * 180 / Math.PI;
+
             return angle;
         }
 

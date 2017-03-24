@@ -79,7 +79,20 @@ namespace DissertationFEPrototype.MeshQualityMetrics
         }
         private static double weightedScore(double score, double perfectScore, double averageScore)
         {
-            return (score - perfectScore) / (averageScore - perfectScore); 
+            var nominator = (score - perfectScore);
+            var denominator = (averageScore - perfectScore);
+
+
+
+            if(denominator == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return nominator / denominator;
+            }
+           
         }
         /// <summary>
         /// according to the paper I have taken this method of deviation is used because it is faster

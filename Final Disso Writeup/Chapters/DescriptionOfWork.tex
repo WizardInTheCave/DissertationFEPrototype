@@ -15,13 +15,13 @@ The project can be broken into thee main sections of research and implementation
 \item The third objective will be to use justifiable metrics for assessing the quality of a given mesh. This will allow for a much greater range of hybrid variations to be tried without requiring inspection from an expert. 
 \end{enumerate}
 
-\section{System specification}
+\subsection{System specification}
 To demonstrate success in achieving the objectives of the project it is important to have tractability from the requirements through to the solution and lastly verification and validation. This section describes the current systems \textit{functional requirements} (what the system will do) and \textit{non-functional} requirements (its constraints) based upon evaluation of the research I have conducted in conjunction with discussions with the project supervisor: Dr Jason Atkin. Functional requirements have primarily been listed under their respective high level subsystems that are responsible for encapsulating their functionality. \\ 
 
 \noindent
 Although it has not been developed as part of the project the application responsible for solving the finite element models has been included as part of the systems requirements since it highly influences the overall scope of the project and much of the design associated with other subsystems which were developed for the project. \\ 
 
-\section{Functional Requirements}
+\subsection{Functional Requirements}
 
 \begin{enumerate}
 \item FE integration: System will be able to interface with a third party finite element application
@@ -58,7 +58,7 @@ Although it has not been developed as part of the project the application respon
 \end{enumerate}
 \end{enumerate}
 
-\section{Non-Functional Requirements}
+\subsection{Non-Functional Requirements}
 
 
 \textbf{Design:} The system architecture will be developed using the object oriented design principals of SOLID to allow for clear interfaces between the different functional components. Functional programming practices will be adopted through use of the .NET Language Integrated Query or LINQ framework. This will help to simplify the code and improve reliability. Where functions and classes are written their length will be kept to a minimum to reduce complexity and allow for reuse wherever possible. \\ 

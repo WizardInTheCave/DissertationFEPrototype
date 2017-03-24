@@ -80,7 +80,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 this.zNegative.Count > MAX_FACE_NODES
                 )
             {
-                Console.WriteLine("Wir Haben Problem");
+              
             }
 
             var ref1 = splitCorner1();

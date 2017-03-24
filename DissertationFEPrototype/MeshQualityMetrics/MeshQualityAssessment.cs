@@ -124,10 +124,9 @@ namespace DissertationFEPrototype.MeshQualityMetrics
             // the number of square elements of the desired size that would be required to cover the entire area 
             // (the desired number of elements), 
             // and the entire quotient is the ratio of actual element count to desired element count
-            // 
             // for the time being we will take this to mean the smallest element that is produced using h-refinement for the current model
 
-            var areas = meshData.Elements.Select(e => e.getArea());
+            var areas = meshData.Elements.Select(e => e.getArea()).ToList();
 
             double meshSurfaceArea = areas.Sum();
             double targetElemSize = meshData.Elements.Min(e => e.getArea());

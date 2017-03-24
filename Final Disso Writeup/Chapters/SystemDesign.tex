@@ -11,13 +11,18 @@ Determining the overall design of the system was initially hard since it was not
 
 
 \subsection{Modular Architecture}
-The modular architecture allows meshing algorithms and metrics for calculating mesh quality could be swapped interchanged was an important consideration in the design of the system. At best the quality of the output could be predicted for each method before it was integrated into the system and executed in a range of different scenarios. To have tightly coupled these individual components would have rendered the overall system a failure in the event that any one of them performed greatly worse than expected. Instead the loose coupling of the architecture has enabled the system to be considered as more of a framework for testing the effects of combining heuristic knowledge of a Finite element problem with a stress based refinement method.\\
+The modular architecture was crucial for allowing meshing algorithms and quality metrics to be replaced as necessary and was an important consideration in the design of the system. At best the quality of the output could could only be predicted for each method before it was integrated into the system and executed in a range of different scenarios. To have tightly coupled these individual components would have rendered the overall system a failure in the event that any one of them performed greatly worse than expected. Instead the loose coupling of the architecture has enabled the system to be considered as more of a framework for testing the effects of combining heuristic knowledge of a Finite element problem with a stress based refinement method.\\
 
 \noindent
 Although the system was highly modular It was also still desirable to maintain a hierarchy within the classes so that smaller components could be developed independently and contained within the larger ones. Composition was therefore generally favoured over inheritance as a means of building the architecture. Static classes and methods were also used when needing to write utility functions that were required by multiple high level subsystems and therefore did no fit especially well into any particular one. Examples of these are generic vector algebra operations such as dot product, matrix determinants and normal vectors.
 
+\noindent
+At the highest level namespaces were used to break down the class groups appropriately namespaces also naturally structure as folders within the Visual Studio (VS) solution explorer which made navigating the project and finding components much easier as the system expanded.
+
 %\subsection{Mesh improvement Loop}
 %As with many optimisation problems the refinement process is driven iteratively through a loop. Within the main loop all %interfacing with LISA, Mesh refinement and analysis is conducted which results in an updated version of the model that can be %handed to the subsequent iteration.
+
+
 
 
 \subsection{Input Files}
@@ -36,7 +41,7 @@ An example of the content and format for each of these input files can be seen i
 Writing an API for LISA was the first clear stage of development for my project for which a design had to be considered. The API was crucial in order to program the more complex aspects using basic operations and avoid having to regularly perform direct string manipulation of the input files in order to manipulate the model. \\
 
 \noindent
-When the first re-meshing iteration occurs the system needs to read the input .liml file into an equivalent class model which closely resembles the schema specified within the .liml file, diagrams for which can be seen in figure 4 below. Each class in this model contains corresponding data and methods used to represent and manipulate the model. These methods are then used by the different refinement methods that exist in the different optimisation classes to alter the mesh, this adapted version of the mesh represented as a data model can then be assessed by the module responsible for validating mesh quality before finally being written back to a .liml file for LISA to solve on the subsequent iteration. When designing the data model to represent the state within LISA it was desirable to maintain coherence with the structure specified by LISA as closely as possible, this allowed for the data model to more easily be serialised when communicating with LISA without errors resulting from inconsistencies between the two representations. 
+When the first re-meshing iteration occurs the system needs to read the input .liml file into an equivalent class model which closely resembles the files schema, diagrams for which can be seen in figure 4 below. Each class in this model contains corresponding data and methods used to represent and manipulate the model. These methods are then used by each of the refinement approaches to easily alter the mesh in a controlled manner. Once the mesh  has been adapted however is required it can then be assessed by the modules responsible for validating its quality before finally being written back to a .liml file for LISA to solve on the subsequent iteration. Designing the data model so that it closely resembled the LISA scema not only made the higher level programming less confusing but also made serialisation of the data back to .liml format much simpler  thus reducing the number of bugs arising from inconsistencies between different representations of the same data. \\
 
 \begin{figure}[!h]
 \centering
@@ -74,7 +79,7 @@ When the first re-meshing iteration occurs the system needs to read the input .l
 \end{figure}
 
 \noindent
-One aspect of the data models design which greatly adds to the systems flexibility is the hierarchical design for representing the various Element types. At the root of this structure is the IElement interface, all new Element types must adhere to this in order for the various refinement methods to run. Implementing the interface are a range of abstract classes such as ``SquareBasedElem" and ``TriangleBasedElem" These classes are designed to contain methods that are generally applicable for calculating metrics and re meshing individual elements for elements of this type that are both in two and three dimensions. This is powerful since computing this for a 3d element is simply a reduction of the method for a 2d element over every face which comprises the 3d one. Finally underneath this level are the concrete classes which represent each specific type of element with its own bespoke characteristics. \\ 
+One aspect of the data models design which greatly adds to the systems flexibility is the hierarchical design for representing the various Element types. At the root of this structure is the IElement interface, all new Element types must adhere to this in order for the various refinement methods to refine that element. Implementing the interface are a range of abstract classes such as ``SquareBasedElem" and ``TriangleBasedElem" These classes are designed to contain methods that are generally applicable for calculating metrics and re meshing individual elements where the elements fit this abstract category but their concrete implementation specifies their dimensionality and number of nodes. This is powerful since computing metrics and performing subdivision for a 3d element is simply a reduction using the code to do this for a 2d element but over every face comprising the 3d one. \\ 
 
 \begin{figure}[!h]                                                   
   \centerline{\includegraphics[width=150mm, scale=1]{../Graphics/ElementHigerarchyDiagram2.png}}
@@ -84,13 +89,14 @@ One aspect of the data models design which greatly adds to the systems flexibili
 
 
 \subsection{Remeshing methods approach}
-Due to the modular design of the system the low level methods for performing refinement for each element type were contained within the elements abstract class or if more bespoke its subclass, see Figure 6. This made it much easier to decouple both the stress and heuristic methods allowing each of them to simply have the task of selecting elements which they considered beneficial to refine before delegating the refinement to each element itself. This allowed both high level refinement approaches to utilise the same low level functionality which greatly improved the systems reliability and simplified the design.
+Due to the modular design of the system the low level methods for performing refinement for each element type were contained within the elements abstract class or if more bespoke its subclass, see Figure 6. This made it much easier to decouple both the stress and heuristic methods allowing each of them to simply have the task of selecting elements which they considered beneficial to refine before delegating the refinement to each element itself. This allowed both of these high level refinement approaches to utilise the same low level functionality which greatly improved code reuse and simplified the design so much so that the high level meshing methods are relatively concise.
 
 \subsubsection{Combining methods}
 Since each refinement method could be executed independently of the other it made sense when testing combinations both to simply enumerate the combinations that each could be applied for each iteration before running each specific combination iteratively on a model. This results in a set of two valued tuples up to some value :
 
 \[ \left\{ (a, b) \,\middle|\, \, a,b \in \mathbb{N} a,b < k \right\} \]
 
+Although this approach can be used to combine both methods simultaneously upon testing the system later on
 
 \subsubsection{Multi Threading}
 To allow allow for better performance when evaluating a range of different weightings of the stress and heuristic methods multi threading was used to allow each configuration to be run independently of the others. When started each thread creates its own directory which it copies the three input files to and runs for its designating weighting configuration. \colorbox{yellow}

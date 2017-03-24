@@ -23,19 +23,28 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             this.elem = elem;
         }
 
+        /// <summary>
+        /// compute the max corner angle given nodes for a hex8
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <returns></returns>
         internal double computeMaxCornerAngle(Node[][] nodes)
         {
             return nodes.Select(x => elem.computeMaxCornerAngle(x.ToList())).Max();
-
-            // throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// compute the max parallel Deviation
+        /// </summary>
+        /// <param name="faceEdgePairings"></param>
+        /// <returns></returns>
         internal double computeMaxparallelDev(List<Tuple<Node, Node>[]> faceEdgePairings)
         {
             double maxParrallelDev = faceEdgePairings
                 .Select(x => elem.computeMaxParallelDev(x)).Max();
             return maxParrallelDev;
         }
+
 
         internal double computeAspectRatio(double longestEdge, double shortestEdge)
         {

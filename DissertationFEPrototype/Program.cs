@@ -56,7 +56,6 @@ namespace DissertationFEPrototype
 
             List<Tuple<short, short>> experimentVals = new List<Tuple<short, short>>();
 
-
             // create combinations to try for the different methods.
             //for (short ii = 0; ii < k; ii++){
             //    for (short jj = 0; jj < k; jj++)
@@ -64,10 +63,8 @@ namespace DissertationFEPrototype
             //        experimentVals.Add(new Tuple<short, short>(ii, jj));
             //    }
             // }
-            
 
-
-            experimentVals.Add(new Tuple<short, short>(0, 7));
+            experimentVals.Add(new Tuple<short, short>(2, 0));
 
             Directory.SetCurrentDirectory(topLevelFolder);
 

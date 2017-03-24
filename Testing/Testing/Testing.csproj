@@ -39,6 +39,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\DissertationFEPrototype\bin\Debug\DisertationFEPrototype.exe</HintPath>
     </Reference>
+    <Reference Include="Loyc.Essentials, Version=2.4.3.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7" />
     <Reference Include="System" />
   </ItemGroup>
   <Choose>

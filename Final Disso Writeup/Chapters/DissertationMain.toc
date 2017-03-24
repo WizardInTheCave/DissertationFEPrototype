@@ -8,59 +8,64 @@
 \contentsline {subsection}{\numberline {3.3}Quality metrics}{8}{subsection.3.3}
 \contentsline {section}{\numberline {4}Description of the work}{10}{section.4}
 \contentsline {subsection}{\numberline {4.1}Aims and Objectives}{10}{subsection.4.1}
-\contentsline {section}{\numberline {5}System specification}{10}{section.5}
-\contentsline {section}{\numberline {6}Functional Requirements}{10}{section.6}
-\contentsline {section}{\numberline {7}Non-Functional Requirements}{11}{section.7}
-\contentsline {section}{\numberline {8}System Design}{12}{section.8}
-\contentsline {subsection}{\numberline {8.1}System Overview}{12}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Modular Architecture}{12}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}Input Files}{13}{subsection.8.3}
-\contentsline {subsection}{\numberline {8.4}Simulation Data Model}{13}{subsection.8.4}
-\contentsline {subsection}{\numberline {8.5}Remeshing methods approach}{13}{subsection.8.5}
-\contentsline {subsubsection}{\numberline {8.5.1}Combining methods}{14}{subsubsection.8.5.1}
-\contentsline {subsubsection}{\numberline {8.5.2}Multi Threading}{14}{subsubsection.8.5.2}
-\contentsline {section}{\numberline {9}Software Implementation}{16}{section.9}
-\contentsline {subsection}{\numberline {9.1}Third Party FE Application}{16}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}LISA}{16}{subsection.9.2}
-\contentsline {subsection}{\numberline {9.3}Languages and platforms}{16}{subsection.9.3}
-\contentsline {subsection}{\numberline {9.4}Implementation Methodology}{17}{subsection.9.4}
-\contentsline {subsection}{\numberline {9.5}Implementation of Subsystems}{17}{subsection.9.5}
-\contentsline {subsubsection}{\numberline {9.5.1}Re-meshing using hierarchical refinement}{17}{subsubsection.9.5.1}
-\contentsline {subsection}{\numberline {9.6}Fast node lookup and update of nodes}{18}{subsection.9.6}
-\contentsline {subsection}{\numberline {9.7}Sorting Element Nodes in 3d space using convex hull Algorithm}{19}{subsection.9.7}
-\contentsline {subsection}{\numberline {9.8}Stress Based Refinement}{19}{subsection.9.8}
-\contentsline {subsection}{\numberline {9.9}Rule Based Refinement}{19}{subsection.9.9}
-\contentsline {subsection}{\numberline {9.10}Mesh Quality Assessment}{20}{subsection.9.10}
-\contentsline {subsection}{\numberline {9.11}Implementation Issues}{20}{subsection.9.11}
-\contentsline {subsubsection}{\numberline {9.11.1}Attempts to Automatically Define edges within models}{20}{subsubsection.9.11.1}
-\contentsline {section}{\numberline {10}Evaluation of Project}{22}{section.10}
-\contentsline {subsection}{\numberline {10.1}Validation against Functional Requirements}{22}{subsection.10.1}
-\contentsline {subsection}{\numberline {10.2}Unit Testing}{22}{subsection.10.2}
-\contentsline {subsection}{\numberline {10.3}Validation against Non Functional}{22}{subsection.10.3}
-\contentsline {subsection}{\numberline {10.4}Evaluation Of The system For Various Models}{22}{subsection.10.4}
-\contentsline {subsubsection}{\numberline {10.4.1}Suspension Bridge structure}{22}{subsubsection.10.4.1}
-\contentsline {subsubsection}{\numberline {10.4.2}Evaluation of bridge for sideways loading}{24}{subsubsection.10.4.2}
-\contentsline {subsubsection}{\numberline {10.4.3}Evaluation of bridge for base loading}{24}{subsubsection.10.4.3}
-\contentsline {subsubsection}{\numberline {10.4.4}Validating system against previously obtained research results}{24}{subsubsection.10.4.4}
-\contentsline {subsubsection}{\numberline {10.4.5}Paper Mill}{24}{subsubsection.10.4.5}
-\contentsline {subsubsection}{\numberline {10.4.6}Cylinder}{24}{subsubsection.10.4.6}
-\contentsline {subsection}{\numberline {10.5}Evaluation of Subsystems based on model evaluation}{25}{subsection.10.5}
-\contentsline {subsubsection}{\numberline {10.5.1}Analysis of Methods Using Metrics}{25}{subsubsection.10.5.1}
-\contentsline {subsubsection}{\numberline {10.5.2}Evaluation of stress refinement effectiveness}{27}{subsubsection.10.5.2}
-\contentsline {subsubsection}{\numberline {10.5.3}Evaluation of heuristic refinement effectiveness}{27}{subsubsection.10.5.3}
-\contentsline {subsection}{\numberline {10.6}Increase in performance through parallel execution}{27}{subsection.10.6}
-\contentsline {subsection}{\numberline {10.7}Software Quality and Maintainability}{27}{subsection.10.7}
-\contentsline {subsection}{\numberline {10.8}Documentation}{28}{subsection.10.8}
-\contentsline {subsubsection}{\numberline {10.8.1}Evaluation Issues}{28}{subsubsection.10.8.1}
-\contentsline {subsection}{\numberline {10.9}Evaluation of overall project}{28}{subsection.10.9}
-\contentsline {subsection}{\numberline {10.10}Evaluation summary}{28}{subsection.10.10}
-\contentsline {subsection}{\numberline {10.11}Successes and Limitations of project}{28}{subsection.10.11}
-\contentsline {section}{\numberline {11}Further Work}{29}{section.11}
-\contentsline {subsection}{\numberline {11.1}Gathering feedback from experienced engineers}{29}{subsection.11.1}
-\contentsline {subsection}{\numberline {11.2}Improving usability through a web interface}{29}{subsection.11.2}
-\contentsline {section}{\numberline {12}Personal Reflections and Summary}{29}{section.12}
-\contentsline {section}{References}{32}{section.12}
+\contentsline {subsection}{\numberline {4.2}System specification}{10}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Functional Requirements}{10}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Non-Functional Requirements}{11}{subsection.4.4}
+\contentsline {section}{\numberline {5}System Design}{12}{section.5}
+\contentsline {subsection}{\numberline {5.1}System Overview}{12}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Modular Architecture}{12}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Input Files}{13}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Simulation Data Model}{13}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Remeshing methods approach}{14}{subsection.5.5}
+\contentsline {subsubsection}{\numberline {5.5.1}Combining methods}{14}{subsubsection.5.5.1}
+\contentsline {subsubsection}{\numberline {5.5.2}Multi Threading}{15}{subsubsection.5.5.2}
+\contentsline {section}{\numberline {6}Software Implementation}{16}{section.6}
+\contentsline {subsection}{\numberline {6.1}Third Party FE Application}{16}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}LISA}{16}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Languages and platforms}{16}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Implementation Methodology}{17}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}Implementation of Subsystems}{17}{subsection.6.5}
+\contentsline {subsubsection}{\numberline {6.5.1}Re-meshing using hierarchical refinement}{17}{subsubsection.6.5.1}
+\contentsline {subsection}{\numberline {6.6}Fast node lookup and update of nodes}{18}{subsection.6.6}
+\contentsline {subsection}{\numberline {6.7}Sorting Element Nodes}{19}{subsection.6.7}
+\contentsline {subsection}{\numberline {6.8}Stress Based Refinement}{21}{subsection.6.8}
+\contentsline {subsection}{\numberline {6.9}Heuristic/Rule Based Refinement}{21}{subsection.6.9}
+\contentsline {subsection}{\numberline {6.10}Mesh Quality Assessment}{22}{subsection.6.10}
+\contentsline {subsection}{\numberline {6.11}Implementation Issues}{22}{subsection.6.11}
+\contentsline {subsubsection}{\numberline {6.11.1}Attempts to Automatically Define edges within models}{22}{subsubsection.6.11.1}
+\contentsline {section}{\numberline {7}Evaluation of Project}{23}{section.7}
+\contentsline {subsection}{\numberline {7.1}Validation against Functional Requirements}{23}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Validation against Non Functional}{23}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}Unit Testing}{23}{subsection.7.3}
+\contentsline {subsection}{\numberline {7.4}Software Management}{23}{subsection.7.4}
+\contentsline {subsection}{\numberline {7.5}Software Quality and Maintainability}{24}{subsection.7.5}
+\contentsline {subsection}{\numberline {7.6}Documentation}{24}{subsection.7.6}
+\contentsline {subsection}{\numberline {7.7}Increase in performance through parallel execution}{24}{subsection.7.7}
+\contentsline {subsection}{\numberline {7.8}Evaluation Of System For Model Simulations}{24}{subsection.7.8}
+\contentsline {subsubsection}{\numberline {7.8.1}Suspension Bridge structure}{24}{subsubsection.7.8.1}
+\contentsline {subsubsection}{\numberline {7.8.2}Hybrid Evaluation}{26}{subsubsection.7.8.2}
+\contentsline {subsubsection}{\numberline {7.8.3}Analysis of and Addition of Metric(s)}{26}{subsubsection.7.8.3}
+\contentsline {subsection}{\numberline {7.9}Evaluation of Subsystems based on model evaluation}{28}{subsection.7.9}
+\contentsline {subsubsection}{\numberline {7.9.1}Analysis of Methods Using Metrics}{28}{subsubsection.7.9.1}
+\contentsline {subsubsection}{\numberline {7.9.2}Evaluation of Stress Refinement Effectiveness}{28}{subsubsection.7.9.2}
+\contentsline {subsubsection}{\numberline {7.9.3}Evaluation of Heuristic Refinement Effectiveness}{28}{subsubsection.7.9.3}
+\contentsline {subsubsection}{\numberline {7.9.4}Evaluation Issues}{28}{subsubsection.7.9.4}
+\contentsline {subsection}{\numberline {7.10}Strengths and Weaknesses}{29}{subsection.7.10}
+\contentsline {subsection}{\numberline {7.11}Evaluation summary}{29}{subsection.7.11}
+\contentsline {subsection}{\numberline {7.12}Successes and Limitations of project}{29}{subsection.7.12}
+\contentsline {section}{\numberline {8}Further Work}{30}{section.8}
+\contentsline {subsection}{\numberline {8.1}Gathering feedback from experienced engineers}{30}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Improving usability through a web interface}{30}{subsection.8.2}
+\contentsline {section}{\numberline {9}Personal Reflections and Summary}{30}{section.9}
+\contentsline {section}{References}{32}{section.9}
 \contentsline {section}{\numberline {A}Element Types within LISA}{33}{appendix.A}
-\contentsline {section}{\numberline {B}Calculating Centripetal Force For Paper Mill}{34}{appendix.B}
+\contentsline {section}{\numberline {B}Unit Testing}{34}{appendix.B}
 \contentsline {section}{\numberline {C}Input and output files}{34}{appendix.C}
-\contentsline {section}{\numberline {D}Software Quality Metrics}{34}{appendix.D}
+\contentsline {section}{\numberline {D}Project Layout in Solution Explorer}{34}{appendix.D}
+\contentsline {section}{\numberline {E}Software Quality Metrics}{34}{appendix.E}
+\contentsline {section}{\numberline {F}Bridge Cross Loading Simulation Results}{34}{appendix.F}
+\contentsline {subsection}{\numberline {F.1}Heuristic Refinement}{35}{subsection.F.1}
+\contentsline {subsection}{\numberline {F.2}Stress Refinement}{35}{subsection.F.2}
+\contentsline {section}{\numberline {G}Bridge Base Loading Simulation Results}{35}{appendix.G}
+\contentsline {section}{\numberline {H}Paper Mill Simulation Results}{35}{appendix.H}
+\contentsline {section}{\numberline {I}Gantt Chart for Project Time Management}{36}{appendix.I}

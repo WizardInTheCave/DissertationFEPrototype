@@ -11,8 +11,10 @@ namespace Testing
         [TestMethod]
         public void ConvexHullTest()
         {
-            // var a = new List<>();
-            // var convexHullOrderedPoints = ConvexHull.ComputeConvexHull(); 
+            var a = new List<ConvexHullPoint>();
+            var convexHullOrderedPoints = ConvexHull.ComputeConvexHull(a);
+
+            Assert.IsTrue(convexHullOrderedPoints == new List<ConvexHullPoint>());
         }
     }
 }

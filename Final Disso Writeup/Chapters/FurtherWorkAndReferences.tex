@@ -4,8 +4,7 @@ This section details some areas which given additional time to work on the proje
 
 \subsection{Gathering feedback from experienced engineers}
 Approaching the end of the project it became clear that in order to better identify the systems strengths and weaknesses would require additional user testing by engineers who have experience conducting this type of analysis. Despite a lack of available time obtaining feedback from engineers with extensive applied industrial experience along with that of academics would have hopefully allowed for a more conclusive analysis of the systems and its ability to work across a greater number of general case scenarios. 
-
-Part of the reason feedback for not obtaining user feedback was the difficulty of doing so given the available time available simply to implement the project and validate it for a selection of basic models. As such even if time had been available the ethical clearance required to collect user feedback at the start was not obtained.
+User feedback was largely not obtained within the duration of the project as a result of time constraints and the complexity inherent in simply implementing and validating the project for a selection of basic models. As such even if time had been available the ethical clearance required to collect user feedback at the start was not obtained.
 
 
 \subsection{Improving usability through a web interface}
@@ -78,15 +77,9 @@ managerial architectural aspects which I had not previously had that great an in
 
 % Although very keen to utilise functional programming features as much as possible at the start I realised towards the end of the project that doing this a lot can actually make you as a programmer very lazy and in some cases can make code more challenging to read for those who aren't familiar with the style. Having completed this project I now feel I have a better appreciation of where to use functional programming best and when to best avoid it in order to improve speed and readability.
 
-\newpage
-\pagestyle{empty}
-\begin{landscape}
-\vspace*{1cm}
-\hspace*{-3cm}
-\includegraphics[width =700px, height=300px]{../Graphics/TimePlanUpdated2.png} \par
-\hspace*{-1cm}
 
-\end{landscape}
+
+
 
 \newpage
 
@@ -138,6 +131,9 @@ managerial architectural aspects which I had not previously had that great an in
 \bibitem{cite07}\emph{Type of Finite Elements and Steps in FEA Process}\\
 http://highered.mheducation.com/sites/dl/free/0073398144/934758/\\Ch07TypesOfFiniteElementsAndStepsInFEAProcess.pdf 
 
+
+\bibitem{ElemQualAndChecks}\emph{Element Quality And Checks}\url{http://www.altairuniversity.com/wp-content/uploads/2012/04/Student_Guide_211-233.pdf}
+
 \bibitem{cantileverBeam} \url{https://www.quora.com/What-is-the-cantilever-beam-What-is-the-advantages-and-disadvantages-of-it}
 
 \bibitem{LISAWebsite} \url{http://www.lisafea.com/purchase.html}
@@ -171,6 +167,8 @@ for Triangular Mesh Generation} \url{https://people.eecs.berkeley.edu/~jrs/paper
 
 
 \end{thebibliography}
+\end{changemargin}
+
 \appendix
 
 \section{Element Types within LISA}
@@ -229,28 +227,30 @@ Here are shown the the visual specifications LISA provides for the ordering and 
 \label{fig:test}
 \end{figure}
 
-\section{Calculating Centripetal Force For Paper Mill}
-Assuming a constant speed of the paper mill disk at  the following standard calculation was done to compute a forces that could be specified for different elements in order to simulate the effects on the model.
+%\section{Calculating Centripetal Force For Paper Mill}
+%Assuming a constant speed of the paper mill disk at  the following standard calculation was done to compute a forces that could be specified for different elements in order to simulate the effects on the model.
 
-F = m $\omega^2$ r\\ 
+%F = m $\omega^2$ r\\ 
 
-where: \\ 
-m - mass of object \\ 
-r - radius from centre \\ 
-$\omega$ - angular velocity (radians per second)
+%where: \\ 
+%m - mass of object \\ 
+%r - radius from centre \\ 
+%$\omega$ - angular velocity (radians per second)
 
-Using the following values for each variable for the plates forming the outside of the paper mill disk the force could be calculated as:
+%Using the following values for each variable for the plates forming the outside of the paper mill disk the force could be calculated as:
 
-mass- paper mill is made of steel with each plate having a volume of approximately $24cm^3$ which gives a mass of
-188 grams
+%mass- paper mill is made of steel with each plate having a volume of approximately $24cm^3$ which gives a mass of
+%188 grams
 
+\section{Unit Testing}
+%Unit tests to validate the correctness of key functionality
 
 
 
 \cite{Centripetal}
 
 \section{Input and output files}
-Below can be seen the format of the input files for the system (A LISA .liml and a .json edge definition file\\
+Below can be seen the format of the input files for the system, a LISA .liml and a .json edge definition file\\
 
 \begin{figure}[!h]
 \centering
@@ -270,21 +270,89 @@ Below can be seen the format of the input files for the system (A LISA .liml and
 \end{figure}
 
 
+\section{Project Layout in Solution Explorer}
+Below show the Visual Studio Solution Explorer which provides a general idea of the layout of the project with namespace hierarchies from within an IDE.
+
+\begin{figure}[!h]
+  \centerline{\includegraphics[width=60mm, scale=0.5]{../Graphics/VSolutionExplorer.png}}
+  \caption{The metrics calculated by visual studio for all high level modules in the system}
+\end{figure}
+
+
 \section{Software Quality Metrics}
 
-
-\begin{figure}
+\begin{figure}[!h]
   \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/softwareQualityMetrics.png}}
   \caption{The metrics calculated by visual studio for all high level modules in the system}
-  \label{fig:boat1}
+\end{figure}
+
+\begin{figure}[!h]
+  \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/qualityMetricsExpanded.png}}
+  \caption{The metrics calculated by visual studio for the all classes in the final system}
+\end{figure}
+%
+
+
+\section{Bridge Cross Loading Simulation Results}
+Below can be seen the results of executing both the heuristics and the stress refinement method on the suspension bridge model when loads are placed against the base of the bridge in the negative x direction.
+
+\subsection{Heuristic Refinement}
+
+\begin{figure}[!h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+	\includegraphics[width=80mm, scale=0.5]{../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png}
+  \caption{Important edges specified effectively to facilitate preemptive meshing of area which undergoes high displacement and thus stress}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \centerline{\includegraphics[width=80mm, scale=0.5]{../Graphics/BridgeCrossLoading/bestEdgeSpecResultsCloseUp.png}}
+  \caption{Close up view of refinement for high displacement areas }
+  \label{fig:sub2}
+\end{subfigure}
+\label{fig:test}
+\end{figure}
+
+
+\begin{figure}[!h]
+  \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/BridgeCrossLoading/okEdgeSpecResults.png}}
+  \caption{Important edges more poorly specified missing high displacement region on top of furthest suspension bridge tower}
+\end{figure}
+
+\subsection{Stress Refinement}
+\begin{figure}[!h]
+  \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png}}
+  \caption{Iterative stress/ displacement refinement method used to focus meshing on the top 6\% most displaced region of model}
 \end{figure}
 
 \begin{figure}
-  \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/qualityMetricsExpanded.png}}
-  \caption{The metrics calculated by visual studio for the all classes in the final system}
-  \label{fig:boat1}
+  \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png}}
+  \caption{Iterative refinement of high displacement but with the remesh threshold specified as the average displacement across the whole model. A consequence of this is the gradient of refinement fidelity that can be seen corresponding to the importance of that part of the structure}
 \end{figure}
 
 
+\begin{figure}
+  \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/BridgeCrossLoading/aboveAverageRefinement.png}}
+  \caption{The metrics calculated by visual studio for the all classes in the final system}
+\end{figure}
+%\end{changemargin}
 
-\end{changemargin}
+
+\section{Bridge Base Loading Simulation Results}
+
+\section{Paper Mill Simulation Results}
+
+\newpage  
+\section{Gantt Chart for Project Time Management}
+\pagestyle{empty}
+\begin{landscape}
+\vspace*{1cm}
+\hspace*{-3cm}
+\begin{figure}
+\includegraphics[width =700px, height=300px]{../Graphics/TimePlanUpdated2.png} \par
+\end{figure}
+\hspace*{-1cm}
+\end{landscape}
+

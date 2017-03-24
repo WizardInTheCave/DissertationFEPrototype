@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DissertationFEPrototype.FEModelUpdate.Model.Structure;
 using DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 using System.Collections.Generic;
+using System.Linq;
+
 
 namespace Testing
 {
@@ -33,11 +35,9 @@ namespace Testing
 
 
         [TestMethod]
-        public void computeDevOnEdgePairTest()
+        public void ComputeDevOnEdgePairTest()
         {
             List<Node> elemNodes = new List<Node>();
-
-            // DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements.
 
             var a = new Node(1, 0.0, 0.0, 1.0);
             var b = new Node(2, 1.0, 0.0, 1.0);
@@ -56,36 +56,46 @@ namespace Testing
 
             var devOnEdgePair = quadElem.computeDevOnEdgePair(edgeA, edgeB);
 
-            var EXPECTED = 1.414;
+            var EXPECTED = 0.0;
             var delta = Math.Abs(devOnEdgePair - EXPECTED);
             Assert.IsTrue(delta < 0.01);
         }
 
-
+        // Test that the element correctly returns the set of edges that it is supposed to
         [TestMethod]
-        public void computeEdgePairingsForNodeTest()
+        public void ComputeEdgePairingsForNodeTest()
         {
-            var nodes = new List<Node>();
-            List<Node> elemNodes = new List<Node>();
 
-            // DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements.
-            var quadElem = new Quad4Elem(1, elemNodes);
-            quadElem.computeEdgePairingsForNode(nodes);
+            List<Node> faceNodes = new List<Node>();
 
+            var a = new Node(1, 0.0, 0.0, 1.0);
+            var b = new Node(2, 1.0, 0.0, 1.0);
+            var d = new Node(3, 1.0, 1.0, 0.0);
+            var c = new Node(4, 0.0, 1.0, 0.0);
 
-            var nodes2 = new List<Node>();
-            List<Node> elemNodes2 = new List<Node>();
+            faceNodes.Add(a);
+            faceNodes.Add(b);
+            faceNodes.Add(c);
+            faceNodes.Add(d);
 
-            var quadElem2 = new Quad4Elem(1, elemNodes);
-            quadElem.computeEdgePairingsForNode(nodes2);
+            var quadElem = new Quad4Elem(1, faceNodes);
+
+            var edgePairs = quadElem.computeEdgePairingsForNode(faceNodes);
+            
+
+            Assert.IsTrue(edgePairs.Contains(new Tuple<Node, Node>(a, c)));
+            Assert.IsTrue(edgePairs.Contains(new Tuple<Node, Node>(c, d)));
+            Assert.IsTrue(edgePairs.Contains(new Tuple<Node, Node>(a, b)));
+            Assert.IsTrue(edgePairs.Contains(new Tuple<Node, Node>(b, d)));
+
+            // quadElem.computeEdgePairingsForNode(nodes2);
 
         }
 
         [TestMethod]
-        public void computeFaceAreaTest()
+        public void ComputeFaceAreaTest()
         {
 
-            // DisertationFEPrototype.FEModelUpdate.Model.Structure.Elements.
             List<Node> faceNodes = new List<Node>();
 
             var a = new Node(1, 0.0, 0.0, 1.0);
@@ -211,7 +221,7 @@ namespace Testing
 
 
         [TestMethod]
-        public void computeMaxCornerAngleTest()
+        public void ComputeMaxCornerAngleTest()
         {
             List<Node> elemNodes = new List<Node>();
 
@@ -243,7 +253,7 @@ namespace Testing
 
 
         [TestMethod]
-        public void computeMaxParallelDevTest()
+        public void ComputeMaxParallelDevTest()
         {
             List<Node> elemNodes = new List<Node>();
 
@@ -264,19 +274,19 @@ namespace Testing
 
             edges[0] = new Tuple<Node, Node>(a, b);
             edges[1] = new Tuple<Node, Node>(a, c);
-            edges[0] = new Tuple<Node, Node>(b, d);
-            edges[1] = new Tuple<Node, Node>(c, d);
+            edges[2] = new Tuple<Node, Node>(b, d);
+            edges[3] = new Tuple<Node, Node>(c, d);
 
             var maxParallelDev = quadElem.computeMaxParallelDev(edges);
 
-            //var delta = Math.Abs(maxParallelDev - );
-            // Assert.IsTrue(delta < 0.01);
+            var delta = Math.Abs(maxParallelDev - 0.0);
+            Assert.IsTrue(delta < 0.01);
         }
 
 
 
         [TestMethod]
-        public void computeNonDiagAdjacentNodesTest()
+        public void ComputeNonDiagAdjacentNodesTest()
         {
             List<Node> elemNodes = new List<Node>();
 

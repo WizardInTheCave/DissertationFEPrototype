@@ -28,5 +28,12 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         {
             return new ConvexHullPoint(null, X - b.X, Y - b.Y);
         }
+        public double distanceTo(ConvexHullPoint b)
+        {
+            var delX = Math.Abs(this.X - b.X);
+            var delY = Math.Abs(this.Y - b.Y);
+
+            return Math.Sqrt(Math.Pow(delX, 2.0) + Math.Pow(delY, 2));
+        }
     }
 }
