@@ -30,6 +30,9 @@ namespace DissertationFEPrototype.Optimisations
         short ILPRefineCount = 1;
         short stressRefineCount = 1;
 
+        int flatStructElemId = 1;
+
+
         public MeshData GetUpdatedMesh
         {
             get
@@ -63,17 +66,19 @@ namespace DissertationFEPrototype.Optimisations
             for (int ii = 0; ii < stressRefineCount; ii++)
             {
                 stressGradientDrivenRemesh(elements, analysisData);
+                this.meshData.Elements = getNewElementList(elements);
+                flatStructElemId = 1;
             }
-        
+
             for (int jj = 0; jj < ILPRefineCount; jj++)
             {
                 ILPEdgeDrivenRefinement();
+                this.meshData.Elements = getNewElementList(elements);
+                flatStructElemId = 1;
             }
 
-            // now flatten the tree structure
-            this.meshData.Elements = getNewElementList(elements);
 
-            // our mesh should now be refined
+            // now flatten the tree structure
             var newMeshDataNodes = meshData.Nodes;
 
             var newmeshData = new MeshData();
@@ -83,6 +88,7 @@ namespace DissertationFEPrototype.Optimisations
             newmeshData.Material = meshData.Material;
             newmeshData.FaceSelections = meshData.FaceSelections;
             newmeshData.FixSelections = meshData.FixSelections;
+
             meshData = newmeshData;
 
         }
@@ -94,8 +100,7 @@ namespace DissertationFEPrototype.Optimisations
         /// </summary>
         private void ILPEdgeDrivenRefinement()
         {
-           
-
+          
             // the edges which had been assigned an amount for remeshing
             List<Edge> meshingEdges = this.ruleManager.Edges;
 
@@ -138,8 +143,6 @@ namespace DissertationFEPrototype.Optimisations
         }
 
 
-
-
         /// <summary>
         /// Reconnect the allNodes so that the method can be applied multiple times for subsequent iterations.
         /// </summary>
@@ -159,9 +162,7 @@ namespace DissertationFEPrototype.Optimisations
             var theNewNodes = refined.SelectMany(x => x.getNodes());
             HashSet<Node> refinedNodes = new HashSet<Node>(theNewNodes);
 
-
             Node[] pathNodes = edgeToUpdate.NodePath.ToArray();
-
             Node currentNode;
 
             // loop through each of the gaps between two allNodes
@@ -169,8 +170,6 @@ namespace DissertationFEPrototype.Optimisations
             {
                 var firstNode = pathNodes[ii];
                 var secondNode = pathNodes[ii + 1];
-
-
 
                 currentNode = firstNode;
 
@@ -213,10 +212,6 @@ namespace DissertationFEPrototype.Optimisations
 
                     // get rid of the node we have just added to the updated edge
                     refinedNodes.Remove(currentNode);
-
-                    // comparisonsAgainstSecond.Remove(fourClosestToFirstFromSecond[0]);
-
-
                     distancesToSecond.Add(currentNode.distanceTo(secondNode));
                 }
             }
@@ -227,7 +222,7 @@ namespace DissertationFEPrototype.Optimisations
         }
 
         /// <summary>
-        /// we want to use the data from the previous analyis that we have to refine our mesh specificially in areas with high stress values
+        /// We want to use the data from the previous analyis that we have to refine our mesh specificially in areas with high stress values
         /// </summary>
         /// <param name="elements">All the elements within the model</param>
         /// <param name="analysisData">Analysis data describing the stresses induced upon the model from the pervious iteration of the experiment</param>
@@ -264,8 +259,7 @@ namespace DissertationFEPrototype.Optimisations
                 }
             }
         }
-        
-      
+       
 
         /// <summary>
         /// some function which using the nodal displacements for the whole model determines what is considered a high displacement,
@@ -279,11 +273,7 @@ namespace DissertationFEPrototype.Optimisations
 
             List<double> allDisps = analysisData.Select(ad => ad.DispMag).ToList();
 
-            threshold = Percentile(allDisps.ToArray(), 0.94);
-
-           //  var average = allDisps.Average();
-
-            
+            threshold = Percentile(allDisps.ToArray(), 0.94);            
 
             return threshold;
         }
@@ -310,7 +300,7 @@ namespace DissertationFEPrototype.Optimisations
             }
         }
 
-        int flatStructElemId = 1;
+       
         /// <summary>
         /// Use this method to flatten the element tree to produce a single list of leaf nodes by recursing through the quad tree 
         /// </summary>
@@ -348,6 +338,13 @@ namespace DissertationFEPrototype.Optimisations
 
                 }
             }
+            // ids need to start at 1
+            //foreach(var flatElem in flatElemTree)
+            //{
+            //    int? newId = flatElem.getId() - flatElemTree[0].getId() + 1;
+            //    flatElem.setId(newId);
+            //}
+         
             // this.meshData.TheFaceSelections
             return flatElemTree;
         }

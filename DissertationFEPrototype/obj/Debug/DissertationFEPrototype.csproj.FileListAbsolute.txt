@@ -60,3 +60,5 @@ C:\Users\Jack\Documents\Visual Studio 2015\Projects\DissertationFEPrototype\Diss
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DissertationFEPrototype\DissertationFEPrototype\obj\Debug\DissertationFEPrototype.Form1.resources
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DissertationFEPrototype\DissertationFEPrototype\obj\Debug\DisertationFEPrototype.Properties.Resources.resources
 C:\Users\Jack\Documents\Visual Studio 2015\Projects\DissertationFEPrototype\DissertationFEPrototype\obj\Debug\DissertationFEPrototype.csproj.GenerateResource.Cache
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DissertationFEPrototype\DissertationFEPrototype\bin\Debug\CsvHelper.dll
+C:\Users\Jack\Documents\Visual Studio 2015\Projects\DissertationFEPrototype\DissertationFEPrototype\bin\Debug\CsvHelper.xml

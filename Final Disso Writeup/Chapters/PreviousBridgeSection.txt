@@ -1,0 +1,138 @@
+
+\noindent
+The basic bridge structure consists of 196 elements and 212 nodes, which is very coarse for a FE mesh structure. \\
+
+
+\noindent
+The primary model for which work on the latter half of the project was based upon was the following suspension bridge model:
+
+
+\begin{figure}
+  \centerline{\includegraphics[width=150mm, scale=1]{../Graphics/BasicBridge.jpeg}}
+  \caption{Diagram representing the general structure of the system with interactions between non internal entities such as files and LIA shown using dashed lines}
+  \label{fig:h-refinementImp}
+\end{figure}
+
+
+\newpage
+
+\noindent
+A strength of the bridge model is its high versatility with regards to different simulation configurations. This meant during evaluation the bridge could be run with forces placed on a range of different faces with corresponding edge rules and a range of varying results obtained. For example a force on the desk of the bridge could be used to simulate the weight of a vehicle moving over it while forces placed sideways on the towers and cables could be used to model stress induced from strong crosswinds.
+
+\subsubsection{Execution and Evaluation of bridge for sideways loading}
+Simulating effects of forces across the bridge provided an opportunity  to test the system for a scenario that an engineer could feasibly face. Placing forces 
+
+%A force was calculated for each section of the bridge when subjected to a crosswind of 70mph, 
+% specify formula for calculating cross loadinghttp://www.wikihow.com/Calculate-Wind-Load
+
+%typical significance of crosswinds on suspension bridges
+%some general forces and on which part of the bridge are they exerted,
+%Image showing the forces placed on the actual bridge and possibly on a diagram from some engineering company.
+%Where is stress expected to be induced.
+\cite{CrosswindsOnSuspensionBridges}
+
+In order to mesh successfully and focus refinement on these areas the following rules can be suggested for the bridge structure when crosswinds were applied negatively along the X axis as shown in figure 10 below.
+
+\begin{figure}[!h]
+  \centerline{\includegraphics[width=0.7\linewidth]{../Graphics/BridgeCrossLoading/ForcesOnBridgeBase.png}}
+  \caption{Forces applied to the base of the bridge structure}
+  \label{fig:h-refinementImp}
+\end{figure}
+
+In total the simulation was run six different times on the model, for four of the six experiments the model was refined using the heuristics method with a variety of different edge specifications of variable quality being used. The remaining two simulations were aimed at experimenting with the threshold used by the stress refinement method.
+
+
+A desirable parameter to evaluate was the overall runtime when performing a particular number of iterations with each of the different approaches. 
+
+%why is runtime important!!!
+
+
+\begin{figure}[!h]
+  \centerline{\includegraphics[width=0.9\linewidth]{../Graphics/Graphs/BridgeCrossLoadingExecutionTimesPerIterations.png}}
+  \caption{Diagram representing the general structure of the system with interactions between non internal entities such as files and LIA shown using dashed lines}
+  \label{fig:h-refinementImp}
+\end{figure}
+
+
+
+
+ 
+
+
+\subsubsection{Evaluation of bridge for base loading}
+Loading the base of a bridge is yet another typical analysis conducted within civil engineering. The loading can be used to represent anything which moves over the bridge that needs to be supported by it such as vehicles or pedestrians. 
+
+
+\subsubsection{Validating system against previously obtained research results}
+Due to a lack of specific implementation details provided by Dolsak and Muggleton in their papers for generating meshes it was important to demonstrate that the underlying implementation for generating meshes based on the rules was essentially equivalent. \\ 
+
+
+Dolsak did however provide information about the various models 
+
+this the models used by Dolsak in order to train his initial ILP system responsible for generating the rules were re crated. This allowed for verification of the heuristic component of the project through comparison of both implentations outputs. \cite{DolsakPaper91}.
+
+
+\subsubsection{Paper Mill}
+Disks are used in multiple places within the paper manufacturing process in order to press the paper as it undergoes pressing and drying. Unlike the bridge example where stresses are for the most part induced by external loading disks within paper mills are primarily stressed as a result of centripetal loading \cite{} Consequently stresses are much more even assuming symmetry in the geometry \cite{RotatingDiskFE}.
+
+
+Assuming a disk is rotating at a particular speed it is possible to calculate the centrifugal force exerted outwards on it. This has been done in the appendix section for various points on the mill to calculate feasible input for the system \cite{RotatingDiskFE}.
+
+
+
+\begin{figure}[!h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../Graphics/PaperMillDolsak.jpeg}
+  \caption{Paper Mill presented by Dolsak in his paper as input for training Golem}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../Graphics/PaperMillWithinLisa.jpeg}
+  \caption{Representation of paper mill within LISA before applying meshing rules to validate}
+  \label{fig:sub2}
+\end{subfigure}
+\label{fig:test}
+\end{figure}
+
+
+
+
+\subsubsection{Cylinder}
+Obtaining results based on the edge relationships described within the research literature was the first step required when performing evaluation of the cylinder. The rules provided in Dolasks paper used to generate the initial JSON file were the following:
+
+
+
+
+\begin{figure}[!h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../Graphics/DolsakCylinderWithEdges.jpeg}
+  \caption{Cylinder model used by Dolsak with edges labeled, each labelling corresponds to a rule generated by the Golem algorithm \cite{DolsakPaper91}}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../Graphics/DolsakCylinderMeshed.jpeg}
+  \caption{Diagram representing the general structure of the system with interactions between non internal entities such as files and LIA shown using dashed lines}
+  \label{fig:sub2}
+\end{subfigure}
+\label{fig:test}
+\end{figure} 
+
+The resulting mesh generated by the system after increasing numbers of iterations based primarily
+
+\begin{figure}[!h]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../Graphics/DolsakCylinderWithinLisa.jpeg}
+  \caption{Cylinder cross section initial construction within Lisa \cite{DolsakPaper91}}
+  \label{fig:sub1}
+\end{subfigure}%
+\label{fig:test}
+\end{figure}
+

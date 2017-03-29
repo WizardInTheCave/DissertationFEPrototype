@@ -23,8 +23,7 @@ namespace DissertationFEPrototype.MeshQualityMetrics
         double elemCountScore;
         double elemQualScore;
 
-        double overlapScore;
-        
+        double overlapScore; 
         double overallQualImprovement;
 
 
@@ -140,6 +139,5 @@ namespace DissertationFEPrototype.MeshQualityMetrics
             this.stressRefinementIncrease = computeStressRefinementImprovement();
   
         }
-        
     }
 }

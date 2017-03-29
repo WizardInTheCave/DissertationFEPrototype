@@ -1,0 +1,84 @@
+////////////////////////////Results for iteration 0\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 0
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.59367366057329
+Average Max parallel dev: 176.890129050378
+Average AspectRatio: ∞
+
+////////////////////////////---------------------\\\\\\\\\\\\\\
+////////////////////////////Results for iteration 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 0
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.59241454186539
+Average Max parallel dev: 176.886134270467
+Average AspectRatio: ∞
+
+////////////////////////////---------------------\\\\\\\\\\\\\\
+////////////////////////////Results for iteration 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 0
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.58928482828909
+Average Max parallel dev: NaN
+Average AspectRatio: ∞
+
+////////////////////////////---------------------\\\\\\\\\\\\\\
+////////////////////////////Results for iteration 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 0
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.58757195103619
+Average Max parallel dev: NaN
+Average AspectRatio: ∞
+
+////////////////////////////---------------------\\\\\\\\\\\\\\
+////////////////////////////Results for iteration 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 0
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.5865252776936
+Average Max parallel dev: NaN
+Average AspectRatio: ∞
+
+////////////////////////////---------------------\\\\\\\\\\\\\\
+////////////////////////////Results for iteration 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 0
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.58581700047334
+Average Max parallel dev: NaN
+Average AspectRatio: ∞
+
+////////////////////////////---------------------\\\\\\\\\\\\\\

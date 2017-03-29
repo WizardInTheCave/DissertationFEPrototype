@@ -64,9 +64,25 @@ namespace DissertationFEPrototype
             //    }
             // }
 
-            experimentVals.Add(new Tuple<short, short>(2, 0));
+            // experimentVals.Add(new Tuple<short, short>(2, 2));
+            // experimentVals.Add(new Tuple<short, short>(2, 3));
+
+            experimentVals.Add(new Tuple<short, short>(2, 5));
+            experimentVals.Add(new Tuple<short, short>(5, 2));
+
+            //experimentVals.Add(new Tuple<short, short>(3, 3));
+            //experimentVals.Add(new Tuple<short, short>(3, 2));
+            //experimentVals.Add(new Tuple<short, short>(5, 2));
+
 
             Directory.SetCurrentDirectory(topLevelFolder);
+
+
+            List<List<string>> resultCols = new List<List<string>>();
+            IntWrapper threadEditCount = new IntWrapper(0);
+
+
+            Thread[] threads = new Thread[experimentVals.Count];
 
             int kk = 0;
             // make a bunch of threads to run the experiments with variation on the two input weightings
@@ -89,23 +105,59 @@ namespace DissertationFEPrototype
                 string edgeDefLocal = Path.Combine(experimentFolder, edgeDefinitionFile);
                 File.Copy(edgeDefFile, edgeDefLocal, true);
 
-                Thread thread = new Thread(() => runExperiment(experimentFolder, experimentVal));
+                Thread thread = new Thread(() => runExperiment(threadEditCount, experimentFolder, experimentVal, resultCols));
+                threads[kk] = thread;
                 thread.Name = String.Format("{0}", kk);
 
                 thread.Start();
 
                 kk++;
             }
+
+            for (int i = 0; i < threads.Length; i++)
+            {
+                threads[i].Join();
+            }
+
+
+            string analysisFile = Path.Combine(@"D:\Documents\DissertationWork\models\FinalDissoExperiments\Experiments\BridgeAdvanced", "analysisData.csv");
+            StreamWriter file = new StreamWriter(analysisFile);
+
+            const string fieldDelim = ", , , , , , , ";
+
+            file.WriteLine("TimesForRuns" + fieldDelim
+               + "ElemCount" + fieldDelim
+               + "StressElemCount" + fieldDelim
+               + "HeuristicElemCount" + fieldDelim
+               + "Elem Qual Score" + fieldDelim
+               + "Element Count Score" + fieldDelim
+               + "Average Max Angle" + fieldDelim
+               + "Average Max Parallel Devs" + fieldDelim
+               + "Average OverallQualScore" + fieldDelim
+               + "StressImprove" + fieldDelim
+               + "HeuristicImprove" + fieldDelim
+               );
+
+            // write to the file at the end.
+            foreach (var column in resultCols)
+            {
+                file.WriteLine(string.Join("", column));
+            }
+
+            file.Close();
+
         }
+
+
     
         /// <summary>
         /// Run an Individual experiment by creating a new Control object.
         /// </summary>
         /// <param name="experimentFolder">Folder that iterations for this threads particular experiment will run within</param>
         /// <param name="experimentVal">values to use for this the particular experiment running on this thread</param>
-        static void runExperiment(string experimentFolder, Tuple<short, short> experimentVal)
+        static void runExperiment(IntWrapper threadEditCount, string experimentFolder, Tuple<short, short> experimentVal, List<List<string>> resultCols)
         {   
-            var control = new Control(experimentFolder, experimentVal);  
+            var control = new Control(threadEditCount, experimentFolder, experimentVal, resultCols);  
         }
     }
 }

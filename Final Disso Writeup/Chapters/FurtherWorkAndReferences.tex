@@ -7,7 +7,7 @@ Approaching the end of the project it became clear that in order to better ident
 User feedback was largely not obtained within the duration of the project as a result of time constraints and the complexity inherent in simply implementing and validating the project for a selection of basic models. As such even if time had been available the ethical clearance required to collect user feedback at the start was not obtained.
 
 
-\subsection{Improving usability through a web interface}
+\subsection{Improving Usability Through A Web Interface}
 Although possible to visit various engineers in order to conduct feedback the process is both time consuming on my part and inconvenient for the participant as a rigid time for which to meet must be scheduled and a laptop containing the working software brought to them which they must design or transfer their model to before running it multiple times to obtain results. This scenario is at best inconvenient for the participants and pressures them into arriving at a conclusion within a relatively small time of experimenting with it. \\ 
 
 \noindent
@@ -43,7 +43,7 @@ A negative consequence of the bespoke nature of the system was that obtaining de
 Throughout the majority of the project I felt organisation of time and planning of activities was done well. Work on the project began early with the goal of easing pressure in the later stages and work continued despite deadlines for coursework associated with other modules. A crucial mistake made was to reduce effort two months before the deadline having completed the software implementation and written much of the initial sections of the dissertation despite not completing evaluation of the results. Evaluation of the software turned out to be substantially more time consuming than expected in additional stresses towards the deadline. \\
 
 \noindent
-Given the chance to redo the project I would have liked to conducted more research to better assess an even wider scope of research surrounding meshing methods. In many cases the academic literature surrounding bespoke meshing techniques became complicated very quickly and was clearly aimed at individuals with a high degree of prior experience.
+Given the chance to redo the project I would have liked to conducted more research to better assess an even wider scope of research surrounding meshing methods. In many cases the academic literature surrounding bespoke meshing techniques became complicated very quickly and was clearly aimed at individuals with a high degree of prior experience. \\ 
 
 %A consequence of this was I  opted for the simplest version of the two approaches I could find so as to tesy my
 
@@ -80,9 +80,7 @@ managerial architectural aspects which I had not previously had that great an in
 
 
 
-
 \newpage
-
 \begin{changemargin}{\CMwidth}{\CMheight} 
 
 \addcontentsline{toc}{section}{References}
@@ -128,8 +126,17 @@ managerial architectural aspects which I had not previously had that great an in
 
 \bibitem{cite06}Nam-Ho Kim \emph{STRUCTURAL DESIGN USING FINITE ELEMENTS} http://web.mae.ufl.edu/nkim/eas6939/Opt\_FEM.pdf
 
+
+\bibitem{GrahamScan} \emph{The convex hull of a set of points} \url{http://www2.lawrence.edu/fast/GREGGJ/CMSC210/convex/convex.html} 
+
+\bibitem{ConvexHulls} Dan Sunday \emph{The Convex Hull of a Planar Point Set} \url{http://geomalgorithms.com/a10-_hull-1.html}
+
+\bibitem{BruteConvex} \emph{Brute Force Closest Pair and Convex-Hull} \url{http://www.csl.mtu.edu/cs4321/www/Lectures/Lecture\%206\%20-\%20Brute\%20Force\%20Closest\%20Pair\%20and\%20Convex\%20and\%20Exhausive\%20Search.htm}
+
 \bibitem{cite07}\emph{Type of Finite Elements and Steps in FEA Process}\\
 http://highered.mheducation.com/sites/dl/free/0073398144/934758/\\Ch07TypesOfFiniteElementsAndStepsInFEAProcess.pdf 
+
+\bibitem{FiniteElementMeshRefinement}\emph{Finite Element Mesh Refinement} \url{https://www.comsol.com/multiphysics/mesh-refinement}
 
 
 \bibitem{ElemQualAndChecks}\emph{Element Quality And Checks}\url{http://www.altairuniversity.com/wp-content/uploads/2012/04/Student_Guide_211-233.pdf}
@@ -148,9 +155,9 @@ http://highered.mheducation.com/sites/dl/free/0073398144/934758/\\Ch07TypesOfFin
 
 \bibitem{CSharpConvexHull} \url{http://loyc.net/2014/2d-convex-hull-in-cs.html}
 
-\bibitem{YoungsModulus} \url{http://physicsnet.co.uk/a-level-physics-as-a2/materials/young-modulus/}
+\bibitem{YoungsModulus} \emph{Young Modulus} \url{http://physicsnet.co.uk/a-level-physics-as-a2/materials/young-modulus/}
 
-\bibitem{PossionsRatio} \url{http://silver.neep.wisc.edu/~lakes/PoissonIntro.html}
+\bibitem{PossionsRatio} \emph{Poisson Intro} \url{http://silver.neep.wisc.edu/~lakes/PoissonIntro.html}
 
 \bibitem{DelaunyTriangles} Jonathan Richard Shewchuk \emph{Delaunay Refinement Algorithms
 for Triangular Mesh Generation} \url{https://people.eecs.berkeley.edu/~jrs/papers/2dj.pdf}
@@ -172,9 +179,9 @@ for Triangular Mesh Generation} \url{https://people.eecs.berkeley.edu/~jrs/paper
 \appendix
 
 \section{Element Types within LISA}
-Here are shown the the visual specifications LISA provides for the ordering and layout of nodes for defining each type of element supported. Each of these types can be classified using the
+Here are shown the the visual specifications LISA provides for the ordering and layout of nodes for defining each type of element supported. Each of these types can be classified using the 
 
-\begin{figure}[!h]
+\begin{figure}[ht]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -192,7 +199,7 @@ Here are shown the the visual specifications LISA provides for the ordering and 
 \end{figure}
 
 
-\begin{figure}[!h]
+\begin{figure}[ht]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -210,7 +217,7 @@ Here are shown the the visual specifications LISA provides for the ordering and 
 \end{figure}
 
 
-\begin{figure}[!h]
+\begin{figure}[ht]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -225,7 +232,7 @@ Here are shown the the visual specifications LISA provides for the ordering and 
   \label{fig:sub2}
 \end{subfigure}
 \label{fig:test}
-\end{figure}
+\end{figure} 
 
 %\section{Calculating Centripetal Force For Paper Mill}
 %Assuming a constant speed of the paper mill disk at  the following standard calculation was done to compute a forces that could be specified for different elements in order to simulate the effects on the model.
@@ -242,6 +249,7 @@ Here are shown the the visual specifications LISA provides for the ordering and 
 %mass- paper mill is made of steel with each plate having a volume of approximately $24cm^3$ which gives a mass of
 %188 grams
 
+
 \section{Unit Testing}
 %Unit tests to validate the correctness of key functionality
 
@@ -252,7 +260,7 @@ Here are shown the the visual specifications LISA provides for the ordering and 
 \section{Input and output files}
 Below can be seen the format of the input files for the system, a LISA .liml and a .json edge definition file\\
 
-\begin{figure}[!h]
+\begin{figure}[h!!]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -273,20 +281,19 @@ Below can be seen the format of the input files for the system, a LISA .liml and
 \section{Project Layout in Solution Explorer}
 Below show the Visual Studio Solution Explorer which provides a general idea of the layout of the project with namespace hierarchies from within an IDE.
 
-\begin{figure}[!h]
+\begin{figure}[h!!]
   \centerline{\includegraphics[width=60mm, scale=0.5]{../Graphics/VSolutionExplorer.png}}
   \caption{The metrics calculated by visual studio for all high level modules in the system}
 \end{figure}
 
 
 \section{Software Quality Metrics}
-
-\begin{figure}[!h]
+\begin{figure}[h!!]
   \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/softwareQualityMetrics.png}}
   \caption{The metrics calculated by visual studio for all high level modules in the system}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[h!!]
   \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/qualityMetricsExpanded.png}}
   \caption{The metrics calculated by visual studio for the all classes in the final system}
 \end{figure}
@@ -298,7 +305,7 @@ Below can be seen the results of executing both the heuristics and the stress re
 
 \subsection{Heuristic Refinement}
 
-\begin{figure}[!h]
+\begin{figure}[h!!]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -316,24 +323,24 @@ Below can be seen the results of executing both the heuristics and the stress re
 \end{figure}
 
 
-\begin{figure}[!h]
+\begin{figure}[h!!]
   \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/BridgeCrossLoading/okEdgeSpecResults.png}}
   \caption{Important edges more poorly specified missing high displacement region on top of furthest suspension bridge tower}
 \end{figure}
 
-\subsection{Stress Refinement}
-\begin{figure}[!h]
+\section{Stress Refinement}
+\begin{figure}[h!!]
   \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png}}
   \caption{Iterative stress/ displacement refinement method used to focus meshing on the top 6\% most displaced region of model}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h!!]
   \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png}}
   \caption{Iterative refinement of high displacement but with the remesh threshold specified as the average displacement across the whole model. A consequence of this is the gradient of refinement fidelity that can be seen corresponding to the importance of that part of the structure}
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[h!!]
   \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/BridgeCrossLoading/aboveAverageRefinement.png}}
   \caption{The metrics calculated by visual studio for the all classes in the final system}
 \end{figure}

@@ -1,0 +1,84 @@
+////////////////////////////Results for iteration 0\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 12.1374644200983
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.59815705009911
+Average Max parallel dev: 176.90453814714
+Average AspectRatio: 4.15647944820479
+
+////////////////////////////---------------------\\\\\\\\\\\\\\
+////////////////////////////Results for iteration 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 12.1374644200983
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.59815705009911
+Average Max parallel dev: 176.90453814714
+Average AspectRatio: 4.15647944820479
+
+////////////////////////////---------------------\\\\\\\\\\\\\\
+////////////////////////////Results for iteration 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 12.1374644200983
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.59815705009911
+Average Max parallel dev: 176.90453814714
+Average AspectRatio: 4.15647944820479
+
+////////////////////////////---------------------\\\\\\\\\\\\\\
+////////////////////////////Results for iteration 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 12.1374644200983
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.59815705009911
+Average Max parallel dev: 176.90453814714
+Average AspectRatio: 4.15647944820479
+
+////////////////////////////---------------------\\\\\\\\\\\\\\
+////////////////////////////Results for iteration 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 12.1374644200983
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.59815705009911
+Average Max parallel dev: 176.90453814714
+Average AspectRatio: 4.15647944820479
+
+////////////////////////////---------------------\\\\\\\\\\\\\\
+////////////////////////////Results for iteration 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Global Metrics
+ElemCount score: 12.1374644200983
+Element Quality score: NaN
+Overall Quality Improvement score: 0
+Heuristic Quality Score: 0
+
+ElementMetrics
+Average Max Angle: 1.59815705009911
+Average Max parallel dev: 176.90453814714
+Average AspectRatio: 4.15647944820479
+
+////////////////////////////---------------------\\\\\\\\\\\\\\

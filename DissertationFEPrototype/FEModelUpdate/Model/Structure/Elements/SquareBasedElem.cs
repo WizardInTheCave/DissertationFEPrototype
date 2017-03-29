@@ -292,10 +292,10 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
 
 
-            // var convexHullVals = convexHull(nodes);
+            var convexHullVals = convexHull(nodes);
             // try my method
-           // if (convexHullVals.Count < 4)
-            // {
+            if (convexHullVals.Count < 4)
+            {
                 Node currentnode = removableNodes[0];
                 sortMatchedNodes.Add(currentnode);
 
@@ -344,15 +344,13 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
                     ii++;
                 }
-           // }
-            //else
-            //{
-           //     sortMatchedNodes = convexHullVals;
-          //  }
+            }
+            else
+            {
+                sortMatchedNodes = convexHullVals;
+            }
 
             return sortMatchedNodes;
-
-            //// add the first node in the current list
         }
 
         /// <summary>
