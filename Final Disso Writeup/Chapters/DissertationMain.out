@@ -15,56 +15,54 @@
 \BOOKMARK [1][-]{section.5}{System Design}{}% 15
 \BOOKMARK [2][-]{subsection.5.1}{System Overview}{section.5}% 16
 \BOOKMARK [2][-]{subsection.5.2}{Modular Architecture}{section.5}% 17
-\BOOKMARK [2][-]{subsection.5.3}{Simulation Data Model}{section.5}% 18
-\BOOKMARK [2][-]{subsection.5.4}{Remeshing methods approach}{section.5}% 19
-\BOOKMARK [2][-]{subsection.5.5}{Input Files}{section.5}% 20
-\BOOKMARK [3][-]{subsubsection.5.5.1}{Combining methods}{subsection.5.5}% 21
-\BOOKMARK [1][-]{section.6}{Software Implementation}{}% 22
-\BOOKMARK [2][-]{subsection.6.1}{Third Party FE Application}{section.6}% 23
-\BOOKMARK [2][-]{subsection.6.2}{LISA}{section.6}% 24
-\BOOKMARK [2][-]{subsection.6.3}{Languages and platforms}{section.6}% 25
-\BOOKMARK [2][-]{subsection.6.4}{Implementation Methodology}{section.6}% 26
-\BOOKMARK [2][-]{subsection.6.5}{Hierarchical Refinement}{section.6}% 27
-\BOOKMARK [2][-]{subsection.6.6}{Stress Based Refinement}{section.6}% 28
-\BOOKMARK [2][-]{subsection.6.7}{Heuristic/Rule Based Refinement}{section.6}% 29
-\BOOKMARK [2][-]{subsection.6.8}{Mesh Quality Assessment}{section.6}% 30
-\BOOKMARK [2][-]{subsection.6.9}{Implementation Challenges}{section.6}% 31
-\BOOKMARK [3][-]{subsubsection.6.9.1}{Fast Node Lookup and Update}{subsection.6.9}% 32
-\BOOKMARK [3][-]{subsubsection.6.9.2}{Sorting Element Nodes}{subsection.6.9}% 33
-\BOOKMARK [3][-]{subsubsection.6.9.3}{Attempts to Automatically Define Edges Within Models}{subsection.6.9}% 34
+\BOOKMARK [2][-]{subsection.5.3}{Third Party FE Application}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.4}{LISA}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.5}{Simulation Data Model}{section.5}% 20
+\BOOKMARK [2][-]{subsection.5.6}{Remeshing methods approach}{section.5}% 21
+\BOOKMARK [2][-]{subsection.5.7}{Input Files}{section.5}% 22
+\BOOKMARK [3][-]{subsubsection.5.7.1}{Combining methods}{subsection.5.7}% 23
+\BOOKMARK [1][-]{section.6}{Software Implementation}{}% 24
+\BOOKMARK [2][-]{subsection.6.1}{Languages and platforms}{section.6}% 25
+\BOOKMARK [2][-]{subsection.6.2}{Implementation Methodology}{section.6}% 26
+\BOOKMARK [2][-]{subsection.6.3}{Hierarchical Refinement}{section.6}% 27
+\BOOKMARK [2][-]{subsection.6.4}{Stress Based Refinement}{section.6}% 28
+\BOOKMARK [2][-]{subsection.6.5}{Heuristic/Rule Based Refinement}{section.6}% 29
+\BOOKMARK [2][-]{subsection.6.6}{Mesh Quality Assessment}{section.6}% 30
+\BOOKMARK [2][-]{subsection.6.7}{Implementation Challenges}{section.6}% 31
+\BOOKMARK [3][-]{subsubsection.6.7.1}{Fast Node Lookup and Update}{subsection.6.7}% 32
+\BOOKMARK [3][-]{subsubsection.6.7.2}{Sorting Element Nodes}{subsection.6.7}% 33
+\BOOKMARK [3][-]{subsubsection.6.7.3}{Attempts to Automatically Define Edges Within Models}{subsection.6.7}% 34
 \BOOKMARK [1][-]{section.7}{Evaluation of Project}{}% 35
 \BOOKMARK [2][-]{subsection.7.1}{Validation Against Functional Requirements}{section.7}% 36
 \BOOKMARK [2][-]{subsection.7.2}{Validation Against Non Functional Requirements}{section.7}% 37
 \BOOKMARK [2][-]{subsection.7.3}{Unit Testing}{section.7}% 38
-\BOOKMARK [2][-]{subsection.7.4}{Software Management}{section.7}% 39
-\BOOKMARK [2][-]{subsection.7.5}{Software Quality and Maintainability}{section.7}% 40
-\BOOKMARK [2][-]{subsection.7.6}{Documentation}{section.7}% 41
-\BOOKMARK [2][-]{subsection.7.7}{Increase in performance through parallel execution}{section.7}% 42
-\BOOKMARK [2][-]{subsection.7.8}{Evaluation Of System For Model Simulations}{section.7}% 43
-\BOOKMARK [3][-]{subsubsection.7.8.1}{Suspension Bridge structure}{subsection.7.8}% 44
-\BOOKMARK [3][-]{subsubsection.7.8.2}{Hybrid Evaluation}{subsection.7.8}% 45
-\BOOKMARK [3][-]{subsubsection.7.8.3}{Analysis of and Addition of Metric\(s\)}{subsection.7.8}% 46
-\BOOKMARK [2][-]{subsection.7.9}{Evaluation of Subsystems based on model evaluation}{section.7}% 47
-\BOOKMARK [3][-]{subsubsection.7.9.1}{Analysis of Methods Using Metrics}{subsection.7.9}% 48
-\BOOKMARK [3][-]{subsubsection.7.9.2}{Evaluation of Stress Refinement Effectiveness}{subsection.7.9}% 49
-\BOOKMARK [3][-]{subsubsection.7.9.3}{Evaluation of Heuristic Refinement Effectiveness}{subsection.7.9}% 50
-\BOOKMARK [3][-]{subsubsection.7.9.4}{Evaluation Issues}{subsection.7.9}% 51
-\BOOKMARK [2][-]{subsection.7.10}{Strengths and Weaknesses}{section.7}% 52
-\BOOKMARK [2][-]{subsection.7.11}{Evaluation summary}{section.7}% 53
-\BOOKMARK [2][-]{subsection.7.12}{Successes and Limitations of project}{section.7}% 54
-\BOOKMARK [1][-]{section.8}{Further Work}{}% 55
-\BOOKMARK [2][-]{subsection.8.1}{Gathering feedback from experienced engineers}{section.8}% 56
-\BOOKMARK [2][-]{subsection.8.2}{Improving Usability Through A Web Interface}{section.8}% 57
-\BOOKMARK [1][-]{section.9}{Personal Reflections and Summary}{}% 58
-\BOOKMARK [1][-]{section.9}{References}{}% 59
-\BOOKMARK [1][-]{appendix.A}{Element Types within LISA}{}% 60
-\BOOKMARK [1][-]{appendix.B}{Unit Testing}{}% 61
-\BOOKMARK [1][-]{appendix.C}{Input and output files}{}% 62
-\BOOKMARK [1][-]{appendix.D}{Project Layout in Solution Explorer}{}% 63
-\BOOKMARK [1][-]{appendix.E}{Software Quality Metrics}{}% 64
-\BOOKMARK [1][-]{appendix.F}{Bridge Cross Loading Simulation Results}{}% 65
-\BOOKMARK [2][-]{subsection.F.1}{Heuristic Refinement}{appendix.F}% 66
-\BOOKMARK [1][-]{appendix.G}{Stress Refinement}{}% 67
-\BOOKMARK [1][-]{appendix.H}{Bridge Base Loading Simulation Results}{}% 68
-\BOOKMARK [1][-]{appendix.I}{Paper Mill Simulation Results}{}% 69
-\BOOKMARK [1][-]{appendix.J}{Gantt Chart for Project Time Management}{}% 70
+\BOOKMARK [2][-]{subsection.7.4}{Software Quality and Management}{section.7}% 39
+\BOOKMARK [2][-]{subsection.7.5}{Documentation}{section.7}% 40
+\BOOKMARK [2][-]{subsection.7.6}{Increase in performance through parallel execution}{section.7}% 41
+\BOOKMARK [2][-]{subsection.7.7}{Evaluation Of System For Model Simulations}{section.7}% 42
+\BOOKMARK [3][-]{subsubsection.7.7.1}{Suspension Bridge structure}{subsection.7.7}% 43
+\BOOKMARK [3][-]{subsubsection.7.7.2}{Hybrid Evaluation}{subsection.7.7}% 44
+\BOOKMARK [3][-]{subsubsection.7.7.3}{Analysis of and Addition of Metric\(s\)}{subsection.7.7}% 45
+\BOOKMARK [2][-]{subsection.7.8}{Evaluation of Subsystems based on model evaluation}{section.7}% 46
+\BOOKMARK [3][-]{subsubsection.7.8.1}{Analysis of Methods Using Metrics}{subsection.7.8}% 47
+\BOOKMARK [3][-]{subsubsection.7.8.2}{Evaluation of Stress Refinement Effectiveness}{subsection.7.8}% 48
+\BOOKMARK [3][-]{subsubsection.7.8.3}{Evaluation of Heuristic Refinement Effectiveness}{subsection.7.8}% 49
+\BOOKMARK [3][-]{subsubsection.7.8.4}{Evaluation Issues}{subsection.7.8}% 50
+\BOOKMARK [2][-]{subsection.7.9}{Strengths and Weaknesses}{section.7}% 51
+\BOOKMARK [2][-]{subsection.7.10}{Evaluation summary}{section.7}% 52
+\BOOKMARK [1][-]{section.8}{Further Work}{}% 53
+\BOOKMARK [2][-]{subsection.8.1}{Gathering feedback from experienced engineers}{section.8}% 54
+\BOOKMARK [2][-]{subsection.8.2}{Improving Usability Through A Web Interface}{section.8}% 55
+\BOOKMARK [1][-]{section.9}{Personal Reflections and Summary}{}% 56
+\BOOKMARK [1][-]{section.9}{References}{}% 57
+\BOOKMARK [1][-]{appendix.A}{Element Types within LISA}{}% 58
+\BOOKMARK [1][-]{appendix.B}{Unit Testing}{}% 59
+\BOOKMARK [1][-]{appendix.C}{Input and output files}{}% 60
+\BOOKMARK [1][-]{appendix.D}{Project Layout in Solution Explorer}{}% 61
+\BOOKMARK [1][-]{appendix.E}{Software Quality Metrics}{}% 62
+\BOOKMARK [1][-]{appendix.F}{Bridge Cross Loading Simulation Results}{}% 63
+\BOOKMARK [2][-]{subsection.F.1}{Heuristic Refinement}{appendix.F}% 64
+\BOOKMARK [1][-]{appendix.G}{Stress Refinement}{}% 65
+\BOOKMARK [1][-]{appendix.H}{Bridge Base Loading Simulation Results}{}% 66
+\BOOKMARK [1][-]{appendix.I}{Paper Mill Simulation Results}{}% 67
+\BOOKMARK [1][-]{appendix.J}{Gantt Chart for Project Time Management}{}% 68

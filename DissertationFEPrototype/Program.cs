@@ -8,7 +8,9 @@ namespace DissertationFEPrototype
 {
     static class Program
     {
+        //static string folderName = "PaperMillQuads";
 
+        static string folderName = "BridgeAdvanced";
         /// <summary>
         /// The main entry point for the application.
         /// Read in possible command line arguments specifying key inoput folders and files so the system can execute
@@ -16,11 +18,17 @@ namespace DissertationFEPrototype
         // [STAThread]
         static void Main(string[] args)
         {
-
             string topLevelFolder = @"D:\Documents\DissertationWork\models\FinalDissoExperiments\Experiments\BridgeAdvanced";
             string modelFile = "bridgeAdvanced.liml";
             string edgeDefinitionFile = "modelEdges.json";
             string modelAnalysisFileName = "bridgeAdvancedOut.csv";
+
+            //string topLevelFolder = @"D:\Documents\DissertationWork\models\FinalDissoExperiments\Experiments\" + folderName;
+            //string modelFile = "paperMill.liml";
+            //string edgeDefinitionFile = "modelEdges.json";
+            //string modelAnalysisFileName = "paperMillOut.csv";
+
+
             int k = 3;
 
             if (args.Length > 0)
@@ -56,7 +64,7 @@ namespace DissertationFEPrototype
 
             List<Tuple<short, short>> experimentVals = new List<Tuple<short, short>>();
 
-            // create combinations to try for the different methods.
+            // create combinations to try for the different methods.    
             //for (short ii = 0; ii < k; ii++){
             //    for (short jj = 0; jj < k; jj++)
             //    {
@@ -67,13 +75,11 @@ namespace DissertationFEPrototype
             // experimentVals.Add(new Tuple<short, short>(2, 2));
             // experimentVals.Add(new Tuple<short, short>(2, 3));
 
+            experimentVals.Add(new Tuple<short, short>(2, 3));
+            experimentVals.Add(new Tuple<short, short>(3, 2));
             experimentVals.Add(new Tuple<short, short>(2, 5));
-            experimentVals.Add(new Tuple<short, short>(5, 2));
 
-            //experimentVals.Add(new Tuple<short, short>(3, 3));
-            //experimentVals.Add(new Tuple<short, short>(3, 2));
             //experimentVals.Add(new Tuple<short, short>(5, 2));
-
 
             Directory.SetCurrentDirectory(topLevelFolder);
 
@@ -114,13 +120,13 @@ namespace DissertationFEPrototype
                 kk++;
             }
 
-            for (int i = 0; i < threads.Length; i++)
+            for (int i = 0; i < threads.Length; i++)    
             {
                 threads[i].Join();
             }
 
-
-            string analysisFile = Path.Combine(@"D:\Documents\DissertationWork\models\FinalDissoExperiments\Experiments\BridgeAdvanced", "analysisData.csv");
+            
+            string analysisFile = Path.Combine(@"D:\Documents\DissertationWork\models\FinalDissoExperiments\Experiments\" + folderName, "analysisData.csv");
             StreamWriter file = new StreamWriter(analysisFile);
 
             const string fieldDelim = ", , , , , , , ";
@@ -129,10 +135,10 @@ namespace DissertationFEPrototype
                + "ElemCount" + fieldDelim
                + "StressElemCount" + fieldDelim
                + "HeuristicElemCount" + fieldDelim
-               + "Elem Qual Score" + fieldDelim
-               + "Element Count Score" + fieldDelim
+              //  + "Elem Qual Score" + fieldDelim
+              // + "Element Count Score" + fieldDelim
                + "Average Max Angle" + fieldDelim
-               + "Average Max Parallel Devs" + fieldDelim
+              // + "Average Max Parallel Devs" + fieldDelim
                + "Average OverallQualScore" + fieldDelim
                + "StressImprove" + fieldDelim
                + "HeuristicImprove" + fieldDelim
@@ -143,13 +149,9 @@ namespace DissertationFEPrototype
             {
                 file.WriteLine(string.Join("", column));
             }
-
             file.Close();
-
         }
-
-
-    
+ 
         /// <summary>
         /// Run an Individual experiment by creating a new Control object.
         /// </summary>

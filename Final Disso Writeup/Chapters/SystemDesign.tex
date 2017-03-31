@@ -21,13 +21,31 @@ At the highest level namespaces were used to break down the class groups appropr
 
 %\subsection{Mesh improvement Loop}
 %As with many optimisation problems the refinement process is driven iteratively through a loop. Within the main loop all %interfacing with LISA, Mesh refinement and analysis is conducted which results in an updated version of the model that can be %handed to the subsequent iteration.
+\subsection{Third Party FE Application}
+In order to demonstrate the potential feasibility of the hybrid approach it was first important to obtain a finite element solver which could be given a FE model containing data about forces, materials and the mesh structure and then execute the model programmatically so as to obtain stress results. \\ 
+
+\noindent
+A multitude of commercial FE tools exist with there being a wide variety in both the complexity and cost associated with each tool. 
+Finite element software is typically very expensive due to its high development cost and small customer base. Tools used within industry such as ANSYS typically require a great deal of time in order to become proficient in their usage and can cost in excess of five thousand pounds a year for a single licence \cite{AnsysCost}. It was therefore important to find a tool which was both affordable while also powerful enough to demonstrate a working prototype of the re meshing method.
+ 
+\subsection{LISA}
+After reviewing several FE applications used within industry in addition to a variety of less well known ones used within academia and by hobbyists LISA  was selected as the solver application for which to implement  the systems prototypes. \\ 
+
+\noindent
+\textbf{Strengths: }LISA is a FE tool which allows the user to run models of up to 1300 element for free; This was beneficial in allowing me to experiment with the software and gauge the feasibility of my projects concept before requiring a full version. Once at a stage in the project where each problem had been solved for small models containing less than 1300 elements an academic licence for the software was purchased for the projects use. \\
+
+\noindent
+LISA also provides a GUI which allows visual inspection of the model and its mesh; This is particularly useful for observing the output of the meshing algorithms which can often provide a human with a much better understanding of how the method has performed and whether or not there are obvious bugs. in the implementation of the meshing procedures \\ 
+
+\noindent
+\textbf{Weaknesses: } Due to LISA’s simplicity it does not come with an extensive API allowing for easy programmatic use of its inbuilt features, however it is still possible to interface with LISA through less direct means \cite{LISAManual}. LISA models are stored in .liml files which use XML as a meta mark-up format. The model files contain all the information about the model including the materials used as well as loads and constraints and of course the mesh. It is therefore possible to manipulate a .liml file having parsed its contents before writing a new version of the file which LISA can be called to solve. In order to more easily alter the model it made sense to write a wrapper  for the .liml files to abstract the manipulation of their content.
 
 
 \subsection{Simulation Data Model}
 Writing an API for LISA was the first stage of development for my project for which a design had to be considered. The API was crucial in order to program the more complex aspects using basic operations and avoid having to regularly perform direct string manipulation of the input files in order to manipulate the model. \\
 
 \noindent
-When the first re-meshing iteration occurs the system needs to read the input .liml file into an equivalent class model which closely resembles the files schema, diagrams for which can be seen in figure 4 below. Each class in this model contains corresponding data and methods used to represent and manipulate the model. These methods are then used by each of the refinement approaches to easily alter the mesh in a controlled manner. Once the mesh  has been adapted however it is required to be assessed by the modules responsible for validating its quality before finally being written back to a .liml file for LISA to solve on the subsequent iteration. Designing the data model so that it closely resembled the LISA scema not only made the higher level programming less confusing but also made serialisation of the data back to .liml format much simpler  thus reducing the number of bugs arising from inconsistencies between different representations of the same data. \\
+When the first re-meshing iteration occurs the system needs to read the input .liml file into an equivalent class model which closely resembles the files schema, diagrams for which can be seen in figure 4 below. Each class in this model contains corresponding data and methods used to represent and manipulate the model. These methods are then used by each of the refinement approaches to easily alter the mesh in a controlled manner. Once the mesh  has been adapted however it is required to be assessed by the modules responsible for validating its quality before finally being written back to a .liml file for LISA to solve on the subsequent iteration. Designing the data model so that it closely resembled the LISA schema not only made the higher level programming less confusing but also made serialisation of the data back to .liml format much simpler  thus reducing the number of bugs arising from inconsistencies between different representations of the same data. \\
 
 \begin{figure}[h!!]
 \centering
@@ -75,17 +93,20 @@ One aspect of the data models design which greatly adds to the systems flexibili
 
 
 \subsection{Remeshing methods approach}
-
-Delegating refinement of individual elements to their respective classes made it much easier to decouple both the stress and heuristic methods allowing each of them to simply have the task of selecting elements which they considered beneficial to refine before calling the createChildElements() method on that element through the IElement interface. This allowed both of these high level refinement approaches to utilise the same low level functionality thus greatly improving code reuse and simplifying the design such that the high level meshing methods are relatively concise. \\
-
-\noindent
-Having reviewed both h-refinement \cite{HandPRefinements} and r-refinement \cite{RRefinement} as techniques for performing element subdivision it was concluded h-refinement was prefferable due to its simplicity and widespread use despite typically being more computationally expensive than r-refinement \cite{HandPRefinements} \cite{RRefinement}. \\ \\ \\ \\ \\
+\textbf{Element Refinement: } Delegating refinement of individual elements to their respective classes made it much easier to decouple both the stress and heuristic methods allowing each of them to simply have the task of selecting elements which they considered beneficial to refine before calling the createChildElements() method on that element through the IElement interface. This allowed both of these high level refinement approaches to utilise the same low level functionality thus greatly improving code reuse and simplifying the design such that the high level meshing methods are relatively concise. \\
 
 \noindent
-Upon finishing subdivision and producing new child elements stored within their parents the refinement process also needed to flatten each tree to produce a new set of model elements. This task involved the deletion of parent elements and therefore needed to be performed by the ``OptimisationManager'' class responsible for combining and executing both refinement methods. \\
+Having reviewed both h-refinement \cite{HandPRefinements} and r-refinement \cite{RRefinement} as techniques for performing element subdivision it was concluded h-refinement was prefferable due to its simplicity and widespread use despite typically being more computationally expensive than r-refinement \cite{HandPRefinements} \cite{RRefinement}. 
+Upon finishing subdivision and producing new child elements the refinement process also needed to flatten each tree as seen in figure 7 below to produce a new set of elements which could be stored at root level within the data model. This made the elements more difficult to manage although was another requirement imposed by LISA, which lacks an equivalent concept of element hierarchy within its representation of the mesh. As this task involved the deletion of parent elements and therefore needed to be performed by the ``OptimisationManager'' class responsible for combining and executing both refinement methods. \\
+
+\begin{figure}[!h]
+  \centerline{\includegraphics[width=150mm, scale=1]{../Graphics/ElemFlattening.png}}
+  \caption{Process of flattening a refined element tree into a single list which can be handed back to LISA for processing}
+  \label{fig:h-refinementImp}
+\end{figure}
 
 \noindent
-Having evaluated a variety of approaches from the domains of AI it was concluded that the best approach for delivering a system capable of meeting the requirements and demonstrating effectiveness of a hybrid method would be an implementation of the heuristic expert system described by Dolsak. \\ 
+\textbf{Stress and Heuristic Refinement: } Having evaluated a variety of approaches from the domains of AI it was concluded that the best approach for delivering a system capable of meeting the requirements and demonstrating effectiveness of a hybrid method would be an implementation of the heuristic expert system described by Dolsak. \\ 
 
 \noindent
 One key strength of selecting this approach as the alternative method by which to mesh was clear separation of the underlying AI method from what had to be implemented. This not only meant that focus could be given towards the design, implementation and evaluation of the general purpose system but demonstrated that the meshing procedure can for the most part be interchanged depending on the specific type of finite element analysis. \\ 

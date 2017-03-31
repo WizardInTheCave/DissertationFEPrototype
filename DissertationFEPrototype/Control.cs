@@ -24,9 +24,7 @@ namespace DissertationFEPrototype
 {
     class Control
     {
-
-
-        // make a lock so file IO isn't a problem when running experiments on lots of threads
+        //make a lock so file IO isn't a problem when running experiments on lots of threads
         //private Object fileIOLock = new Object();
 
         /// <summary>
@@ -46,8 +44,10 @@ namespace DissertationFEPrototype
             bool isNodeOutput = true;
 
             string lisaFile = "bridgeAdvanced.liml";
-
             string lisaFileName = "bridgeAdvanced";
+
+            //string lisaFile = "paperMill.liml";
+            //string lisaFileName = "paperMill";
 
             string outputCSVPath = Path.Combine(experimentFolderLocal, lisaFileName + "Out.csv");
             string lisaFilePath = Path.Combine(experimentFolderLocal, lisaFile);
@@ -143,7 +143,7 @@ namespace DissertationFEPrototype
         /// <returns></returns>
         private bool evaluationFunction(int ii)
         {
-            return ii > 2;
+            return ii > 12;
         }
     }
 }

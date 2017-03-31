@@ -102,13 +102,15 @@ namespace DisertationFEPrototype.FEModelUpdate
             expRow[threadId + 7] = expRef;
             expRow[threadId + 14] = expRef;
             expRow[threadId + 21] = expRef;
+            expRow[threadId + 27] = expRef;
+            expRow[threadId + 34] = expRef;
             //lines[threadId + 27] = meshAssessments[kk].ElemQualityScore.ToString();
             //lines[threadId + 34] = meshAssessments[kk].ElemCountScore.ToString();
             expRow[threadId + 42] = expRef;
             expRow[threadId + 49] = expRef;
             expRow[threadId + 56] = expRef;
-            expRow[threadId + 63] = expRef;
-            expRow[threadId + 70] = expRef;
+            //expRow[threadId + 63] = expRef;
+            //expRow[threadId + 70] = expRef;
 
             // headings already in the file need to be retained
             
@@ -147,14 +149,15 @@ namespace DisertationFEPrototype.FEModelUpdate
                 col[threadId + 7] = meshes[kk].Elements.Count.ToString() + colDelim;
                 col[threadId + 14] = stressCount[kk].ToString() + colDelim;
                 col[threadId + 21] = hurCount[kk].ToString() + colDelim;
+                col[threadId + 27] = meshAssessments[kk].ElemQualMetrics.MaxCornerAngles.Average().ToString() + colDelim;
+                col[threadId + 34] = meshAssessments[kk].OvarallQualityImprovement.ToString() + colDelim;
                 //lines[threadId + 27] = meshAssessments[kk].ElemQualityScore.ToString();
                 //lines[threadId + 34] = meshAssessments[kk].ElemCountScore.ToString();
-                col[threadId + 42] = meshAssessments[kk].ElemQualMetrics.MaxCornerAngles.Average().ToString() + colDelim;
-                col[threadId + 49] = meshAssessments[kk].ElemQualMetrics.MaxParrallelDevs.Average().ToString() + colDelim;
-                col[threadId + 56] = meshAssessments[kk].OvarallQualityImprovement.ToString() + colDelim;
-                col[threadId + 63] = meshAssessments[kk].StressRefinementIncrease.ToString() + colDelim;
-                col[threadId + 70] = meshAssessments[kk].HeuristicRefinementIncrease.ToString() + colDelim;
-
+                col[threadId + 42] = meshAssessments[kk].StressRefinementIncrease.ToString() + colDelim;
+                col[threadId + 49] = meshAssessments[kk].HeuristicRefinementIncrease.ToString() + colDelim;
+                col[threadId + 56] = meshAssessments[kk].ElemQualMetrics.MaxParrallelDevs.Average().ToString() + colDelim;
+                // col[threadId + 63];
+                // col[threadId + 70];
                 // columns.Add(col);
             }
         }

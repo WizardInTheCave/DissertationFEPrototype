@@ -64,11 +64,33 @@ namespace DissertationFEPrototype.ModelUpdate
             fw.WriteLine("      <namedselection>Unnamed</namedselection>");
             fw.WriteLine("      <namedselection>Unnamed(2)</namedselection>");
 
-            fw.WriteLine("      <fieldvalue>displx</fieldvalue>");
-            fw.WriteLine("      <fieldvalue>disply</fieldvalue>");
-            fw.WriteLine("      <fieldvalue>displz</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>displx</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>disply</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>displz</fieldvalue>");
 
-            fw.WriteLine("      <fieldvalue>displmag</fieldvalue>");
+            //fw.WriteLine("      <fieldvalue>displmag</fieldvalue>");
+
+
+            fw.WriteLine("      <fieldvalue>displx</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>disply</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>displz</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>shearuw</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>shearvw</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>vonmisesb</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>vonmisesu</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>principal1u</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>principal2u</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>principal1b</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>principal2b</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>principal2u</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>stressuu</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>stressvv</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>stressuv</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>vonmisesm</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>principal1m</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>principal2m</fieldvalue>");
+            fw.WriteLine("     <fieldvalue>displmag</fieldvalue>");
+
 
             // elem values results only in data from the element analysis being outputted, 
             //we are interested in displacement which is associeated with Nodes

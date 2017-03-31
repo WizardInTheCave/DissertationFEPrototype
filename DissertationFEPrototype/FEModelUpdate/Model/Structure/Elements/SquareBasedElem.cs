@@ -806,8 +806,13 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 }
             }
             return commonNodes;
-        }
 
+            var elem = new List<IElement>()
+            {
+
+            };
+        }
+      
         /// <summary>
         /// currently assumes that three of the nodes have two axis in common, can't do irregular shapes
         /// </summary>

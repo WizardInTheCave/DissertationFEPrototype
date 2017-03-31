@@ -81,9 +81,32 @@ namespace DissertationFEPrototype.ModelUpdate
                 double dispY = Convert.ToDouble(fields[5]);
                 double dispZ = Convert.ToDouble(fields[6]);
 
-                double dispMag = Convert.ToDouble(fields[7]);
+                double sheerUW = Convert.ToDouble(fields[7]);
+                double sheerVW = Convert.ToDouble(fields[8]);
 
-                analysisData.Add(new NodeAnalysisData(nodeId, x, y, z, dispX, dispY, dispZ, dispMag));
+                double vonMeisesBottom = Convert.ToDouble(fields[9]);
+                double vonMeisesUpper = Convert.ToDouble(fields[10]);
+
+                double principal1Upper = Convert.ToDouble(fields[11]);
+                double principal2Upper = Convert.ToDouble(fields[12]);
+
+                double principal1Bottom = Convert.ToDouble(fields[13]);
+                double principal2Bottom = Convert.ToDouble(fields[14]);
+
+                double stressUU = Convert.ToDouble(fields[15]);
+                double stressVV = Convert.ToDouble(fields[16]);
+                double stressUV = Convert.ToDouble(fields[17]);
+                double vonMisesMidplane = Convert.ToDouble(fields[18]);
+                double principalStress1Midplane = Convert.ToDouble(fields[19]);
+                double principalStress2Midplane = Convert.ToDouble(fields[20]);
+                
+                double dispMag = Convert.ToDouble(fields[21]);
+
+                analysisData.Add(new NodeAnalysisData(nodeId, x, y, z, dispX, dispY, dispZ, 
+                    sheerUW, sheerVW, vonMeisesBottom,
+                    vonMeisesUpper, principal1Upper, principal2Upper, principal1Bottom, 
+                    principal2Bottom, stressUU, stressVV, stressUV, vonMisesMidplane, principalStress1Midplane,
+                    principalStress1Midplane, principalStress2Midplane, dispMag));
             }
             return analysisData;
         }

@@ -229,7 +229,10 @@ namespace DissertationFEPrototype.Optimisations
         private void stressGradientDrivenRemesh(List<IElement> elements, List<NodeAnalysisData> analysisData)
         {
 
-            double remeshThreshold = determineRemeshThreshold(analysisData);
+
+            List<double> variableOfInterest = analysisData.Select(ad => ad.StressUV).ToList();
+            double remeshThreshold = determineRemeshThreshold(variableOfInterest);
+
 
             // ruleRefinement();
             foreach (var elem in elements)
@@ -241,21 +244,26 @@ namespace DissertationFEPrototype.Optimisations
                 List<NodeAnalysisData> nodeAnalysisData = analysisData.Where(d => elemNodesIds.Contains(d.Id)).ToList();
 
                 // get the average displacement for the element based on the nodal displacements
-                double avgDispMag = nodeAnalysisData.Select(nad => nad.DispMag).Average();
+                // double avgDispMag = nodeAnalysisData.Select(nad => nad.DispMag).Average();
 
-
-                if (avgDispMag > remeshThreshold)
+                if (nodeAnalysisData.Count > 0)
                 {
-                    Console.WriteLine("Remeshed elements: " + elem.getId().ToString());
-                    List<IElement> children = elem.createChildElements(allNodes);
+                    double averageStress = nodeAnalysisData.Select(nad => nad.StressUV).Average();
+                    //
 
-                    foreach (IElement child in children)
+                    if (averageStress > remeshThreshold)
                     {
-                        child.getNodes().ForEach(node => node.NodeOrigin = Node.Origin.Stress);
-                    }
+                        Console.WriteLine("Remeshed elements: " + elem.getId().ToString());
+                        List<IElement> children = elem.createChildElements(allNodes);
 
-                    // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
-                    elem.setChildren(children);
+                        foreach (IElement child in children)
+                        {
+                            child.getNodes().ForEach(node => node.NodeOrigin = Node.Origin.Stress);
+                        }
+
+                        // GeneralRefinementMethods.getNewQuadElements(elem, nodes);
+                        elem.setChildren(children);
+                    }
                 }
             }
         }
@@ -267,13 +275,12 @@ namespace DissertationFEPrototype.Optimisations
         /// </summary>
         /// <param name="analysisData"></param>
         /// <returns>threshold value</returns>
-        private double determineRemeshThreshold(List<NodeAnalysisData> analysisData)
+        private double determineRemeshThreshold(List<double> variableOfInterest)
         {
             double threshold = 0;
 
-            List<double> allDisps = analysisData.Select(ad => ad.DispMag).ToList();
-
-            threshold = Percentile(allDisps.ToArray(), 0.94);            
+      
+            threshold = Percentile(variableOfInterest.ToArray(), 0.94);            
 
             return threshold;
         }

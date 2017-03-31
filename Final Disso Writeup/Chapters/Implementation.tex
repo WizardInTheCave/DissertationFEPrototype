@@ -2,25 +2,6 @@
 \section{Software Implementation}
 The following subsections detail the implementation of the final software solution that has been written to meet the objectives posed previously of this dissertation.
 
-\subsection{Third Party FE Application}
-In order to demonstrate the potential feasibility of the hybrid approach it was first important to obtain a finite element solver which could be given a FE model containing data about forces, materials and the mesh structure and then execute the model programmatically so as to obtain stress results. \\ 
-
-\noindent
-A multitude of commercial FE tools exist with there being a wide variety in both the complexity and cost associated with each tool. 
-Finite element software is typically very expensive due to its high development cost and small customer base. Tools used within industry such as ANSYS typically require a great deal of time in order to become proficient in their usage and can cost in excess of five thousand pounds a year for a single licence \cite{AnsysCost}. It was therefore important to find a tool which was both affordable while also powerful enough to demonstrate a working prototype of the re meshing method.
- 
-\subsection{LISA}
-After reviewing several FE applications used within industry in addition to a variety of less well known ones used within academia and by hobbyists LISA  was selected as the solver application for which to implement  the systems prototypes. \\ 
-
-\noindent
-\textbf{Strengths: }LISA is a FE tool which allows the user to run models of up to 1300 element for free; This was beneficial in allowing me to experiment with the software and gauge the feasibility of my projects concept before requiring a full version. Once at a stage in the project where each problem had been solved for small models containing less than 1300 elements an academic licence for the software was purchased for the projects use. \\
-
-\noindent
-LISA also provides a GUI which allows visual inspection of the model and its mesh; This is particularly useful for observing the output of the meshing algorithms which can often provide a human with a much better understanding of how the method has performed and whether or not there are obvious bugs. in the implementation of the meshing procedures \\ 
-
-\noindent
-\textbf{Weaknesses: } Due to LISA’s simplicity it does not come with an extensive API allowing for easy programmatic use of its inbuilt features, however it is still possible to interface with LISA through less direct means \cite{LISAManual}. LISA models are stored in .liml files which use XML as a meta mark-up format. The model files contain all the information about the model including the materials used as well as loads and constraints and of course the mesh. It is therefore possible to manipulate a .liml file having parsed its contents before writing a new version of the file which LISA can be called to solve. In order to more easily alter the model it made sense to write a wrapper  for the .liml files to abstract the manipulation of their content.
-
 \subsection{Languages and platforms}
 The final system has been written entirely using the C\# programming language (version 5.0) with Visual Studio 2015 as the development environment on a Windows 10 system. C\# is an application development language built on the .NET framework. Although any number of programming languages could have been used to implement the solution C\# offered a good compromise for developing a system with both structural rigidity through static typing and object orientation in addition to functionality to allow for rapid prototyping. C\# does this well through use of LINQ, a part of the standard library that provides a large number of higher order functions which allow for operations to be performed over any data structure that implements the built in IEnumerable interface. Given that much of the code within the project performs the same operation on collections of nodes and elements stored in lists, arrays and dictionaries which all implement IEnumerable the ability to write much of the project using this capability dramatically reduced the number of errors encountered and increased development speed.
 
@@ -101,21 +82,20 @@ Dittmers rules for computing the quality of both individual elements and the ent
 
 \noindent
 %not sure about the last sentence here
-Since each element is initialised with the nodes that comprise it, it is also possible to derive all the geometric characteristics and thus its quality metrics upon its initialisation. This allows the metrics for each node to also be calculated upon its initialisation removing the risk of elements returning null when asked for them.
-
+Since each element is initialised with the nodes that comprise it, it is also possible to derive all the geometric characteristics and thus its quality metrics upon its initialisation. This allows the metrics for each element to also be calculated upon its initialisation and thus removing the risk of null values being returned when other parts of the system request this information.
 
 
 %Upon evaluation of the project and concluding that effectiveness of the heuristic relied upon overlap of the %heuristically mesh area with areas of high stress
 
 
 \subsection{Implementation Challenges}
-Implementation of the system was not without its difficulties, many of which arising as a consequence of unforeseeable complications when implementing the well understood theoretical aspects. 
+Implementation of the system was not without its share of challenges, some of which required fundamentally re addressing the approach used to tackle the problem. This section outlines the main instances of such cases during the projects development where as a consequence a notable change to the implementation was made often requiring additional research.
 
 \subsubsection{Fast Node Lookup and Update}
 A key requirement for the design of the data model generated by the hierarchical re meshing process was the need to perform fast lookup of nodes already present in the mesh. Lookup is important within the meshing methods as a means of checking whether a node that is about to be created already exists within the model, in the event that no such node already exists a new one can be created however if it does then instead of creating a new node the node that already exists needs to be connected to a node in an adjacent element that is currently being refined. If nodes are not linked correctly form correct elements the physics solver is unable to assume the stress moves through one element to another despite both having nodes at the same coordinates, this results in inaccurate output or potentially an error being thrown by LISA. \\ 
 
 \noindent
-This issue arose partly as a result of the systems design, as previously mentioned subdivision for every individual element is the responsibility of that element which from a software engineering perspective is very good since it means the low level meshing process for each different type of element could be written within that elements class. This avoids the need for much heavier generalised refinement classes that would have needed to know how to perform the meshing for all elements in the model at once and for each of the different potential element types. A consequence of this was despite every Element being capable of meshing itself perfectly adjacent elements that also requiring refinement needed the ability to reconnect the new nodes along their edges to those that have been created by the adjacent element. \colorbox{yellow}{This can be seen below in figure x} \\ 
+This issue arose partly as a result of the systems design, as previously mentioned subdivision for every individual element is the responsibility of that element which from a software engineering perspective is very good since it means the low level meshing process for each different type of element could be written within that elements class. This avoids the need for much heavier generalised refinement classes that would have needed to know how to perform the meshing for all elements in the model at once and for each of the different potential element types. A consequence of this was despite every Element being capable of meshing itself perfectly adjacent elements that also requiring refinement needed the ability to reconnect the new nodes along their edges to those that have been created by the adjacent element, this can be seen below in figure 9. \\ 
 
 
 \begin{figure}[!h]
@@ -194,6 +174,7 @@ For the most part this approach was both fast and correct for Quad4 elements alt
 \noindent
 Attempting to arrive at a more general solution focus was directed towards sorting the more complex Hex8 element type as this represented a more complete instance of the problem. Analysis of this led to the realisation that the most important task in sorting nodes for an arbitrary type is to simply establish the corner nodes relative to that type. Having established corners correctly sorting then simply required adding them to a list in the order specified by LISA. \\
 
+\noindent
 The subsequent method which was used to successfully establish corners for both Quad4 and Hex8 elements was to split nodes for each element using planes running along the x, y and z axis as can be seen in Figure 9 below.
 
 \begin{figure}[!h]
@@ -219,56 +200,86 @@ Although this approach resolved the initial problems resulting from simply tryin
 
 
 \noindent
-Having already devised two solutions it seemed likely that there would be some body of research surrounding the problem worth investigating. with research leading to a set of possible alternaives known as convex hull algorithms. As the name suggests the goal of a convex hull algorithm is to generate a convex hull, convex hulls have several definitions but the simplest of these as described by \cite{ConvexHulls} is for a set of points in some space a subset S of those points is convex if for any two points P and Q  inside S the line between the two should also be inside S. This is directly applicable in the case of quad4 elements where the LISA sort order is the convex hull of the points, in the case of more complex elements the algorithm can be applied repeatedly to different faced divided though plane splitting before sorting the nodes at the end with knowledge of node ordering within each individual face.
+Having already devised two solutions it seemed likely that there would be some body of research surrounding the problem worth investigating. with research leading to a set of possible alternaives known as convex hull algorithms. As the name suggests the goal of a convex hull algorithm is to generate a convex hull, convex hulls have several definitions but the simplest of these as described by \cite{ConvexHulls} is for a set of points in some space a subset S of those points is convex if for any two points P and Q  inside S the line between the two should also be inside S. This is directly applicable in the case of quad4 elements where the LISA sort order is the convex hull of the points, in the case of more complex elements the algorithm can be applied repeatedly to different faced divided though plane splitting before sorting the nodes at the end with knowledge of node ordering within each individual face. \\ 
 
 \begin{figure}[!h]
   \centerline{\includegraphics[width=100mm , scale=1]{../Graphics/ConvexHullGraphic.png}}
-  \caption{Illustration of convex hull definition, credit: \cite{ConvexHulls}
+  \caption{Illustration of convex hull definition, imace source: \cite{ConvexHulls}
   }
   \label{fig:h-refinementImp}
 \end{figure}
 
 
-Having considered several convex hull algorithms including Graham scan \cite{GrahamScan} $O(n\ log\ n)$ and brute force scan $O(n^4)$ \cite{ConvexHulls} \cite{BruteConvex} I decided to trial the following C\# implementation of the Monotone Chain algorithm $O(n\ log\ n)$ within my codebase \cite{CSharpConvexHull}
-Despite the existence of algorithms for generating a convex hull in three dimensions These tend to be slower and add a significant amount of complexity, because of this choosing to stick with a simple 2D method for proof of concept before committing to a full 3D implementation made the most sense. To get a 2D representation of Quad4 elements required each element to be flattened to remove a dimension. This was done by calculating the maximum delta between the greatest and smallest value on each axis and eliminating the axis with the smallest delta. These new 2D points could be given to the algorithm which when used in conjunction with the approach already taken was able to solve all instances of node ordering within the models. \\ 
+\noindent
+Having considered several convex hull algorithms including Graham scan \cite{GrahamScan} $O(n\ log\ n)$ and brute force scan $O(n^4)$ \cite{ConvexHulls} \cite{BruteConvex} before deciding to trial the following C\# implementation of the Monotone Chain algorithm, also $O(n\ log\ n)$ \cite{CSharpConvexHull}. \\ 
+
+\noindent
+The Monotone Chain algorithm algorithm was developed shortly after Graham scan and builds upon the concepts introduced in the former. Graham's scan works by initially finding the point in the data set with the lowest y coordinate which can be called P. Having found this point the other points in the set are sorted based on the angle created between them and P. Combining both these steps gives a complexity of $O(n\ log\ n)$, with  $O(n)$ to find P and $O(n\ log\ n)$ to perform a general sort of the angles. Moving through each point in the sorted array Graham scan determines whether moving to this point results in making a right or left hand turn based on the two previous points. If a right turn is made then the second do last point has caused a concave shape which has violated the requirement of the convex hull path. In this scenario is repeated the algorithm excludes the point from the convex set and resumes with the previous two points being those on the path before the rejected point. A stack structure is therefore typically used to keep track of the point ordering as is the case with the Monotone Chain implementation within the system \cite{ChainHull}. \\ 
+
+\noindent
+The Monotone Chain algorithm performs essentially the same procedure however instead of sorting using simply y values Monoton Chain sorts using both x and y values. This allows the algorithm to sort the points in two separate groups which form the top and the bottom of the hull and a reduction in the complexity of the sort comparison function. \\ \\ 
 
 %Monotone chain
 \begin{algorithm}[H]
- \While{$\exists node \in UnstortedNodes$}{
-  Get distance between current node and the next two nodes in UnstortedNodes\;
-  
-  \eIf{Nodes left ==  1}{
-  
-  }
 
-  \eIf{distanceToNode1 < distanceToNode2}{
-  currentNode Node1\;
-  	sortedNodes.Add(Node1)\;
-  	UnstortedNodes.Remove(Node1)\;
-   }
-   {
-    currentNode Node2\;
-  	sortedNodes.Add(Node2)\;
-  	UnstortedNodes.Remove(Node2)\;
-  }
- }
- \caption{How to write algorithms}
+%\begin{algorithmic}[1]
+%\Procedure{Monotone Chain algorithm}{}
+
+
+	Sort the points of P by x-coordinate (in case of a tie, sort by y-coordinate)\;
+	%\State $\textit{U} \gets \text{Empty List}\textit{string}$
+	%\State $\textit{L} \gets \text{Empty List}\textit{string}$
+	Make two empty lists I and L
+	Lists hold vertices of upper and lower hull\;
+	
+	\While{i = 1; i < n; i++}{
+		\While{L contains at least two points and the sequence of last two points of L and the point P[i] does not make a counter clockwise turn}{
+		Remove the last Point from L\;
+		}
+	}
+	
+	\While{i = n; i > 1; i- -}{
+		\While{L contains at least two points and the sequence of last two points of L and the point P[i] does not make a counter clockwise turn}{
+		
+		Remove the last Point from U\;
+		
+		}
+	}
+	
+Remove the last point of each list (it's the same as the first point of the other list).\;
+Concatenate L and U to obtain the convex hull of P.\;
+Points in the result will be listed in counter-clockwise order.\;
+
+\caption{Monotone Chain algorithm for generating convex hull, pseudocode description credit: \cite{MonotoneChain}}\label{MonotoneChain}
 \end{algorithm}
 
+%\cite{MonotoneChain}
 
 %algo 2
 
+
 \noindent
-This method has $O(n\ log\ n)$ time complexity however due to the size of n being 4 in all cases the complexity of sorting an individual element is constant, with the overall complexity of sorting all elements in the model being $O(n)$ where n is the number of elements. \\ 
+\newline
+%This method has $O(n\ log\ n)$ time complexity however due to the size of n being 4 in all cases the complexity of sorting an individual element is constant, with the overall complexity of sorting all elements in the model being $O(n)$ where n is the number of elements. \\ 
+
+%A key drawback of both Graham scan and Monotone Chain is their limitation to 2D space. Despite the existance of algorithms for generating convex hulls in n dimensions such as \cite{} and
+
+\noindent
+The additional complexity of implementing a 3D convex hull algorithm meant it was much easier to experiment the with the approach as a potential solution to the problem using a 2D implementation by simply reducing the problem to a 2D equivalent. This was for quad4 elements by calculating the maximum delta between the max and min value on each axis and eliminating the axis with the smallest delta. These new 2D points could be given to the algorithm which when used in conjunction with the approach already taken was able to solve all instances of node ordering within the models. The only instances in which this approach failed were where highly elements would lie on a perfectly diagonal plane resulting in two axis of elimination using this method. This problem was avoid however by using the basic traversal to sort these elements. \\ 
+
 
 
 %Think about putting this under evaluation or removing it instead
 \subsubsection{Attempts to Automatically Define Edges Within Models}
-As discussed under evaluation one of the main issues faced was identifying where the system behaved poorly through weakness in the methods or poor design and implementation as opposed to poor output generated as a consequence of poor input by the operator. In order to avoid this issue it was desirable to try and remove user intervention besides the configuration of the initial model. The obvious way by which to do this was automatic identification of interesting edges within the model. A crucial property which made this approach appear promising is the fact that it is known that edge importance directly correlates with the size of the edge and how much force is applied near it, since both this information exists within the data model it should be possible to identify edges from it and generate them automatically for Dolsaks rules to process.  \\
-
+As discussed under evaluation another central faced was identifying where the system behaved poorly as a result of weakness in the underlying methods or poor design and implementation  as opposed to poor edge definitions as input for the heuristic method. One way to avoid this issue of evaluation would be to remove all user intervention from the process besides the configuration of the initial model.
 
 \noindent
-In practice there are multiple complications surrounding this, several of these arise from ambiguity in Dolsaks paper regarding what constitutes a an edge which is for example "long" or "important". As a result edges are only able to be defined to the extent that a user has confidence in their understanding of these concepts. \\ 
+The obvious way by which to do this was automatic identification of interesting edges which would normally be the responsibility of the trained engineer. Such an approach initially seems promising since the quality of edges as with the mesh can be judged using a small number of key properties. For example it is known that edge importance directly correlates with the size of the edge and how much force is applied near it, since this information exists within the data model it should be possible to identify edges from it and generate them automatically for Dolsaks rules to process.  \\
+
+\noindent
+In practice there were multiple complications surrounding this, several of these arise from ambiguity in Dolsaks paper regarding what constitutes a an edge which is for example "long" or "important". As a result edges are only able to be defined to the extent that a user has confidence in their understanding of these concepts. \\ 
+
+Assuming it is possible to generate a system capable of producing edges of interest for a model the problem of evaluating system correctness persists. Bad results then indicate that one of the two systems is broken but provide no clear indication as to which one is.
 
 
 Having considered a method using these properties of the mesh several days were then spent attempting to implement it with poor success achieved.
