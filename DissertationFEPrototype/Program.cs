@@ -8,7 +8,8 @@ namespace DissertationFEPrototype
 {
     static class Program
     {
-        //static string folderName = "PaperMillQuads";
+
+        // static string folderName = "PaperMillQuads";
 
         static string folderName = "BridgeAdvanced";
         /// <summary>
@@ -77,7 +78,8 @@ namespace DissertationFEPrototype
 
             experimentVals.Add(new Tuple<short, short>(2, 3));
             experimentVals.Add(new Tuple<short, short>(3, 2));
-            experimentVals.Add(new Tuple<short, short>(2, 5));
+            experimentVals.Add(new Tuple<short, short>(2, 4));
+            experimentVals.Add(new Tuple<short, short>(4, 2));
 
             //experimentVals.Add(new Tuple<short, short>(5, 2));
 

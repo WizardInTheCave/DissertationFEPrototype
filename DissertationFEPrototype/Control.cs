@@ -143,7 +143,7 @@ namespace DissertationFEPrototype
         /// <returns></returns>
         private bool evaluationFunction(int ii)
         {
-            return ii > 12;
+            return ii > 5;
         }
     }
 }

@@ -93,10 +93,10 @@ Variation of inputs was particularly important when testing Heuristic method as 
  \end{figure}
 
 \noindent
-For stress refinement the parameter varied was the threshold determining whether elements were considered under high stress and should be further refined. The main consequence of varying this parameter was change in both the node count and the programs runtime as can be seen in Figure 14a. Despite time complexity for subdivision being $O(n^2)$ for all methods using a low threshold results in large values of n and consequently a rapid increase in both runtime and element count. \\
+For stress refinement the varied parameter was the threshold used to determine whether elements were considered under high stress and should be further refined. The main consequence of varying this parameter was change in both the node count and the programs runtime as can be seen in Figure 14a. Despite time complexity for subdivision being $O(n^2)$ for all methods using a low threshold results in large values of n and consequently a rapid increase in both runtime and element count. \\
 
 \noindent
-In order to perform reasonable comparison between both the stress and heuristic refinement methods it was therefore important to specify the threshold such that approximately equal amounts were performed by each approach per unit of weighting for each iteration (see combining methods under System Design), thus allowing each method to be evaluated on its merit to select elements appropriately and a hybrid method through its designated weightings. To do this the increase in element count was tracked for the different heuristic methods, as can be seen in Figure 10. The average increase in elements per iteration could then be calculated as 6\% of the total number of elements within the model. This meant stress refinement could be reasonably compared to heuristic refinement if for each use of the refinement it only re meshed those elements considered to be above the 94th percentile in terms of displacement. \\ 
+In order to perform a reasonable comparison between both the stress and heuristic refinement methods it was important to specify the threshold such that approximately equal amounts were performed by each approach per unit of weighting for each iteration (see combining methods under System Design), thus allowing each method to be evaluated on its merit to select elements appropriately and a hybrid method through its designated weightings. To do this the increase in element count was tracked for the different heuristic methods, as can be seen in Figure 10. The average increase in elements per iteration could then be calculated as 6\% of the total number of elements within the model. This meant stress refinement could be reasonably compared to heuristic refinement if for each use of the refinement it only re meshed those elements considered to be above the 94th percentile in terms of stress. \\ 
 
 
 \begin{figure}[!h]
@@ -105,181 +105,85 @@ In order to perform reasonable comparison between both the stress and heuristic 
   \label{fig:sub1}
 \end{figure}
 
+\noindent
 %Having obtained data from multiple runs of the individual methods 
-\noindent
-Evaluation of the data Shows that in general refinement based on displacement and stress consistency results in well refined meshes although depending on the threshold this can be highly costly to compute. By contrast heuristics have shown to retain low computational overhead although volatile when used to refine meshes. Where edges are well specified for the heuristics quality can be seen to increase more rapidly than refinement based on displacement data. Heuristic refinement slows down with subsequent iterations which is likely a result of the regions yielding improvement with refinement becoming increasingly small and thus increasing the distance between the edges originally specified and the target meshing location. \\
-
-\noindent
-Heuristics therefore appear preferable in cases where they can be confirmed as good and where very high accuracy is not as important as reduced computational overhead. By contrast displacement refinement works work well when high accuracy is needed although incurs a higher computational overhead per gain in accuracy early on. \\ 
-
-\noindent
-An ideal hybrid configuration should therefore exhibit the following two characteristics:\\ \\ 
-\noindent
-\textbf{Edge Specification Assessment:} Establish quickly if the edges specified are any good when meshing, if they aren't stop continued use and switch to displacement refinement. \\ \\ 
-\noindent
-\textbf{Heuristic Refinement Halting:} If the heuristic refinement does appear to be working well establish at what point it is beginning to become inferior and then switch methods. \\
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%
-% a series of hybrid weightings were then run
-\noindent
-To evaluate each hybrid weighting the improvement results were averaged so as to provide a general indication given a variety of edge qualities used hybrid weightings with variable edge quality used for the heuristic method. The results for this can be seen below in figure x. \\
+Executing the bridge model for a variety of hybrid weightings revealed the following general trends in the amount of stress discovered per iteration:
 
 \begin{figure}[!h]
-  \centerline{\includegraphics[width=110mm, scale=1]{../Graphics/Graphs/BridgeCrossLoadingElementCount.png}}
+  \centerline{\includegraphics[width=110mm, scale=1]{../Graphics/Graphs/BridgeCrossLoadingAverageStressRevealed.png}}
   \caption{Increase in element count for the various refinement methods over forty iterations}
   \label{fig:sub1}
 \end{figure}
 
 
-\noindent
-Looking at the numerical data in figure x the trend for heuristics to perform well initially before before losing ground to the displacement refinement process persists. This trend is most noticeable in the data for those hybrid processes which place a greater weighting upon upon the heuristic component. Although Heuristic methods can be seen to regain an increasing rate of improvement after the initial decline from the first iteration, this is still slower than that of the displacement method. Considering these results the most desirable hybrid probably will want to continue to utilise both approaches for the entire duration of its refinement process although will want to increasingly shift weighting in favour of displacement or stress refinement in favour of the heuristic. This does rule out the possibility of non traditional approaches in general however but simply indicates weaknesses in the current heuristic system being used. 
 
-\noindent
-Running the same weightings for two additional models reveals consistency in these results . which suggest  that given the design of the heuristic meshing process this trend can be generalised to describe the results for arbitrary structures regardless of variation in the edge quality.
-
-\noindent                                                                                                                                                      %As a result of both methods running sequentially when combined as part of the system design there was little difference in the results of each method when run as part of a hybrid process when compared to its individual execution. Consequently the results for weighting using a hybrid approach were largely predicable using the results from execution of the individual methods, with a continuing trend of improvement increasing fastest in with those weightings that favour a good set of heuristic input witht the rate of improvement increasingly slowing in favour of refinement in areas of high displacement.
-                                                                                                                                                       
-                                                                                                                                                      %effecting the mesh for the other method on subsequent iteration
-                                                                                                                                                      
-                                                                                                                                                      
-                                                                                                                                                       
-                                                                                                                                                        the only observed effect when executing hybrid approaches was the
-
-
-
-
-\subsubsection{Hybrid Evaluation}
-It's clear looking at the data that a hybrid approach is potentially beneficial in scenarios where.
-
-
-
-\subsubsection{Analysis of and Addition of Metric(s)}
-\noindent
-When looking at the initial results of the quality metrics for both the various simulations there were several key observations which greatly informed the remaining evaluation to be conducted. The maximum internal angles to elements are one good indication of general quality for the mesh and indeed gradual improvement with additional refinement iterations increasingly subdividing skewed elements into more uniform ones. Figure 11 below shows greater uniformity towards the optimum of 90 degrees for elements of type Quad4 is achieved for all but the poorest edge specification. Rate of improvement is fast for the first few iterations but then gradually declines. \\ 
-
-Looking at the Figure its also clear that as a result of the heuristics being described in terms of edges
-
-Increase in element count for the various refinement methods over forty iterations
-
-\noindent
-Although the Dittmer metrics providing a good indication of general improvement in quality across a mesh or a particular element in the majority of cases they gave little insight into the strengths of a particular element arrangement within a given mesh. Consequently it was possible to conclude using Dittmers metrics that the general quality of the resultant meshes was good with this quality being at lest retained and often improved, but not that the method refining the mesh had made a better selection of elements to mesh. \\
-
-\cite{ElemQualAndChecks}. \\
-
-
-\noindent
-A more conclusive evaluation metric was clearly needed. Designing such a metric required clarity in the understanding that each method should provide as much information as possible to an engineer while retaining the lowest computational overhead possible, essentially how much additional information is revealed through each additional iteration of a given approach. It can also assume in this case that the concentration of displacement and therefore stress is what we are interested in finding. I concluded that the best means of evaluating each method was was to cross reference the resultant stress data for each iteration against the newly refined regions generated by each approach, the overall stress revealed within the output as a result of that part of the mesh being refined could then be summed and divided by the number of nodes created in order to reveal it through evaluation. This new metric became the average displacement revealed metric as can be seen in Figure 9b. \\ 
-
-
-
-
-%\begin{figure}{\textwidth}
-%  \centering
-%  \includegraphics[width=0.9\linewidth]{../Graphics/Graphs/BridgeCrossLoadingElementCount.png}
-%  \caption{Execution time in seconds for each method to reach 40 refinement iterations}
-%  \label{fig:sub1}
-%\end{figure}
-%see appendix x figure for example
-
-\noindent
-%Currently the default setting for the evaluation function is to refine any elements with a stress greater than the 94th percentile for the model. The threshold setting is relatively arbitrary although choosing to mesh elements rated above the 94th percentile allowed the stress refinement method to be fairly compared against the heuristic methods since these typically only selected about 6\% of elements for refinement although this can clearly vary depending on the model and edges used.
-
-
-% of input configurations was particularly important when analysing the heuristic method since  by what edges were provided to it by the operator.
-
-
-%When testing the stress refinement method the main approach altered
-
-
-In order to evaluate general consistency in these results the experiments were rerun for 
-
-
-Results for which can be seen in 
-
-
-\newpage
-\subsection{Evaluation of Subsystems based on model evaluation}
-Running the system for the above models gave clear indications as to the overall effectiveness of both methods
-
-Having run the system on the range of models described above it was possible to begin assessing it's ability to mesh and the use of Dittmers metrics for assessing 
-the quality of each mesh.
-
-\subsubsection{Analysis of Methods Using Metrics}
-When evaluating Dittmers metrics for distinguishing between meshes of different qualities there were several key observations that resulted in re assessment of how to evaluate the mesh qualities in general.
-
-
-
-\iffalse
-%graphs of Dittmer metrics showing little variation in the results
-\begin{figure}[!h]
+\begin{figure}[h!]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=0.9\linewidth]{g}
-  \caption{Cylinder model used by Dolsak with edges labeled, each labelling corresponds to a rule generated by the Golem algorithm \cite{DolsakPaper91}}
+  \includegraphics[width=0.9\linewidth]{../Graphics/BridgeCrossLoadingStress/bridgeStressBasic.png}
+  \caption{Stress Revealed through the initial highly coarse bridge mesh without running any iterations for either method}
   \label{fig:sub1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=0.9\linewidth]{}
-  \caption{Diagram representing the general structure of the system with interactions between non internal entities such as files and LIA shown using dashed lines}
+  \includegraphics[width=0.9\linewidth]{../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.png}
+  \caption{Stress revealed within model after just 4 iterations with a heuristic stress method weighting of 3-2, edge heuristics also considered good in this case}
   \label{fig:sub2}
 \end{subfigure}
 \label{fig:test}
-\end{figure}
-\fi
+  \caption{Execution time increase compared to the amount of information revealed for the different approaches}
+ \end{figure}
 
+
+Looking at the metric and the resulting meshes it is clear that the system very quickly identifies areas under very high stress with both of the two approaches, with meshing being highly focused on those areas and consequently a rapid increase in the average stress covered by the elements in the model after only two iterations. 
+
+%say something about how actually you want a bit of distribution
+
+\noindent
+Comparing the amount of improvement performed by both the stress and heuristic refinement processes with varying weightings that in general heuristics performed better than stress refinement although interestingly more weighting did not necessarily correlate to better results as can be be seen with heuristic weighting of two doing a better job than weighting four in the final iteration. \\
+
+
+\begin{figure}[!h]
+  \centerline{\includegraphics[width=110mm, scale=1]{../Graphics/Graphs/AverageStressDetected Per Iteration By Different Method Weightings.png}}
+  \caption{Increase in element count for the various refinement methods over forty iterations}
+  \label{fig:sub1}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+  \centerline{\includegraphics[width=110mm, scale=1]{../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png}}
+  \caption{Intense meshing occurring around stress points at joint intersections}
+  \label{fig:sub1}
+\end{figure}
 
 
 \noindent
-Having coded this into the MeshQualityAssessment class the results for this metric could be plotted to evaluate each approach over a number of iterations for the different simulations. I also varied the selection of edges provided to heuristic refinement method which highlighted just how dependent the heuristic approach was on the quality of user expertise.
+Effective comparison of the two methods indicates that the system works as a tool by which comparisons of different refinement methods can effectively be made. 
 
-\begin{figure}[!h]
-\centering
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=1.5\linewidth]{../Graphics/Graphs/BridgeCrossLoadingAverageDisplacementRevealed.png}
-  \caption{Bridge Cross Loading -Average Displacement Revealed Through Creation of Node per Iteration the plateau experienced by Stress Remeshing above 94th percentile is a consequence of all subsequent meshing being focused on an area already very highly meshed, in other words}
-  \label{fig:sub1}
-\end{subfigure}%
-\label{fig:test}
-\end{figure}
+%
 
-%Subsequent research suggested
-
-
-%Demonstrating potential for both heuristic and hybrid refinement for small models suggests that there is still a large amount of work to be done in this area. Although extensive work has been done by engineers and mathematicians to improve the numerical methods associated with the method for many years the improvements obtained  
-
-
-\subsubsection{Evaluation of Stress Refinement Effectiveness}
-Comparisons across multiple models suggests that for general purpose scenarios where results of the simulation are highly unpredictable and the geometry irregular stress based refinement will continue to provide engineers with reliable results within a predictable although potentially costly amount of time. This scenario likely encapsulates the majority of use cases for FE analysis in the real world and therefore is likely to remain the prominent approach by practitioners.
-
-It is clear however that the decline in performance is dependent upon the threshold used to detemine meshing
-
-\subsubsection{Evaluation of Heuristic Refinement Effectiveness}
-The most crucial observation which can be made through analysis of the simulation data is that heuristic equation based on model edges has resulting mesh quality has high variability. Despite this it is also clear that despite high variation in results for different edge specifications the general rate of growth or decline for the resultant metric values remains consistent. In addition to supporting the general case for using heuristics in order to aid the mesh refinement the success of Dolsaks published rules indicate that Muggletons underlying ILP approach for generation of the rules has some underlying merit. \\ 
 
 \subsubsection{Evaluation Issues}
 A significant issue faced in attempting to demonstrate the effectiveness of the system was to provide an indication of how well the system worked without taking into account the ability of the user who may be providing the edge rules for a particular model. Not taking this into account would result in an inaccurate representation of its ability.
 
 \subsection{Strengths and Weaknesses}
-The resulting system successfully satisfied both the functional and non functional requirements in addition to providing insights into the possibilities of a hybrid technique for effective finite element meshing, something that was optimistic at the start of the project but highly desirable. The project was well managed with deliverables consistent met as per the initial time plan quality maintained through application of good software engineering practice. \\
+The resulting system successfully satisfied both the functional and non functional requirements in addition to providing insights into the possibilities of a hybrid technique for effective finite element meshing, something that was optimistic at the start of the project but highly desirable. The project was well managed with all of the objectives being delivered as per the initial time plan. Quality was also maintained throughout the project by the application of good software engineering practice. \\
 
 \noindent
-One of the great strengths of the system would be its modular architecture which has allowed for a great amount of potential extendibility in the future. Although little focus has so far been given to the systems usability it can ideally be developed and distributed as tool for experimentation with hybrid meshing with limited additional effort. \\
+One of the great strengths of the finished system was its modular architecture which allows for a great amount of potential extendibility in the future. Although little focus has so far been given to the systems usability it could be developed and distributed as a public tool for experimentation with hybrid meshing with limited additional effort. \\
 
 \noindent
 Another strength of the system is its ability to accept any heuristic definition in terms of edges within a mesh structure. Theoretically this means the final system is also capable of using the same types of edge specifications for any type of FE analysis such as fluid flow or heat transfer given a corresponding rule set by which to mesh with. \\
 
 
 \noindent
-A downside of the current design is manual specification of the edges by the user directly into the JSON input file which is both time consuming and prone to error despite the relatively small size of the models analysed in this dissertation. Comparing the size of these with those those used in industry it is clear that this process is simply not practical for engineers conducting FE analysis. To change this better tools are required that will allow engineers to automatically generate edge specifications quickly, most likely through some GUI or a bespoke high level language capable of combining knowledge about the mesh structure and different types of edges to generate specific rules. Again this is beyond the scope of the project and would likely be a dissertation in its own right. \\
+A downside of the current design is the need for the user to manually specify the edges by the user directly into the JSON input file which is both time consuming and prone to error despite the relatively small size of the models analysed in this dissertation. Comparing the size of these with those used in industry it is clear that this process is simply not practical for engineers conducting FE analysis. To change this better tools are required that will allow engineers to automatically generate edge specifications quickly, most likely through some GUI or a bespoke high level language capable of combining knowledge about the mesh structure and different types of edges to generate specific rules. Again this is beyond the scope of the project and would likely be a dissertation in its own right. \\
 
 
 \noindent
-Although the system had a strong subsystem and class level architecture many of its greater weaknesses could be attributed to prioritisation of its rapid prototyping over efficient implementation of the various algorithms and methods described in this dissertation. Much of this a consequence of overusing the functional programming capabilities within the C\# LINQ library. Widespread adoption of functional programming practices was stated as a desirable aspect of the final system implementation within the original non functional requirements. This has largely been adhered to with  higher order and lambda functions widespread throughout the codebase. In the later stages of the project it became apparent however that in many cases reliance on these features resulted in reduced readability and performance for many of underlying algorithms described in this dissertation. \\
+Although the system had a strong subsystem and class level architecture many of its weaknesses could be attributed to needing to prioritise the ability to perform rapid prototyping over efficient implementation of the various algorithms and methods described in this dissertation. Much of this a consequence of overusing the functional programming capabilities within the C\# LINQ library. Widespread adoption of functional programming practices was stated as a desirable aspect of the final system implementation within the non-functional requirements. This has largely been adhered to with  higher order and lambda functions widespread throughout the codebase. In the later stages of the project it became apparent however that in many cases reliance on these features resulted in reduced readability and performance for many of underlying algorithms described in this dissertation. \\
 
 
 % Overall the project met all its initial requirements laid out in both the objectives and its requirements.

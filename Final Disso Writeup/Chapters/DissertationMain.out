@@ -41,28 +41,22 @@
 \BOOKMARK [2][-]{subsection.7.6}{Increase in performance through parallel execution}{section.7}% 41
 \BOOKMARK [2][-]{subsection.7.7}{Evaluation Of System For Model Simulations}{section.7}% 42
 \BOOKMARK [3][-]{subsubsection.7.7.1}{Suspension Bridge structure}{subsection.7.7}% 43
-\BOOKMARK [3][-]{subsubsection.7.7.2}{Hybrid Evaluation}{subsection.7.7}% 44
-\BOOKMARK [3][-]{subsubsection.7.7.3}{Analysis of and Addition of Metric\(s\)}{subsection.7.7}% 45
-\BOOKMARK [2][-]{subsection.7.8}{Evaluation of Subsystems based on model evaluation}{section.7}% 46
-\BOOKMARK [3][-]{subsubsection.7.8.1}{Analysis of Methods Using Metrics}{subsection.7.8}% 47
-\BOOKMARK [3][-]{subsubsection.7.8.2}{Evaluation of Stress Refinement Effectiveness}{subsection.7.8}% 48
-\BOOKMARK [3][-]{subsubsection.7.8.3}{Evaluation of Heuristic Refinement Effectiveness}{subsection.7.8}% 49
-\BOOKMARK [3][-]{subsubsection.7.8.4}{Evaluation Issues}{subsection.7.8}% 50
-\BOOKMARK [2][-]{subsection.7.9}{Strengths and Weaknesses}{section.7}% 51
-\BOOKMARK [2][-]{subsection.7.10}{Evaluation summary}{section.7}% 52
-\BOOKMARK [1][-]{section.8}{Further Work}{}% 53
-\BOOKMARK [2][-]{subsection.8.1}{Gathering feedback from experienced engineers}{section.8}% 54
-\BOOKMARK [2][-]{subsection.8.2}{Improving Usability Through A Web Interface}{section.8}% 55
-\BOOKMARK [1][-]{section.9}{Personal Reflections and Summary}{}% 56
-\BOOKMARK [1][-]{section.9}{References}{}% 57
-\BOOKMARK [1][-]{appendix.A}{Element Types within LISA}{}% 58
-\BOOKMARK [1][-]{appendix.B}{Unit Testing}{}% 59
-\BOOKMARK [1][-]{appendix.C}{Input and output files}{}% 60
-\BOOKMARK [1][-]{appendix.D}{Project Layout in Solution Explorer}{}% 61
-\BOOKMARK [1][-]{appendix.E}{Software Quality Metrics}{}% 62
-\BOOKMARK [1][-]{appendix.F}{Bridge Cross Loading Simulation Results}{}% 63
-\BOOKMARK [2][-]{subsection.F.1}{Heuristic Refinement}{appendix.F}% 64
-\BOOKMARK [1][-]{appendix.G}{Stress Refinement}{}% 65
-\BOOKMARK [1][-]{appendix.H}{Bridge Base Loading Simulation Results}{}% 66
-\BOOKMARK [1][-]{appendix.I}{Paper Mill Simulation Results}{}% 67
-\BOOKMARK [1][-]{appendix.J}{Gantt Chart for Project Time Management}{}% 68
+\BOOKMARK [3][-]{subsubsection.7.7.2}{Evaluation Issues}{subsection.7.7}% 44
+\BOOKMARK [2][-]{subsection.7.8}{Strengths and Weaknesses}{section.7}% 45
+\BOOKMARK [2][-]{subsection.7.9}{Evaluation summary}{section.7}% 46
+\BOOKMARK [1][-]{section.8}{Further Work}{}% 47
+\BOOKMARK [2][-]{subsection.8.1}{Gathering feedback from experienced engineers}{section.8}% 48
+\BOOKMARK [2][-]{subsection.8.2}{Improving Usability Through A Web Interface}{section.8}% 49
+\BOOKMARK [1][-]{section.9}{Personal Reflections and Summary}{}% 50
+\BOOKMARK [1][-]{section.9}{References}{}% 51
+\BOOKMARK [1][-]{appendix.A}{Element Types within LISA}{}% 52
+\BOOKMARK [1][-]{appendix.B}{Unit Testing}{}% 53
+\BOOKMARK [1][-]{appendix.C}{Input and output files}{}% 54
+\BOOKMARK [1][-]{appendix.D}{Project Layout in Solution Explorer}{}% 55
+\BOOKMARK [1][-]{appendix.E}{Software Quality Metrics}{}% 56
+\BOOKMARK [1][-]{appendix.F}{Bridge Cross Loading Simulation Results}{}% 57
+\BOOKMARK [2][-]{subsection.F.1}{Heuristic Refinement}{appendix.F}% 58
+\BOOKMARK [1][-]{appendix.G}{Stress Refinement}{}% 59
+\BOOKMARK [1][-]{appendix.H}{Bridge Base Loading Simulation Results}{}% 60
+\BOOKMARK [1][-]{appendix.I}{Paper Mill Simulation Results}{}% 61
+\BOOKMARK [1][-]{appendix.J}{Gantt Chart for Project Time Management}{}% 62

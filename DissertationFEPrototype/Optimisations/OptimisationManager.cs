@@ -228,9 +228,9 @@ namespace DissertationFEPrototype.Optimisations
         /// <param name="analysisData">Analysis data describing the stresses induced upon the model from the pervious iteration of the experiment</param>
         private void stressGradientDrivenRemesh(List<IElement> elements, List<NodeAnalysisData> analysisData)
         {
+            // List<double> variableOfInterest = analysisData.Select(ad => ad.ShearUW).ToList();
 
-
-            List<double> variableOfInterest = analysisData.Select(ad => ad.StressUV).ToList();
+            List<double> variableOfInterest = analysisData.Select(ad => ad.StressUVMidplace).ToList();
             double remeshThreshold = determineRemeshThreshold(variableOfInterest);
 
 
@@ -248,7 +248,7 @@ namespace DissertationFEPrototype.Optimisations
 
                 if (nodeAnalysisData.Count > 0)
                 {
-                    double averageStress = nodeAnalysisData.Select(nad => nad.StressUV).Average();
+                    double averageStress = nodeAnalysisData.Select(nad => nad.ShearUW).Average();
                     //
 
                     if (averageStress > remeshThreshold)
