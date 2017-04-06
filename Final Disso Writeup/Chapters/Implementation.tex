@@ -13,8 +13,7 @@ The growing size of the software meant it was important to work systematically t
 For the duration of the project the spiral methodology was adhered to. This enforced multiple deliverable stages that were concluded with a supervisor meeting every one or two weeks. Adopting the spiral methodology also provided flexibility regarding the order in which tasks were able to take place outside of a spiral iteration. This was necessary when conducting a research driven project where direction of work for subsequent development iterations was largely driven by the  findings of the work in the previous ones. \\
 
 \noindent
-Tasks were chosen every week for the project, the number of tasks and their complexity was determined using a combination of factors including their complexity, the criticality of the task e.g. Did it need to be completed for other important tasks to be started and the time available to me as the individual undertaking the project (More tasks typically performed on weeks when less work was due for other modules. \\ 
-
+Tasks were chosen every week for the project, the number of tasks and their complexity was determined using a combination of factors including the time they were expected to take along with their criticality within the project. In a busy week requiring lots of work for other modules the tasks with lower time costs and higher criticality were typically selected over the others.
 
 \subsection{Hierarchical Refinement}
 \noindent
@@ -46,20 +45,36 @@ Each rule is represented as a function within the implementation, this closely r
 \noindent
 If a rule detects a relationship in the model the edge is assigned a criticality rating as defined by the rule, the value is then used by the meshing procedure to determine how many times it should re mesh the elements along that edge. \\ 
  
+\noindent
 The properties that can exist between two edges when compared are the following:
 \begin{itemize}
-\item Edges opposite one another - the edges run alongside one another closely, look at the distance between each of the corresponding nodes and check whether this distance is less than some threshold amount
+\item Edges opposite one another - the edges run alongside one another closely, look at the distance between each of the corresponding nodes and check whether this distance is less than some threshold amount.
+
 \item Edges posses the same form - \colorbox{yellow}{Still need to write about this}
 %finish this
 
 \item Edges are considered the same - to meet this requirement both edges must be almost the same length, opposite one another and posses the same form.
-
 \end{itemize}
+
+\noindent
+Each edge specification has several properties which Dolsak describes within his papers including:
+\begin{itemize}
+\item Id number - used to identify edge uniquely within the RuleManager 
+\item Edge type - How would the engineer describe the edge, does it form a circuit, it an important aspect of the models design or is it along the edge of some hole?
+\item Load type - Is the edge between to areas with forces applied to them, is just one side of it or is it located elsewhere within the model.
+\item Boundary type - Does the edge run along a constraint point where the model is attached to the outside world.
+
+
+%\colorbox{yellow}{Still need to write about this}
+\end{itemize}
+
+Each of the three edge type properties have a set of recognised values defined by Dolsak within his paper which have been listed in Appendix 
+
 
 \noindent
 Since this system relied on a persistent definition of edges across multiple refinement iterations another challenge was to correctly redefine edges in terms of the newly created nodes so that after meshing had occurred the rules could be re applied to a refined edge to potentially refine it further.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -75,6 +90,61 @@ Since this system relied on a persistent definition of edges across multiple ref
 \end{subfigure}
 \label{fig:test}
 \end{figure}
+
+\noindent
+Having completed meshing of targeted areas it was also important for the heuristic refinement process to redefine the specified edges so that refinement along an edge could be performed again on a subsequent iteration taking into account the newly created nodes and their associated elements created along the original edge. The solution to this problem was yet another node traversal starting at the origin of an edge and moving through each of the node points defined along the edge while collecting newly created nodes lying between the two. \\
+
+
+\noindent
+Since the only information available by which to determine the new edge nodes is the node path comprising the current edge it has to be assumed that new nodes linking the each current node pair will take a direct path between the two. Since there is no graph structure stored within memory that represents all the possible traversal moves and with the number of possible paths increasing exponentially with the number of nearby nodes considered it was not practical to generate it. Consequently he only way to effectively move towards the node end point consistently was to perform a greedy search. \\ 
+
+\noindent
+The greedy search starts by computing the distance between the start and end node points for all nearby nodes, determine the nodes directly adjacent to the start and then of those nodes link the one which has the shortest distance to the end node to the path before repeating this process for that node. This approach was not the first used in an attempt to solve the problem however having completed its implementation it proved to work effectively.
+
+%without incurring excessive runtime due to the number of potentially new nodes along an edge for each iteration only increasing quadratically. \\ 
+
+ A more detailed pseudo code description of this process can be seen below:
+
+
+\begin{algorithm}[H]
+\ForAll{$E \in refinedEdges$}{
+	Get the list of potentially new nodes K as the set of all nodes previously created by refining elements that run along E\; \
+	
+	Create a new empty list containing the new edge path used for subsequent iterations EL\;\
+	
+	\ForAll{$edgeNodePairs N \in E$}{
+	
+	Make a new sub list SL which will be the sorted path between the end of each node pairing in the current path N.FirstNode and N.SecondNode\;
+	Add N.FirstNode to S\;\
+	
+	
+	Make two lists A and B which will contain tuples holding the distance from each potentially new node to N.FirstNode in A and n2.SecondNode in B along with a reference to the potential new path node\;\
+
+		\ForAll{$nearbyElemNode \in K$}{
+			Compute euclidean distance from n1 and store with reference in A\;
+			Compute euclidean distance from n2 and store with reference in B\;\
+			
+		
+			Sort A ascending\;
+			Sort B ascending\; \
+			
+			
+			Make a list F of first n nodes from A i.e. the closest ones depending on the element type, more complex elements take higher number of nodes, in the case of quad4 take 4\;\
+		
+			\ForAll{$n2Node \in n2$}{
+				\If{$n2Node.Ref \in F$}{
+					Add	F to S\;
+					Set new n1 value as F\;
+					Break\;
+				}
+			}		
+		}
+		Add N.SecondNode to S to complete that section of the path\;
+		Add SL to new edge path EL\;
+	}
+}
+\caption{Greedy search of shortest node path in 3D space to form new edge path after each iteration}
+\end{algorithm}
 
 
 \subsection{Mesh Quality Assessment}
@@ -124,28 +194,37 @@ One issue faced when working with LISA was an interface requirement specified re
 
 \noindent
 When addressing this problem for simple models constructed from Quad4 elements the most straightforward approach was to simply traverse each of the nodes in the order specified by LISA and with the resulting traversal list being ordered for LISA. The resulting traversal process resembles the following: \\
+	
 
 
 \begin{algorithm}[H]
- \While{$\exists node \in UnstortedNodes$}{
-  Get distance between current node and the next two nodes in UnstortedNodes\;
+ make a list to contain sorted nodes called SN
+ \While{$\exists node \in unstortedNodes$}{
+  Get distance between current node and the next two nodes in unstortedNodes\;
   
-  \eIf{Nodes left ==  1}{
-  
-  }
-
-  \eIf{distanceToNode1 < distanceToNode2}{
-  currentNode Node1\;
-  	sortedNodes.Add(Node1)\;
-  	UnstortedNodes.Remove(Node1)\;
-   }
-   {
-    currentNode Node2\;
-  	sortedNodes.Add(Node2)\;
-  	UnstortedNodes.Remove(Node2)\;
+  \eIf{sortedNodes.Count == 1}{
+ 	Calculate the distance between the origin node and the penultimately unsorted node A
+ 	Calculate the distance between the origin node and the last unsorted node B 
+  	
+	\eIf{lengthA > lengthB}{
+		currentNode = A\;
+  		Add A to SN\;
+  		Remove A from unsortedNodes\;
+	}
+	{
+		currentNode B\;
+  		Add B to SN\;
+  		UnstortedNodes.Remove(B)\;
+	}	 
+  }{
+   Go through all unsorted nodes, compute distance to each, assign the node with the shortest distance as C.
+    
+    currentNode = C\;
+  	Add c to SN
+    Remove C from unsortedNodes\;
   }
  }
- \caption{How to write algorithms}
+ \caption{A basic traversal approach for sorting Quad4 elements, code for when one node has already been sorted used to ensure that in nearly all cases the diagonal from the origin is selected as the third node in the sequence.}
 \end{algorithm}
 
 \noindent
@@ -266,20 +345,3 @@ Points in the result will be listed in counter-clockwise order.\;
 
 \noindent
 The additional complexity of implementing a 3D convex hull algorithm meant it was much easier to experiment the with the approach as a potential solution to the problem using a 2D implementation by simply reducing the problem to a 2D equivalent. This was for quad4 elements by calculating the maximum delta between the max and min value on each axis and eliminating the axis with the smallest delta. These new 2D points could be given to the algorithm which when used in conjunction with the approach already taken was able to solve all instances of node ordering within the models. The only instances in which this approach failed were where highly elements would lie on a perfectly diagonal plane resulting in two axis of elimination using this method. This problem was avoid however by using the basic traversal to sort these elements. \\ 
-
-
-
-%Think about putting this under evaluation or removing it instead
-\subsubsection{Attempts to Automatically Define Edges Within Models}
-As discussed under evaluation another central faced was identifying where the system behaved poorly as a result of weakness in the underlying methods or poor design and implementation  as opposed to poor edge definitions as input for the heuristic method. One way to avoid this issue of evaluation would be to remove all user intervention from the process besides the configuration of the initial model.
-
-\noindent
-The obvious way by which to do this was automatic identification of interesting edges which would normally be the responsibility of the trained engineer. Such an approach initially seems promising since the quality of edges as with the mesh can be judged using a small number of key properties. For example it is known that edge importance directly correlates with the size of the edge and how much force is applied near it, since this information exists within the data model it should be possible to identify edges from it and generate them automatically for Dolsaks rules to process.  \\
-
-\noindent
-In practice there were multiple complications surrounding this, several of these arise from ambiguity in Dolsaks paper regarding what constitutes a an edge which is for example "long" or "important". As a result edges are only able to be defined to the extent that a user has confidence in their understanding of these concepts. \\ 
-
-Assuming it is possible to generate a system capable of producing edges of interest for a model the problem of evaluating system correctness persists. Bad results then indicate that one of the two systems is broken but provide no clear indication as to which one is.
-
-
-Having considered a method using these properties of the mesh several days were then spent attempting to implement it with poor success achieved.

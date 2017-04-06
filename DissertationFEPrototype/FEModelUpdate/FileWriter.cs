@@ -18,16 +18,15 @@ namespace DisertationFEPrototype.FEModelUpdate
     /// <summary>
     /// Write out a summary of the Assessments for this experiment so we can compare variations in how effective the two methods are
     /// </summary>
-    public class FileWriter
+    public class TableWriter
     {
 
 
         // private ReaderWriterLockSlim lock_ = new ReaderWriterLockSlim();
-       
 
+        
         private Tuple<List<int>, List<int>> getHeuristicCounts(List<MeshData> meshes)
         {
-
 
             List<int> hurCount = new List<int>();
             List<int> stressCount = new List<int>();

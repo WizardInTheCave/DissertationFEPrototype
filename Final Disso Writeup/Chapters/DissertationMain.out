@@ -31,32 +31,31 @@
 \BOOKMARK [2][-]{subsection.6.7}{Implementation Challenges}{section.6}% 31
 \BOOKMARK [3][-]{subsubsection.6.7.1}{Fast Node Lookup and Update}{subsection.6.7}% 32
 \BOOKMARK [3][-]{subsubsection.6.7.2}{Sorting Element Nodes}{subsection.6.7}% 33
-\BOOKMARK [3][-]{subsubsection.6.7.3}{Attempts to Automatically Define Edges Within Models}{subsection.6.7}% 34
-\BOOKMARK [1][-]{section.7}{Evaluation of Project}{}% 35
-\BOOKMARK [2][-]{subsection.7.1}{Validation Against Functional Requirements}{section.7}% 36
-\BOOKMARK [2][-]{subsection.7.2}{Validation Against Non Functional Requirements}{section.7}% 37
-\BOOKMARK [2][-]{subsection.7.3}{Unit Testing}{section.7}% 38
-\BOOKMARK [2][-]{subsection.7.4}{Software Quality and Management}{section.7}% 39
-\BOOKMARK [2][-]{subsection.7.5}{Documentation}{section.7}% 40
-\BOOKMARK [2][-]{subsection.7.6}{Increase in performance through parallel execution}{section.7}% 41
-\BOOKMARK [2][-]{subsection.7.7}{Evaluation Of System For Model Simulations}{section.7}% 42
-\BOOKMARK [3][-]{subsubsection.7.7.1}{Suspension Bridge structure}{subsection.7.7}% 43
-\BOOKMARK [3][-]{subsubsection.7.7.2}{Evaluation Issues}{subsection.7.7}% 44
-\BOOKMARK [2][-]{subsection.7.8}{Strengths and Weaknesses}{section.7}% 45
-\BOOKMARK [2][-]{subsection.7.9}{Evaluation summary}{section.7}% 46
-\BOOKMARK [1][-]{section.8}{Further Work}{}% 47
-\BOOKMARK [2][-]{subsection.8.1}{Gathering feedback from experienced engineers}{section.8}% 48
-\BOOKMARK [2][-]{subsection.8.2}{Improving Usability Through A Web Interface}{section.8}% 49
-\BOOKMARK [1][-]{section.9}{Personal Reflections and Summary}{}% 50
-\BOOKMARK [1][-]{section.9}{References}{}% 51
-\BOOKMARK [1][-]{appendix.A}{Element Types within LISA}{}% 52
-\BOOKMARK [1][-]{appendix.B}{Unit Testing}{}% 53
-\BOOKMARK [1][-]{appendix.C}{Input and output files}{}% 54
-\BOOKMARK [1][-]{appendix.D}{Project Layout in Solution Explorer}{}% 55
-\BOOKMARK [1][-]{appendix.E}{Software Quality Metrics}{}% 56
-\BOOKMARK [1][-]{appendix.F}{Bridge Cross Loading Simulation Results}{}% 57
-\BOOKMARK [2][-]{subsection.F.1}{Heuristic Refinement}{appendix.F}% 58
-\BOOKMARK [1][-]{appendix.G}{Stress Refinement}{}% 59
-\BOOKMARK [1][-]{appendix.H}{Bridge Base Loading Simulation Results}{}% 60
-\BOOKMARK [1][-]{appendix.I}{Paper Mill Simulation Results}{}% 61
-\BOOKMARK [1][-]{appendix.J}{Gantt Chart for Project Time Management}{}% 62
+\BOOKMARK [1][-]{section.7}{Evaluation of Project}{}% 34
+\BOOKMARK [2][-]{subsection.7.1}{Validation Against Functional Requirements}{section.7}% 35
+\BOOKMARK [2][-]{subsection.7.2}{Validation Against Non Functional Requirements}{section.7}% 36
+\BOOKMARK [2][-]{subsection.7.3}{Unit Testing}{section.7}% 37
+\BOOKMARK [2][-]{subsection.7.4}{Software Quality and Management}{section.7}% 38
+\BOOKMARK [2][-]{subsection.7.5}{Documentation}{section.7}% 39
+\BOOKMARK [2][-]{subsection.7.6}{Evaluation Of System For Model Simulations}{section.7}% 40
+\BOOKMARK [2][-]{subsection.7.7}{Strengths and Weaknesses}{section.7}% 41
+\BOOKMARK [2][-]{subsection.7.8}{Evaluation summary}{section.7}% 42
+\BOOKMARK [1][-]{section.8}{Further Work}{}% 43
+\BOOKMARK [2][-]{subsection.8.1}{Gathering feedback from experienced engineers}{section.8}% 44
+\BOOKMARK [2][-]{subsection.8.2}{Improving Usability Through A Web Interface}{section.8}% 45
+\BOOKMARK [2][-]{subsection.8.3}{Added Sophistication of Hybrid Generation}{section.8}% 46
+\BOOKMARK [1][-]{section.9}{Personal Reflections and Summary}{}% 47
+\BOOKMARK [1][-]{section.9}{References}{}% 48
+\BOOKMARK [1][-]{appendix.A}{Element Types within LISA}{}% 49
+\BOOKMARK [1][-]{appendix.B}{Unit Testing}{}% 50
+\BOOKMARK [1][-]{appendix.C}{Edge Definition Categories}{}% 51
+\BOOKMARK [1][-]{appendix.D}{Input and Output Files}{}% 52
+\BOOKMARK [1][-]{appendix.E}{Project Layout in Solution Explorer}{}% 53
+\BOOKMARK [1][-]{appendix.F}{Doxygen Documentation}{}% 54
+\BOOKMARK [1][-]{appendix.G}{Software Quality Metrics}{}% 55
+\BOOKMARK [2][-]{subsection.G.1}{Mesh Refinements}{appendix.G}% 56
+\BOOKMARK [2][-]{subsection.G.2}{Heuristic Refinement}{appendix.G}% 57
+\BOOKMARK [1][-]{appendix.H}{Stress Refinement}{}% 58
+\BOOKMARK [1][-]{appendix.I}{Paper Mill Simulation Results}{}% 59
+\BOOKMARK [1][-]{appendix.J}{Half Cylinder Simulation Results}{}% 60
+\BOOKMARK [1][-]{appendix.K}{Gantt Chart for Project Time Management}{}% 61

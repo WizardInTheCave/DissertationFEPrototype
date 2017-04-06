@@ -21,7 +21,7 @@ namespace Testing
 
 
         [TestMethod]
-        public void DistanceTo()
+        public void ComputeDistanceBetween()
         {
             Node n1 = new Node(1, 1.0, 1.0, 1.0);
             Node n2 = new Node(1, 1.0, 1.0, 1.0);
@@ -42,7 +42,7 @@ namespace Testing
         }
 
         [TestMethod]
-        public void Clone()
+        public void CloneElement()
         {
             Node n1 = new Node(1, 1.0, 1.0, 1.0);
             Node n1Clone = (Node)n1.Clone();
@@ -63,7 +63,7 @@ namespace Testing
         }
 
         [TestMethod]
-        public void DotProduct()
+        public void DotProductNodes()
         {
             Node n1 = new Node(1, 1.0 , 2.0, 3.0);
             Node n2 = new Node(2, 4.0, -5.0, 6.0);

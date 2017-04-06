@@ -117,7 +117,7 @@
     <Compile Include="Optimisations\ILPRules\DeserializedEdgeGroup.cs" />
     <Compile Include="Optimisations\ILPRules\EdgeIdentifier.cs" />
     <Compile Include="Optimisations\ILPRules\JsonEdge.cs" />
-    <Compile Include="Optimisations\OptimisationManager.cs" />
+    <Compile Include="Optimisations\RefinementManager.cs" />
     <Compile Include="Optimisations\ILPRules\Edge.cs" />
     <Compile Include="Optimisations\ILPRules\EdgeGenerator.cs" />
     <Compile Include="Optimisations\ILPRules\RuleManager.cs" />

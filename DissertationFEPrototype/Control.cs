@@ -84,7 +84,7 @@ namespace DissertationFEPrototype
                 short ILPRefineCount = experimentVals.Item1;
                 short stressRefineCount = experimentVals.Item2;
                 // assuming we have different mesh data should get a new set of edges.
-                OptimisationManager optimisation = new OptimisationManager(meshData, analysisData, ii, ILPRefineCount, stressRefineCount, ruleMan);
+                RefinementManager optimisation = new RefinementManager(meshData, analysisData, ii, ILPRefineCount, stressRefineCount, ruleMan);
                 
                 // hand quality assessment down to the refinement method so we can apply apply either rule based
                 // or traditional meshing further
@@ -116,7 +116,7 @@ namespace DissertationFEPrototype
 
             stopwatch.Stop();
 
-            var fw = new FileWriter();
+            var fw = new TableWriter();
             fw.WriteData(threadEditCount, resultCols, experimentVals, experimentFolder, meshAssessments, meshes, times.ToList());
         }
 
@@ -143,7 +143,7 @@ namespace DissertationFEPrototype
         /// <returns></returns>
         private bool evaluationFunction(int ii)
         {
-            return ii > 5;
+            return ii > 8;
         }
     }
 }

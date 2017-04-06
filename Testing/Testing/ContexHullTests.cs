@@ -8,7 +8,7 @@ namespace Testing
     [TestClass]
     public class ConvexHullTests
     {
-        [TestMethod]
+       //  [TestMethod]
         public void ConvexHullTest()
         {
             var a = new List<ConvexHullPoint>();

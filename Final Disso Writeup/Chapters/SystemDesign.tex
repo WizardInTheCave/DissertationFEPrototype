@@ -38,7 +38,7 @@ After reviewing several FE applications used within industry in addition to a va
 LISA also provides a GUI which allows visual inspection of the model and its mesh; This is particularly useful for observing the output of the meshing algorithms which can often provide a human with a much better understanding of how the method has performed and whether or not there are obvious bugs. in the implementation of the meshing procedures \\ 
 
 \noindent
-\textbf{Weaknesses: } Due to LISA’s simplicity it does not come with an extensive API allowing for easy programmatic use of its inbuilt features, however it is still possible to interface with LISA through less direct means \cite{LISAManual}. LISA models are stored in .liml files which use XML as a meta mark-up format. The model files contain all the information about the model including the materials used as well as loads and constraints and of course the mesh. It is therefore possible to manipulate a .liml file having parsed its contents before writing a new version of the file which LISA can be called to solve. In order to more easily alter the model it made sense to write a wrapper  for the .liml files to abstract the manipulation of their content.
+\textbf{Weaknesses: } Due to LISA’s simplicity it does not come with an extensive API allowing for easy programmatic use of its inbuilt features, however it is still possible to interface with LISA through less direct means \cite{LISAManual}. LISA models are stored in .liml files which use XML as a meta mark-up format. The model files contain all the information about the model including the materials used as well as loads and constraints and of course the mesh. It is therefore possible to manipulate a .liml file having parsed its contents before writing a new version of the file which LISA can be called to solve. In order to more easily alter the model it made sense to write a wrapper  for the .liml files to abstract the manipulation of their content. \\ 
 
 
 \subsection{Simulation Data Model}
@@ -47,7 +47,7 @@ Writing an API for LISA was the first stage of development for my project for wh
 \noindent
 When the first re-meshing iteration occurs the system needs to read the input .liml file into an equivalent class model which closely resembles the files schema, diagrams for which can be seen in figure 4 below. Each class in this model contains corresponding data and methods used to represent and manipulate the model. These methods are then used by each of the refinement approaches to easily alter the mesh in a controlled manner. Once the mesh  has been adapted however it is required to be assessed by the modules responsible for validating its quality before finally being written back to a .liml file for LISA to solve on the subsequent iteration. Designing the data model so that it closely resembled the LISA schema not only made the higher level programming less confusing but also made serialisation of the data back to .liml format much simpler  thus reducing the number of bugs arising from inconsistencies between different representations of the same data. \\
 
-\begin{figure}[h!!]
+\begin{figure}[h!]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -64,7 +64,7 @@ When the first re-meshing iteration occurs the system needs to read the input .l
 \label{fig:test}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -83,7 +83,7 @@ When the first re-meshing iteration occurs the system needs to read the input .l
 \end{figure}
 
 \noindent
-One aspect of the data models design which greatly adds to the systems flexibility is the hierarchical design for representing the various Element types. At the root of this structure is the IElement interface, all new Element types must adhere to this in order for the various refinement methods to request refinement of an element using its class. Implementing the interface are a range of abstract classes such as ``SquareBasedElem" and ``TriangleBasedElem" These classes are designed to contain methods that are generally applicable for calculating metrics and re meshing individual elements where the elements fit this abstract category but their concrete implementation specifies their dimensionality and number of nodes, see Figure 6. This is powerful since computing metrics and performing subdivision for a 3d element is simply a reduction using the code for a 2D element but over every face comprising the 3D one. \\ 
+One aspect of the data models design which greatly adds to the systems flexibility is the hierarchical design for representing the various Element types. At the root of this structure is the IElement interface, all new Element types must adhere to this in order for the various refinement methods to request refinement of an element using its class. Implementing the interface are a range of abstract classes such as ``SquareBasedElem" and ``TriangleBasedElem" These classes are designed to contain methods that are generally applicable for calculating metrics and re meshing individual elements where the elements fit this abstract category but their concrete implementation specifies their dimensionality and number of nodes, see Figure 6. This is powerful since computing metrics and performing subdivision for a 3D element is simply a reduction using the code for a 2D element but over every face comprising the 3D one. \\ 
 
 \begin{figure}[h!!]                                                   
   \centerline{\includegraphics[width=150mm, scale=1]{../Graphics/ElementHigerarchyDiagram2.png}}
@@ -97,7 +97,7 @@ One aspect of the data models design which greatly adds to the systems flexibili
 
 \noindent
 Having reviewed both h-refinement \cite{HandPRefinements} and r-refinement \cite{RRefinement} as techniques for performing element subdivision it was concluded h-refinement was prefferable due to its simplicity and widespread use despite typically being more computationally expensive than r-refinement \cite{HandPRefinements} \cite{RRefinement}. 
-Upon finishing subdivision and producing new child elements the refinement process also needed to flatten each tree as seen in figure 7 below to produce a new set of elements which could be stored at root level within the data model. This made the elements more difficult to manage although was another requirement imposed by LISA, which lacks an equivalent concept of element hierarchy within its representation of the mesh. As this task involved the deletion of parent elements and therefore needed to be performed by the ``OptimisationManager'' class responsible for combining and executing both refinement methods. \\
+Upon finishing subdivision and producing new child elements the refinement process also needed to flatten each tree as seen in figure 7 below to produce a new set of elements which could be stored at root level within the data model. This made the elements more difficult to manage although was another requirement imposed by LISA, which lacks an equivalent concept of element hierarchy within its representation of the mesh. As this task involved the deletion of parent elements and therefore needed to be performed by the ``RefinementManager'' class responsible for combining and executing both refinement methods. \\
 
 \begin{figure}[!h]
   \centerline{\includegraphics[width=150mm, scale=1]{../Graphics/ElemFlattening.png}}
@@ -124,16 +124,14 @@ The system requires three basic input files which should be placed within a dire
 An example of the content and format for each of these input files can be seen in Appendix B
 
 
-
 \subsubsection{Combining methods}
-Since each refinement method performed a discrete amount of subdivision every time it was called it made sense when developing a hybrid approach to simply enumerate the possible combinations for how much each method could be applied each iteration resulting in a set of two valued tuples up to some value :
+Since each refinement method performed a discrete amount of subdivision every time it was called it made sense when developing a hybrid approach to simply enumerate the possible combinations for how much each method could be applied each iteration resulting in a set of two valued tuples up to some value:
 
-\[ \left\{ (a, b) \,\middle|\, \, a,b \in \mathbb{N}\, \, a,b < k \right\} \]
-
-
-\colorbox{yellow}{not sure if anyone actually cares about multithreading}
+\[ \left\{ (HeuristicRefinementIterations, StressRefinementIterations) \,\middle|\, \, a,b \in \mathbb{N}\, \, a,b < k \right\} \]
 
 \noindent
-Each tuple could then be considered one weighting configuration for combining the two methods and could be executed independent of the others to obtain a set of results for that weighting. Consequently it was possible to improve performance when conducting multiple evaluations through parallelism of the different weighting configurations as experiments onto independent threads. When started each thread creates its own directory which it copies the three input files to and runs for its designating weighting configuration. 
+Each tuple can then be considered one weighting specification for indicating how many times each method should be applied, each application adding a depth of one to element refinement trees affected by the rule as seen in figure 7. Testing the hybrid weightings as different specifications meant it was also possible to improve the systems throughput by conducting evaluations simultaneously on different threads. When started each thread creates its own directory which it copies the three input files to and runs for its designating weighting configuration. \\
 
+\noindent
+Another key consideration when comparing the different meshing approaches was to establish what the value of weighting unit and thus allowing comparisons and evaluation for each of the hybrids as a weighting specification. Balance of the weightings was achieved at the start of the evaluation process through observing the increase in element count for the different heuristic methods when run individually as can be seen in Figure 10. With the average increase in element count per iteration being calculated as 6\% of the model total the stress refinement threshold could then be configured so as only to mesh those elements within the 94th percentile within the model in terms of stress. \\
 

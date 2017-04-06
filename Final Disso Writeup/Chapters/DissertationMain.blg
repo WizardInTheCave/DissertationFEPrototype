@@ -6,7 +6,9 @@ A level-1 auxiliary file: DescriptionOfWork.aux
 A level-1 auxiliary file: SystemDesign.aux
 A level-1 auxiliary file: Implementation.aux
 A level-1 auxiliary file: Evaluation.aux
-A level-1 auxiliary file: FurtherWorkAndReferences.aux
+A level-1 auxiliary file: FurtherWork.aux
+A level-1 auxiliary file: References.aux
+A level-1 auxiliary file: Appendix.aux
 I found no \bibdata command---while reading file DissertationMain.aux
 I found no \bibstyle command---while reading file DissertationMain.aux
 (There were 2 error messages)

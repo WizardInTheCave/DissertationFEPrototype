@@ -73,13 +73,16 @@ namespace DissertationFEPrototype
             //    }
             // }
 
-            // experimentVals.Add(new Tuple<short, short>(2, 2));
-            // experimentVals.Add(new Tuple<short, short>(2, 3));
+            //experimentVals.Add(new Tuple<short, short>(2, 2));
+            //experimentVals.Add(new Tuple<short, short>(2, 3));
 
-            experimentVals.Add(new Tuple<short, short>(2, 3));
-            experimentVals.Add(new Tuple<short, short>(3, 2));
-            experimentVals.Add(new Tuple<short, short>(2, 4));
-            experimentVals.Add(new Tuple<short, short>(4, 2));
+            experimentVals.Add(new Tuple<short, short>(1, 0));
+            experimentVals.Add(new Tuple<short, short>(0, 1));
+
+            //experimentVals.Add(new Tuple<short, short>(2, 3));
+            //experimentVals.Add(new Tuple<short, short>(3, 2));
+            //experimentVals.Add(new Tuple<short, short>(2, 4));
+            //experimentVals.Add(new Tuple<short, short>(4, 2));
 
             //experimentVals.Add(new Tuple<short, short>(5, 2));
 
@@ -133,17 +136,21 @@ namespace DissertationFEPrototype
 
             const string fieldDelim = ", , , , , , , ";
 
+
+            //+"Element Count Score" + fieldDelim
+            //  + "Average Max Angle" + fieldDelim
+
             file.WriteLine("TimesForRuns" + fieldDelim
                + "ElemCount" + fieldDelim
                + "StressElemCount" + fieldDelim
                + "HeuristicElemCount" + fieldDelim
-              //  + "Elem Qual Score" + fieldDelim
-              // + "Element Count Score" + fieldDelim
                + "Average Max Angle" + fieldDelim
-              // + "Average Max Parallel Devs" + fieldDelim
                + "Average OverallQualScore" + fieldDelim
                + "StressImprove" + fieldDelim
                + "HeuristicImprove" + fieldDelim
+               + "Average Max Parallel Devs" + fieldDelim
+               
+              
                );
 
             // write to the file at the end.

@@ -12,7 +12,7 @@ namespace Testing
     public class SquareElementTests
     {
         [TestMethod]
-        public void AspectRatioTest()
+        public void ComputeAspectRatio()
         {
             List<Node> elemNodes = new List<Node>();
 
@@ -35,7 +35,7 @@ namespace Testing
 
 
         [TestMethod]
-        public void ComputeDevOnEdgePairTest()
+        public void ComputeDevOnEdgePair()
         {
             List<Node> elemNodes = new List<Node>();
 
@@ -63,7 +63,7 @@ namespace Testing
 
         // Test that the element correctly returns the set of edges that it is supposed to
         [TestMethod]
-        public void ComputeEdgePairingsForNodeTest()
+        public void ComputeEdgePairingsForNode()
         {
 
             List<Node> faceNodes = new List<Node>();
@@ -93,7 +93,7 @@ namespace Testing
         }
 
         [TestMethod]
-        public void ComputeFaceAreaTest()
+        public void ComputeFaceArea()
         {
 
             List<Node> faceNodes = new List<Node>();
@@ -121,7 +121,7 @@ namespace Testing
 
 
         [TestMethod]
-        public void LongestEdgeTest()
+        public void LongestEdge()
         {
             List<Node> elemNodes = new List<Node>();
 
@@ -154,7 +154,7 @@ namespace Testing
 
 
         [TestMethod]
-        public void ShortestEdgeTest()
+        public void ShortestEdge()
         {
             List<Node> elemNodes = new List<Node>();
 
@@ -253,7 +253,7 @@ namespace Testing
 
 
         [TestMethod]
-        public void ComputeMaxParallelDevTest()
+        public void ComputeMaxParallelDev()
         {
             List<Node> elemNodes = new List<Node>();
 

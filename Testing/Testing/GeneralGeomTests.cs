@@ -9,7 +9,7 @@ namespace Testing
     public class GeneralGeomTests
     {
         [TestMethod]
-        public void DotProduct()
+        public void DotProductCoordTuples()
         {
 
             var vec1 = new double[3] { 1, 2, 3 };

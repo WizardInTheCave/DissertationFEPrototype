@@ -19,6 +19,11 @@ An alternative approach would be to develop a Web Interface so as to allow users
 To use the web interface an engineer would simply need to submit a model they have already created  along with a JSON file containing edges they have designated as important for their model. LISA supports imports from multiple CAD formats including the Standard for the Exchange of Product model data (STEP) and Initial Graphics Exchange Specification (IGES)) \cite{LISAManual}. Upon receiving the request the web server would run the system using their input data and having finished allow them to download the re meshed model along with the calculated stress data for analysis.
 
 
+\subsection{Added Sophistication of Hybrid Generation}
+It has been shown the system can be used to effectively execute and evaluate discrete combinations of different methods it is clear this is an incredibly simple approach to demonstrating the working concept in reality the optimum meshing strategy is likely to be some fuzzy function of several meshing approaches with gradient weighting. As such this would be an exciting direction in which to take the project in future and would greatly increase the experimentation flexibility of the overall system.
+
+
+
 \section{Personal Reflections and Summary}
 %While conducting research, development and implementation for the project I have worked methodically to best understand each problem as and when they occur and consider each of the possible solutions before committing to one. I feel this approached has saved me much time and has forced me to reach a better view about what exactly each subsystem should do and how to implement it. In hindsight if I were to repeat the first part of the project again I would have organised my time differently to spend less of it focussed on the details of coursework assignments for other modules into making further progress on the implementation of the rule system.
 
@@ -29,36 +34,29 @@ Overall I felt the project was a success. The final software solution was eviden
 From my perspective I wanted to use this project as an opportunity to improve my understanding of a technology that I previously had limited knowledge of through its use on my industrial placement year. My prior experience with FE analysis was very much confined to that of a typical engineer making use of the method through a licensed desktop application with many of the technicalities that are of most interest to a computer scientist hidden. I therefore found the project highly enjoyable as an opportunity to learn more about the underlying processes through both research and practical experimentation. As a means of facilitating my personal learning as an individual I therefore also consider the project a success.
 
 \noindent
-Despite working on larger software projects during my year within industry this was certainly the most complex I have undertaken as an individual. As the lead software developer on my own project I encountered many challenges which as a junior developer within industry were not my responsibility but which I observed team leaders and senior developers encountering regularly. Such tasks were those that required high level analysis of the systems purpose and design in order to continuously steer the project in the right direction. Only through doing this was it possible to ensure successful delivery within the specified time scales. In many ways the project therefore provided me with a greater appreciation of the difficulties associated with delivering a software project in its entirety. 
+Despite working on larger software projects during my year within industry this was certainly the most complex project I have undertaken as an individual. As the lead software developer on my own project I encountered many challenges which as a junior developer within industry were not my responsibility but which I observed team leaders and senior developers encountering regularly. Such tasks were those requiring high level analysis of the design and purpose of the system in order to continuously steer the project in the right direction. In  many such cases the direction the project needed to take was not obvious making it hard to focus purely on implementation. Discussion and management of these decisions with my supervisor Jason Atkin ensured that the project was never stalled for too long and all tasks were successfully delivered within the specified time scales. As a result of these challenges I feel the project has provided me with a much better appreciation of the difficulties associated with delivering a software project in its entirety. \\ 
 
 %and one that has the potential change fluidly throughout.\\ 
 
 \noindent
-Research and evaluation phases were also particularly difficult. Upon completion of the project I came to realise this was largely due to my lack of formal education in mechanical engineering which meant I had to work a lot harder both to understand the initial problems associated with the methods and subsequently to correctly evaluate the results I obtained. Had I chosen a more traditional computer science topic I believe both of these aspects would have been much easier. The increasing scope of the project as each aspect revealed ever more complex challenges meant it became an ever growing difficulty to understanding each of the sub topics required in order to implement the different aspects of the project. To add to this issue much of the academic literature surrounding finite element approaches transpired to be highly bespoke for particular scenarios and appeared too complicated for anyone with less than a postdoctoral level of understanding of the topic. \\
-
-  
+From my perspective the hardest parts of the project were the research and evaluation phases. Upon completion of the project I came to realise this was mostly due to a combination of my lack of former experience with regards to academic research and formal education in mechanical engineering. Both these factors meant I had to work a lot harder both to understand the initial problems associated with the methods and subsequently to correctly evaluate both my own results and those described within the academic literature. One such example in this was the increase in stress around points of weakness which increased far more exponentially than I had initially expected. Had I chosen a more traditional computer science topic I believe both the research and evaluation would have been much easier. \\ 
 
 \noindent
-Having completed the research too much time was then spent concerned with the specifics of the implementation, much aof which was associated with integrating the functionality of LISA into my system. Although LISAs simplicity was its great strength and helped in simplifying many of the initial design and testing aspects of the project its lack of an extensive API resulted in a large amount of the projects time being focused towards system integration issues which were not apparent in the system design and research stages. Although these problems such as element sorting and data modelling proved interesting challenges. Solving them was considerably more time consuming than would have initially been predicted and thus reducing the amount of time that could be directed towards the other components. Given the change to repeat the project and having learnt a lot about the design of finite element programs I feel I would be better placed to evaluate a greater range of potential choices so as to select an alternative which would have come with a comprehensive API out of the box. \\ 
+As the project progressed the increase in scope also presented problems for me as the sole researcher and developer of the system. With a considerable body of research in the wider academic community about each of the specific problems the system needed to perform there was only time for me to survey the most popular papers for each subtopic. This in conjunction with much of the literature being highly specialist and requiring a postdoctoral level of understanding on finite element meshing meant that in the end it was only possible for me to implement basic implementations of each of the subsystems given the time available to me. \\ 
+
+  
+\noindent
+Having completed the research too much time was then spent concerned with the specifics of the implementation, much of which was associated with integrating the functionality of LISA into my system. Although LISAs simplicity was its great strength and helped in simplifying many of the initial design and testing aspects of the project its lack of an extensive API resulted in a large amount of the projects time being focused towards system integration issues which were not apparent in the system design and research stages. Although these problems such as element sorting and data modelling proved interesting challenges. Solving them was considerably more time consuming than would have initially been predicted and thus reducing the amount of time that could be directed towards the other components. Given the change to repeat the project and having learnt a lot about the design of finite element programs I feel I would be better placed to evaluate a greater range of potential choices so as to select an alternative which would have come with a comprehensive API out of the box. \\ 
 
 \noindent
 Throughout the majority of the project I felt organisation of time and planning of activities was done well. Work on the project began early with the goal of easing pressure in the later stages and work continued despite deadlines for coursework associated with other modules. A crucial mistake made was to reduce effort two months before the deadline having completed the software implementation and written much of the initial sections of the dissertation despite not completing evaluation of the results. Evaluation of the software turned out to be substantially more time consuming than expected which created additional stresses towards the deadline. \\
 
 \noindent
-%Given the chance to redo the same project I would have liked to conducted more research to better assess an even wider scope of research surrounding meshing methods and have allowed more time to . In many cases the academic literature surrounding bespoke meshing techniques became complicated very quickly and was clearly aimed at individuals with a high degree of prior experience. \\ 
+%Given the opportunity to repeat the project I would like the opportunity to conducted more research to better assess an even wider scope of research surrounding meshing methods and have allowed more time to . In many cases the academic literature surrounding bespoke meshing techniques became complicated very quickly and was clearly aimed at individuals with a high degree of prior experience. \\ 
+
+
 
 %A consequence of this was I  opted for the simplest version of the two approaches I could find so as to tesy my
-
-
-By contrast I found the system design and programming components 
-
-
-planning and research components 
-
-managerial architectural aspects which I had not previously had that great an involvement with
-%Mention difficulty in initially predicting the unforseen technical challenges.
-
-%Describe ambition behind project to challenge both comptuer science skills and improve knowledge of software methods for solving mechanical engineering problems.
 
 %To understand various mechanical engineering problems for which finite element analysis is used and use this knowledge to guide my decisions as a software engineer when implementing the various methods was challenging and often time consuming given that I did not have a particularly deep background of the topics, made correct evaluation of the software towards the end of the project challenging.
 
@@ -67,15 +65,3 @@ managerial architectural aspects which I had not previously had that great an in
 % - Generally organised time well, made a good start at the beginning of the year when there was little coursework to do.
 
 %spent about a month and a half just readings without trying to implement anything - despite there being not that many papers on topics specific to this worked hard to find a wide variery of approaches taken by people and develop a clear understanding of the topic.
-
-
-% - Tried to approach the development of the system as a piece of industrial software, tried to adopt SOLID principals wherever possible which resulted in a system that was actually well structured and highly extendable.
-
-
-%Things I would do better
-%Spend less time working on the initial structuere and design, gone for minimum viable product in the eairly stages of development and then spent more time in the evaluation/ refinement stages in order to try and better understand how to improve the methods for particular scenarios.
-
-% I actually spent much longer doing the groundwork required to implement the cool stuff than I had previously expected, designing the data model and writing the various code required for general meshing proved more problematic than originally anticipated.
-
-% Although very keen to utilise functional programming features as much as possible at the start I realised towards the end of the project that doing this a lot can actually make you as a programmer very lazy and in some cases can make code more challenging to read for those who aren't familiar with the style. Having completed this project I now feel I have a better appreciation of where to use functional programming best and when to best avoid it in order to improve speed and readability.
-

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.10.17)  2 APR 2017 23:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.10.17)  6 APR 2017 12:28
 entering extended mode
 **./DissertationMain.tex
 (DissertationMain.tex
@@ -804,14 +804,50 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
 LaTeX Info: Redefining \[ on input line 2739.
 LaTeX Info: Redefining \] on input line 2740.
 )
+("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\listings.s
+ty"
+\lst@mode=\count159
+\lst@gtempboxa=\box52
+\lst@token=\toks24
+\lst@length=\count160
+\lst@currlwidth=\dimen161
+\lst@column=\count161
+\lst@pos=\count162
+\lst@lostspace=\dimen162
+\lst@width=\dimen163
+\lst@newlines=\count163
+\lst@lineno=\count164
+\lst@maxwidth=\dimen164
+
+("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstmisc.st
+y"
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count165
+\lst@skipnumbers=\count166
+\lst@framebox=\box53
+)
+("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\listings.c
+fg"
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
+("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count167
+\float@exts=\toks25
+\float@box=\box54
+\@float@everytoks=\toks26
+\@floatcapt=\box55
+)
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\enumitem\enumitem.s
 ty"
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip59
-\enit@outerparindent=\dimen161
-\enit@toks=\toks24
-\enit@inbox=\box52
-\enitdp@description=\count159
+\enit@outerparindent=\dimen165
+\enit@toks=\toks27
+\enit@inbox=\box56
+\enitdp@description=\count168
 )
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\subcaption.
 sty"
@@ -825,24 +861,26 @@ Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
 y"
 Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 67.
-\captionmargin=\dimen162
-\captionmargin@=\dimen163
-\captionwidth=\dimen164
-\caption@tempdima=\dimen165
-\caption@indent=\dimen166
-\caption@parindent=\dimen167
-\caption@hangindent=\dimen168
+\captionmargin=\dimen166
+\captionmargin@=\dimen167
+\captionwidth=\dimen168
+\caption@tempdima=\dimen169
+\caption@indent=\dimen170
+\caption@parindent=\dimen171
+\caption@hangindent=\dimen172
 )
-\c@ContinuedFloat=\count160
+\c@ContinuedFloat=\count169
+Package caption Info: float package is loaded.
+Package caption Info: listings package is loaded.
 Package caption Info: wrapfig package is loaded.
 )
-\c@subfigure=\count161
-\c@subtable=\count162
+\c@subfigure=\count170
+\c@subtable=\count171
 )
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\algorithm2e\algorit
 hm2e.sty"
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count163
+\c@AlgoLine=\count172
 
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ifthen.sty"
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
@@ -871,32 +909,32 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \skiplength=\skip66
 \algomargin=\skip67
 \skipalgocfslide=\skip68
-\algowidth=\dimen169
-\inoutsize=\dimen170
-\inoutindent=\dimen171
-\interspacetitleruled=\dimen172
-\interspacealgoruled=\dimen173
-\interspacetitleboxruled=\dimen174
+\algowidth=\dimen173
+\inoutsize=\dimen174
+\inoutindent=\dimen175
+\interspacetitleruled=\dimen176
+\interspacealgoruled=\dimen177
+\interspacetitleboxruled=\dimen178
 \algocf@ruledwidth=\skip69
-\algocf@inoutbox=\box53
-\algocf@inputbox=\box54
+\algocf@inoutbox=\box57
+\algocf@inputbox=\box58
 \AlCapSkip=\skip70
 \AlCapHSkip=\skip71
 \algoskipindent=\skip72
-\algocf@nlbox=\box55
-\algocf@hangingbox=\box56
-\algocf@untilbox=\box57
+\algocf@nlbox=\box59
+\algocf@hangingbox=\box60
+\algocf@untilbox=\box61
 \algocf@skipuntil=\skip73
-\algocf@capbox=\box58
+\algocf@capbox=\box62
 \algoheightruledefault=\skip74
 \algoheightrule=\skip75
 \algotitleheightruledefault=\skip76
 \algotitleheightrule=\skip77
-\c@algocfline=\count164
-\c@algocfproc=\count165
-\c@algocf=\count166
-\algocf@algoframe=\box59
-\algocf@algobox=\box60
+\c@algocfline=\count173
+\c@algocfproc=\count174
+\c@algocf=\count175
+\algocf@algoframe=\box63
+\algocf@algobox=\box64
 )
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\algorithmicx\algpse
 udocode.sty"
@@ -907,15 +945,15 @@ thmicx.sty"
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count167
-\c@ALG@rem=\count168
-\c@ALG@nested=\count169
+\c@ALG@line=\count176
+\c@ALG@rem=\count177
+\c@ALG@nested=\count178
 \ALG@tlm=\skip78
 \ALG@thistlm=\skip79
-\c@ALG@Lnr=\count170
-\c@ALG@blocknr=\count171
-\c@ALG@storecount=\count172
-\c@ALG@tmpcounter=\count173
+\c@ALG@Lnr=\count179
+\c@ALG@blocknr=\count180
+\c@ALG@storecount=\count181
+\c@ALG@tmpcounter=\count182
 \ALG@tmplength=\skip80
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
@@ -1000,9 +1038,9 @@ Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 sty"
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
-\@linkdim=\dimen175
-\Hy@linkcounter=\count174
-\Hy@pagecounter=\count175
+\@linkdim=\dimen179
+\Hy@linkcounter=\count183
+\Hy@pagecounter=\count184
 
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def
 "
@@ -1010,7 +1048,7 @@ File: pd1enc.def 2016/06/24 v6.83q Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count176
+\Hy@SavedSpaceFactor=\count185
 
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\hyperref.c
 fg"
@@ -1023,16 +1061,16 @@ Package hyperref Info: Plain pages OFF on input line 4501.
 Package hyperref Info: Backreferencing OFF on input line 4506.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4735.
-\c@Hy@tempcnt=\count177
+\c@Hy@tempcnt=\count186
  ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\url.sty"
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5088.
-\XeTeXLinkMargin=\dimen176
-\Fld@menulength=\count178
-\Field@Width=\dimen177
-\Fld@charsize=\dimen178
+\XeTeXLinkMargin=\dimen180
+\Fld@menulength=\count187
+\Field@Width=\dimen181
+\Fld@charsize=\dimen182
 Package hyperref Info: Hyper figures OFF on input line 6342.
 Package hyperref Info: Link nesting OFF on input line 6347.
 Package hyperref Info: Hyper index ON on input line 6350.
@@ -1042,9 +1080,9 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6367.
 Package hyperref Info: PDF/A mode OFF on input line 6372.
 LaTeX Info: Redefining \ref on input line 6412.
 LaTeX Info: Redefining \pageref on input line 6416.
-\Hy@abspage=\count179
-\c@Item=\count180
-\c@Hfootnote=\count181
+\Hy@abspage=\count188
+\c@Item=\count189
+\c@Hfootnote=\count190
 )
 
 Package hyperref Message: Driver (autodetected): hpdftex.
@@ -1053,8 +1091,8 @@ Package hyperref Message: Driver (autodetected): hpdftex.
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hpdftex.de
 f"
 File: hpdftex.def 2016/06/24 v6.83q Hyperref driver for pdfTeX
-\Fld@listcount=\count182
-\c@bookmark@seq@number=\count183
+\Fld@listcount=\count191
+\c@bookmark@seq@number=\count192
 
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\rerunfilec
 heck.sty"
@@ -1064,7 +1102,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip81
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 42.
+Package hyperref Info: Option `colorlinks' set `true' on input line 45.
  (DissertationMain.aux (Introduction.aux)
 (MotivationAndBackground.aux) (RelatedWork.aux) (DescriptionOfWork.aux)
 (SystemDesign.aux
@@ -1181,13 +1219,37 @@ LaTeX Warning: Label `sub@fig:sub2' multiply defined.
 
 LaTeX Warning: Label `fig:test' multiply defined.
 
-
-LaTeX Warning: Label `fig:sub1' multiply defined.
-
-
-LaTeX Warning: Label `fig:sub1' multiply defined.
-
 ) (FurtherWork.aux) (References.aux) (Appendix.aux
+
+LaTeX Warning: Label `fig:sub1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:sub1' multiply defined.
+
+
+LaTeX Warning: Label `fig:sub2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:sub2' multiply defined.
+
+
+LaTeX Warning: Label `fig:test' multiply defined.
+
+
+LaTeX Warning: Label `fig:sub1' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:sub1' multiply defined.
+
+
+LaTeX Warning: Label `fig:sub2' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:sub2' multiply defined.
+
+
+LaTeX Warning: Label `fig:test' multiply defined.
+
 
 LaTeX Warning: Label `fig:sub1' multiply defined.
 
@@ -1266,35 +1328,35 @@ LaTeX Warning: Label `fig:test' multiply defined.
 ))
 \openout1 = `DissertationMain.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
-LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
 
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mki
 i"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count184
-\scratchdimen=\dimen179
-\scratchbox=\box61
-\nofMPsegments=\count185
-\nofMParguments=\count186
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count187
-\MPscratchDim=\dimen180
-\MPnumerator=\count188
-\makeMPintoPDFobject=\count189
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count193
+\scratchdimen=\dimen183
+\scratchbox=\box65
+\nofMPsegments=\count194
+\nofMParguments=\count195
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count196
+\MPscratchDim=\dimen184
+\MPnumerator=\count197
+\makeMPintoPDFobject=\count198
+\everyMPtoPDFconversion=\toks29
 )
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-b
 ase.sty"
@@ -1311,15 +1373,15 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-LaTeX Info: Redefining \celsius on input line 50.
-Package gensymb Info: Faking symbols for \degree and \celsius on input line 50.
+LaTeX Info: Redefining \celsius on input line 53.
+Package gensymb Info: Faking symbols for \degree and \celsius on input line 53.
 
 
 
 Package gensymb Warning: Not defining \perthousand.
 
-LaTeX Info: Redefining \ohm on input line 50.
-Package gensymb Info: Using \Omega for \ohm on input line 50.
+LaTeX Info: Redefining \ohm on input line 53.
+Package gensymb Info: Using \Omega for \ohm on input line 53.
 
 Package gensymb Warning: Not defining \micro.
 
@@ -1405,11 +1467,12 @@ Dictionary: translator-basic-dictionary, Language: English
 reviations.cfg"
 File: siunitx-abbreviations.cfg 2017/03/06 v2.7e siunitx: Abbreviated units
 )
+\c@lstlisting=\count199
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\AtBeginShipoutBox=\box62
-Package hyperref Info: Link coloring ON on input line 50.
+\AtBeginShipoutBox=\box66
+Package hyperref Info: Link coloring ON on input line 53.
 
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.st
 y"
@@ -1419,27 +1482,61 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 string.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count190
+\c@section@level=\count266
 )
-LaTeX Info: Redefining \ref on input line 50.
-LaTeX Info: Redefining \pageref on input line 50.
-LaTeX Info: Redefining \nameref on input line 50.
+LaTeX Info: Redefining \ref on input line 53.
+LaTeX Info: Redefining \pageref on input line 53.
+LaTeX Info: Redefining \nameref on input line 53.
  (DissertationMain.out) (DissertationMain.out)
 \@outlinefile=\write4
 \openout4 = `DissertationMain.out'.
 
-\c__siunitx_mathsf_int=\count191
-LaTeX Font Info:    Try loading font information for U+msa on input line 50.
+\c__siunitx_mathsf_int=\count267
+LaTeX Font Info:    Try loading font information for U+msa on input line 53.
 
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 50.
+LaTeX Font Info:    Try loading font information for U+msb on input line 53.
 
 ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-\c__siunitx_mathtt_int=\count192
+\c__siunitx_mathtt_int=\count268
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--77
+
+ []
 
 (DissertationMain.toc [1
 
@@ -1530,7 +1627,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--51
 
  []
 
-<../Graphics/stressedCorner.png, id=359, 749.80125pt x 551.05875pt>
+<../Graphics/stressedCorner.png, id=352, 749.80125pt x 551.05875pt>
 File: ../Graphics/stressedCorner.png Graphic file (type png)
 
 <use ../Graphics/stressedCorner.png>
@@ -1647,7 +1744,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 56--58
  []
 
 [8]
-<../Graphics/MeshQualityDeterioration.png, id=425, 1708.3825pt x 981.6675pt>
+<../Graphics/MeshQualityDeterioration.png, id=418, 1708.3825pt x 981.6675pt>
 File: ../Graphics/MeshQualityDeterioration.png Graphic file (type png)
 
 <use ../Graphics/MeshQualityDeterioration.png>
@@ -1698,7 +1795,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-<../Graphics/SystemDesignDiagram.jpeg, id=472, 763.35187pt x 516.42938pt>
+<../Graphics/SystemDesignDiagram.jpeg, id=465, 763.35187pt x 516.42938pt>
 File: ../Graphics/SystemDesignDiagram.jpeg Graphic file (type jpg)
 
 <use ../Graphics/SystemDesignDiagram.jpeg>
@@ -1734,6 +1831,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 37--39
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 40--42
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 45--46
 
  []
@@ -1743,7 +1845,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 47--49
 
  []
 
-<../Graphics/DissoFEProto-Model.jpg, id=487, 606.01407pt x 574.39594pt>
+<../Graphics/DissoFEProto-Model.jpg, id=480, 606.01407pt x 574.39594pt>
 File: ../Graphics/DissoFEProto-Model.jpg Graphic file (type jpg)
 
 <use ../Graphics/DissoFEProto-Model.jpg>
@@ -1751,7 +1853,7 @@ Package pdftex.def Info: ../Graphics/DissoFEProto-Model.jpg used on input line
 54.
 (pdftex.def)             Requested size: 211.3883pt x 200.35794pt.
 
-<../Graphics/DissoFEProto-ElemNode.jpg, id=488, 831.85782pt x 604.50844pt>
+<../Graphics/DissoFEProto-ElemNode.jpg, id=481, 831.85782pt x 604.50844pt>
 File: ../Graphics/DissoFEProto-ElemNode.jpg Graphic file (type jpg)
 
 <use ../Graphics/DissoFEProto-ElemNode.jpg>
@@ -1759,14 +1861,14 @@ Package pdftex.def Info: ../Graphics/DissoFEProto-ElemNode.jpg used on input li
 ne 60.
 (pdftex.def)             Requested size: 211.3883pt x 153.61722pt.
 
-<../Graphics/DissoFEProto-ModelAnalysis.jpg, id=489, 801.74532pt x 456.20438pt>
+<../Graphics/DissoFEProto-ModelAnalysis.jpg, id=482, 801.74532pt x 456.20438pt>
 File: ../Graphics/DissoFEProto-ModelAnalysis.jpg Graphic file (type jpg)
 <use ../Graphics/DissoFEProto-ModelAnalysis.jpg>
 Package pdftex.def Info: ../Graphics/DissoFEProto-ModelAnalysis.jpg used on inp
 ut line 71.
 (pdftex.def)             Requested size: 211.3883pt x 120.28099pt.
 
-<../Graphics/DissoFEProto-MaterialProps.jpg, id=490, 621.82312pt x 316.93407pt>
+<../Graphics/DissoFEProto-MaterialProps.jpg, id=483, 621.82312pt x 316.93407pt>
 File: ../Graphics/DissoFEProto-MaterialProps.jpg Graphic file (type jpg)
 <use ../Graphics/DissoFEProto-MaterialProps.jpg>
 Package pdftex.def Info: ../Graphics/DissoFEProto-MaterialProps.jpg used on inp
@@ -1780,7 +1882,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 85--87
 [14 <../Graphics/DissoFEProto-Model.jpg> <../Graphics/DissoFEProto-ElemNode.jpg
 > <../Graphics/DissoFEProto-ModelAnalysis.jpg> <../Graphics/DissoFEProto-Materi
 alProps.jpg>]
-<../Graphics/ElementHigerarchyDiagram2.png, id=498, 1194.3822pt x 941.4372pt>
+<../Graphics/ElementHigerarchyDiagram2.png, id=491, 1194.3822pt x 941.4372pt>
 File: ../Graphics/ElementHigerarchyDiagram2.png Graphic file (type png)
 
 <use ../Graphics/ElementHigerarchyDiagram2.png>
@@ -1798,7 +1900,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 98--101
  []
 
 [15 <../Graphics/ElementHigerarchyDiagram2.png>]
-<../Graphics/ElemFlattening.png, id=509, 824.8416pt x 273.6624pt>
+<../Graphics/ElemFlattening.png, id=502, 824.8416pt x 273.6624pt>
 File: ../Graphics/ElemFlattening.png Graphic file (type png)
 
 <use ../Graphics/ElemFlattening.png>
@@ -1815,7 +1917,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 111--113
 
  []
 
-[16 <../Graphics/ElemFlattening.png>]) [17]
+[16 <../Graphics/ElemFlattening.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 132--134
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 135--137
+
+ []
+
+) [17]
 \openout2 = `Implementation.aux'.
 
  (Implementation.tex
@@ -1875,171 +1987,114 @@ Underfull \hbox (badness 10000) in paragraph at lines 46--48
 
  []
 
-<../Graphics/Rule7Implementation.png, id=533, 447.92343pt x 243.15843pt>
+[19] <../Graphics/Rule7Implementation.png, id=532, 447.92343pt x 243.15843pt>
 File: ../Graphics/Rule7Implementation.png Graphic file (type png)
 
 <use ../Graphics/Rule7Implementation.png>
 Package pdftex.def Info: ../Graphics/Rule7Implementation.png used on input line
- 66.
+ 78.
 (pdftex.def)             Requested size: 211.3883pt x 114.75197pt.
 
-<../Graphics/Rule7Dolsak.png, id=534, 246.9225pt x 137.01187pt>
+<../Graphics/Rule7Dolsak.png, id=533, 246.9225pt x 137.01187pt>
 File: ../Graphics/Rule7Dolsak.png Graphic file (type png)
 
 <use ../Graphics/Rule7Dolsak.png>
-Package pdftex.def Info: ../Graphics/Rule7Dolsak.png used on input line 72.
+Package pdftex.def Info: ../Graphics/Rule7Dolsak.png used on input line 84.
 (pdftex.def)             Requested size: 164.41353pt x 91.22882pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 81--82
-
- []
-
-[19]
-Underfull \hbox (badness 10000) in paragraph at lines 95--96
+Underfull \hbox (badness 10000) in paragraph at lines 91--93
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 97--99
-
- []
-
-<../Graphics/nodeLinking.png, id=543, 274.1442pt x 172.9662pt>
-File: ../Graphics/nodeLinking.png Graphic file (type png)
-
-<use ../Graphics/nodeLinking.png>
-Package pdftex.def Info: ../Graphics/nodeLinking.png used on input line 102.
-(pdftex.def)             Requested size: 274.14351pt x 172.96577pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 107--107
+Underfull \hbox (badness 10000) in paragraph at lines 95--97
 
  []
 
 [20 <../Graphics/Rule7Implementation.png> <../Graphics/Rule7Dolsak.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 116--117
+Underfull \hbox (badness 10000) in paragraph at lines 148--149
 
  []
 
-<../Graphics/BadlyOrderedNodes.png, id=551, 164.2938pt x 165.7392pt>
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 164--166
+
+ []
+
+<../Graphics/nodeLinking.png, id=549, 274.1442pt x 172.9662pt>
+File: ../Graphics/nodeLinking.png Graphic file (type png)
+
+<use ../Graphics/nodeLinking.png>
+Package pdftex.def Info: ../Graphics/nodeLinking.png used on input line 169.
+(pdftex.def)             Requested size: 274.14351pt x 172.96577pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--174
+
+ []
+
+[22 <../Graphics/nodeLinking.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 183--184
+
+ []
+
+<../Graphics/BadlyOrderedNodes.png, id=556, 164.2938pt x 165.7392pt>
 File: ../Graphics/BadlyOrderedNodes.png Graphic file (type png)
 
 <use ../Graphics/BadlyOrderedNodes.png>
 Package pdftex.def Info: ../Graphics/BadlyOrderedNodes.png used on input line 1
-19.
+86.
 (pdftex.def)             Requested size: 164.29338pt x 165.73877pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 125--127
+Underfull \hbox (badness 10000) in paragraph at lines 192--194
 
  []
 
-[21 <../Graphics/nodeLinking.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 151--153
+[23 <../Graphics/BadlyOrderedNodes.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 228--230
 
  []
 
-<../Graphics/SkewedElementIssues.png, id=558, 599.99156pt x 375.65344pt>
+<../Graphics/SkewedElementIssues.png, id=563, 599.99156pt x 375.65344pt>
 File: ../Graphics/SkewedElementIssues.png Graphic file (type png)
 
 <use ../Graphics/SkewedElementIssues.png>
 Package pdftex.def Info: ../Graphics/SkewedElementIssues.png used on input line
- 158.
+ 235.
 (pdftex.def)             Requested size: 211.3883pt x 132.34619pt.
 
-<../Graphics/ElementSkewOnBridge.png, id=559, 718.93594pt x 687.31781pt>
+<../Graphics/ElementSkewOnBridge.png, id=564, 718.93594pt x 687.31781pt>
 File: ../Graphics/ElementSkewOnBridge.png Graphic file (type png)
 
 <use ../Graphics/ElementSkewOnBridge.png>
 Package pdftex.def Info: ../Graphics/ElementSkewOnBridge.png used on input line
- 164.
+ 241.
 (pdftex.def)             Requested size: 164.41353pt x 157.17783pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 174--176
+Underfull \hbox (badness 10000) in paragraph at lines 251--253
 
  []
 
-<../Graphics/SortingQuad4.png, id=560, 192.2382pt x 120.9318pt>
+[24 <../Graphics/SkewedElementIssues.png> <../Graphics/ElementSkewOnBridge.png>
+] <../Graphics/SortingQuad4.png, id=574, 192.2382pt x 120.9318pt>
 File: ../Graphics/SortingQuad4.png Graphic file (type png)
 
 <use ../Graphics/SortingQuad4.png>
-Package pdftex.def Info: ../Graphics/SortingQuad4.png used on input line 184.
+Package pdftex.def Info: ../Graphics/SortingQuad4.png used on input line 261.
 (pdftex.def)             Requested size: 211.3883pt x 132.97923pt.
 
-<../Graphics/SortingHex8.png, id=561, 170.0754pt x 147.9126pt>
+<../Graphics/SortingHex8.png, id=575, 170.0754pt x 147.9126pt>
 File: ../Graphics/SortingHex8.png Graphic file (type png)
 
 <use ../Graphics/SortingHex8.png>
-Package pdftex.def Info: ../Graphics/SortingHex8.png used on input line 190.
+Package pdftex.def Info: ../Graphics/SortingHex8.png used on input line 267.
 (pdftex.def)             Requested size: 164.41353pt x 142.99883pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 198--200
-
- []
-
-[22 <../Graphics/BadlyOrderedNodes.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 202--204
-
- []
-
-<../Graphics/ConvexHullGraphic.png, id=571, 327.2225pt x 160.6pt>
-File: ../Graphics/ConvexHullGraphic.png Graphic file (type png)
-
-<use ../Graphics/ConvexHullGraphic.png>
-Package pdftex.def Info: ../Graphics/ConvexHullGraphic.png used on input line 2
-06.
-(pdftex.def)             Requested size: 327.2217pt x 160.5996pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 213--215
-
- []
-
-[23 <../Graphics/SkewedElementIssues.png> <../Graphics/ElementSkewOnBridge.png>
- <../Graphics/SortingQuad4.png> <../Graphics/SortingHex8.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 216--218
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 219--221
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 219--221
-
- []
-
-[24 <../Graphics/ConvexHullGraphic.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 261--264
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 267--269
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 276--278
+Underfull \hbox (badness 10000) in paragraph at lines 275--277
 
  []
 
@@ -2048,11 +2103,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 279--281
 
  []
 
-) [25] [26]
+<../Graphics/ConvexHullGraphic.png, id=577, 327.2225pt x 160.6pt>
+File: ../Graphics/ConvexHullGraphic.png Graphic file (type png)
+
+<use ../Graphics/ConvexHullGraphic.png>
+Package pdftex.def Info: ../Graphics/ConvexHullGraphic.png used on input line 2
+83.
+(pdftex.def)             Requested size: 327.2217pt x 160.5996pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 290--292
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 293--295
+
+ []
+
+[25 <../Graphics/SortingQuad4.png> <../Graphics/SortingHex8.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 296--298
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 296--298
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 338--341
+
+ []
+
+)
+Underfull \hbox (badness 10000) in paragraph at lines 344--99
+
+ []
+
+[26 <../Graphics/ConvexHullGraphic.png>] [27]
 \openout2 = `Evaluation.aux'.
 
  (Evaluation.tex
-Underfull \hbox (badness 10000) in paragraph at lines 13--14
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
 
  []
 
@@ -2062,111 +2163,140 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--20
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--31
+Underfull \hbox (badness 10000) in paragraph at lines 21--23
 
  []
 
-[27
+[28
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 32--34
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 57--58
+Underfull \hbox (badness 10000) in paragraph at lines 36--37
 
  []
 
 
-LaTeX Warning: Citation `SuspensionBridgeMeasurements' on page 28 undefined on 
-input line 60.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 67--68
+Underfull \hbox (badness 10000) in paragraph at lines 38--40
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--72
-
- []
-
-[28]
-Underfull \hbox (badness 10000) in paragraph at lines 73--75
+Underfull \hbox (badness 10000) in paragraph at lines 41--43
 
  []
 
 
-<../Graphics/Graphs/BridgeCrossLoadingExecutionTimesPerIterations.png, id=625, 
-452.4102pt x 272.217pt>
-File: ../Graphics/Graphs/BridgeCrossLoadingExecutionTimesPerIterations.png Grap
-hic file (type png)
-
-<use ../Graphics/Graphs/BridgeCrossLoadingExecutionTimesPerIterations.png>
-Package pdftex.def Info: ../Graphics/Graphs/BridgeCrossLoadingExecutionTimesPer
-Iterations.png used on input line 81.
-(pdftex.def)             Requested size: 211.3883pt x 127.19017pt.
-
-<../Graphics/Graphs/BridgeCrossLoadingAverageDisplacementRevealed.png, id=626, 
-507.3354pt x 317.988pt>
-File: ../Graphics/Graphs/BridgeCrossLoadingAverageDisplacementRevealed.png Grap
-hic file (type png)
-
-<use ../Graphics/Graphs/BridgeCrossLoadingAverageDisplacementRevealed.png>
-Package pdftex.def Info: ../Graphics/Graphs/BridgeCrossLoadingAverageDisplaceme
-ntRevealed.png used on input line 87.
-(pdftex.def)             Requested size: 211.3883pt x 132.49142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 95--97
+Underfull \hbox (badness 10000) in paragraph at lines 44--46
 
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 47--49
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--52
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--55
+
+ []
+
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 56--58
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 59--61
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 62--64
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--67
+
+ []
+
+
+<../Graphics/Graphs/SingleMethods/ExecutionTimes.png, id=623, 494.3268pt x 297.
+7524pt>
+File: ../Graphics/Graphs/SingleMethods/ExecutionTimes.png Graphic file (type pn
+g)
+ <use ../Graphics/Graphs/SingleMethods/ExecutionTimes.png>
+Package pdftex.def Info: ../Graphics/Graphs/SingleMethods/ExecutionTimes.png us
+ed on input line 75.
+(pdftex.def)             Requested size: 211.3883pt x 127.32681pt.
+
+<../Graphics/Graphs/SingleMethods/NumberOfElements.png, id=624, 365.6862pt x 27
+2.217pt>
+File: ../Graphics/Graphs/SingleMethods/NumberOfElements.png Graphic file (type 
+png)
+ <use ../Graphics/Graphs/SingleMethods/NumberOfElements.png>
+Package pdftex.def Info: ../Graphics/Graphs/SingleMethods/NumberOfElements.png 
+used on input line 81.
+(pdftex.def)             Requested size: 176.15813pt x 131.13618pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--91
+
+ []
+
+
+<../Graphics/Graphs/SingleMethods/AngleImprovements.png, id=625, 483.7272pt x 2
+95.3434pt>
+File: ../Graphics/Graphs/SingleMethods/AngleImprovements.png Graphic file (type
+ png)
+ <use ../Graphics/Graphs/SingleMethods/AngleImprovements.png>
+Package pdftex.def Info: ../Graphics/Graphs/SingleMethods/AngleImprovements.png
+ used on input line 93.
+(pdftex.def)             Requested size: 483.72601pt x 295.34267pt.
+
+[30 <../Graphics/Graphs/SingleMethods/ExecutionTimes.png> <../Graphics/Graphs/S
+ingleMethods/NumberOfElements.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 98--100
 
  []
 
 
-<../Graphics/Graphs/BridgeCrossLoadingElementCount.png, id=627, 411.939pt x 244
-.2726pt>
-File: ../Graphics/Graphs/BridgeCrossLoadingElementCount.png Graphic file (type 
-png)
- <use ../Graphics/Graphs/BridgeCrossLoadingElementCount.png>
-Package pdftex.def Info: ../Graphics/Graphs/BridgeCrossLoadingElementCount.png 
-used on input line 103.
-(pdftex.def)             Requested size: 411.93797pt x 244.272pt.
+Underfull \hbox (badness 10000) in paragraph at lines 101--103
+
+ []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+<../Graphics/Graphs/AverageStressDiffHybrWeightings.png, id=633, 403.2666pt x 2
+32.7094pt>
+File: ../Graphics/Graphs/AverageStressDiffHybrWeightings.png Graphic file (type
+ png)
+ <use ../Graphics/Graphs/AverageStressDiffHybrWeightings.png>
+Package pdftex.def Info: ../Graphics/Graphs/AverageStressDiffHybrWeightings.png
+ used on input line 106.
+(pdftex.def)             Requested size: 403.26561pt x 232.70882pt.
+
+[31 <../Graphics/Graphs/SingleMethods/AngleImprovements.png> <../Graphics/Graph
+s/AverageStressDiffHybrWeightings.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 118--120
+
+ []
 
 
-<../Graphics/Graphs/BridgeCrossLoadingAverageStressRevealed.png, id=628, 481.8p
-t x 286.1892pt>
-File: ../Graphics/Graphs/BridgeCrossLoadingAverageStressRevealed.png Graphic fi
-le (type png)
+Underfull \hbox (badness 10000) in paragraph at lines 121--123
 
-<use ../Graphics/Graphs/BridgeCrossLoadingAverageStressRevealed.png>
-Package pdftex.def Info: ../Graphics/Graphs/BridgeCrossLoadingAverageStressReve
-aled.png used on input line 113.
-(pdftex.def)             Requested size: 481.79881pt x 286.18848pt.
+ []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<../Graphics/BridgeCrossLoadingStress/bridgeStressBasic.png, id=629, 707.64375p
-t x 507.39563pt>
-File: ../Graphics/BridgeCrossLoadingStress/bridgeStressBasic.png Graphic file (
-type png)
-
-<use ../Graphics/BridgeCrossLoadingStress/bridgeStressBasic.png>
-Package pdftex.def Info: ../Graphics/BridgeCrossLoadingStress/bridgeStressBasic
-.png used on input line 124.
-(pdftex.def)             Requested size: 211.3883pt x 151.56952pt.
-
-<../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.png, id=630, 745.28438pt 
+<../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.png, id=644, 745.28438pt 
 x 621.82312pt>
 File: ../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.png Graphic file (ty
 pe png)
@@ -2175,85 +2305,55 @@ Package pdftex.def Info: ../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.p
 ng used on input line 130.
 (pdftex.def)             Requested size: 211.3883pt x 176.36748pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 139--140
-
- []
-
-[29 <../Graphics/Graphs/BridgeCrossLoadingExecutionTimesPerIterations.png> <../
-Graphics/Graphs/BridgeCrossLoadingAverageDisplacementRevealed.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 141--143
-
- []
-
-
-LaTeX Warning: File `../Graphics/Graphs/AverageStressDetected Per Iteration By 
-Different Method Weightings.png' not found on input line 146.
-
-
-<../Graphics/Graphs/AverageStressDetected Per Iteration By Different Method Wei
-ghtings.png, id=638, 403.2666pt x 232.7094pt>
-File: ../Graphics/Graphs/AverageStressDetected Per Iteration By Different Metho
-d Weightings.png Graphic file (type png)
-
-<use ../Graphics/Graphs/AverageStressDetected Per Iteration By Different Method
- Weightings.png>
-Package pdftex.def Info: ../Graphics/Graphs/AverageStressDetected Per Iteration
- By Different Method Weightings.png used on input line 146.
-(pdftex.def)             Requested size: 403.26561pt x 232.70882pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png, id=639
+<../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png, id=645
 , 1123.94907pt x 676.02562pt>
 File: ../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png Gr
 aphic file (type png)
 
 <use ../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png>
 Package pdftex.def Info: ../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadin
-gStress6-3-2.png used on input line 154.
-(pdftex.def)             Requested size: 1123.94633pt x 676.02396pt.
+gStress6-3-2.png used on input line 136.
+(pdftex.def)             Requested size: 211.3883pt x 127.13615pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[30 <../Graphics/Graphs/BridgeCrossLoadingElementCount.png> <../Graphics/Graphs
-/BridgeCrossLoadingAverageStressRevealed.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 170--171
+Underfull \hbox (badness 10000) in paragraph at lines 163--165
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 172--174
-
- []
-
-[31 <../Graphics/BridgeCrossLoadingStress/bridgeStressBasic.png> <../Graphics/B
-ridgeCrossLoadingStress/Hybrid-best-3-2.png> <../Graphics/Graphs/AverageStressD
-etected Per Iteration By Different Method Weightings.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 175--177
+Underfull \hbox (badness 10000) in paragraph at lines 168--170
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 179--181
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
+
+ []
+
+[32 <../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.png> <../Graphics/Bri
+dgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 186--188
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 183--185
+Underfull \hbox (badness 10000) in paragraph at lines 189--191
 
  []
 
-) [32 <../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--195
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 197--199
+
+ []
+
+) [33]
 \openout2 = `FurtherWork.aux'.
 
-(FurtherWork.tex
+ (FurtherWork.tex
 Underfull \hbox (badness 10000) in paragraph at lines 11--12
 
  []
@@ -2264,11 +2364,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 13--15
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 25--27
+Underfull \hbox (badness 10000) in paragraph at lines 30--32
 
  []
 
-[33
+[34
 
 
 ]
@@ -2286,7 +2386,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--46
 
  []
 
-) [34]
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--50
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--53
+
+ []
+
+[35]) [36]
 \openout2 = `References.aux'.
 
  (References.tex
@@ -2318,254 +2428,319 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--53
 t % 20Pair % 20and % 20Convex % 20and %
  []
 
-[35
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--61
+[]\T1/cmr/m/it/10 Stress Con-cen-tra-tion Fun-da-men-tals [][]$\T1/cmtt/m/n/10 
+http : / / www . engineersedge . com / material _ science /
+ []
+
+[37
 
 
 ]
-Overfull \hbox (89.12645pt too wide) in paragraph at lines 62--63
+Overfull \hbox (89.12645pt too wide) in paragraph at lines 65--66
 [][][]$\T1/cmtt/m/n/10 https : / / www . quora . com / What-[]is-[]the-[]cantil
 ever-[]beam-[]What-[]is-[]the-[]advantages-[]and-[]disadvantages-[]of-[]it$[][]
  
  []
 
 
-Underfull \hbox (badness 2435) in paragraph at lines 81--84
-[]\T1/cmr/m/n/10 @misc Cor-ner Un-der High Stress Dur-ing Struc-tural Anal-y-si
-s, Web Lo-ca-tion: [][]$\T1/cmtt/m/n/10 http :
+Underfull \hbox (badness 3068) in paragraph at lines 84--87
+[]\T1/cmr/m/n/10 Corner Un-der High Stress Dur-ing Struc-tural Anal-y-sis, Web 
+Lo-ca-tion: [][]$\T1/cmtt/m/n/10 http : / / www .
  []
 
 
-Underfull \hbox (badness 1005) in paragraph at lines 81--84
-\T1/cmtt/m/n/10 / / www . engineeringanalysisservices . com / moving-[]mesh-[]f
-ea-[]analysis . php$[][]\T1/cmr/m/n/10 , Last Ac-cessed:
+Underfull \hbox (badness 10000) in paragraph at lines 84--87
+\T1/cmtt/m/n/10 engineeringanalysisservices . com / moving-[]mesh-[]fea-[]analy
+sis . php$[][]\T1/cmr/m/n/10 , Last Ac-cessed:
  []
 
 
-Overfull \hbox (96.62389pt too wide) in paragraph at lines 121--122
+Overfull \hbox (96.62389pt too wide) in paragraph at lines 124--125
 [][][]$\T1/cmtt/m/n/10 http : / / www . pulpandpapercanada . com / news / coupl
 ing-[]changes-[]cut-[]paper-[]machinery-[]maintenance-[]1000108660$[][] 
  []
 
-) [36]
+) [38]
 \openout2 = `Appendix.aux'.
 
  (Appendix.tex
-<../Graphics/LISA-quad4.png, id=732, 100.12407pt x 99.37125pt>
+<../Graphics/LISA-quad4.png, id=733, 100.12407pt x 99.37125pt>
 File: ../Graphics/LISA-quad4.png Graphic file (type png)
 
 <use ../Graphics/LISA-quad4.png>
 Package pdftex.def Info: ../Graphics/LISA-quad4.png used on input line 10.
 (pdftex.def)             Requested size: 70.46396pt x 69.93846pt.
 
-<../Graphics/LISA-hex8.png, id=733, 99.37125pt x 100.87688pt>
+<../Graphics/LISA-hex8.png, id=734, 99.37125pt x 100.87688pt>
 File: ../Graphics/LISA-hex8.png Graphic file (type png)
 
 <use ../Graphics/LISA-hex8.png>
 Package pdftex.def Info: ../Graphics/LISA-hex8.png used on input line 16.
 (pdftex.def)             Requested size: 70.46396pt x 71.5338pt.
 
-<../Graphics/LISA-tri3.png, id=734, 100.12407pt x 100.12407pt>
+<../Graphics/LISA-tri3.png, id=735, 100.12407pt x 100.12407pt>
 File: ../Graphics/LISA-tri3.png Graphic file (type png)
 
 <use ../Graphics/LISA-tri3.png>
 Package pdftex.def Info: ../Graphics/LISA-tri3.png used on input line 28.
 (pdftex.def)             Requested size: 70.46396pt x 70.46829pt.
 
-<../Graphics/LISA-tet4.png, id=735, 100.12407pt x 100.12407pt>
+<../Graphics/LISA-tet4.png, id=736, 100.12407pt x 100.12407pt>
 File: ../Graphics/LISA-tet4.png Graphic file (type png)
 
 <use ../Graphics/LISA-tet4.png>
 Package pdftex.def Info: ../Graphics/LISA-tet4.png used on input line 34.
 (pdftex.def)             Requested size: 70.46396pt x 70.46829pt.
 
-<../Graphics/LISA-line2.png, id=736, 100.12407pt x 98.61844pt>
+<../Graphics/LISA-line2.png, id=737, 100.12407pt x 98.61844pt>
 File: ../Graphics/LISA-line2.png Graphic file (type png)
 
 <use ../Graphics/LISA-line2.png>
 Package pdftex.def Info: ../Graphics/LISA-line2.png used on input line 46.
 (pdftex.def)             Requested size: 70.46396pt x 69.40862pt.
 
-<../Graphics/LISA-line3.png, id=737, 100.87688pt x 100.87688pt>
+<../Graphics/LISA-line3.png, id=738, 100.87688pt x 100.87688pt>
 File: ../Graphics/LISA-line3.png Graphic file (type png)
 
 <use ../Graphics/LISA-line3.png>
 Package pdftex.def Info: ../Graphics/LISA-line3.png used on input line 52.
 (pdftex.def)             Requested size: 70.46396pt x 70.464pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--84
+<../Graphics/unitTests.png, id=739, 288.3272pt x 428.35031pt>
+File: ../Graphics/unitTests.png Graphic file (type png)
 
- []
-
-<../Graphics/limlFileLayout.png, id=739, 477.28313pt x 691.08188pt>
-File: ../Graphics/limlFileLayout.png Graphic file (type png)
-
-<use ../Graphics/limlFileLayout.png>
-Package pdftex.def Info: ../Graphics/limlFileLayout.png used on input line 89.
-(pdftex.def)             Requested size: 140.92793pt x 204.04665pt.
-
-<../Graphics/jsonEdgeFileLayout.png, id=740, 495.35063pt x 569.87906pt>
-File: ../Graphics/jsonEdgeFileLayout.png Graphic file (type png)
-
-<use ../Graphics/jsonEdgeFileLayout.png>
-Package pdftex.def Info: ../Graphics/jsonEdgeFileLayout.png used on input line 
-95.
-(pdftex.def)             Requested size: 187.90271pt x 216.17368pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../Graphics/VSolutionExplorer.png, id=741, 219.82124pt x 839.38594pt>
-File: ../Graphics/VSolutionExplorer.png Graphic file (type png)
-
-<use ../Graphics/VSolutionExplorer.png>
-Package pdftex.def Info: ../Graphics/VSolutionExplorer.png used on input line 1
-07.
-(pdftex.def)             Requested size: 109.91034pt x 419.69194pt.
-
-
-LaTeX Warning: Float too large for page by 53.47063pt on input line 109.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../Graphics/softwareQualityMetrics.png, id=742, 791.20593pt x 292.84406pt>
-File: ../Graphics/softwareQualityMetrics.png Graphic file (type png)
-
-<use ../Graphics/softwareQualityMetrics.png>
-Package pdftex.def Info: ../Graphics/softwareQualityMetrics.png used on input l
-ine 114.
-(pdftex.def)             Requested size: 395.60199pt x 146.42166pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../Graphics/qualityMetricsExpanded.png, id=743, 825.0825pt x 855.94781pt>
-File: ../Graphics/qualityMetricsExpanded.png Graphic file (type png)
-
-<use ../Graphics/qualityMetricsExpanded.png>
-Package pdftex.def Info: ../Graphics/qualityMetricsExpanded.png used on input l
-ine 119.
-(pdftex.def)             Requested size: 412.54024pt x 427.97285pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[37
+<use ../Graphics/unitTests.png>
+Package pdftex.def Info: ../Graphics/unitTests.png used on input line 79.
+(pdftex.def)             Requested size: 144.16324pt x 214.17462pt.
+ [39
 
 
  <../Graphics/LISA-quad4.png> <../Graphics/LISA-hex8.png> <../Graphics/LISA-tri
 3.png> <../Graphics/LISA-tet4.png> <../Graphics/LISA-line2.png> <../Graphics/LI
-SA-line3.png>]
-<../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png, id=758, 1148.79187pt x
+SA-line3.png>] [40 <../Graphics/unitTests.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 120--121
+
+ []
+
+<../Graphics/limlFileLayout.png, id=759, 477.28313pt x 691.08188pt>
+File: ../Graphics/limlFileLayout.png Graphic file (type png)
+
+<use ../Graphics/limlFileLayout.png>
+Package pdftex.def Info: ../Graphics/limlFileLayout.png used on input line 126.
+
+(pdftex.def)             Requested size: 140.92793pt x 204.04665pt.
+
+<../Graphics/jsonEdgeFileLayout.png, id=760, 495.35063pt x 569.87906pt>
+File: ../Graphics/jsonEdgeFileLayout.png Graphic file (type png)
+
+<use ../Graphics/jsonEdgeFileLayout.png>
+Package pdftex.def Info: ../Graphics/jsonEdgeFileLayout.png used on input line 
+132.
+(pdftex.def)             Requested size: 187.90271pt x 216.17368pt.
+
+<../Graphics/VSolutionExplorer.png, id=761, 219.82124pt x 839.38594pt>
+File: ../Graphics/VSolutionExplorer.png Graphic file (type png)
+
+<use ../Graphics/VSolutionExplorer.png>
+Package pdftex.def Info: ../Graphics/VSolutionExplorer.png used on input line 1
+44.
+(pdftex.def)             Requested size: 54.95517pt x 209.84596pt.
+ [41 <../Graphics/limlFileLayout.png> <../Graphics/jsonEdgeFileLayout.png>]
+<../Graphics/Doxygen/Quad4Element.png, id=769, 1445.4pt x 784.43062pt>
+File: ../Graphics/Doxygen/Quad4Element.png Graphic file (type png)
+
+<use ../Graphics/Doxygen/Quad4Element.png>
+Package pdftex.def Info: ../Graphics/Doxygen/Quad4Element.png used on input lin
+e 153.
+(pdftex.def)             Requested size: 722.69824pt x 392.21434pt.
+ [42 <../Graphics/VSolutionExplorer.png>]
+<../Graphics/Doxygen/RefinementManager.png, id=776, 1445.4pt x 782.17218pt>
+File: ../Graphics/Doxygen/RefinementManager.png Graphic file (type png)
+
+<use ../Graphics/Doxygen/RefinementManager.png>
+Package pdftex.def Info: ../Graphics/Doxygen/RefinementManager.png used on inpu
+t line 158.
+(pdftex.def)             Requested size: 722.69824pt x 391.08513pt.
+
+<../Graphics/softwareQualityMetrics.png, id=777, 791.20593pt x 292.84406pt>
+File: ../Graphics/softwareQualityMetrics.png Graphic file (type png)
+
+<use ../Graphics/softwareQualityMetrics.png>
+Package pdftex.def Info: ../Graphics/softwareQualityMetrics.png used on input l
+ine 166.
+(pdftex.def)             Requested size: 395.60199pt x 146.42166pt.
+ [43 <../Graphics/Doxygen/Quad4Element.png> <../Graphics/Doxygen/RefinementMana
+ger.png>]
+<../Graphics/qualityMetricsExpanded.png, id=787, 825.0825pt x 855.94781pt>
+File: ../Graphics/qualityMetricsExpanded.png Graphic file (type png)
+
+<use ../Graphics/qualityMetricsExpanded.png>
+Package pdftex.def Info: ../Graphics/qualityMetricsExpanded.png used on input l
+ine 171.
+(pdftex.def)             Requested size: 412.54024pt x 427.97285pt.
+ [44 <../Graphics/softwareQualityMetrics.png>]
+<../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png, id=794, 1148.79187pt x
  709.14937pt>
 File: ../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png Graphic file (type
  png)
  <use ../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png>
 Package pdftex.def Info: ../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png
- used on input line 134.
+ used on input line 188.
 (pdftex.def)             Requested size: 574.39453pt x 354.57382pt.
 
-<../Graphics/BridgeCrossLoading/bestEdgeSpecResultsCloseUp.png, id=759, 1145.78
+<../Graphics/BridgeCrossLoading/bestEdgeSpecResultsCloseUp.png, id=795, 1145.78
 062pt x 710.655pt>
 File: ../Graphics/BridgeCrossLoading/bestEdgeSpecResultsCloseUp.png Graphic fil
 e (type png)
 
 <use ../Graphics/BridgeCrossLoading/bestEdgeSpecResultsCloseUp.png>
 Package pdftex.def Info: ../Graphics/BridgeCrossLoading/bestEdgeSpecResultsClos
-eUp.png used on input line 140.
+eUp.png used on input line 194.
 (pdftex.def)             Requested size: 572.88892pt x 355.32663pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<../Graphics/BridgeCrossLoading/okEdgeSpecResults.png, id=760, 1134.48843pt x 6
+ [45 <../Graphics/qualityMetricsExpanded.png>]
+<../Graphics/BridgeCrossLoading/okEdgeSpecResults.png, id=802, 1134.48843pt x 6
 85.8122pt>
 File: ../Graphics/BridgeCrossLoading/okEdgeSpecResults.png Graphic file (type p
 ng)
  <use ../Graphics/BridgeCrossLoading/okEdgeSpecResults.png>
 Package pdftex.def Info: ../Graphics/BridgeCrossLoading/okEdgeSpecResults.png u
-sed on input line 149.
+sed on input line 203.
 (pdftex.def)             Requested size: 567.24283pt x 342.90526pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png, id=761, 1148.7
+<../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png, id=803, 1148.7
 9187pt x 708.39656pt>
 File: ../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png Graphic fi
 le (type png)
 
 <use ../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png>
 Package pdftex.def Info: ../Graphics/BridgeCrossLoading/the90thPercentileRefine
-ment.png used on input line 155.
+ment.png used on input line 209.
 (pdftex.def)             Requested size: 574.39453pt x 354.1974pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png, id=762, 1150.2975p
+ [46 <../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png> <../Graphics/Brid
+geCrossLoading/bestEdgeSpecResultsCloseUp.png> <../Graphics/BridgeCrossLoading/
+okEdgeSpecResults.png>]
+<../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png, id=813, 1150.2975p
 t x 709.14937pt>
 File: ../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png Graphic file (
 type png)
 
 <use ../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png>
 Package pdftex.def Info: ../Graphics/BridgeCrossLoading/aboveAverageRefinement2
-.png used on input line 160.
+.png used on input line 214.
 (pdftex.def)             Requested size: 575.14735pt x 354.57382pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-<../Graphics/BridgeCrossLoading/aboveAverageRefinement.png, id=763, 1148.03906p
+ [47 <../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png>]
+<../Graphics/BridgeCrossLoading/aboveAverageRefinement.png, id=820, 1148.03906p
 t x 707.64375pt>
 File: ../Graphics/BridgeCrossLoading/aboveAverageRefinement.png Graphic file (t
 ype png)
 
 <use ../Graphics/BridgeCrossLoading/aboveAverageRefinement.png>
 Package pdftex.def Info: ../Graphics/BridgeCrossLoading/aboveAverageRefinement.
-png used on input line 166.
+png used on input line 220.
 (pdftex.def)             Requested size: 574.01813pt x 353.82101pt.
+ [48 <../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png>]
+<../Graphics/PaperMillDolsak.jpeg, id=827, 375.65344pt x 507.39563pt>
+File: ../Graphics/PaperMillDolsak.jpeg Graphic file (type jpg)
+
+<use ../Graphics/PaperMillDolsak.jpeg>
+Package pdftex.def Info: ../Graphics/PaperMillDolsak.jpeg used on input line 23
+7.
+(pdftex.def)             Requested size: 211.3883pt x 285.52547pt.
+
+<../Graphics/PaperMillWithinLisa.jpeg, id=828, 678.28406pt x 530.73282pt>
+File: ../Graphics/PaperMillWithinLisa.jpeg Graphic file (type jpg)
+
+<use ../Graphics/PaperMillWithinLisa.jpeg>
+Package pdftex.def Info: ../Graphics/PaperMillWithinLisa.jpeg used on input lin
+e 243.
+(pdftex.def)             Requested size: 211.3883pt x 165.40009pt.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Citation `Dolsak91' on page 49 undefined on input line 244.
 
-[38 <../Graphics/limlFileLayout.png> <../Graphics/jsonEdgeFileLayout.png>]
-[39] [40 <../Graphics/VSolutionExplorer.png>] [41 <../Graphics/softwareQualityM
-etrics.png>] [42 <../Graphics/qualityMetricsExpanded.png>] [43 <../Graphics/Bri
-dgeCrossLoading/bestEdgeSpecResults.png> <../Graphics/BridgeCrossLoading/bestEd
-geSpecResultsCloseUp.png> <../Graphics/BridgeCrossLoading/okEdgeSpecResults.png
->] [44 <../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png>]
-[45 <../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png>] [46 <../Graph
-ics/BridgeCrossLoading/aboveAverageRefinement.png>]
-<../Graphics/TimePlanUpdated2.png, id=821, 1187.93813pt x 397.485pt>
+
+LaTeX Warning: Citation `Dolsak91' on page 49 undefined on input line 244.
+
+[49 <../Graphics/BridgeCrossLoading/aboveAverageRefinement.png>]
+<../Graphics/PaperMillStress/PaperMillFirstUWMesh.png, id=836, 700.11563pt x 64
+5.91313pt>
+File: ../Graphics/PaperMillStress/PaperMillFirstUWMesh.png Graphic file (type p
+ng)
+ <use ../Graphics/PaperMillStress/PaperMillFirstUWMesh.png>
+Package pdftex.def Info: ../Graphics/PaperMillStress/PaperMillFirstUWMesh.png u
+sed on input line 254.
+(pdftex.def)             Requested size: 350.05696pt x 322.95578pt.
+ [50 <../Graphics/PaperMillDolsak.jpeg> <../Graphics/PaperMillWithinLisa.jpeg>]
+
+<../Graphics/Graphs/PaperMillExecutionTimes.png, id=843, 628.749pt x 632.6034pt
+>
+File: ../Graphics/Graphs/PaperMillExecutionTimes.png Graphic file (type png)
+ <use ../Graphics/Graphs/PaperMillExecutionTimes.png>
+Package pdftex.def Info: ../Graphics/Graphs/PaperMillExecutionTimes.png used on
+ input line 260.
+(pdftex.def)             Requested size: 314.37372pt x 316.30092pt.
+ [51 <../Graphics/PaperMillStress/PaperMillFirstUWMesh.png>]
+<../Graphics/Graphs/PaperMillAverageStressRevealed.png, id=850, 427.8384pt x 23
+3.1912pt>
+File: ../Graphics/Graphs/PaperMillAverageStressRevealed.png Graphic file (type 
+png)
+ <use ../Graphics/Graphs/PaperMillAverageStressRevealed.png>
+Package pdftex.def Info: ../Graphics/Graphs/PaperMillAverageStressRevealed.png 
+used on input line 265.
+(pdftex.def)             Requested size: 213.91867pt x 116.5953pt.
+
+<../Graphics/DolsakCylinderMeshed.jpeg, id=851, 317.68687pt x 267.24844pt>
+File: ../Graphics/DolsakCylinderMeshed.jpeg Graphic file (type jpg)
+
+<use ../Graphics/DolsakCylinderMeshed.jpeg>
+Package pdftex.def Info: ../Graphics/DolsakCylinderMeshed.jpeg used on input li
+ne 275.
+(pdftex.def)             Requested size: 211.3883pt x 177.83215pt.
+
+<../Graphics/DolsakCylinderWithinLisa.jpeg, id=852, 581.92406pt x 444.15938pt>
+File: ../Graphics/DolsakCylinderWithinLisa.jpeg Graphic file (type jpg)
+
+<use ../Graphics/DolsakCylinderWithinLisa.jpeg>
+Package pdftex.def Info: ../Graphics/DolsakCylinderWithinLisa.jpeg used on inpu
+t line 281.
+(pdftex.def)             Requested size: 211.3883pt x 161.3408pt.
+
+
+LaTeX Warning: Citation `Dolsak91' on page 52 undefined on input line 282.
+
+
+LaTeX Warning: Citation `Dolsak91' on page 52 undefined on input line 282.
+
+[52 <../Graphics/Graphs/PaperMillExecutionTimes.png> <../Graphics/Graphs/PaperM
+illAverageStressRevealed.png>] [53 <../Graphics/DolsakCylinderMeshed.jpeg> <../
+Graphics/DolsakCylinderWithinLisa.jpeg>]
+<../Graphics/TimePlanUpdated2.png, id=866, 1187.93813pt x 397.485pt>
 File: ../Graphics/TimePlanUpdated2.png Graphic file (type png)
 
 <use ../Graphics/TimePlanUpdated2.png>
-Package pdftex.def Info: ../Graphics/TimePlanUpdated2.png used on input line 18
-3.
+Package pdftex.def Info: ../Graphics/TimePlanUpdated2.png used on input line 29
+8.
 (pdftex.def)             Requested size: 702.65382pt x 301.13344pt.
 
-Overfull \hbox (82.22382pt too wide) in paragraph at lines 183--183
+Overfull \hbox (82.22382pt too wide) in paragraph at lines 298--298
 [][] 
  []
 
-[47
+[54
 
  <../Graphics/TimePlanUpdated2.png>])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 79.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 79.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 105.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 105.
  (DissertationMain.aux
 (Introduction.aux) (MotivationAndBackground.aux) (RelatedWork.aux)
 (DescriptionOfWork.aux) (SystemDesign.aux) (Implementation.aux) (Evaluation.aux
 ) (FurtherWork.aux) (References.aux) (Appendix.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 79.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 79.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 105.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 105.
 Package rerunfilecheck Info: File `DissertationMain.out' has not changed.
-(rerunfilecheck)             Checksum: 9BF0E78A8123564D575732455E4058A7;4531.
+(rerunfilecheck)             Checksum: 692B10EA3C350879DB720182CDB7A295;4351.
 
 
 LaTeX Warning: There were undefined references.
@@ -2573,41 +2748,40 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 79.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 105.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 20178 strings out of 493334
- 378727 string characters out of 3130654
- 439920 words of memory out of 3000000
- 23174 multiletter control sequences out of 15000+200000
- 19959 words of font info for 62 fonts, out of 3000000 for 9000
+ 21568 strings out of 493334
+ 399218 string characters out of 3130654
+ 462409 words of memory out of 3000000
+ 24533 multiletter control sequences out of 15000+200000
+ 13910 words of font info for 38 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,12n,48p,10389b,7718s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,21n,48p,10389b,7908s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Jack\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknapp
-en\ec\dpi600\ectt1000.pk> <C:\Users\Jack\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
-ur\jknappen\ec\dpi600\ecrm0900.pk> <C:\Users\Jack\AppData\Local\MiKTeX\2.9\font
-s\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\Jack\AppData\Local\MiKTeX
-\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Jack\AppData\Loc
-al\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk> <C:\Users\Jack\Ap
+en\ec\dpi600\ecbx0900.pk> <C:\Users\Jack\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
+ur\jknappen\ec\dpi600\ectt1000.pk> <C:\Users\Jack\AppData\Local\MiKTeX\2.9\font
+s\pk\ljfour\jknappen\ec\dpi600\ecrm0900.pk> <C:\Users\Jack\AppData\Local\MiKTeX
+\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\Jack\AppData\Loc
+al\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Jack\Ap
 pData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk> <C:\User
 s\Jack\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk>
  <C:\Users\Jack\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecr
-m1200.pk> <C:\Users\Jack\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\d
-pi600\ecrm1728.pk><C:/Users/Jack/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmmi10.pfb><C:/Users/Jack/AppData/Local/Programs/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Jack/AppData/Local/Programs/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Jack/AppData/Local
-/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Jack/A
-ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/U
-sers/Jack/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols
-/msbm10.pfb>
-Output written on DissertationMain.pdf (47 pages, 3733670 bytes).
+m1000.pk><C:/Users/Jack/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmmi10.pfb><C:/Users/Jack/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmr10.pfb><C:/Users/Jack/AppData/Local/Programs/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Jack/AppData/Local/Programs
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Jack/AppData/Lo
+cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Jack
+/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.p
+fb>
+Output written on DissertationMain.pdf (54 pages, 4552171 bytes).
 PDF statistics:
- 1402 PDF objects out of 1440 (max. 8388607)
- 214 named destinations out of 1000 (max. 500000)
- 717 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1411 PDF objects out of 1440 (max. 8388607)
+ 229 named destinations out of 1000 (max. 500000)
+ 749 words of extra memory for PDF output out of 10000 (max. 10000000)
 
