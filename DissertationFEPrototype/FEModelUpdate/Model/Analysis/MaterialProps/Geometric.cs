@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DissertationFEPrototype.Model.Analysis.MaterialProps
 {
+    /// <summary>
+    /// Class storing the geometric properties of the material
+    /// </summary>
     public class Geometric
     {
         string type;

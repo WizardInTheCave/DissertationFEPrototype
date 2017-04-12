@@ -29,13 +29,8 @@ namespace DissertationFEPrototype.ModelUpdate
             this.isNodeOutput = isNodeOutput;
             //this.analysisData = something;
         }
-        public string SolveFile
-        {
-            set
-            {
-                this.solveFile = value;
-            }
-        }
+        public string SolveFile { set  { this.solveFile = value; } }
+
         public List<NodeAnalysisData> getAnalysisData()
         {
 
@@ -110,6 +105,7 @@ namespace DissertationFEPrototype.ModelUpdate
             }
             return analysisData;
         }
+
         private List<ElementAnalysisData> parseElementAnalysisData(TextFieldParser parser)
         {
             List<ElementAnalysisData> analysisData = new List<ElementAnalysisData>();

@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 namespace DissertationFEPrototype.Model
 {
 
+    /// <summary>
+    /// This class contains the data from performing analysis for the previous iteration, used to guide the meshing procedures
+    /// And as a record of what has been discovered within the model.
+    /// </summary>
     class ElementAnalysisData
     {
         int element;

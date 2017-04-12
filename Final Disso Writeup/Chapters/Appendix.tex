@@ -3,6 +3,9 @@
 \section{Element Types within LISA}
 Here are shown the the visual specifications LISA provides for the ordering and layout of nodes for defining each type of element supported. Each of these types can be classified using the 
 
+
+
+
 \begin{figure}[!h]
 \centering
 \begin{subfigure}{.5\textwidth}
@@ -18,6 +21,7 @@ Here are shown the the visual specifications LISA provides for the ordering and 
   \label{fig:sub2}
 \end{subfigure}
 \label{fig:test}
+\caption{Square based elements}
 \end{figure}
 
 
@@ -26,7 +30,7 @@ Here are shown the the visual specifications LISA provides for the ordering and 
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=0.3\linewidth]{../Graphics/LISA-tri3.png}
-  \caption{Specification for node ordering of tri3 element within LISA}
+  \caption{tri3 element}
   \label{fig:sub1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
@@ -36,6 +40,7 @@ Here are shown the the visual specifications LISA provides for the ordering and 
   \label{fig:sub2}
 \end{subfigure}
 \label{fig:test}
+\caption{Triangular based elements}
 \end{figure}
 
 
@@ -54,6 +59,7 @@ Here are shown the the visual specifications LISA provides for the ordering and 
   \label{fig:sub2}
 \end{subfigure}
 \label{fig:test}
+\caption{Line based elements}
 \end{figure} 
 
 %\section{Calculating Centripetal Force For Paper Mill}
@@ -173,8 +179,8 @@ Below show the Visual Studio Solution Explorer which provides a general idea of 
 \end{figure}
 
 
-\subsection{Mesh Refinements}
-This appendix item attempt too show the general mesh that are formed using the heuristic and stress based refinement strategy with examples of where a heuristic has been placed well and poorly and where there is also variation in the threshold used to decide whether elements are meshed with the stress variable. Although in the rest of the models we are looking for stress since this is the primary variable of interest displacement has been selected as the analysis variable for displacement due to clearer separation of the different gradients.
+\section{Mesh Refinements}
+This appendix item attempt too show the general mesh that are formed using the heuristic and stress based refinement strategy with examples of where a heuristic has been placed well and poorly and where there is also variation in the threshold used to decide whether elements are meshed with the stress variable. Although in the rest of the models we are looking for stress since this is the primary variable of interest displacement has been selected as the analysis variable for displacement due to it producing a clearer gradient than stress.
 
 
 \subsection{Heuristic Refinement}
@@ -204,7 +210,7 @@ This appendix item attempt too show the general mesh that are formed using the h
   \caption{Important edges more poorly specified missing high displacement region on top of furthest suspension bridge tower}
 \end{figure}
 
-\section{Stress Refinement}
+\subsection{Stress Refinement}
 \begin{figure}[H]
   \centerline{\includegraphics[width=165mm, scale=0.5]{../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png}}
   \caption{Iterative stress/ displacement refinement method used to focus meshing on the top 6\% most displaced region of model}
@@ -225,10 +231,11 @@ This appendix item attempt too show the general mesh that are formed using the h
 
 
 \section{Paper Mill Simulation Results}
-For the paper mill simulation angular forces were set up around the outside of the disk so as to emulate the effect of the disk rotating at high speed, with it also being pulled outwards in the axial direction. This generated some interesting patches of stress across the main body of the structure which could easily be specified as edge rules. One key observation is the very high range of stress values for stress observable within the model as a consequence of stress concentrating at particular points.
+For the paper mill simulation angular forces were set up around the outside of the disk so as to simulate the effect of the disk rotating at high speed, with it also being pulled outwards in the axial direction. This generated some interesting patches of stress across the main body of the structure which could easily be specified as edge rules. Looking at figure 34 it is possible to see very high range of stress values for stress observable within the model as a consequence of stress concentrating at particular points.
 
 % edge assignement drawign here
 
+\colorbox{yellow}{Still need to add some more to this bit}
 
 \begin{figure}[H]
 \centering
@@ -245,48 +252,83 @@ For the paper mill simulation angular forces were set up around the outside of t
   \label{fig:sub2}
 \end{subfigure}
 \label{fig:test}
-
-
   \caption{Execution time increase compared to the amount of information revealed for the different approaches}
  \end{figure}
  
  \begin{figure}[H]
   \centerline{\includegraphics[width=120mm, scale=0.5]{../Graphics/PaperMillStress/PaperMillFirstUWMesh.png}}
-  \caption{The initially stressed paper mill part used to define edge sets for further meshing}
+  \caption{The initially stressed paper mill part used to define edge sets for further meshing, stress concentrations can be observed in red with colour coding at the top indicating showing a rapidly exponential increase concentrated at those points}
 \end{figure}
 
 
- \begin{figure}[H]
+\begin{figure}[H]
   \centerline{\includegraphics[width=120mm, scale=0.5]{../Graphics/Graphs/PaperMillExecutionTimes.png}}
   \caption{Time taken per iteration using the different hybrid weightings with varying edge quality specifications}
 \end{figure}
 
  \begin{figure}[H]
   \centerline{\includegraphics[width=120mm, scale=0.5]{../Graphics/Graphs/PaperMillAverageStressRevealed.png}}
-  \caption{Improvement in average stress detected across all nodes within the model over multiple iterations}
+  \caption{Improvement in average stress detected across all nodes within the model over multiple iterations, results for each weighting with different edge heuristics also averaged}
 \end{figure}
 
 
 \section{Half Cylinder Simulation Results}
+The half cylinder was the third model used to test the system. 
+
+
+
+
 \begin{figure}[H]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=0.9\linewidth]{../Graphics/DolsakCylinderMeshed.jpeg}
+  \includegraphics[width=0.9\linewidth]{../Graphics/HalfCylinder/DolsakCylinderMeshed.jpeg}
   \caption{Half of Cylinder structure described by dolsak in his papers for training ILP system}
   \label{fig:sub1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=0.9\linewidth]{../Graphics/DolsakCylinderWithinLisa.jpeg}
+  \includegraphics[width=0.9\linewidth]{../Graphics/HalfCylinder/DolsakCylinderWithinLisa.jpeg}
   \caption{Replication of mesh structure specified by Dolsak within his paper \cite{Dolsak91}}
   \label{fig:sub2}
 \end{subfigure}
 \label{fig:test}
   \caption{Execution time increase compared to the amount of information revealed for the different approaches}
  \end{figure}
+ 
+ 
+ \begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../Graphics/HalfCylinder/ForcesAndConstraintsOnCylinderPNG.png}
+  \caption{Cylinder Constrained by its adjacent half with forces applied up and outwards on its inner rim}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.9\linewidth]{../Graphics/HalfCylinder/InitialStress.png}
+  \caption{Half cylinder with an initial stress concentration having performed a simple execution of the model.}
+  \label{fig:sub2}
+\end{subfigure}
+\label{fig:test}
+  \caption{Initial configuration for the half cylinder and some stresses revealed on the structure}
+ \end{figure}
+ 
+\begin{figure}[H]
+  \centerline{\includegraphics[width=120mm, scale=0.5]{../Graphics/HalfCylinder/ImprovementInMaxCornerAngles.png}}
+  \caption{Improvement in corner angles for Quad4 elements using the different hybrid methods on the cylinder}
+\end{figure}
 
+\begin{figure}[H]
+  \centerline{\includegraphics[width=120mm, scale=0.5]{../Graphics/HalfCylinder/AverageStressDetectedUsingAverageOverHeuristicsForDifferentHybrids(HalfCylinder).png}}
+  \caption{Stress revealed for each iteration using the different hybrid methods}
+\end{figure}
 
+\begin{figure}[H]
+  \centerline{\includegraphics[width=120mm, scale=0.5]{../Graphics/HalfCylinder/ExecutionTimes.png}}
+  \caption{Time taken per iteration using the different hybrid weightings with varying edge quality specifications}
+\end{figure}
 
  
 \section{Gantt Chart for Project Time Management}

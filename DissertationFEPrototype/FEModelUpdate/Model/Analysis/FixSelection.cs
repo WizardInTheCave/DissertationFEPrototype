@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace DissertationFEPrototype.Model.Analysis
 {
+    /// <summary>
+    /// Class storing
+    /// </summary>
     public class FixSelection
     {
         FaceSelection selection;
-        public FaceSelection Selection{
-            get{
-                return this.selection;
-            }
-        }
+        public FaceSelection Selection{ get{ return this.selection; } }
 
         /// <summary>
         /// This Class represents locations in the model where the structure is fixed, i.e. there is infiniate stiffness

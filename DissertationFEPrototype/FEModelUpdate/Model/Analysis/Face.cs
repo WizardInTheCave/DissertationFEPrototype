@@ -17,13 +17,9 @@ namespace DissertationFEPrototype.Model.Analysis
         IElement element;
         int faceId;
 
-        public int GetId
-        {
-            get
-            {
-                return this.faceId;
-            }
-        }
+        public int GetId {  get { return this.faceId; } }
+
+
         public IElement Element{
             get{
                 return this.element;

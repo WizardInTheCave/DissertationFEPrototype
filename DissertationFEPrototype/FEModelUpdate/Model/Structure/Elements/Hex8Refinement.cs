@@ -53,7 +53,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         List<Node> zPositive;
         List<Node> zNegative;
 
-
+        
         public Hex8Refinement(Node hexCentre, List<Node> xPositive, List<Node> xNegative, List<Node> yPositive,
             List<Node> yNegative, List<Node> zPositive, List<Node> zNegative)
         {

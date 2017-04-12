@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DissertationFEPrototype.FEModelUpdate.Model.Structure
 {
+    /// <summary>
+    /// Node, implements ICloneable so can be copied easily.
+    /// </summary>
     public class Node : ICloneable
     {
         int id;

@@ -19,15 +19,30 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             this.Y = Y;
             this.node3d = node3d;
         }
-
+        /// <summary>
+        /// Do Cross product with a ConvexHullPoint
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public double Cross(ConvexHullPoint b)
         {
             return this.X * b.Y - this.Y * b.X;
         }
+        /// <summary>
+        /// Subtract ConvexHullPoint A from B
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public ConvexHullPoint Sub(ConvexHullPoint b)
         {
             return new ConvexHullPoint(null, X - b.X, Y - b.Y);
         }
+
+        /// <summary>
+        /// Compute the Distance from ConvexHull point A to B
+        /// </summary>
+        /// <param name="b">The second point</param>
+        /// <returns>a distance in euclidean space as a double</returns>
         public double distanceTo(ConvexHullPoint b)
         {
             var delX = Math.Abs(this.X - b.X);

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DissertationFEPrototype.Optimisations.ILPRules
 {
+    /// <summary>
+    /// Class for parseing the JSON files containing the edge descriptions
+    /// </summary>
     class JsonEdge
     {
         public int Id { get; set; }
@@ -14,13 +17,17 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
         public string boundaryType { get; set; }
         public List<int> nodePath { get; set; }
 
+        /// <summary>
+        /// Parse the loading type for the edge
+        /// </summary>
+        /// <returns>A LoadingType enum value</returns>
         public Edge.LoadingType  getConvertedLoadingType()
         {
             Edge.LoadingType returnType = Edge.LoadingType.noneSet;
 
             switch (this.loadType.ToLower())
             {
-                case ("nodloaded"):
+                case ("notloaded"):
                     returnType = Edge.LoadingType.notLoaded;
                     break;
 
@@ -38,6 +45,11 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
             }
             return returnType;
         }
+
+        /// <summary>
+        /// Parse the boundary type for the edge
+        /// </summary>
+        /// <returns>A BoundaryType enum value</returns>
         public Edge.BoundaryType getConvertedBoundaryType()
         {
             Edge.BoundaryType returnType = Edge.BoundaryType.noneSet;
@@ -63,6 +75,10 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
             return returnType;
         }
 
+        /// <summary>
+        /// Parse the edge type for the edge
+        /// </summary>
+        /// <returns>A EdgeyType enum value</returns>
         public Edge.EdgeType getConvertedEdgeType()
         {
             Edge.EdgeType returnType = Edge.EdgeType.noneSet;
@@ -119,6 +135,5 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
             }
             return returnType;
         }
-
     }
 }

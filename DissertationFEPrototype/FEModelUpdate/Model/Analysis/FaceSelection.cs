@@ -21,13 +21,7 @@ namespace DissertationFEPrototype.Model.Analysis
                 faces = value;
             }
         }
-        public string GetName
-        {
-            get
-            {
-                return name;
-            }
-        }
+        public string GetName { get { return name; } }
 
         public FaceSelection(string name, List<Face> faces)
         {

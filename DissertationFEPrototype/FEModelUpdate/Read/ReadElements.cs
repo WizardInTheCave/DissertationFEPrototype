@@ -14,15 +14,11 @@ using DissertationFEPrototype.FEModelUpdate.Model;
 
 namespace DissertationFEPrototype.FEModelUpdate.Read
 {
+    /// <summary>
+    /// Read the elements from the liml file
+    /// </summary>
     class ReadElements
     {
-
-        //static Dictionary<string, Quad4Elem.Shape> shapeLookup = new Dictionary<string, Quad4Elem.Shape>()
-        //{
-        //    {"quad4", Quad4Elem.Shape.Quad4 },
-        //    {"hex8", Quad4Elem.Shape.Hex8 }
-        //};
-
         public static List<IElement> readAllElements(string xmlString, MeshData meshData)
         {
             const string elemTag = "elem";

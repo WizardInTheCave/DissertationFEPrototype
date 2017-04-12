@@ -7,10 +7,13 @@ Over the past forty years FEA has emerged as a prominent technology for simulati
 Although this is a computer science as opposed to a mechanical engineering dissertation it's still important to briefly outline the general principals and properties that underpin the FE method in order to have a general appreciation for how the design and evaluation of the final software system was conducted. \\ 
 
 \noindent
-Finite Element Models have several key properties that need to be specified by the engineers who create them, the configuration of these properties greatly determine the results obtained from the models execution. The first of these properties that an FE model posesses is the mesh. The mesh is constructed out of nodes, points which act as intersections between the second component- elements which are either a polygon or a polyhedron between the nodes. Nodes and elements are important concepts as they provide the theoretical framework for reasoning about the other properties of a mesh and hence the overall quality of the model \cite{IntroductionToFE}.\\ 
+Finite Element Models have several key properties that need to be specified by the engineers who create them, the configuration of these properties greatly determine the results obtained from the models execution. The first of these properties that an FE model has is the mesh. The mesh is constructed out of nodes, points which act as intersections between the second component- elements which are either a polygon or a polyhedron between the nodes. Nodes and elements are important concepts as they provide the theoretical framework for reasoning about the other properties of a mesh and hence the overall quality of the model \cite{IntroductionToFE}.\\ 
 
 \noindent
-In addition to the nodes and elements FE models also contain inputs and constraints. Inputs can be thought of as the phenomena from the outside world which is acting on the structure and consequently inducing some kind of physical effect on it. Inputs are used by engineers to model the conditions under which the structure will be expected to perform under when it is manufactured and enters operation. \\
+Elements within FE models can have different types that define their shape. Different shaped elements are selected based on the type of structure that is being assessed and the simulation conditions, some typical examples would be a quadrilateral also known as a quad4 and a triangle (tri3). Appendix A shows the different element types supported by the FE solver used for this known as LISA. \\ 
+
+\noindent
+In addition to the nodes and elements FE models also contain inputs and constraints. Inputs can be thought of as the phenomena from the outside world are acting on the structure and consequently inducing some kind of physical effect on it. Inputs are used by engineers to model the conditions which the structure will be expected to perform under when it is manufactured and enters operation. \\
 
 % elements can be different types which have different types, typical types
 % triangles and squares. 
@@ -27,15 +30,15 @@ The final piece of information needed in order to calculate the stresses through
 \begin{itemize}
 \item Youngs Modulus - The ratio of stress over strain for a given material, i.e. for an amount of internal force endured by a material how much does it deform, a material such as rubber therefore has a low value for Young's modulus while diamond has a high value \cite{YoungsModulus}.
 
-\item Poissons ratio - Amount of deformation that occurs perpendicular to the force that is applied to the material.
+\item Poissons ratio - Amount of deformation that occurs perpendicular to the force that is applied to the material \cite{PossionsRatio}. 
 \end{itemize}
 
 \noindent
-For the sake of simplicity all structures used to evaluate the final software solution have assumed steel as their material property. Steel is a pretty common material used within manufacturing of many mechanical components and does not exhibit any abnormal properties. This is beneficial for evaluation as it removes variability in the results that could arise from selecting a more complex material.
+For the sake of simplicity all structures used to evaluate the final software solution have assumed steel as their material property. Steel is a pretty common material used within manufacturing of many mechanical components and does not exhibit any abnormal properties. This is beneficial for evaluation as it removes variability in the results that could arise from selecting a more complex material. The system I have designed would also work with these more complex materials however the process of assessing the results could potentially be much harder without a more extensive engineering background and better knowledge of the specific materials. 
 
 \subsection{Limitations and general considerations}
 \noindent
-An important consideration when conducting FEA is the trade-off of a models accuracy against the time in which it can be solved. A major variable determining this trade-off is the models mesh structure which discretizes the problem so that simulation can be run on it. A mesh that is finer is more computationally expensive but also produces results of greater accuracy. It is therefore desirable to generate a mesh which is fine where accuracy is most needed but coarse where it is not \cite{cite04}. \\
+An important consideration when conducting FEA is the trade-off of a model's accuracy against the time in which it can be solved. A major variable determining this trade-off is the model's mesh structure which discretizes the problem so that simulation can be run on it. A mesh that is finer is more computationally expensive but also produces results of greater accuracy. It is therefore desirable to generate a mesh which is fine where accuracy is most needed but coarse where it is not \cite{cite04}. \\
 
 \noindent
 In every type of analysis that the FE method is used for (thermal, structural, fluid flow, electrical) there is a specific differential equation associated with each of the elements. In order to achieve overall convergence of the model the equations must be solved simultaneously to achieve a value for each of the discrete elements \cite{IntroductionToFE}. For this dissertation project attention will be given specifically to the problem of FEA meshing in the context of static structural analysis where the value calculated across each element is its stress. It makes sense to work on hybrid mesh refinement in the context of static structural analysis as it is likely the most common engineering application of the method and as such has the largest body of research that is relevant \cite{DolsakPaper94}\cite{IntroductionToFE}.\\

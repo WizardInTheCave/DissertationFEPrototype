@@ -76,10 +76,17 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
         // rules are coded here in column ordering within the paper
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="edges"></param>
+
+
+        /// <summary>
         /// for all the edges in the model we want to see if there is a group of edges which meet
         /// this specific rule, if so we want to apply the rule 
         /// </summary>
-        /// <param name="edges"></param>
+        /// <param name="edgeA">The first edge</param>
+        /// <param name="edgeB">The second edge</param>
         private void rule1(Edge edgeA, Edge edgeB)
         {
             const int INVOLVED_EDGES = 2;

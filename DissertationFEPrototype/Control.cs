@@ -7,28 +7,22 @@ using DissertationFEPrototype.FEModelUpdate;
 using DissertationFEPrototype.Model;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using DissertationFEPrototype.MeshQualityMetrics;
-using DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 using System;
 
 using System.Linq;
 using DissertationFEPrototype.Optimisations.ILPRules;
 using DissertationFEPrototype.FEModelUpdate.Model;
-using DissertationFEPrototype.FEModelUpdate.Model.Structure;
 
-using CsvHelper;
 using DisertationFEPrototype.FEModelUpdate;
 
 namespace DissertationFEPrototype
 {
     class Control
     {
-        //make a lock so file IO isn't a problem when running experiments on lots of threads
-        //private Object fileIOLock = new Object();
 
         /// <summary>
-        /// main loop which drives iteration until we have a FE model which meets the requirements, simple!
+        /// Main loop which drives iteration until we have a FE model which meets the requirements, simple!
         /// </summary>
         /// <param name="lisaString"></param>
         public Control(IntWrapper threadEditCount, string experimentFolder, Tuple<short, short> experimentVals, List<List<string>> resultCols) {
@@ -43,11 +37,15 @@ namespace DissertationFEPrototype
            
             bool isNodeOutput = true;
 
-            string lisaFile = "bridgeAdvanced.liml";
-            string lisaFileName = "bridgeAdvanced";
+            //string lisaFile = "bridgeAdvanced.liml";
+            //string lisaFileName = "bridgeAdvanced";
 
             //string lisaFile = "paperMill.liml";
             //string lisaFileName = "paperMill";
+
+            
+            string lisaFileName = "cylinderCrossSection";
+            string lisaFile = lisaFileName + ".liml";
 
             string outputCSVPath = Path.Combine(experimentFolderLocal, lisaFileName + "Out.csv");
             string lisaFilePath = Path.Combine(experimentFolderLocal, lisaFile);
@@ -124,7 +122,7 @@ namespace DissertationFEPrototype
         /// <summary>
         /// Tells lisa to run a solve on the lisa file which will produce some output
         /// </summary>
-        /// <param name="lisaFile"></param>
+        /// <param name="lisaFile">name of the LISA file that the updated model has just been written to and needs solving</param>
         private void solve(string lisaFile, string experimentFolderLocal)
         {
             string executeString = Path.GetFileName(experimentFolderLocal) + "\\" +  lisaFile + " solve";
@@ -137,7 +135,9 @@ namespace DissertationFEPrototype
         }
 
         /// <summary>
-        /// Some function which determines whether it is cool for us to stop meshing yet.
+        /// Some function which determines whether it is good to stop meshing yet.
+        /// Since this will depend on the specifics of what the software is used for
+        /// currently just hardcoding values here for testing purposes.
         /// </summary>
         /// <param name="ii"></param>
         /// <returns></returns>

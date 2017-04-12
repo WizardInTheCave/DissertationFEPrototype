@@ -40,6 +40,13 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
             }
             Console.WriteLine("something");
         }
+        /// <summary>
+        /// Using the nodes alredy present in the model and the JSON file containing edges produce edge objects correctly
+        /// referenceing the nodes.
+        /// </summary>
+        /// <param name="nodes">Node objects currently present in the model</param>
+        /// <param name="edgeFileLocal">path to the edges JSON file</param>
+        /// <returns></returns>
         private List<Edge> readEdges(List<Node> nodes, string edgeFileLocal)
         {
             DeserializedEdgeGroup eg = null;

@@ -9,6 +9,9 @@ using System.Xml;
 
 namespace DissertationFEPrototype.FEModelUpdate.Read
 {
+    /// <summary>
+    /// Class for reading the nodes from the liml file.
+    /// </summary>
     class ReadNodes
     {
         public static Dictionary<Tuple<double, double, double>, Node> readAllNodes(string xmlString)
@@ -29,7 +32,6 @@ namespace DissertationFEPrototype.FEModelUpdate.Read
                     {
                         // Get element name and switch on it.
                         Node node = getNodeData(reader);
-                        //nodes.Add(node);
                         nodes[new Tuple<double, double, double>(node.GetX, node.GetY, node.GetZ)] = node;
                     }
                 }
@@ -37,6 +39,11 @@ namespace DissertationFEPrototype.FEModelUpdate.Read
             return nodes;
         }
 
+        /// <summary>
+        /// Get the data for an individual node from the file using XmlReader
+        /// </summary>
+        /// <param name="reader">XmlReader object</param>
+        /// <returns>Node object</returns>
         private static Node getNodeData(XmlReader reader)
         {
             const string nodeIdAtt = "nid";

@@ -39,7 +39,6 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
         {
             return edgeType;
         }
-
         public void SetEdgeType(EdgeType type)
         {
             this.edgeType = type;
@@ -77,14 +76,18 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
         /// <summary>
         /// is opposite and also has same length or form according to muggleton and Dolsak paper
         /// </summary>
-        /// <param name="edgeA"></param>
-        /// <param name="edgeB"></param>
-        /// <returns></returns>
+        /// <param name="edgeB">Edge that we are comparing to the current edge</param>
+        /// <returns>true if both are considered the same, false otherwise</returns>
         public bool isSameAs(Edge edgeB)
         {
             return this.isOpposite(edgeB) && (this.isSameLength(edgeB) || this.isSameForm(edgeB));
         }
 
+        /// <summary>
+        /// Get the total length along the entire node path, sum of euclidean distances between each pair in the chain.
+        /// </summary>
+        /// <param name="nodePath">A list of nodes which form the node path</param>
+        /// <returns>total length</returns>
         public double computeTotalLength(List<Node> nodePath)
         {
 
@@ -160,21 +163,28 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
             return neighbour;
         }
 
-
+        /// <summary>
+        /// Return True if the Edges are the same length, false otherwise
+        /// </summary>
+        /// <param name="edgeB"></param>
+        /// <returns></returns>
         private bool isSameLength(Edge edgeB)
         {
             return Math.Abs(this.TotalLength - edgeB.TotalLength) <= SAME_DISTANCE_TOLERANCE;
         }
 
+        /// <summary>
+        /// Return true if the Edges have the same form.
+        /// </summary>
+        /// <param name="edgeB"></param>
+        /// <returns></returns>
         private bool isSameForm(Edge edgeB)
         {
-            throw new NotImplementedException();
+            return this.edgeType == edgeB.edgeType;
         }
 
-
-
         /// <summary>
-        /// 
+        /// Constructor for an Edge object, takes an id, its value for the different types and a node path which describes the edge.
         /// </summary>
         /// <param name="id">id of the edge so that it can be refferenced</param>
         /// <param name="type"> specific type of the edge, may have an interface with seperate classes later to implement this</param>

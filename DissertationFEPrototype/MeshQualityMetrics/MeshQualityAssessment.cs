@@ -44,7 +44,11 @@ namespace DissertationFEPrototype.MeshQualityMetrics
             get { return overallQualImprovement; }
         }
 
-
+        /// <summary>
+        /// Assess the quality of a mesh
+        /// </summary>
+        /// <param name="meshData">Object representing the current state of the mesh</param>
+        /// <param name="analysisData">Data read from the analysis file produced by LISA</param>
         public MeshQualityAssessment(MeshData meshData, List<NodeAnalysisData> analysisData)
         {
             this.meshData = meshData;

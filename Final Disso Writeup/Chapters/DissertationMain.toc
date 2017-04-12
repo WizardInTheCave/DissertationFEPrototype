@@ -1,61 +1,58 @@
-\contentsline {section}{\numberline {1}Introduction}{3}{section.1}
-\contentsline {section}{\numberline {2}Motivation and Background}{4}{section.2}
-\contentsline {subsection}{\numberline {2.1}Properties of Finite Element Models}{4}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Limitations and general considerations}{5}{subsection.2.2}
-\contentsline {section}{\numberline {3}Related Work}{7}{section.3}
-\contentsline {subsection}{\numberline {3.1}Traditional Subdivision Approaches}{7}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Stress Refinement}{7}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Uses of Artificial Intelligence and Machine Learning}{7}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Quality metrics}{8}{subsection.3.4}
-\contentsline {section}{\numberline {4}Description of the work}{10}{section.4}
-\contentsline {subsection}{\numberline {4.1}Aims and Objectives}{10}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}System specification}{10}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Functional Requirements}{10}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Non-Functional Requirements}{11}{subsection.4.4}
-\contentsline {section}{\numberline {5}System Design}{12}{section.5}
-\contentsline {subsection}{\numberline {5.1}System Overview}{12}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Modular Architecture}{12}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Third Party FE Application}{13}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}LISA}{13}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}Simulation Data Model}{13}{subsection.5.5}
-\contentsline {subsection}{\numberline {5.6}Remeshing methods approach}{15}{subsection.5.6}
-\contentsline {subsection}{\numberline {5.7}Input Files}{16}{subsection.5.7}
-\contentsline {subsubsection}{\numberline {5.7.1}Combining methods}{17}{subsubsection.5.7.1}
-\contentsline {section}{\numberline {6}Software Implementation}{18}{section.6}
-\contentsline {subsection}{\numberline {6.1}Languages and platforms}{18}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Implementation Methodology}{18}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}Hierarchical Refinement}{18}{subsection.6.3}
-\contentsline {subsection}{\numberline {6.4}Stress Based Refinement}{19}{subsection.6.4}
-\contentsline {subsection}{\numberline {6.5}Heuristic/Rule Based Refinement}{19}{subsection.6.5}
-\contentsline {subsection}{\numberline {6.6}Mesh Quality Assessment}{21}{subsection.6.6}
-\contentsline {subsection}{\numberline {6.7}Implementation Challenges}{22}{subsection.6.7}
-\contentsline {subsubsection}{\numberline {6.7.1}Fast Node Lookup and Update}{22}{subsubsection.6.7.1}
-\contentsline {subsubsection}{\numberline {6.7.2}Sorting Element Nodes}{23}{subsubsection.6.7.2}
-\contentsline {section}{\numberline {7}Evaluation of Project}{28}{section.7}
-\contentsline {subsection}{\numberline {7.1}Validation Against Functional Requirements}{28}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Validation Against Non Functional Requirements}{28}{subsection.7.2}
-\contentsline {subsection}{\numberline {7.3}Unit Testing}{28}{subsection.7.3}
-\contentsline {subsection}{\numberline {7.4}Software Quality and Management}{28}{subsection.7.4}
-\contentsline {subsection}{\numberline {7.5}Documentation}{29}{subsection.7.5}
-\contentsline {subsection}{\numberline {7.6}Evaluation Of System For Model Simulations}{29}{subsection.7.6}
-\contentsline {subsection}{\numberline {7.7}Strengths and Weaknesses}{33}{subsection.7.7}
-\contentsline {subsection}{\numberline {7.8}Evaluation summary}{33}{subsection.7.8}
-\contentsline {section}{\numberline {8}Further Work}{34}{section.8}
-\contentsline {subsection}{\numberline {8.1}Gathering feedback from experienced engineers}{34}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Improving Usability Through A Web Interface}{34}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}Added Sophistication of Hybrid Generation}{34}{subsection.8.3}
-\contentsline {section}{\numberline {9}Personal Reflections and Summary}{34}{section.9}
-\contentsline {section}{References}{37}{section.9}
-\contentsline {section}{\numberline {A}Element Types within LISA}{39}{appendix.A}
-\contentsline {section}{\numberline {B}Unit Testing}{40}{appendix.B}
-\contentsline {section}{\numberline {C}Edge Definition Categories}{40}{appendix.C}
-\contentsline {section}{\numberline {D}Input and Output Files}{41}{appendix.D}
-\contentsline {section}{\numberline {E}Project Layout in Solution Explorer}{42}{appendix.E}
-\contentsline {section}{\numberline {F}Doxygen Documentation}{43}{appendix.F}
-\contentsline {section}{\numberline {G}Software Quality Metrics}{44}{appendix.G}
-\contentsline {subsection}{\numberline {G.1}Mesh Refinements}{45}{subsection.G.1}
-\contentsline {subsection}{\numberline {G.2}Heuristic Refinement}{46}{subsection.G.2}
-\contentsline {section}{\numberline {H}Stress Refinement}{47}{appendix.H}
-\contentsline {section}{\numberline {I}Paper Mill Simulation Results}{49}{appendix.I}
-\contentsline {section}{\numberline {J}Half Cylinder Simulation Results}{53}{appendix.J}
-\contentsline {section}{\numberline {K}Gantt Chart for Project Time Management}{53}{appendix.K}
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}
+\contentsline {section}{\numberline {2}Motivation and Background}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}Properties of Finite Element Models}{5}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Limitations and general considerations}{6}{subsection.2.2}
+\contentsline {section}{\numberline {3}Related Work}{8}{section.3}
+\contentsline {subsection}{\numberline {3.1}Traditional Subdivision Approaches}{8}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Stress Refinement}{8}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Uses of Artificial Intelligence and Machine Learning}{8}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Quality metrics}{9}{subsection.3.4}
+\contentsline {section}{\numberline {4}Description of the work}{11}{section.4}
+\contentsline {subsection}{\numberline {4.1}Aims and Objectives}{11}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}System specification}{11}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Functional Requirements}{11}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Non-Functional Requirements}{12}{subsection.4.4}
+\contentsline {section}{\numberline {5}System Design}{13}{section.5}
+\contentsline {subsection}{\numberline {5.1}System Overview}{13}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Modular Architecture}{15}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Third Party FE Application}{15}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}LISA}{16}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Simulation Data Model}{16}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}Remeshing methods approach}{19}{subsection.5.6}
+\contentsline {subsection}{\numberline {5.7}Input Files}{20}{subsection.5.7}
+\contentsline {subsection}{\numberline {5.8}Combining methods}{20}{subsection.5.8}
+\contentsline {section}{\numberline {6}Software Implementation}{21}{section.6}
+\contentsline {subsection}{\numberline {6.1}Languages and platforms}{21}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Implementation Methodology}{21}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Stress Based Refinement}{21}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Heuristic/Rule Based Refinement}{22}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}Mesh Quality Assessment}{24}{subsection.6.5}
+\contentsline {subsection}{\numberline {6.6}Implementation Challenges}{25}{subsection.6.6}
+\contentsline {subsubsection}{\numberline {6.6.1}Fast Node Lookup and Update}{25}{subsubsection.6.6.1}
+\contentsline {subsubsection}{\numberline {6.6.2}Sorting Element Nodes}{25}{subsubsection.6.6.2}
+\contentsline {section}{\numberline {7}Evaluation of Project}{31}{section.7}
+\contentsline {subsection}{\numberline {7.1}Validation Against Functional Requirements}{31}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Validation Against Non Functional Requirements}{31}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}Unit Testing}{31}{subsection.7.3}
+\contentsline {subsection}{\numberline {7.4}Software Quality and Management}{31}{subsection.7.4}
+\contentsline {subsection}{\numberline {7.5}Documentation}{32}{subsection.7.5}
+\contentsline {subsection}{\numberline {7.6}Evaluation Of System For Model Simulations}{32}{subsection.7.6}
+\contentsline {subsection}{\numberline {7.7}Strengths and Weaknesses}{36}{subsection.7.7}
+\contentsline {section}{\numberline {8}Further Work}{38}{section.8}
+\contentsline {subsection}{\numberline {8.1}Gathering Feedback From Experienced Engineers}{38}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Improving Usability Through A Web Interface}{38}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Added Sophistication of Hybrid Generation}{38}{subsection.8.3}
+\contentsline {section}{\numberline {9}Project Conclusion and Personal Reflections}{39}{section.9}
+\contentsline {section}{\numberline {A}Element Types within LISA}{41}{appendix.A}
+\contentsline {section}{\numberline {B}Unit Testing}{42}{appendix.B}
+\contentsline {section}{\numberline {C}Edge Definition Categories}{42}{appendix.C}
+\contentsline {section}{\numberline {D}Input and Output Files}{43}{appendix.D}
+\contentsline {section}{\numberline {E}Project Layout in Solution Explorer}{44}{appendix.E}
+\contentsline {section}{\numberline {F}Doxygen Documentation}{45}{appendix.F}
+\contentsline {section}{\numberline {G}Software Quality Metrics}{46}{appendix.G}
+\contentsline {section}{\numberline {H}Mesh Refinements}{47}{appendix.H}
+\contentsline {subsection}{\numberline {H.1}Heuristic Refinement}{48}{subsection.H.1}
+\contentsline {subsection}{\numberline {H.2}Stress Refinement}{49}{subsection.H.2}
+\contentsline {section}{\numberline {I}Paper Mill Simulation Results}{51}{appendix.I}
+\contentsline {section}{\numberline {J}Half Cylinder Simulation Results}{55}{appendix.J}
+\contentsline {section}{\numberline {K}Gantt Chart for Project Time Management}{57}{appendix.K}

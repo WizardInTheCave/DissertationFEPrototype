@@ -10,8 +10,10 @@ namespace DissertationFEPrototype
     {
 
         // static string folderName = "PaperMillQuads";
+        // static string folderName = "BridgeAdvanced";
 
-        static string folderName = "BridgeAdvanced";
+        static string folderName = "Cylinder";
+
         /// <summary>
         /// The main entry point for the application.
         /// Read in possible command line arguments specifying key inoput folders and files so the system can execute
@@ -19,15 +21,20 @@ namespace DissertationFEPrototype
         // [STAThread]
         static void Main(string[] args)
         {
-            string topLevelFolder = @"D:\Documents\DissertationWork\models\FinalDissoExperiments\Experiments\BridgeAdvanced";
-            string modelFile = "bridgeAdvanced.liml";
-            string edgeDefinitionFile = "modelEdges.json";
-            string modelAnalysisFileName = "bridgeAdvancedOut.csv";
+            //string topLevelFolder = @"D:\Documents\DissertationWork\models\FinalDissoExperiments\Experiments\BridgeAdvanced";
+            //string modelFile = "bridgeAdvanced.liml";
+            //string edgeDefinitionFile = "modelEdges.json";
+            //string modelAnalysisFileName = "bridgeAdvancedOut.csv";
 
             //string topLevelFolder = @"D:\Documents\DissertationWork\models\FinalDissoExperiments\Experiments\" + folderName;
             //string modelFile = "paperMill.liml";
             //string edgeDefinitionFile = "modelEdges.json";
             //string modelAnalysisFileName = "paperMillOut.csv";
+
+            string topLevelFolder = @"D:\Documents\DissertationWork\models\FinalDissoExperiments\Experiments\Cylinder";
+            string modelFile = "CylinderCrossSection.liml";
+            string edgeDefinitionFile = "modelEdges.json";
+            string modelAnalysisFileName = "CylinderCrossSectionOut.csv";
 
 
             int k = 3;
@@ -76,13 +83,13 @@ namespace DissertationFEPrototype
             //experimentVals.Add(new Tuple<short, short>(2, 2));
             //experimentVals.Add(new Tuple<short, short>(2, 3));
 
-            experimentVals.Add(new Tuple<short, short>(1, 0));
-            experimentVals.Add(new Tuple<short, short>(0, 1));
+            //experimentVals.Add(new Tuple<short, short>(1, 0));
+            //experimentVals.Add(new Tuple<short, short>(0, 1));
 
-            //experimentVals.Add(new Tuple<short, short>(2, 3));
-            //experimentVals.Add(new Tuple<short, short>(3, 2));
-            //experimentVals.Add(new Tuple<short, short>(2, 4));
-            //experimentVals.Add(new Tuple<short, short>(4, 2));
+            experimentVals.Add(new Tuple<short, short>(2, 3));
+            experimentVals.Add(new Tuple<short, short>(3, 2));
+            experimentVals.Add(new Tuple<short, short>(2, 4));
+            experimentVals.Add(new Tuple<short, short>(4, 2));
 
             //experimentVals.Add(new Tuple<short, short>(5, 2));
 
@@ -140,6 +147,7 @@ namespace DissertationFEPrototype
             //+"Element Count Score" + fieldDelim
             //  + "Average Max Angle" + fieldDelim
 
+            // Write the headers for the different types of information saved to the output file.
             file.WriteLine("TimesForRuns" + fieldDelim
                + "ElemCount" + fieldDelim
                + "StressElemCount" + fieldDelim

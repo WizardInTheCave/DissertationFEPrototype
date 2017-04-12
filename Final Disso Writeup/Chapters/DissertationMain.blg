@@ -7,8 +7,11 @@ A level-1 auxiliary file: SystemDesign.aux
 A level-1 auxiliary file: Implementation.aux
 A level-1 auxiliary file: Evaluation.aux
 A level-1 auxiliary file: FurtherWork.aux
-A level-1 auxiliary file: References.aux
+I couldn't open style file article.bst
+---line 28 of file DissertationMain.aux
+ : \bibstyle{article
+ :                  }
+I'm skipping whatever remains of this command
 A level-1 auxiliary file: Appendix.aux
-I found no \bibdata command---while reading file DissertationMain.aux
-I found no \bibstyle command---while reading file DissertationMain.aux
+I found no style file---while reading file DissertationMain.aux
 (There were 2 error messages)

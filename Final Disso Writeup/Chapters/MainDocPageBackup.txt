@@ -1,0 +1,49 @@
+\setcounter{secnumdepth}{0}
+\usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
+\usepackage{fullpage} % changes the margin
+
+\usepackage{graphicx}
+%\usepackage{lscape}
+%\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{wrapfig}
+\usepackage{gensymb}
+\usepackage{graphicx} 
+\usepackage[utf8]{inputenc}
+\usepackage{siunitx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{listings}
+
+\usepackage{float}
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage[]{algorithm2e}
+\usepackage[noend]{algpseudocode}
+%\usepackage{pgffor}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+
+\newcommand{\CMwidth}{-1.7cm}
+\newcommand{\CMheight}{2.7cm}
+
+\usepackage{hyperref}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	filecolor=blue,
+	menucolor=black,
+	urlcolor=blue
+}
+
+
+\setcounter{secnumdepth}{5}% Include \subsubsection in ToC
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 

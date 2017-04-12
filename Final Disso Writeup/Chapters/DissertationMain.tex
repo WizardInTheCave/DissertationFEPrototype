@@ -1,4 +1,6 @@
 \documentclass{article}
+%\documentclass[conference]{IEEEtran}
+
 \setcounter{secnumdepth}{0}
 %[a4paper, 11pt]
 \usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
@@ -16,7 +18,6 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{listings}
-
 \usepackage{float}
 
 \renewcommand{\labelenumii}{\theenumii}
@@ -50,6 +51,7 @@
 \def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
 \let\endchangemargin=\endlist 
 
+
 \begin{document}
 %Header-Make sure you update this information!!!!
 %\noindent
@@ -63,6 +65,7 @@
 %\date{April 5, 2017}
 %\maketitle
 %{\centering  
+\noindent
 Dissertation: Hybrid Methods for Finite Element Meshing \\ \\
 Submitted September 2015, in partial fulfilment of
 the conditions of the award of the degree \\ \\
@@ -72,15 +75,18 @@ psyjb4 \\ \\
 School of Computer Science \\
 University Of Nottingham \\ 
 
+\noindent
 I hereby declare that this dissertation is all my own work, except as indicated
 in the text: \\ 
 
-Signature:
+\noindent
+Signature: \\ 
+
+\noindent
+Date: \\ 
 
 
-Date: 
-
-
+\noindent
 I hereby declare that I have all necessary rights and consents  to publicly
 distribute this dissertation via the University of Nottingham's e-dissertation
 archive.*
@@ -91,6 +97,8 @@ archive.*
 
 \newpage
 
+\cite{einstein}
+
 \include{Introduction}
 \include{MotivationAndBackground}
 \include{RelatedWork}
@@ -99,7 +107,11 @@ archive.*
 \include{Implementation}
 \include{Evaluation}
 \include{FurtherWork}
-\include{References}
+
+\bibliographystyle{article}
+\bibliography{bibItems}
+
+
 \include{Appendix}
 
 \end{document}

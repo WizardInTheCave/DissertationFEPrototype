@@ -15,23 +15,6 @@ For the duration of the project the spiral methodology was adhered to. This enfo
 \noindent
 Tasks were chosen every week for the project, the number of tasks and their complexity was determined using a combination of factors including the time they were expected to take along with their criticality within the project. In a busy week requiring lots of work for other modules the tasks with lower time costs and higher criticality were typically selected over the others.
 
-\subsection{Hierarchical Refinement}
-\noindent
-Elements within traditional FEA can typically be classified as either triangle or square based elements, each of these provide different strengths and weaknesses when used                                                                                                                                                                                                                                                                                                                                                                                                                                                                         to mesh and solve models. Within industry triangular elements are typically preferable since it is always possible to generate an initial triangular mesh from any arbitrary CAD geometry algorithmically. This is done by simply making smaller triangles until all gaps along the edge of the geometry are filled \cite{DelaunyTriangles}. The same cannot always be said  when meshing using square elements. For proof of the solutions concept however it was concluded that square based elements were preferable to triangular ones since the steps required for a basic refinement are much simpler, just take the corners of an element that already exists, add their corresponding x, y and z components before dividing each component by two to achieve the new midpoint. \\ 
-
-\noindent
-In addition to refinement it is also significantly easier to define edges which the ILP rules can be applied to when edges naturally form within a structure through a chain of nodes along the edges of square elements.
-
-%The process of re meshing square based elements 
-
-\noindent
-Unfortunately Triangular meshes also generally incur a higher computational cost than an equivalent square element mesh due to added complexity of performing the calculations required to remesh in addition to requiring more elements over a given area to achieve the same accuracy. \\
-
-\noindent
-From an implementation standpoint writing a square based remeshing algorithm was also substantially easier if given a mesh of exclusively square elements since the primary task to be performed is to repeatedly divide each element into four sub elements, by contrast methods uses to re mesh triangular meshes are typically more complex and have corresponding initial meshes that are harder to generate manually by human operators \cite{HandMeshing}. \\ 
-
-
-
 \subsection{Stress Based Refinement}
 To focus meshing in areas of high stress each iteration needed to parse the results file from the previous iterations execution of LISA. LISA result files are in csv format by default and contain the displacements and stresses associated with each node within the model once it has been solved. \\
 
@@ -48,12 +31,12 @@ If a rule detects a relationship in the model the edge is assigned a criticality
 \noindent
 The properties that can exist between two edges when compared are the following:
 \begin{itemize}
-\item Edges opposite one another - the edges run alongside one another closely, look at the distance between each of the corresponding nodes and check whether this distance is less than some threshold amount.
+\item Edges opposite one another - The edges run alongside one another closely, look at the distance between each of the corresponding nodes and check whether this distance is less than some threshold amount.
 
-\item Edges posses the same form - \colorbox{yellow}{Still need to write about this}
+\item Edges posses the same form - The Edges share the same edge type as one another
 %finish this
 
-\item Edges are considered the same - to meet this requirement both edges must be almost the same length, opposite one another and posses the same form.
+\item Edges are considered the same - Both edges must be almost the same length, opposite one another and posses the same form.
 \end{itemize}
 
 \noindent
@@ -68,7 +51,8 @@ Each edge specification has several properties which Dolsak describes within his
 %\colorbox{yellow}{Still need to write about this}
 \end{itemize}
 
-Each of the three edge type properties have a set of recognised values defined by Dolsak within his paper which have been listed in Appendix 
+\noindent
+Each of the three edge type properties have a set of recognised values defined by Dolsak within his paper which have been listed in appendix C. In addition to these properties used by the refinement system for deciding where to mesh each element also contains a list of nodes referencing those within the model which describe the path the edge takes along the mesh.\\
 
 
 \noindent
@@ -153,6 +137,11 @@ Dittmers rules for computing the quality of both individual elements and the ent
 \noindent
 %not sure about the last sentence here
 Since each element is initialised with the nodes that comprise it, it is also possible to derive all the geometric characteristics and thus its quality metrics upon its initialisation. This allows the metrics for each element to also be calculated upon its initialisation and thus removing the risk of null values being returned when other parts of the system request this information.
+
+\noindent
+Coding the individual methods did not take too long since Dittmer provided a clear description for each metric calculation method many of the values needed to perform the calculations were also conveniently stored as properties within different parts of the model. A considerable part of calculating each metric was therefore the process of aggregating all of the necessary data from the model so that the individual values could be calculated.  
+
+Although the element shape metrics provided an indication of how much an elements shape deviated from its ideal understanding the differences between exactly what each metric implied was challenging, specifications for the metrics did not provide information on this besides describing cases of a good value and bad value. As a consequence the metric I decided to focus my evaluation primarily on out of the ones described was the maximum corner angles which provided a clear indication of element skew. This metric was also useful in attempting to identify elements which cause problems when needing to be sorted, see 6.6.2.
 
 
 %Upon evaluation of the project and concluding that effectiveness of the heuristic relied upon overlap of the %heuristically mesh area with areas of high stress
@@ -288,15 +277,14 @@ Having already devised two solutions it seemed likely that there would be some b
   \label{fig:h-refinementImp}
 \end{figure}
 
-
 \noindent
-Having considered several convex hull algorithms including Graham scan \cite{GrahamScan} $O(n\ log\ n)$ and brute force scan $O(n^4)$ \cite{ConvexHulls} \cite{BruteConvex} before deciding to trial the following C\# implementation of the Monotone Chain algorithm, also $O(n\ log\ n)$ \cite{CSharpConvexHull}. \\ 
+After reviewing the different convex hull algorithms including Grapham scan \cite{GrahamScan} $O(n\ log\ n)$ and brute force scan $O(n^4)$ \cite{ConvexHulls} \cite{BruteConvex} I decided to trial the following C\# implementation of the Monotone Chain algorithm, also $O(n\ log\ n)$ \cite{CSharpConvexHull}. \\ 
 
 \noindent
 The Monotone Chain algorithm algorithm was developed shortly after Graham scan and builds upon the concepts introduced in the former. Graham's scan works by initially finding the point in the data set with the lowest y coordinate which can be called P. Having found this point the other points in the set are sorted based on the angle created between them and P. Combining both these steps gives a complexity of $O(n\ log\ n)$, with  $O(n)$ to find P and $O(n\ log\ n)$ to perform a general sort of the angles. Moving through each point in the sorted array Graham scan determines whether moving to this point results in making a right or left hand turn based on the two previous points. If a right turn is made then the second do last point has caused a concave shape which has violated the requirement of the convex hull path. In this scenario is repeated the algorithm excludes the point from the convex set and resumes with the previous two points being those on the path before the rejected point. A stack structure is therefore typically used to keep track of the point ordering as is the case with the Monotone Chain implementation within the system \cite{ChainHull}. \\ 
 
 \noindent
-The Monotone Chain algorithm performs essentially the same procedure however instead of sorting using simply y values Monoton Chain sorts using both x and y values. This allows the algorithm to sort the points in two separate groups which form the top and the bottom of the hull and a reduction in the complexity of the sort comparison function. \\ \\ 
+The Monotone Chain algorithm performs essentially the same procedure however instead of sorting using simply y values Monotone Chain sorts using both x and y values. This allows the algorithm to sort the points in two separate groups which form the top and the bottom of the hull and a reduction in the complexity of the sort comparison function. \\ \\ 
 
 %Monotone chain
 \begin{algorithm}[H]

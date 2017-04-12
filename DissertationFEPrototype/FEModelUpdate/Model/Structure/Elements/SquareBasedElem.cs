@@ -7,6 +7,9 @@ using DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 
 namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
+    /// <summary>
+    /// Square based Element implementing the IElement interface
+    /// </summary>
     public abstract class SquareBasedElem : IElement
     {
 
@@ -182,7 +185,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             //    if (node.GetZ < zMin)
             //    {
             //        zMin = node.GetZ;
-            //    }
+            //    }                        
             //}
 
             //var xDev = new Tuple<string, double>("X", xMax - xMin);
@@ -298,7 +301,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             {
                 Node currentnode = removableNodes[0];
                 sortMatchedNodes.Add(currentnode);
-
+ 
                 removableNodes.Remove(currentnode);
 
                 const int nodes_in_quad_four = 4;
