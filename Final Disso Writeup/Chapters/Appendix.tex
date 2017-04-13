@@ -1,7 +1,7 @@
 \appendix
 
 \section{Element Types within LISA}
-Here are shown the the visual specifications LISA provides for the ordering and layout of nodes for defining each type of element supported. Each of these types can be classified using the 
+Here are shown the the visual specifications LISA provides for the ordering and layout of nodes for defining each type of element supported. Each of these element types can be classified using the 
 
 
 
@@ -248,7 +248,7 @@ For the paper mill simulation angular forces were set up around the outside of t
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=0.9\linewidth]{../Graphics/PaperMillWithinLisa.jpeg}
-  \caption{Replication of mesh structure specified by Dolsak within his paper \cite{Dolsak91}}
+  \caption{Replication of mesh structure specified by Dolsak within his paper \cite{DolsakPaper91}}
   \label{fig:sub2}
 \end{subfigure}
 \label{fig:test}
@@ -262,14 +262,23 @@ For the paper mill simulation angular forces were set up around the outside of t
 
 
 \begin{figure}[H]
-  \centerline{\includegraphics[width=120mm, scale=0.5]{../Graphics/Graphs/PaperMillExecutionTimes.png}}
+  \centerline{\includegraphics[width=120mm, scale=0.5]{../Graphics/PaperMill/MaximumInternalAngle.png}}
+  \caption{Improvement in the maximum internal Angle for Quad4 Elements}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=120mm, scale=0.5]{../Graphics/PaperMill/AverageStress.png}}
+  \caption{Improvement on average for detecting across all nodes within the model over multiple iterations, results for each weighting with different edge heuristics also averaged}
+\end{figure}
+
+
+
+\begin{figure}[H]
+  \centerline{\includegraphics[width=120mm, scale=0.5]{../Graphics/PaperMill/PaperMillExecutionTimes.png}}
   \caption{Time taken per iteration using the different hybrid weightings with varying edge quality specifications}
 \end{figure}
 
- \begin{figure}[H]
-  \centerline{\includegraphics[width=120mm, scale=0.5]{../Graphics/Graphs/PaperMillAverageStressRevealed.png}}
-  \caption{Improvement in average stress detected across all nodes within the model over multiple iterations, results for each weighting with different edge heuristics also averaged}
-\end{figure}
 
 
 \section{Half Cylinder Simulation Results}
@@ -289,7 +298,7 @@ The half cylinder was the third model used to test the system.
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=0.9\linewidth]{../Graphics/HalfCylinder/DolsakCylinderWithinLisa.jpeg}
-  \caption{Replication of mesh structure specified by Dolsak within his paper \cite{Dolsak91}}
+  \caption{Replication of mesh structure specified by Dolsak within his paper \cite{DolsakPaper91}}
   \label{fig:sub2}
 \end{subfigure}
 \label{fig:test}

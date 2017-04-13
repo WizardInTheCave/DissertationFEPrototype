@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.10.17)  12 APR 2017 12:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.10.17)  13 APR 2017 20:47
 entering extended mode
 **./DissertationMain.tex
 (DissertationMain.tex
@@ -1585,10 +1585,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 85--87
 \openout5 = `DissertationMain.toc'.
 
  [2]
-
-LaTeX Warning: Citation `einstein' on page 3 undefined on input line 100.
-
-[3]
 \openout2 = `Introduction.aux'.
 
  (Introduction.tex
@@ -1601,36 +1597,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 5--7
 
  []
 
-) [4
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+)
+Underfull \hbox (badness 10000) in paragraph at lines 11--100
+
+ []
+
+[3
 
 ]
 \openout2 = `MotivationAndBackground.aux'.
 
  (MotivationAndBackground.tex
-
-LaTeX Warning: Citation `cite0' on page 5 undefined on input line 3.
-
-
-LaTeX Warning: Citation `DolsakPaper94' on page 5 undefined on input line 3.
-
-
-LaTeX Warning: Citation `DolsakPaper94' on page 5 undefined on input line 3.
-
-
-LaTeX Warning: Citation `IntroductionToFE' on page 5 undefined on input line 3.
-
-
-
-LaTeX Warning: Citation `DolsakPaper94' on page 5 undefined on input line 3.
-
-
-LaTeX Warning: Citation `ConsultRuleIntelltSystemFE' on page 5 undefined on inp
-ut line 3.
-
-
-LaTeX Warning: Citation `cite03' on page 5 undefined on input line 3.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
  []
@@ -1639,10 +1621,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--4
 Underfull \hbox (badness 10000) in paragraph at lines 7--8
 
  []
-
-
-LaTeX Warning: Citation `IntroductionToFE' on page 5 undefined on input line 10
-.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 9--11
@@ -1660,6 +1638,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 15--17
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 18--20
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 21--23
 
  []
@@ -1669,108 +1652,53 @@ Underfull \hbox (badness 10000) in paragraph at lines 24--26
 
  []
 
+[4
+
+
+]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 31.
-("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+ ("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 31.
-
-
-LaTeX Warning: Citation `YoungsModulus' on page 5 undefined on input line 31.
-
-
-LaTeX Warning: Citation `PossionsRatio' on page 5 undefined on input line 33.
-
-[5
-
-
-]
-
-LaTeX Warning: Citation `cite04' on page 6 undefined on input line 41.
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 40--42
 
  []
 
 
-LaTeX Warning: Citation `IntroductionToFE' on page 6 undefined on input line 44
-.
-
-
-LaTeX Warning: Citation `DolsakPaper94' on page 6 undefined on input line 44.
-
-
-LaTeX Warning: Citation `IntroductionToFE' on page 6 undefined on input line 44
-.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 43--45
+Underfull \hbox (badness 10000) in paragraph at lines 44--46
 
  []
 
 
-LaTeX Warning: Citation `cite06' on page 6 undefined on input line 47.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 46--48
+Underfull \hbox (badness 10000) in paragraph at lines 47--49
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--51
+Underfull \hbox (badness 10000) in paragraph at lines 50--52
 
  []
 
-
-LaTeX Warning: Citation `cite03' on page 6 undefined on input line 53.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 52--54
-
- []
-
-
-LaTeX Warning: Citation `DolsakPaper91' on page 6 undefined on input line 56.
-
-<../Graphics/stressedCorner.png, id=320, 749.80125pt x 551.05875pt>
+<../Graphics/stressedCorner.png, id=347, 749.80125pt x 551.05875pt>
 File: ../Graphics/stressedCorner.png Graphic file (type png)
 
 <use ../Graphics/stressedCorner.png>
-Package pdftex.def Info: ../Graphics/stressedCorner.png used on input line 59.
+Package pdftex.def Info: ../Graphics/stressedCorner.png used on input line 57.
 (pdftex.def)             Requested size: 374.8997pt x 275.52869pt.
-
-
-LaTeX Warning: Citation `HighStressCorner' on page 6 undefined on input line 60
-.
-
-
-LaTeX Warning: Citation `HighStressCorner' on page 6 undefined on input line 60
-.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [6] [7 <../Graphics/stressedCorner.png>]
+) [5] [6 <../Graphics/stressedCorner.png>]
 \openout2 = `RelatedWork.aux'.
 
  (RelatedWork.tex
-
-LaTeX Warning: Citation `HandPRefinements' on page 8 undefined on input line 5.
-
-
-
-LaTeX Warning: Citation `RRefinement' on page 8 undefined on input line 5.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 5--6
 
  []
-
-
-LaTeX Warning: Citation `HandPRefinements' on page 8 undefined on input line 9.
-
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 7--10
@@ -1778,53 +1706,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--10
  []
 
 
-LaTeX Warning: Citation `RRefinement' on page 8 undefined on input line 13.
-
-
-LaTeX Warning: Citation `FiniteElementMeshRefinement' on page 8 undefined on in
-put line 17.
-
-
-LaTeX Warning: Citation `NeuralNetworks' on page 8 undefined on input line 26.
-
-
-LaTeX Warning: Citation `caseBasedReasoning' on page 8 undefined on input line 
-26.
-
-
-LaTeX Warning: Citation `DolsakPaper94' on page 8 undefined on input line 26.
-
-
-LaTeX Warning: Citation `TraditionalHybridRefinement' on page 8 undefined on in
-put line 26.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 25--27
 
  []
 
 
-LaTeX Warning: Citation `DolsakPaper91' on page 8 undefined on input line 29.
-
-
-LaTeX Warning: Citation `DittmerMeshQualityMet' on page 8 undefined on input li
-ne 29.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 28--30
 
  []
-
-
-LaTeX Warning: Citation `MuggletonILP' on page 8 undefined on input line 32.
-
-
-LaTeX Warning: Citation `ILPYoutubeLecture' on page 8 undefined on input line 3
-2.
-
-
-LaTeX Warning: Citation `ILPYoutubeLecture' on page 8 undefined on input line 3
-2.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 31--33
@@ -1836,41 +1725,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--36
 
  []
 
-[8
+[7
 
 
 ]
-
-LaTeX Warning: Citation `Golem' on page 9 undefined on input line 44.
-
-
-LaTeX Warning: Citation `DolsakPaper94' on page 9 undefined on input line 44.
-
-
-LaTeX Warning: Citation `DolsakPaper94' on page 9 undefined on input line 44.
-
-
-LaTeX Warning: Citation `appOfILPToFEMeshDesign' on page 9 undefined on input l
-ine 44.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 43--45
 
  []
-
-
-LaTeX Warning: Citation `DolsakPaper94' on page 9 undefined on input line 47.
-
-
-LaTeX Warning: Citation `appOfILPToFEMeshDesign' on page 9 undefined on input l
-ine 47.
-
-
-LaTeX Warning: Citation `DolsakPaper91' on page 9 undefined on input line 47.
-
-
-LaTeX Warning: Citation `appOfILPToFEMeshDesign' on page 9 undefined on input l
-ine 47.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 46--48
@@ -1883,34 +1744,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--51
  []
 
 
-LaTeX Warning: Citation `DittmerMeshQualityMet' on page 9 undefined on input li
-ne 54.
-
-
-LaTeX Warning: Citation `NeuralNetworks' on page 9 undefined on input line 54.
-
-
-LaTeX Warning: Citation `DittmerMeshQualityMet' on page 9 undefined on input li
-ne 54.
-
-
-LaTeX Warning: Citation `DittmerMeshQualityMet' on page 9 undefined on input li
-ne 54.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 53--55
 
  []
 
 
-LaTeX Warning: Citation `DittmerMeshQualityMet' on page 9 undefined on input li
-ne 57.
-
-
-LaTeX Warning: Citation `IntroductionToFE' on page 9 undefined on input line 57
-.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 56--58
 
  []
@@ -1960,24 +1798,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 56--58
 
  []
 
-[9]
-<../Graphics/MeshQualityDeterioration.png, id=341, 1708.3825pt x 981.6675pt>
+[8]
+<../Graphics/MeshQualityDeterioration.png, id=416, 1708.3825pt x 981.6675pt>
 File: ../Graphics/MeshQualityDeterioration.png Graphic file (type png)
 
 <use ../Graphics/MeshQualityDeterioration.png>
 Package pdftex.def Info: ../Graphics/MeshQualityDeterioration.png used on input
  line 60.
 (pdftex.def)             Requested size: 1708.37836pt x 981.6651pt.
-
-
-LaTeX Warning: Citation `PoorFEElementShapes' on page 10 undefined on input lin
-e 61.
-
-
-LaTeX Warning: Citation `PoorFEElementShapes' on page 10 undefined on input lin
-e 61.
-
-) [10 <../Graphics/MeshQualityDeterioration.png>]
+) [9 <../Graphics/MeshQualityDeterioration.png>]
 \openout2 = `DescriptionOfWork.aux'.
 
  (DescriptionOfWork.tex
@@ -2000,7 +1829,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 24--26
 
  []
 
-[11
+[10
 
 
 ]
@@ -2009,14 +1838,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 72--73
  []
 
 
-LaTeX Warning: Citation `Doxygen' on page 12 undefined on input line 75.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 74--76
 
  []
 
-) [12]
+) [11]
 \openout2 = `SystemDesign.aux'.
 
  (SystemDesign.tex
@@ -2049,24 +1875,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--20
 
  []
 
-<../Graphics/OverallProcess.png, id=383, 965.0454pt x 1027.6794pt>
+<../Graphics/OverallProcess.png, id=463, 965.0454pt x 1027.6794pt>
 File: ../Graphics/OverallProcess.png Graphic file (type png)
 
 <use ../Graphics/OverallProcess.png>
 Package pdftex.def Info: ../Graphics/OverallProcess.png used on input line 27.
 (pdftex.def)             Requested size: 965.04303pt x 1027.6769pt.
- [13
+ [12
 
 
 ]
-<../Graphics/SystemDesignDiagram.jpeg, id=389, 763.35187pt x 516.42938pt>
+<../Graphics/SystemDesignDiagram.jpeg, id=468, 763.35187pt x 516.42938pt>
 File: ../Graphics/SystemDesignDiagram.jpeg Graphic file (type jpg)
 
 <use ../Graphics/SystemDesignDiagram.jpeg>
 Package pdftex.def Info: ../Graphics/SystemDesignDiagram.jpeg used on input lin
 e 35.
 (pdftex.def)             Requested size: 763.35pt x 516.42812pt.
- [14 <../Graphics/OverallProcess.png>]
+ [13 <../Graphics/OverallProcess.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 44--45
 
  []
@@ -2076,11 +1902,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 55--56
 
  []
 
-[15 <../Graphics/SystemDesignDiagram.jpeg>]
-
-LaTeX Warning: Citation `AnsysCost' on page 16 undefined on input line 59.
-
-
+[14 <../Graphics/SystemDesignDiagram.jpeg>]
 Underfull \hbox (badness 10000) in paragraph at lines 62--63
 
  []
@@ -2094,9 +1916,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 64--66
 Underfull \hbox (badness 10000) in paragraph at lines 67--69
 
  []
-
-
-LaTeX Warning: Citation `LISAManual' on page 16 undefined on input line 71.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 70--72
@@ -2113,7 +1932,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 77--79
 
  []
 
-<../Graphics/DataModelStructure/Model.png, id=401, 910.90312pt x 405.01312pt>
+<../Graphics/DataModelStructure/Model.png, id=483, 910.90312pt x 405.01312pt>
 File: ../Graphics/DataModelStructure/Model.png Graphic file (type png)
 
 <use ../Graphics/DataModelStructure/Model.png>
@@ -2121,15 +1940,15 @@ Package pdftex.def Info: ../Graphics/DataModelStructure/Model.png used on input
  line 84.
 (pdftex.def)             Requested size: 211.3883pt x 93.98535pt.
 
-<../Graphics/DataModelStructure/Elements.png, id=402, 623.32875pt x 340.27126pt
+<../Graphics/DataModelStructure/Elements.png, id=484, 623.32875pt x 340.27126pt
 >
 File: ../Graphics/DataModelStructure/Elements.png Graphic file (type png)
  <use ../Graphics/DataModelStructure/Elements.png>
 Package pdftex.def Info: ../Graphics/DataModelStructure/Elements.png used on in
 put line 90.
 (pdftex.def)             Requested size: 211.3883pt x 115.39474pt.
- [16]
-<../Graphics/DataModelStructure/ModelAnalysis.png, id=407, 869.49844pt x 426.84
+ [15]
+<../Graphics/DataModelStructure/ModelAnalysis.png, id=491, 869.49844pt x 426.84
 468pt>
 File: ../Graphics/DataModelStructure/ModelAnalysis.png Graphic file (type png)
  <use ../Graphics/DataModelStructure/ModelAnalysis.png>
@@ -2137,7 +1956,7 @@ Package pdftex.def Info: ../Graphics/DataModelStructure/ModelAnalysis.png used
 on input line 101.
 (pdftex.def)             Requested size: 211.3883pt x 103.77348pt.
 
-<../Graphics/DataModelStructure/MaterialProps.png, id=408, 627.09282pt x 323.70
+<../Graphics/DataModelStructure/MaterialProps.png, id=492, 627.09282pt x 323.70
 938pt>
 File: ../Graphics/DataModelStructure/MaterialProps.png Graphic file (type png)
  <use ../Graphics/DataModelStructure/MaterialProps.png>
@@ -2149,17 +1968,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 120--122
 
  []
 
-[17 <../Graphics/DataModelStructure/Model.png> <../Graphics/DataModelStructure/
+[16 <../Graphics/DataModelStructure/Model.png> <../Graphics/DataModelStructure/
 Elements.png> <../Graphics/DataModelStructure/ModelAnalysis.png> <../Graphics/D
 ataModelStructure/MaterialProps.png>]
-<../Graphics/ElementHigerarchyDiagram2.png, id=420, 1194.3822pt x 941.4372pt>
+<../Graphics/ElementHigerarchyDiagram2.png, id=504, 1194.3822pt x 941.4372pt>
 File: ../Graphics/ElementHigerarchyDiagram2.png Graphic file (type png)
 
 <use ../Graphics/ElementHigerarchyDiagram2.png>
 Package pdftex.def Info: ../Graphics/ElementHigerarchyDiagram2.png used on inpu
 t line 128.
 (pdftex.def)             Requested size: 1194.3793pt x 941.43489pt.
- [18
+ [17
 
  <../Graphics/ElementHigerarchyDiagram2.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 136--137
@@ -2167,33 +1986,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 136--137
  []
 
 
-LaTeX Warning: Citation `HandPRefinements' on page 19 undefined on input line 1
-39.
-
-
-LaTeX Warning: Citation `RRefinement' on page 19 undefined on input line 139.
-
-
-LaTeX Warning: Citation `HandPRefinements' on page 19 undefined on input line 1
-39.
-
-
-LaTeX Warning: Citation `RRefinement' on page 19 undefined on input line 139.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--141
+Underfull \hbox (badness 10000) in paragraph at lines 138--140
 
  []
 
-<../Graphics/ElemFlattening.png, id=427, 824.8416pt x 273.6624pt>
-File: ../Graphics/ElemFlattening.png Graphic file (type png)
 
-<use ../Graphics/ElemFlattening.png>
-Package pdftex.def Info: ../Graphics/ElemFlattening.png used on input line 143.
+Underfull \hbox (badness 10000) in paragraph at lines 141--143
 
-(pdftex.def)             Requested size: 824.83958pt x 273.66171pt.
+ []
 
-Underfull \hbox (badness 10000) in paragraph at lines 148--150
+
+Underfull \hbox (badness 10000) in paragraph at lines 144--146
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 147--149
 
  []
 
@@ -2202,15 +2010,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 151--153
 
  []
 
-[19
 
- <../Graphics/ElemFlattening.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 174--176
+Underfull \hbox (badness 10000) in paragraph at lines 156--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--179
+Underfull \hbox (badness 10000) in paragraph at lines 160--162
+
+ []
+
+[18
+
+] <../Graphics/ElemFlattening.png, id=520, 824.8416pt x 273.6624pt>
+File: ../Graphics/ElemFlattening.png Graphic file (type png)
+
+<use ../Graphics/ElemFlattening.png>
+Package pdftex.def Info: ../Graphics/ElemFlattening.png used on input line 165.
+
+(pdftex.def)             Requested size: 824.83958pt x 273.66171pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--173
+
+ []
+
+[19 <../Graphics/ElemFlattening.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 208--210
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 211--213
 
  []
 
@@ -2218,41 +2048,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 177--179
 \openout2 = `Implementation.aux'.
 
  (Implementation.tex
-Underfull \hbox (badness 10000) in paragraph at lines 10--11
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 12--14
+Underfull \hbox (badness 10000) in paragraph at lines 15--17
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--20
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 21--23
+Underfull \hbox (badness 10000) in paragraph at lines 24--26
 
  []
 
 
-LaTeX Warning: Citation `DolsakPaper91' on page 21 undefined on input line 26.
-
-
-LaTeX Warning: Citation `DolsakPaper94' on page 21 undefined on input line 26.
-
-
-LaTeX Warning: Citation `appOfILPToFEMeshDesign' on page 21 undefined on input 
-line 26.
-
-
-LaTeX Warning: Citation `ConsultRuleIntelltSystemFE' on page 21 undefined on in
-put line 26.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 26--27
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
 
  []
 
@@ -2260,71 +2076,67 @@ Underfull \hbox (badness 10000) in paragraph at lines 26--27
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 28--30
+Underfull \hbox (badness 10000) in paragraph at lines 31--33
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--56
+Underfull \hbox (badness 10000) in paragraph at lines 57--59
 
  []
 
-<../Graphics/Rule7Implementation.png, id=446, 447.92343pt x 243.15843pt>
+<../Graphics/Rule7Implementation.png, id=548, 447.92343pt x 243.15843pt>
 File: ../Graphics/Rule7Implementation.png Graphic file (type png)
 
 <use ../Graphics/Rule7Implementation.png>
 Package pdftex.def Info: ../Graphics/Rule7Implementation.png used on input line
- 65.
+ 68.
 (pdftex.def)             Requested size: 211.3883pt x 114.75197pt.
 
-<../Graphics/Rule7Dolsak.png, id=447, 246.9225pt x 137.01187pt>
+<../Graphics/Rule7Dolsak.png, id=549, 246.9225pt x 137.01187pt>
 File: ../Graphics/Rule7Dolsak.png Graphic file (type png)
 
 <use ../Graphics/Rule7Dolsak.png>
-Package pdftex.def Info: ../Graphics/Rule7Dolsak.png used on input line 71.
+Package pdftex.def Info: ../Graphics/Rule7Dolsak.png used on input line 74.
 (pdftex.def)             Requested size: 164.41353pt x 91.22882pt.
-
-
-LaTeX Warning: Citation `appOfILPToFEMeshDesign' on page 22 undefined on input 
-line 72.
-
-
-LaTeX Warning: Citation `appOfILPToFEMeshDesign' on page 22 undefined on input 
-line 72.
-
-[22]
-Underfull \hbox (badness 10000) in paragraph at lines 78--80
+ [22]
+Underfull \hbox (badness 10000) in paragraph at lines 81--83
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 82--84
+Underfull \hbox (badness 10000) in paragraph at lines 85--87
 
  []
 
 [23 <../Graphics/Rule7Implementation.png> <../Graphics/Rule7Dolsak.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 135--136
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 144--146
 
  []
 
 [24]
-Underfull \hbox (badness 10000) in paragraph at lines 154--155
+Underfull \hbox (badness 10000) in paragraph at lines 158--159
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--158
+Underfull \hbox (badness 10000) in paragraph at lines 160--162
 
  []
 
-<../Graphics/nodeLinking.png, id=467, 274.1442pt x 172.9662pt>
+<../Graphics/nodeLinking.png, id=570, 274.1442pt x 172.9662pt>
 File: ../Graphics/nodeLinking.png Graphic file (type png)
 
 <use ../Graphics/nodeLinking.png>
-Package pdftex.def Info: ../Graphics/nodeLinking.png used on input line 161.
+Package pdftex.def Info: ../Graphics/nodeLinking.png used on input line 165.
 (pdftex.def)             Requested size: 274.14351pt x 172.96577pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--166
+Underfull \hbox (badness 10000) in paragraph at lines 170--170
 
  []
 
@@ -2332,138 +2144,124 @@ Underfull \hbox (badness 10000) in paragraph at lines 166--166
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--176
+Underfull \hbox (badness 10000) in paragraph at lines 179--180
 
  []
 
-[25] <../Graphics/BadlyOrderedNodes.png, id=473, 164.2938pt x 165.7392pt>
+[25] <../Graphics/BadlyOrderedNodes.png, id=576, 164.2938pt x 165.7392pt>
 File: ../Graphics/BadlyOrderedNodes.png Graphic file (type png)
 
 <use ../Graphics/BadlyOrderedNodes.png>
 Package pdftex.def Info: ../Graphics/BadlyOrderedNodes.png used on input line 1
-78.
+82.
 (pdftex.def)             Requested size: 164.29338pt x 165.73877pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 184--186
+Underfull \hbox (badness 10000) in paragraph at lines 188--190
 
  []
 
 [26 <../Graphics/nodeLinking.png> <../Graphics/BadlyOrderedNodes.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 219--221
+Underfull \hbox (badness 10000) in paragraph at lines 223--225
 
  []
 
-<../Graphics/SkewedElementIssues.png, id=482, 599.99156pt x 375.65344pt>
+<../Graphics/SkewedElementIssues.png, id=585, 599.99156pt x 375.65344pt>
 File: ../Graphics/SkewedElementIssues.png Graphic file (type png)
 
 <use ../Graphics/SkewedElementIssues.png>
 Package pdftex.def Info: ../Graphics/SkewedElementIssues.png used on input line
- 226.
+ 230.
 (pdftex.def)             Requested size: 211.3883pt x 132.34619pt.
 
-<../Graphics/ElementSkewOnBridge.png, id=483, 718.93594pt x 687.31781pt>
+<../Graphics/ElementSkewOnBridge.png, id=586, 718.93594pt x 687.31781pt>
 File: ../Graphics/ElementSkewOnBridge.png Graphic file (type png)
 
 <use ../Graphics/ElementSkewOnBridge.png>
 Package pdftex.def Info: ../Graphics/ElementSkewOnBridge.png used on input line
- 232.
+ 236.
 (pdftex.def)             Requested size: 164.41353pt x 157.17783pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 242--244
+Underfull \hbox (badness 10000) in paragraph at lines 246--248
 
  []
 
 [27 <../Graphics/SkewedElementIssues.png> <../Graphics/ElementSkewOnBridge.png>
-] <../Graphics/SortingQuad4.png, id=493, 192.2382pt x 120.9318pt>
+] <../Graphics/SortingQuad4.png, id=596, 192.2382pt x 120.9318pt>
 File: ../Graphics/SortingQuad4.png Graphic file (type png)
 
 <use ../Graphics/SortingQuad4.png>
-Package pdftex.def Info: ../Graphics/SortingQuad4.png used on input line 252.
+Package pdftex.def Info: ../Graphics/SortingQuad4.png used on input line 256.
 (pdftex.def)             Requested size: 211.3883pt x 132.97923pt.
 
-<../Graphics/SortingHex8.png, id=494, 170.0754pt x 147.9126pt>
+<../Graphics/SortingHex8.png, id=597, 170.0754pt x 147.9126pt>
 File: ../Graphics/SortingHex8.png Graphic file (type png)
 
 <use ../Graphics/SortingHex8.png>
-Package pdftex.def Info: ../Graphics/SortingHex8.png used on input line 258.
+Package pdftex.def Info: ../Graphics/SortingHex8.png used on input line 262.
 (pdftex.def)             Requested size: 164.41353pt x 142.99883pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 266--268
-
- []
-
-
-LaTeX Warning: Citation `ConvexHulls' on page 28 undefined on input line 271.
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 270--272
 
  []
 
-<../Graphics/ConvexHullGraphic.png, id=495, 327.2225pt x 160.6pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 274--276
+
+ []
+
+<../Graphics/ConvexHullGraphic.png, id=599, 327.2225pt x 160.6pt>
 File: ../Graphics/ConvexHullGraphic.png Graphic file (type png)
 
 <use ../Graphics/ConvexHullGraphic.png>
 Package pdftex.def Info: ../Graphics/ConvexHullGraphic.png used on input line 2
-74.
+78.
 (pdftex.def)             Requested size: 327.2217pt x 160.5996pt.
-
-
-LaTeX Warning: Citation `ConvexHulls' on page 28 undefined on input line 276.
-
-
-LaTeX Warning: Citation `ConvexHulls' on page 28 undefined on input line 276.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-LaTeX Warning: Citation `GrahamScan' on page 28 undefined on input line 281.
-
-
-LaTeX Warning: Citation `ConvexHulls' on page 28 undefined on input line 281.
-
-
-LaTeX Warning: Citation `BruteConvex' on page 28 undefined on input line 281.
-
-
-LaTeX Warning: Citation `CSharpConvexHull' on page 28 undefined on input line 2
-81.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 280--282
+Underfull \hbox (badness 10000) in paragraph at lines 284--286
 
  []
 
 
-LaTeX Warning: Citation `ChainHull' on page 28 undefined on input line 284.
+Underfull \hbox (badness 10000) in paragraph at lines 284--286
+
+ []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 283--285
+Underfull \hbox (badness 10000) in paragraph at lines 284--286
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 284--286
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 287--289
 
  []
 
 [28 <../Graphics/SortingQuad4.png> <../Graphics/SortingHex8.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 286--288
+Underfull \hbox (badness 10000) in paragraph at lines 290--292
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 286--288
+Underfull \hbox (badness 10000) in paragraph at lines 290--292
 
  []
 
 
-LaTeX Warning: Citation `MonotoneChain' on page 29 undefined on input line 320.
-
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 328--331
+Underfull \hbox (badness 10000) in paragraph at lines 332--335
 
  []
 
 )
-Underfull \hbox (badness 10000) in paragraph at lines 334--107
+Underfull \hbox (badness 10000) in paragraph at lines 338--105
 
  []
 
@@ -2471,11 +2269,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 334--107
 \openout2 = `Evaluation.aux'.
 
  (Evaluation.tex
-
-LaTeX Warning: Citation `DittmerMeshQualityMet' on page 31 undefined on input l
-ine 3.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
@@ -2491,10 +2284,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--20
  []
 
 
-LaTeX Warning: Citation `VisualStudioMaintainIndex' on page 31 undefined on inp
-ut line 22.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 21--23
 
  []
@@ -2508,27 +2297,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 29--30
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--40
+Underfull \hbox (badness 10000) in paragraph at lines 40--42
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 41--43
+Underfull \hbox (badness 10000) in paragraph at lines 43--45
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--46
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 47--49
+Underfull \hbox (badness 10000) in paragraph at lines 46--48
 
  []
 
@@ -2568,102 +2352,75 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--70
  []
 
 
-<../Graphics/Graphs/SingleMethods/ExecutionTimes.png, id=524, 494.3268pt x 297.
-7524pt>
-File: ../Graphics/Graphs/SingleMethods/ExecutionTimes.png Graphic file (type pn
-g)
- <use ../Graphics/Graphs/SingleMethods/ExecutionTimes.png>
-Package pdftex.def Info: ../Graphics/Graphs/SingleMethods/ExecutionTimes.png us
-ed on input line 77.
-(pdftex.def)             Requested size: 211.3883pt x 127.32681pt.
-
-<../Graphics/Graphs/SingleMethods/NumberOfElements.png, id=525, 365.6862pt x 27
-2.217pt>
-File: ../Graphics/Graphs/SingleMethods/NumberOfElements.png Graphic file (type 
-png)
- <use ../Graphics/Graphs/SingleMethods/NumberOfElements.png>
-Package pdftex.def Info: ../Graphics/Graphs/SingleMethods/NumberOfElements.png 
-used on input line 83.
-(pdftex.def)             Requested size: 176.15813pt x 131.13618pt.
- [33]
-Underfull \hbox (badness 10000) in paragraph at lines 91--93
+Underfull \hbox (badness 10000) in paragraph at lines 71--73
 
  []
 
 
-<../Graphics/Graphs/SingleMethods/AngleImprovements.png, id=530, 483.7272pt x 2
-95.3434pt>
-File: ../Graphics/Graphs/SingleMethods/AngleImprovements.png Graphic file (type
- png)
- <use ../Graphics/Graphs/SingleMethods/AngleImprovements.png>
-Package pdftex.def Info: ../Graphics/Graphs/SingleMethods/AngleImprovements.png
- used on input line 95.
-(pdftex.def)             Requested size: 483.72601pt x 295.34267pt.
+Underfull \hbox (badness 10000) in paragraph at lines 77--79
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--84
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--87
+
+ []
+
+[33]
+Underfull \hbox (badness 10000) in paragraph at lines 88--90
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--99
+
+ []
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 100--102
 
  []
 
+
+<../Graphics/Graphs/SingleMethods/ExecutionTimes.png, id=650, 494.3268pt x 297.
+7524pt>
+File: ../Graphics/Graphs/SingleMethods/ExecutionTimes.png Graphic file (type pn
+g)
+ <use ../Graphics/Graphs/SingleMethods/ExecutionTimes.png>
+Package pdftex.def Info: ../Graphics/Graphs/SingleMethods/ExecutionTimes.png us
+ed on input line 109.
+(pdftex.def)             Requested size: 211.3883pt x 127.32681pt.
+
+<../Graphics/Graphs/SingleMethods/NumberOfElements.png, id=651, 365.6862pt x 27
+2.217pt>
+File: ../Graphics/Graphs/SingleMethods/NumberOfElements.png Graphic file (type 
+png)
+ <use ../Graphics/Graphs/SingleMethods/NumberOfElements.png>
+Package pdftex.def Info: ../Graphics/Graphs/SingleMethods/NumberOfElements.png 
+used on input line 115.
+(pdftex.def)             Requested size: 176.15813pt x 131.13618pt.
+
+<../Graphics/Graphs/SingleMethods/AngleImprovements.png, id=652, 483.7272pt x 2
+95.3434pt>
+File: ../Graphics/Graphs/SingleMethods/AngleImprovements.png Graphic file (type
+ png)
+ <use ../Graphics/Graphs/SingleMethods/AngleImprovements.png>
+Package pdftex.def Info: ../Graphics/Graphs/SingleMethods/AngleImprovements.png
+ used on input line 130.
+(pdftex.def)             Requested size: 483.72601pt x 295.34267pt.
+
 [34 <../Graphics/Graphs/SingleMethods/ExecutionTimes.png> <../Graphics/Graphs/S
-ingleMethods/NumberOfElements.png> <../Graphics/Graphs/SingleMethods/AngleImpro
-vements.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 103--105
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 106--107
-
- []
-
-
-LaTeX Warning: Citation `StressConcerntration' on page 35 undefined on input li
-ne 110.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 109--111
-
- []
-
-
-<../Graphics/Graphs/AverageStressesBridge/AverageStressRevealedForIndividualMet
-hodWeightings.png, id=540, 434.5836pt x 298.716pt>
-File: ../Graphics/Graphs/AverageStressesBridge/AverageStressRevealedForIndividu
-alMethodWeightings.png Graphic file (type png)
-
-<use ../Graphics/Graphs/AverageStressesBridge/AverageStressRevealedForIndividua
-lMethodWeightings.png>
-Package pdftex.def Info: ../Graphics/Graphs/AverageStressesBridge/AverageStress
-RevealedForIndividualMethodWeightings.png used on input line 116.
-(pdftex.def)             Requested size: 211.3883pt x 145.30096pt.
-
-<../Graphics/Graphs/AverageStressesBridge/HybridResultsAveraged.png, id=541, 54
-8.2884pt x 301.125pt>
-File: ../Graphics/Graphs/AverageStressesBridge/HybridResultsAveraged.png Graphi
-c file (type png)
-
-<use ../Graphics/Graphs/AverageStressesBridge/HybridResultsAveraged.png>
-Package pdftex.def Info: ../Graphics/Graphs/AverageStressesBridge/HybridResults
-Averaged.png used on input line 122.
-(pdftex.def)             Requested size: 258.36668pt x 141.89635pt.
-
-Overfull \hbox (23.48918pt too wide) in paragraph at lines 122--123
- [][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 131--133
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 134--137
-
- []
-
-[35 <../Graphics/Graphs/AverageStressesBridge/AverageStressRevealedForIndividua
-lMethodWeightings.png> <../Graphics/Graphs/AverageStressesBridge/HybridResultsA
-veraged.png>]
+ingleMethods/NumberOfElements.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 138--140
 
  []
@@ -2674,49 +2431,108 @@ Underfull \hbox (badness 10000) in paragraph at lines 141--143
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 144--146
+Underfull \hbox (badness 10000) in paragraph at lines 144--145
 
  []
 
 
-<../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.png, id=549, 745.28438pt 
+Underfull \hbox (badness 10000) in paragraph at lines 147--149
+
+ []
+
+
+<../Graphics/Graphs/AverageStressesBridge/AverageStressRevealedForIndividualMet
+hodWeightings.png, id=661, 434.5836pt x 298.716pt>
+File: ../Graphics/Graphs/AverageStressesBridge/AverageStressRevealedForIndividu
+alMethodWeightings.png Graphic file (type png)
+
+<use ../Graphics/Graphs/AverageStressesBridge/AverageStressRevealedForIndividua
+lMethodWeightings.png>
+Package pdftex.def Info: ../Graphics/Graphs/AverageStressesBridge/AverageStress
+RevealedForIndividualMethodWeightings.png used on input line 154.
+(pdftex.def)             Requested size: 211.3883pt x 145.30096pt.
+
+<../Graphics/Graphs/AverageStressesBridge/HybridResultsAveraged.png, id=662, 54
+8.2884pt x 301.125pt>
+File: ../Graphics/Graphs/AverageStressesBridge/HybridResultsAveraged.png Graphi
+c file (type png)
+
+<use ../Graphics/Graphs/AverageStressesBridge/HybridResultsAveraged.png>
+Package pdftex.def Info: ../Graphics/Graphs/AverageStressesBridge/HybridResults
+Averaged.png used on input line 160.
+(pdftex.def)             Requested size: 258.36668pt x 141.89635pt.
+
+Overfull \hbox (23.48918pt too wide) in paragraph at lines 160--161
+ [][] 
+ []
+
+[35 <../Graphics/Graphs/SingleMethods/AngleImprovements.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 169--171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--175
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 176--178
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 179--181
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 184--186
+
+ []
+
+[36 <../Graphics/Graphs/AverageStressesBridge/AverageStressRevealedForIndividua
+lMethodWeightings.png> <../Graphics/Graphs/AverageStressesBridge/HybridResultsA
+veraged.png>]
+<../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.png, id=677, 745.28438pt 
 x 621.82312pt>
 File: ../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.png Graphic file (ty
 pe png)
  <use ../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.png>
 Package pdftex.def Info: ../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.p
-ng used on input line 159.
+ng used on input line 199.
 (pdftex.def)             Requested size: 211.3883pt x 176.36748pt.
 
-<../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png, id=550
+<../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png, id=678
 , 1123.94907pt x 676.02562pt>
 File: ../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png Gr
 aphic file (type png)
 
 <use ../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png>
 Package pdftex.def Info: ../Graphics/BridgeCrossLoadingStress/BridgeCrossLoadin
-gStress6-3-2.png used on input line 165.
+gStress6-3-2.png used on input line 205.
 (pdftex.def)             Requested size: 211.3883pt x 127.13615pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--194
-
- []
-
-[36 <../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.png> <../Graphics/Bri
-dgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 195--197
+Underfull \hbox (badness 10000) in paragraph at lines 233--234
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--201
+Underfull \hbox (badness 10000) in paragraph at lines 235--237
 
  []
 
-) [37]
+
+Underfull \hbox (badness 10000) in paragraph at lines 239--241
+
+ []
+
+[37 <../Graphics/BridgeCrossLoadingStress/Hybrid-best-3-2.png> <../Graphics/Bri
+dgeCrossLoadingStress/BridgeCrossLoadingStress6-3-2.png>]) [38]
 \openout2 = `FurtherWork.aux'.
 
- (FurtherWork.tex
+
+(FurtherWork.tex
 Underfull \hbox (badness 10000) in paragraph at lines 11--12
 
  []
@@ -2726,10 +2542,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 13--15
 
  []
 
-
-LaTeX Warning: Citation `LISAManual' on page 38 undefined on input line 19.
-
-[38
+[39
 
 
 ]
@@ -2762,69 +2575,109 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--51
 
  []
 
-[39]) [40] (DissertationMain.bbl)
+[40]
+Underfull \hbox (badness 10000) in paragraph at lines 52--54
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--57
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 58--60
+
+ []
+
+) [41] (DissertationMain.bbl
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 40.
+
+("C:\Users\Jack\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+[42
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 149--153
+\T1/cmtt/m/n/10 Lecture % 206 % 20-[] % 20Brute % 20Force % 20Closest % 20Pair 
+% 20and % 20Convex % 20and % 20Exhausive %
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 161--164
+[]\T1/cmr/m/n/10 Unknown.  Fi-nite el-e-ment mesh re-fine-ment.  [][]$\T1/cmtt/
+m/n/10 https : / / www . comsol . com / multiphysics /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--170
+[]\T1/cmr/m/n/10 Unknown.  High stress cor-ner.  [][]$\T1/cmtt/m/n/10 http : / 
+/ www . engineeringanalysisservices . com /
+ []
+
+) [43]
 \openout2 = `Appendix.aux'.
 
  (Appendix.tex
-<../Graphics/LISA-quad4.png, id=575, 100.12407pt x 99.37125pt>
+<../Graphics/LISA-quad4.png, id=756, 100.12407pt x 99.37125pt>
 File: ../Graphics/LISA-quad4.png Graphic file (type png)
 
 <use ../Graphics/LISA-quad4.png>
 Package pdftex.def Info: ../Graphics/LISA-quad4.png used on input line 13.
 (pdftex.def)             Requested size: 70.46396pt x 69.93846pt.
 
-<../Graphics/LISA-hex8.png, id=576, 99.37125pt x 100.87688pt>
+<../Graphics/LISA-hex8.png, id=757, 99.37125pt x 100.87688pt>
 File: ../Graphics/LISA-hex8.png Graphic file (type png)
 
 <use ../Graphics/LISA-hex8.png>
 Package pdftex.def Info: ../Graphics/LISA-hex8.png used on input line 19.
 (pdftex.def)             Requested size: 70.46396pt x 71.5338pt.
 
-<../Graphics/LISA-tri3.png, id=577, 100.12407pt x 100.12407pt>
+<../Graphics/LISA-tri3.png, id=758, 100.12407pt x 100.12407pt>
 File: ../Graphics/LISA-tri3.png Graphic file (type png)
 
 <use ../Graphics/LISA-tri3.png>
 Package pdftex.def Info: ../Graphics/LISA-tri3.png used on input line 32.
 (pdftex.def)             Requested size: 70.46396pt x 70.46829pt.
 
-<../Graphics/LISA-tet4.png, id=578, 100.12407pt x 100.12407pt>
+<../Graphics/LISA-tet4.png, id=759, 100.12407pt x 100.12407pt>
 File: ../Graphics/LISA-tet4.png Graphic file (type png)
 
 <use ../Graphics/LISA-tet4.png>
 Package pdftex.def Info: ../Graphics/LISA-tet4.png used on input line 38.
 (pdftex.def)             Requested size: 70.46396pt x 70.46829pt.
 
-<../Graphics/LISA-line2.png, id=579, 100.12407pt x 98.61844pt>
+<../Graphics/LISA-line2.png, id=760, 100.12407pt x 98.61844pt>
 File: ../Graphics/LISA-line2.png Graphic file (type png)
 
 <use ../Graphics/LISA-line2.png>
 Package pdftex.def Info: ../Graphics/LISA-line2.png used on input line 51.
 (pdftex.def)             Requested size: 70.46396pt x 69.40862pt.
 
-<../Graphics/LISA-line3.png, id=580, 100.87688pt x 100.87688pt>
+<../Graphics/LISA-line3.png, id=761, 100.87688pt x 100.87688pt>
 File: ../Graphics/LISA-line3.png Graphic file (type png)
 
 <use ../Graphics/LISA-line3.png>
 Package pdftex.def Info: ../Graphics/LISA-line3.png used on input line 57.
 (pdftex.def)             Requested size: 70.46396pt x 70.464pt.
 
-<../Graphics/unitTests.png, id=581, 288.3272pt x 428.35031pt>
+<../Graphics/unitTests.png, id=762, 288.3272pt x 428.35031pt>
 File: ../Graphics/unitTests.png Graphic file (type png)
 
 <use ../Graphics/unitTests.png>
 Package pdftex.def Info: ../Graphics/unitTests.png used on input line 85.
 (pdftex.def)             Requested size: 144.16324pt x 214.17462pt.
- [41
-
+ [44
 
  <../Graphics/LISA-quad4.png> <../Graphics/LISA-hex8.png> <../Graphics/LISA-tri
 3.png> <../Graphics/LISA-tet4.png> <../Graphics/LISA-line2.png> <../Graphics/LI
-SA-line3.png>] [42 <../Graphics/unitTests.png>]
+SA-line3.png>] [45 <../Graphics/unitTests.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 126--127
 
  []
 
-<../Graphics/limlFileLayout.png, id=601, 477.28313pt x 691.08188pt>
+<../Graphics/limlFileLayout.png, id=782, 477.28313pt x 691.08188pt>
 File: ../Graphics/limlFileLayout.png Graphic file (type png)
 
 <use ../Graphics/limlFileLayout.png>
@@ -2832,7 +2685,7 @@ Package pdftex.def Info: ../Graphics/limlFileLayout.png used on input line 132.
 
 (pdftex.def)             Requested size: 140.92793pt x 204.04665pt.
 
-<../Graphics/jsonEdgeFileLayout.png, id=602, 495.35063pt x 569.87906pt>
+<../Graphics/jsonEdgeFileLayout.png, id=783, 495.35063pt x 569.87906pt>
 File: ../Graphics/jsonEdgeFileLayout.png Graphic file (type png)
 
 <use ../Graphics/jsonEdgeFileLayout.png>
@@ -2840,23 +2693,23 @@ Package pdftex.def Info: ../Graphics/jsonEdgeFileLayout.png used on input line
 138.
 (pdftex.def)             Requested size: 187.90271pt x 216.17368pt.
 
-<../Graphics/VSolutionExplorer.png, id=603, 219.82124pt x 839.38594pt>
+<../Graphics/VSolutionExplorer.png, id=784, 219.82124pt x 839.38594pt>
 File: ../Graphics/VSolutionExplorer.png Graphic file (type png)
 
 <use ../Graphics/VSolutionExplorer.png>
 Package pdftex.def Info: ../Graphics/VSolutionExplorer.png used on input line 1
 50.
 (pdftex.def)             Requested size: 54.95517pt x 209.84596pt.
- [43 <../Graphics/limlFileLayout.png> <../Graphics/jsonEdgeFileLayout.png>]
-<../Graphics/Doxygen/Quad4Element.png, id=612, 1445.4pt x 784.43062pt>
+ [46 <../Graphics/limlFileLayout.png> <../Graphics/jsonEdgeFileLayout.png>]
+<../Graphics/Doxygen/Quad4Element.png, id=792, 1445.4pt x 784.43062pt>
 File: ../Graphics/Doxygen/Quad4Element.png Graphic file (type png)
 
 <use ../Graphics/Doxygen/Quad4Element.png>
 Package pdftex.def Info: ../Graphics/Doxygen/Quad4Element.png used on input lin
 e 159.
 (pdftex.def)             Requested size: 722.69824pt x 392.21434pt.
- [44 <../Graphics/VSolutionExplorer.png>]
-<../Graphics/Doxygen/RefinementManager.png, id=619, 1445.4pt x 782.17218pt>
+ [47 <../Graphics/VSolutionExplorer.png>]
+<../Graphics/Doxygen/RefinementManager.png, id=799, 1445.4pt x 782.17218pt>
 File: ../Graphics/Doxygen/RefinementManager.png Graphic file (type png)
 
 <use ../Graphics/Doxygen/RefinementManager.png>
@@ -2864,24 +2717,24 @@ Package pdftex.def Info: ../Graphics/Doxygen/RefinementManager.png used on inpu
 t line 164.
 (pdftex.def)             Requested size: 722.69824pt x 391.08513pt.
 
-<../Graphics/softwareQualityMetrics.png, id=620, 791.20593pt x 292.84406pt>
+<../Graphics/softwareQualityMetrics.png, id=800, 791.20593pt x 292.84406pt>
 File: ../Graphics/softwareQualityMetrics.png Graphic file (type png)
 
 <use ../Graphics/softwareQualityMetrics.png>
 Package pdftex.def Info: ../Graphics/softwareQualityMetrics.png used on input l
 ine 172.
 (pdftex.def)             Requested size: 395.60199pt x 146.42166pt.
- [45 <../Graphics/Doxygen/Quad4Element.png> <../Graphics/Doxygen/RefinementMana
+ [48 <../Graphics/Doxygen/Quad4Element.png> <../Graphics/Doxygen/RefinementMana
 ger.png>]
-<../Graphics/qualityMetricsExpanded.png, id=629, 825.0825pt x 855.94781pt>
+<../Graphics/qualityMetricsExpanded.png, id=809, 825.0825pt x 855.94781pt>
 File: ../Graphics/qualityMetricsExpanded.png Graphic file (type png)
 
 <use ../Graphics/qualityMetricsExpanded.png>
 Package pdftex.def Info: ../Graphics/qualityMetricsExpanded.png used on input l
 ine 177.
 (pdftex.def)             Requested size: 412.54024pt x 427.97285pt.
- [46 <../Graphics/softwareQualityMetrics.png>]
-<../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png, id=636, 1148.79187pt x
+ [49 <../Graphics/softwareQualityMetrics.png>]
+<../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png, id=817, 1148.79187pt x
  709.14937pt>
 File: ../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png Graphic file (type
  png)
@@ -2890,7 +2743,7 @@ Package pdftex.def Info: ../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png
  used on input line 194.
 (pdftex.def)             Requested size: 574.39453pt x 354.57382pt.
 
-<../Graphics/BridgeCrossLoading/bestEdgeSpecResultsCloseUp.png, id=637, 1145.78
+<../Graphics/BridgeCrossLoading/bestEdgeSpecResultsCloseUp.png, id=818, 1145.78
 062pt x 710.655pt>
 File: ../Graphics/BridgeCrossLoading/bestEdgeSpecResultsCloseUp.png Graphic fil
 e (type png)
@@ -2899,8 +2752,8 @@ e (type png)
 Package pdftex.def Info: ../Graphics/BridgeCrossLoading/bestEdgeSpecResultsClos
 eUp.png used on input line 200.
 (pdftex.def)             Requested size: 572.88892pt x 355.32663pt.
- [47 <../Graphics/qualityMetricsExpanded.png>]
-<../Graphics/BridgeCrossLoading/okEdgeSpecResults.png, id=644, 1134.48843pt x 6
+ [50 <../Graphics/qualityMetricsExpanded.png>]
+<../Graphics/BridgeCrossLoading/okEdgeSpecResults.png, id=825, 1134.48843pt x 6
 85.8122pt>
 File: ../Graphics/BridgeCrossLoading/okEdgeSpecResults.png Graphic file (type p
 ng)
@@ -2909,7 +2762,7 @@ Package pdftex.def Info: ../Graphics/BridgeCrossLoading/okEdgeSpecResults.png u
 sed on input line 209.
 (pdftex.def)             Requested size: 567.24283pt x 342.90526pt.
 
-<../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png, id=645, 1148.7
+<../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png, id=826, 1148.7
 9187pt x 708.39656pt>
 File: ../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png Graphic fi
 le (type png)
@@ -2918,10 +2771,10 @@ le (type png)
 Package pdftex.def Info: ../Graphics/BridgeCrossLoading/the90thPercentileRefine
 ment.png used on input line 215.
 (pdftex.def)             Requested size: 574.39453pt x 354.1974pt.
- [48 <../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png> <../Graphics/Brid
+ [51 <../Graphics/BridgeCrossLoading/bestEdgeSpecResults.png> <../Graphics/Brid
 geCrossLoading/bestEdgeSpecResultsCloseUp.png> <../Graphics/BridgeCrossLoading/
 okEdgeSpecResults.png>]
-<../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png, id=655, 1150.2975p
+<../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png, id=836, 1150.2975p
 t x 709.14937pt>
 File: ../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png Graphic file (
 type png)
@@ -2930,8 +2783,8 @@ type png)
 Package pdftex.def Info: ../Graphics/BridgeCrossLoading/aboveAverageRefinement2
 .png used on input line 220.
 (pdftex.def)             Requested size: 575.14735pt x 354.57382pt.
- [49 <../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png>]
-<../Graphics/BridgeCrossLoading/aboveAverageRefinement.png, id=663, 1148.03906p
+ [52 <../Graphics/BridgeCrossLoading/the90thPercentileRefinement.png>]
+<../Graphics/BridgeCrossLoading/aboveAverageRefinement.png, id=843, 1148.03906p
 t x 707.64375pt>
 File: ../Graphics/BridgeCrossLoading/aboveAverageRefinement.png Graphic file (t
 ype png)
@@ -2940,8 +2793,8 @@ ype png)
 Package pdftex.def Info: ../Graphics/BridgeCrossLoading/aboveAverageRefinement.
 png used on input line 226.
 (pdftex.def)             Requested size: 574.01813pt x 353.82101pt.
- [50 <../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png>]
-<../Graphics/PaperMillDolsak.jpeg, id=670, 375.65344pt x 507.39563pt>
+ [53 <../Graphics/BridgeCrossLoading/aboveAverageRefinement2.png>]
+<../Graphics/PaperMillDolsak.jpeg, id=850, 375.65344pt x 507.39563pt>
 File: ../Graphics/PaperMillDolsak.jpeg Graphic file (type jpg)
 
 <use ../Graphics/PaperMillDolsak.jpeg>
@@ -2949,22 +2802,15 @@ Package pdftex.def Info: ../Graphics/PaperMillDolsak.jpeg used on input line 24
 4.
 (pdftex.def)             Requested size: 211.3883pt x 285.52547pt.
 
-<../Graphics/PaperMillWithinLisa.jpeg, id=671, 678.28406pt x 530.73282pt>
+<../Graphics/PaperMillWithinLisa.jpeg, id=851, 678.28406pt x 530.73282pt>
 File: ../Graphics/PaperMillWithinLisa.jpeg Graphic file (type jpg)
 
 <use ../Graphics/PaperMillWithinLisa.jpeg>
 Package pdftex.def Info: ../Graphics/PaperMillWithinLisa.jpeg used on input lin
 e 250.
 (pdftex.def)             Requested size: 211.3883pt x 165.40009pt.
-
-
-LaTeX Warning: Citation `Dolsak91' on page 51 undefined on input line 251.
-
-
-LaTeX Warning: Citation `Dolsak91' on page 51 undefined on input line 251.
-
-[51 <../Graphics/BridgeCrossLoading/aboveAverageRefinement.png>]
-<../Graphics/PaperMillStress/PaperMillFirstUWMesh.png, id=678, 700.11563pt x 64
+ [54 <../Graphics/BridgeCrossLoading/aboveAverageRefinement.png>]
+<../Graphics/PaperMillStress/PaperMillFirstUWMesh.png, id=860, 700.11563pt x 64
 5.91313pt>
 File: ../Graphics/PaperMillStress/PaperMillFirstUWMesh.png Graphic file (type p
 ng)
@@ -2972,150 +2818,150 @@ ng)
 Package pdftex.def Info: ../Graphics/PaperMillStress/PaperMillFirstUWMesh.png u
 sed on input line 259.
 (pdftex.def)             Requested size: 350.05696pt x 322.95578pt.
- [52 <../Graphics/PaperMillDolsak.jpeg> <../Graphics/PaperMillWithinLisa.jpeg>]
+ [55 <../Graphics/PaperMillDolsak.jpeg> <../Graphics/PaperMillWithinLisa.jpeg>]
 
-<../Graphics/Graphs/PaperMillExecutionTimes.png, id=684, 628.749pt x 632.6034pt
->
-File: ../Graphics/Graphs/PaperMillExecutionTimes.png Graphic file (type png)
- <use ../Graphics/Graphs/PaperMillExecutionTimes.png>
-Package pdftex.def Info: ../Graphics/Graphs/PaperMillExecutionTimes.png used on
+<../Graphics/PaperMill/MaximumInternalAngle.png, id=867, 473.6094pt x 284.7438p
+t>
+File: ../Graphics/PaperMill/MaximumInternalAngle.png Graphic file (type png)
+ <use ../Graphics/PaperMill/MaximumInternalAngle.png>
+Package pdftex.def Info: ../Graphics/PaperMill/MaximumInternalAngle.png used on
  input line 265.
-(pdftex.def)             Requested size: 314.37372pt x 316.30092pt.
- [53 <../Graphics/PaperMillStress/PaperMillFirstUWMesh.png>]
-<../Graphics/Graphs/PaperMillAverageStressRevealed.png, id=691, 427.8384pt x 23
-3.1912pt>
-File: ../Graphics/Graphs/PaperMillAverageStressRevealed.png Graphic file (type 
-png)
- <use ../Graphics/Graphs/PaperMillAverageStressRevealed.png>
-Package pdftex.def Info: ../Graphics/Graphs/PaperMillAverageStressRevealed.png 
-used on input line 270.
-(pdftex.def)             Requested size: 213.91867pt x 116.5953pt.
+(pdftex.def)             Requested size: 236.80412pt x 142.37155pt.
 
-<../Graphics/HalfCylinder/DolsakCylinderMeshed.jpeg, id=692, 317.68687pt x 267.
+<../Graphics/PaperMill/AverageStress.png, id=868, 616.2222pt x 332.442pt>
+File: ../Graphics/PaperMill/AverageStress.png Graphic file (type png)
+
+<use ../Graphics/PaperMill/AverageStress.png>
+Package pdftex.def Info: ../Graphics/PaperMill/AverageStress.png used on input 
+line 271.
+(pdftex.def)             Requested size: 308.11034pt x 166.22058pt.
+ [56 <../Graphics/PaperMillStress/PaperMillFirstUWMesh.png> <../Graphics/PaperM
+ill/MaximumInternalAngle.png>]
+<../Graphics/PaperMill/PaperMillExecutionTimes.png, id=877, 628.749pt x 632.603
+4pt>
+File: ../Graphics/PaperMill/PaperMillExecutionTimes.png Graphic file (type png)
+
+ <use ../Graphics/PaperMill/PaperMillExecutionTimes.png>
+Package pdftex.def Info: ../Graphics/PaperMill/PaperMillExecutionTimes.png used
+ on input line 278.
+(pdftex.def)             Requested size: 314.37372pt x 316.30092pt.
+
+<../Graphics/HalfCylinder/DolsakCylinderMeshed.jpeg, id=878, 317.68687pt x 267.
 24844pt>
 File: ../Graphics/HalfCylinder/DolsakCylinderMeshed.jpeg Graphic file (type jpg
 )
  <use ../Graphics/HalfCylinder/DolsakCylinderMeshed.jpeg>
 Package pdftex.def Info: ../Graphics/HalfCylinder/DolsakCylinderMeshed.jpeg use
-d on input line 285.
+d on input line 294.
 (pdftex.def)             Requested size: 211.3883pt x 177.83215pt.
 
-<../Graphics/HalfCylinder/DolsakCylinderWithinLisa.jpeg, id=693, 581.92406pt x 
+<../Graphics/HalfCylinder/DolsakCylinderWithinLisa.jpeg, id=879, 581.92406pt x 
 444.15938pt>
 File: ../Graphics/HalfCylinder/DolsakCylinderWithinLisa.jpeg Graphic file (type
  jpg)
  <use ../Graphics/HalfCylinder/DolsakCylinderWithinLisa.jpeg>
 Package pdftex.def Info: ../Graphics/HalfCylinder/DolsakCylinderWithinLisa.jpeg
- used on input line 291.
+ used on input line 300.
 (pdftex.def)             Requested size: 211.3883pt x 161.3408pt.
 
-
-LaTeX Warning: Citation `Dolsak91' on page 54 undefined on input line 292.
-
-
-LaTeX Warning: Citation `Dolsak91' on page 54 undefined on input line 292.
-
-[54 <../Graphics/Graphs/PaperMillExecutionTimes.png> <../Graphics/Graphs/PaperM
-illAverageStressRevealed.png>]
-<../Graphics/HalfCylinder/ForcesAndConstraintsOnCylinderPNG.png, id=702, 718.93
+[57 <../Graphics/PaperMill/AverageStress.png> <../Graphics/PaperMill/PaperMillE
+xecutionTimes.png>]
+<../Graphics/HalfCylinder/ForcesAndConstraintsOnCylinderPNG.png, id=890, 718.93
 594pt x 439.6425pt>
 File: ../Graphics/HalfCylinder/ForcesAndConstraintsOnCylinderPNG.png Graphic fi
 le (type png)
 
 <use ../Graphics/HalfCylinder/ForcesAndConstraintsOnCylinderPNG.png>
 Package pdftex.def Info: ../Graphics/HalfCylinder/ForcesAndConstraintsOnCylinde
-rPNG.png used on input line 304.
+rPNG.png used on input line 313.
 (pdftex.def)             Requested size: 211.3883pt x 129.26407pt.
 
-<../Graphics/HalfCylinder/InitialStress.png, id=703, 732.48656pt x 561.59813pt>
+<../Graphics/HalfCylinder/InitialStress.png, id=891, 732.48656pt x 561.59813pt>
 File: ../Graphics/HalfCylinder/InitialStress.png Graphic file (type png)
 <use ../Graphics/HalfCylinder/InitialStress.png>
 Package pdftex.def Info: ../Graphics/HalfCylinder/InitialStress.png used on inp
-ut line 310.
+ut line 319.
 (pdftex.def)             Requested size: 211.3883pt x 162.0709pt.
 
-<../Graphics/HalfCylinder/ImprovementInMaxCornerAngles.png, id=704, 490.9542pt 
+<../Graphics/HalfCylinder/ImprovementInMaxCornerAngles.png, id=892, 490.9542pt 
 x 293.4162pt>
 File: ../Graphics/HalfCylinder/ImprovementInMaxCornerAngles.png Graphic file (t
 ype png)
  <use ../Graphics/HalfCylinder/ImprovementInMaxCornerAngles.png>
 Package pdftex.def Info: ../Graphics/HalfCylinder/ImprovementInMaxCornerAngles.
-png used on input line 319.
+png used on input line 328.
 (pdftex.def)             Requested size: 245.47649pt x 146.70773pt.
 
-[55 <../Graphics/HalfCylinder/DolsakCylinderMeshed.jpeg> <../Graphics/HalfCylin
+[58 <../Graphics/HalfCylinder/DolsakCylinderMeshed.jpeg> <../Graphics/HalfCylin
 der/DolsakCylinderWithinLisa.jpeg> <../Graphics/HalfCylinder/ForcesAndConstrain
 tsOnCylinderPNG.png> <../Graphics/HalfCylinder/InitialStress.png>]
 <../Graphics/HalfCylinder/AverageStressDetectedUsingAverageOverHeuristicsForDif
-ferentHybrids(HalfCylinder).png, id=714, 534.798pt x 356.0502pt>
+ferentHybrids(HalfCylinder).png, id=901, 534.798pt x 356.0502pt>
 File: ../Graphics/HalfCylinder/AverageStressDetectedUsingAverageOverHeuristicsF
 orDifferentHybrids(HalfCylinder).png Graphic file (type png)
 
 <use ../Graphics/HalfCylinder/AverageStressDetectedUsingAverageOverHeuristicsFo
 rDifferentHybrids(HalfCylinder).png>
 Package pdftex.def Info: ../Graphics/HalfCylinder/AverageStressDetectedUsingAve
-rageOverHeuristicsForDifferentHybrids(HalfCylinder).png used on input line 324.
+rageOverHeuristicsForDifferentHybrids(HalfCylinder).png used on input line 333.
 
 (pdftex.def)             Requested size: 267.39835pt x 178.02466pt.
 
-<../Graphics/HalfCylinder/ExecutionTimes.png, id=715, 820.0236pt x 675.4836pt>
+<../Graphics/HalfCylinder/ExecutionTimes.png, id=902, 820.0236pt x 675.4836pt>
 File: ../Graphics/HalfCylinder/ExecutionTimes.png Graphic file (type png)
 
 <use ../Graphics/HalfCylinder/ExecutionTimes.png>
 Package pdftex.def Info: ../Graphics/HalfCylinder/ExecutionTimes.png used on in
-put line 329.
+put line 338.
 (pdftex.def)             Requested size: 410.0108pt x 337.74097pt.
- [56 <../Graphics/HalfCylinder/ImprovementInMaxCornerAngles.png> <../Graphics/H
+ [59 <../Graphics/HalfCylinder/ImprovementInMaxCornerAngles.png> <../Graphics/H
 alfCylinder/AverageStressDetectedUsingAverageOverHeuristicsForDifferentHybrids(
-HalfCylinder).png>] [57 <../Graphics/HalfCylinder/ExecutionTimes.png>]
-<../Graphics/TimePlanUpdated2.png, id=730, 1187.93813pt x 397.485pt>
+HalfCylinder).png>] [60 <../Graphics/HalfCylinder/ExecutionTimes.png>]
+<../Graphics/TimePlanUpdated2.png, id=917, 1187.93813pt x 397.485pt>
 File: ../Graphics/TimePlanUpdated2.png Graphic file (type png)
 
 <use ../Graphics/TimePlanUpdated2.png>
 Package pdftex.def Info: ../Graphics/TimePlanUpdated2.png used on input line 34
-0.
+9.
 (pdftex.def)             Requested size: 702.65382pt x 301.13344pt.
 
-Overfull \hbox (82.22382pt too wide) in paragraph at lines 340--340
+Overfull \hbox (82.22382pt too wide) in paragraph at lines 349--349
 [][] 
  []
 
-[58
+[61
 
  <../Graphics/TimePlanUpdated2.png>])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 117.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 117.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 115.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 115.
  (DissertationMain.aux
 (Introduction.aux) (MotivationAndBackground.aux) (RelatedWork.aux)
 (DescriptionOfWork.aux) (SystemDesign.aux) (Implementation.aux) (Evaluation.aux
 ) (FurtherWork.aux) (Appendix.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 117.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 117.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 115.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 115.
 Package rerunfilecheck Info: File `DissertationMain.out' has not changed.
-(rerunfilecheck)             Checksum: 9004B5D681CD20F3889A0395F3F39583;4162.
-
-
-LaTeX Warning: There were undefined references.
+(rerunfilecheck)             Checksum: F9E836BEF71057A059664A1280F32242;4332.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 117.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 115.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 21532 strings out of 493334
- 399995 string characters out of 3130654
- 458267 words of memory out of 3000000
- 24534 multiletter control sequences out of 15000+200000
- 13597 words of font info for 37 fonts, out of 3000000 for 9000
+ 21596 strings out of 493334
+ 401547 string characters out of 3130654
+ 462522 words of memory out of 3000000
+ 24553 multiletter control sequences out of 15000+200000
+ 13134 words of font info for 37 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,21n,45p,10389b,7908s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,21n,48p,10389b,7908s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Jack\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknapp
-en\ec\dpi600\ecbx0900.pk> <C:\Users\Jack\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
+en\ec\dpi600\ectt1000.pk> <C:\Users\Jack\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
 ur\jknappen\ec\dpi600\ecrm0900.pk> <C:\Users\Jack\AppData\Local\MiKTeX\2.9\font
 s\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\Jack\AppData\Local\MiKTeX
 \2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Jack\AppData\Loc
@@ -3129,9 +2975,9 @@ ype1/public/amsfonts/cm/cmr7.pfb><C:/Users/Jack/AppData/Local/Programs/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Jack/AppData/Local/Progr
 ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Jack/AppData/
 Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on DissertationMain.pdf (58 pages, 4858635 bytes).
+Output written on DissertationMain.pdf (61 pages, 4970639 bytes).
 PDF statistics:
- 1170 PDF objects out of 1200 (max. 8388607)
- 192 named destinations out of 1000 (max. 500000)
- 760 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1440 PDF objects out of 1440 (max. 8388607)
+ 233 named destinations out of 1000 (max. 500000)
+ 781 words of extra memory for PDF output out of 10000 (max. 10000000)
 

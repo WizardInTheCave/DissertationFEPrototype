@@ -1,4 +1,7 @@
 
+
+
+
 \section{Software Implementation}
 The following subsections detail the implementation of the final software solution that has been written to meet the objectives posed previously of this dissertation.
 
@@ -23,7 +26,7 @@ Once the data in the output file has been parsed the nodal values for which disp
 
 
 \subsection{Heuristic/Rule Based Refinement}
-Each rule is represented as a function within the implementation, this closely resembles the format presented by Dolsak \cite{DolsakPaper91, DolsakPaper94, appOfILPToFEMeshDesign} \cite{ConsultRuleIntelltSystemFE}. The rules resides within the ``RuleManager'' class and each take a number of the defined edges as parameters. When an instance of the RuleManager is created it parses the edges file provided by the user into a list of edges that the rules can then be executed on. Every rule then checks the properties of a particular edge against properties which have been identified through the ILP learning algorithm as being important when the model executes. In cases where the rules accept more than one edge as an argument the system attempts to apply the rule to each pair of different edges in the edge list giving a time complexity of $O(n^2)$ where n is the total number of defined edges.\\
+Each rule is represented as a function within the implementation, this closely resembles the format presented by Dolsak \cite{DolsakPaper91, DolsakPaper94, appOfILPToFEMeshDesign, ConsultRuleIntellSystemFE}. The rules resides within the ``RuleManager'' class and each take a number of the defined edges as parameters. When an instance of the RuleManager is created it parses the edges file provided by the user into a list of edges that the rules can then be executed on. Every rule then checks the properties of a particular edge against properties which have been identified through the ILP learning algorithm as being important when the model executes. In cases where the rules accept more than one edge as an argument the system attempts to apply the rule to each pair of different edges in the edge list giving a time complexity of $O(n^2)$ where n is the total number of defined edges.\\
 
 \noindent
 If a rule detects a relationship in the model the edge is assigned a criticality rating as defined by the rule, the value is then used by the meshing procedure to determine how many times it should re mesh the elements along that edge. \\ 
@@ -139,8 +142,9 @@ Dittmers rules for computing the quality of both individual elements and the ent
 Since each element is initialised with the nodes that comprise it, it is also possible to derive all the geometric characteristics and thus its quality metrics upon its initialisation. This allows the metrics for each element to also be calculated upon its initialisation and thus removing the risk of null values being returned when other parts of the system request this information.
 
 \noindent
-Coding the individual methods did not take too long since Dittmer provided a clear description for each metric calculation method many of the values needed to perform the calculations were also conveniently stored as properties within different parts of the model. A considerable part of calculating each metric was therefore the process of aggregating all of the necessary data from the model so that the individual values could be calculated.  
+Coding the individual methods did not take too long since Dittmer provided a clear description for each metric calculation method many of the values needed to perform the calculations were also conveniently stored as properties within different parts of the model. A considerable part of calculating each metric was therefore the process of aggregating all of the necessary data from the model so that the individual values could be calculated. \\ 
 
+\noindent
 Although the element shape metrics provided an indication of how much an elements shape deviated from its ideal understanding the differences between exactly what each metric implied was challenging, specifications for the metrics did not provide information on this besides describing cases of a good value and bad value. As a consequence the metric I decided to focus my evaluation primarily on out of the ones described was the maximum corner angles which provided a clear indication of element skew. This metric was also useful in attempting to identify elements which cause problems when needing to be sorted, see 6.6.2.
 
 
@@ -217,14 +221,14 @@ When addressing this problem for simple models constructed from Quad4 elements t
 \end{algorithm}
 
 \noindent
-For the most part this approach was both fast and correct for Quad4 elements although in cases where elements were particularly skewed in 3d space it was sometimes possible for the internal diagonals to be shorter than the actual sides as seen in Figure 9 below. This proved to be a significant flaw in the method and brought about the realisation that a reliable approach would not be able to depend simply upon highly variable properties such as node distances. \\ 
+For the most part this approach was both fast and correct for Quad4 elements although in cases where elements were particularly skewed in 3D space it was sometimes possible for an internal diagonal to be shorter than both of the edge sides as seen in Figure 9 below, this broke the traversal process which relied upon there being at least one side edge that was shorter than the diagonal. This proved to be a significant flaw in the approach and brought about the realisation that a reliable strategy for solving this problem would not be able to depend simply upon varying properties of the different elements9. \\ 
 
 \begin{figure}[!h]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=0.9\linewidth]{../Graphics/SkewedElementIssues.png}
-  \caption{Dividing a Quad4 along planes to establish each node as a corner point}
+  \caption{Quad4 Element with diagonal shorter than both external edges}
   \label{fig:sub1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
@@ -278,7 +282,7 @@ Having already devised two solutions it seemed likely that there would be some b
 \end{figure}
 
 \noindent
-After reviewing the different convex hull algorithms including Grapham scan \cite{GrahamScan} $O(n\ log\ n)$ and brute force scan $O(n^4)$ \cite{ConvexHulls} \cite{BruteConvex} I decided to trial the following C\# implementation of the Monotone Chain algorithm, also $O(n\ log\ n)$ \cite{CSharpConvexHull}. \\ 
+After reviewing the different convex hull algorithms including Grapham scan \cite{GrahamScan} $O(n\ log\ n)$ and brute force scan $O(n^4)$ \cite{ConvexHulls} \cite{BruteConvex} I decided to trial the following C\# implementation of the Monotone Chain algorithm, also $O(n\ log\ n)$ \cite{CSharpConvexHull}. \\ \\ \\ \\
 
 \noindent
 The Monotone Chain algorithm algorithm was developed shortly after Graham scan and builds upon the concepts introduced in the former. Graham's scan works by initially finding the point in the data set with the lowest y coordinate which can be called P. Having found this point the other points in the set are sorted based on the angle created between them and P. Combining both these steps gives a complexity of $O(n\ log\ n)$, with  $O(n)$ to find P and $O(n\ log\ n)$ to perform a general sort of the angles. Moving through each point in the sorted array Graham scan determines whether moving to this point results in making a right or left hand turn based on the two previous points. If a right turn is made then the second do last point has caused a concave shape which has violated the requirement of the convex hull path. In this scenario is repeated the algorithm excludes the point from the convex set and resumes with the previous two points being those on the path before the rejected point. A stack structure is therefore typically used to keep track of the point ordering as is the case with the Monotone Chain implementation within the system \cite{ChainHull}. \\ 

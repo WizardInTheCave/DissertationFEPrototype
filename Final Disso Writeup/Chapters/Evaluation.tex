@@ -33,16 +33,25 @@ The process of continuously writing descriptive documentation was important to t
 \subsection{Evaluation Of System For Model Simulations}
 %To demonstrate the systems applicability to a variety of real engineering problems demanded the creation of several models resembling basic equivalents of real structures that are often analysed by FE methods.
 
-As a system designed to facilitate analysis of hybrid meshing techniques the ability to conduct detailed evaluation for a set of hybrids over multiple simulations demonstrates successful generality. \\
+%As a system designed to facilitate analysis of hybrid meshing techniques the ability to conduct detailed evaluation for a set of hybrids over multiple simulations demonstrates successful generality. \\
+
+In order to perform reasonable evaluation of the different methods it was important to carefully design tests for the system which would fairly evaluate its ability to generate a range of hybrid methods capable of performing meshing. \\ 
 
 \noindent
-Three models have been created in total as simulation input by which to test the overall refinement system. With each of the three models being a general simplification of some more complex model that could be expected within an industrial engineering setting. Before any refinement occurs each model has a manually constructed low fidelity mesh built using LISA's graphical user interface. Each model also has a set of forces applied to it which are required to induce stress within the simulation along with various constraint surfaces as described under the Motivation and Background section. \\ 
+Firstly it was important to test the various methods individually for at least one model in order to verify that each of the methods individually performs as expected, this step does not produce particularly interesting results although is an key step in order to have trust in the results subsequently produced by the hybrids. When evaluating the hybrids the system also needed to be evaluated for several different FE models with varying simulation conditions. This demonstrates consistency in the results and de  the systems ability to work for a range of different model inputs. \\
 
 \noindent
-Another important aspect of designing the evaluation process was deliberate variation of inputs for the heuristic component when running the different hybrid processes, see 6.4 for heuristic edge specifications. Since users specify the edges and they directly affect the final result of the process it is important to consider the results produced by the system both on average and when run by a variety of different users. The effects of variation in edge specifications are observable both in execution times for the simulations and in the system's ability to mesh accurately where required as seen in figure 14 and the mesh structure in appendix F. \\ 
+Since the system also builds hybrids from different weightings of the stress and heuristic refinement methods it was also important to ensure that when the systems performance could be partially attributed to the heuristic component the range of possible user inputs for the edge specifications was taken into account. \\  
 
 \noindent
-Four sets of of edges were consequently constructed for each of the models and given classifications of ``Best'', ``Good'', ``Ok'' and ``Poor'' With the following as general guidelines for defining each set: \\
+Three models were created in total for evaluation, with each of the models being a general simplification of some more complex model that could be expected within an industrial engineering setting. Each model has a manually constructed low fidelity mesh built using LISA's graphical user interface. The models also have a set of forces applied to them which are required so that stress is induced within the simulation. Constraints are also assigned to surfaces as described under section 2.1. \\ 
+
+
+\noindent
+\textbf{Different Quality Edge Specifications: } Deliberate variation of inputs for the heuristic component was also important for making a general assessment of the heuristic method, see 6.4 for heuristic edge specifications. Since the users specify the edges that determine the meshing focus they directly affect the final result of the process, it is therefore important to consider the results produced by the system for a variety of different potential users. The effects of good and bad edge specifications can be observed both in execution times for the simulations and in the system's ability to mesh accurately where required as seen in figure 14 and the mesh structure in appendix F. \\ 
+
+\noindent
+Since it was not possible to objectively compare the edge specifications for different models that were evaluated a basic criteria was developed so that comparisons could be drawn. For each model four sets of of edges were consequently constructed and given classifications of ``Best'', ``Good'', ``Ok'' and ``Poor'' With the following as general guidelines for defining each set: \\
 
 \noindent
 \textbf{Best: } Approximately five edges specified directly over or adjacent to those areas of known high stress within the model - input potentially generated by a user with a high degree of expertise in evaluating the specific type of structure. \\ 
@@ -57,18 +66,39 @@ Four sets of of edges were consequently constructed for each of the models and g
 \textbf{Poor: } Three to five edges none of which are close to areas of high stress - representing input as would be generated by an inexperienced user new to FE stress analysis. \\ 
 
 \noindent
-As someone who would identify as an inexperienced user determining the areas of high stress in advance was important in order to successfully develop rule sets which satisfied each of these categories  for each of the different simulations. The system was therefore initially run for each model without a heuristic component in order to provide some indication of what edges might be described for each set. Having designed four edge sets for each of the three evaluation models data could then be collected on the performance of both the individual heuristic and the combined hybrid method for each of these methods based on different levels of user expertise. \\
+As someone who would identify as an inexperienced user determining the areas of high stress in advance was important in order to successfully develop rule sets which satisfied each of these categories for the different simulations. The system was therefore initially run for each model without a heuristic component in order to provide some indication of what edges could be used for each set. Having designed four edge sets for each of the three evaluation models data could then be collected on the performance of both the individual heuristic and the combined hybrid method for each of these methods based on different levels of user expertise. \\
 
 \noindent
 A clear drawback of not having the edge sets defined by an experienced FE engineer is a lack of a guarantee that the edge sets chosen by me accurately represent those similar to what would be specified by a typical user of the system. At best it can be asserted that the sets represent a range of deviations from the theoretical ideal for the edge specifications which it is reasonable to expect from users with varying degrees of skill. Consequently it is only possible to objectively judge each of the different sets on the basis of the results they produce. These results for the different specifications cannot be claimed to represent the output mesh of a user group.\\ 
 
+
+\subsubsection{Metrics Selections}
+
 \noindent
+Due to the complex nature of finite element models there are a huge number of potential methods that can be calculated from the available stress data and mesh. selecting appropriate metrics by which to draw conclusions from the different models was in itself challenging. Below I have described the metrics I eventually selected along with a description of what they indicate and why this was important to conclude the systems ability to meet its objectives. \\ 
+
+For subsequent evaluation of hybrids the following metrics are then 
+
+\noindent
+\textbf{Average Maximum Internal Corner Angle: } This metric was cited by Dittmer \cite{DittmerMeshQualityMet}as one of the most consistent indicators by which to evaluate the quality of a mesh with gradual deviation from the optimum indicating a degradation in quality and the meshing processes inability to maintain quality and consequently insure accuracy of subsequent results. \\ 
+
+\noindent
+\textbf{Execution Times: } Since it is important for all methods to run in a reasonable amount of time, measuring the increase in runtime with additional iterations provided a good indication of how costly each approach became and whether there were any points at which meshing became significantly more expensive. \\ 
+
+\noindent
+\textbf{Average Stress Revealed for Each Iteration: } In order to measure the different methods ability to reveal stress over time the average stress underneath an elements across the model was an effective metric. with increase in the average occurring as a result of more elements being placed on those areas of high stress and decrease occurring with creation of elements over areas of lower stress. Since this metric is a measurement of stress which is force over a given area stress is essentially a measure of pressure and as such the unit of measurement used is pascals. \\ 
+
+
+\subsubsection{Evaluation of Bridge Structure}
 The suspension bridge model consists of 196 elements of quad4 type and 212 nodes which can be considered coarse given the size of the structure. Four constraint points were specified at the base of each supporting column and strong forces of applied across the structure along the negative x axis. \\
 
-\noindent
-The results in figure 14 below show the increase in time taken to complete execution and the number of elements generated having reached each iteration, the growth in both of these are linear which indicates that no individual method is doing significantly more meshing than another. This shows both the methods are closely balanced the importance of which is described in section 5.8. Looking at b it can also be seen that the quality of individual heuristics does not necessarily result in more meshing with it being possible to mesh more in undesirable areas given poor user input, a better edge specification  therefore does not simply have an advantage over a poorer one by being able to conduct more meshing, 
+The first step taken before evaluating the hybrids was to find
 
-. Running this set of evaluation therefore indicates that further comparisons between the different methods are conducted fairly. \\
+\noindent
+The results in figure 14 below show the increase in time taken to complete execution and the number of elements generated having reached each iteration, the growth in both of these are linear which indicates that no individual method is doing significantly more meshing than another. This shows both the methods are closely balanced the importance of which is described in section 5.8. Looking at b it can also be seen that the quality of individual heuristics does not necessarily result in more meshing with it being possible to mesh more in undesirable areas given poor user input, a better edge specification  therefore does not simply have an advantage over a poorer one by being able to conduct more meshing. \\ 
+
+\noindent
+These tests indicate that subsequent evaluations for hybrid methods are conducted fairly with each weightings representing equatable in  the number of elements created and consequently the execution time. \\
 
 % show angle and runtime
 
@@ -91,7 +121,10 @@ The results in figure 14 below show the increase in time taken to complete execu
  \end{figure}
  
 \noindent
-Looking at the the maximum corner angles within the elements in figure 15 below it can be see that the general element quality improves again fairly linearly over time although with a the greatest rate of improvement occurring during the first few iterations of each method before decreasing as the average for the mesh increasingly approaches the optimum, which for elements of type  quad4 is 90 degrees. This data indicates that all of the methods tend to reduce skew present in initial meshes when performing refinement by effectively smoothing the mesh. This is useful to know since it suggests the solver is able to correctly calculate the correct stress results across the model based on the mesh formulation and that given an arbitrary model the methods will not distort the mesh. \\ 
+The maximum internal corner angles can be seen as improving fairly linearly over time although with a the greatest rate of improvement occurring during the first few iterations for each method before the average for the mesh approaches the optimum, which for elements of type quad4 is 90 degrees. This means in general the refinement methods reduce skew present within the model through the creation of new elements and the calculated stress retaining its accuracy. 
+
+%This indicates that the refinement methods tend to reduce element skew within the mesh by effectively smoothing the mesh. This suggests that the results produced by the solver can be assumed to be at least if not more accurate after the mesh has been refined than before. This trend also extends to the other two evaluation models suggesting that the underlying subdivision process does not generate meshes that compromise the calculation of stress values for any input mesh.
+
 
 \begin{figure}[H]
   \centerline{\includegraphics[width=110mm, scale=1]{../Graphics/Graphs/SingleMethods/AngleImprovements.png}}
@@ -100,7 +133,10 @@ Looking at the the maximum corner angles within the elements in figure 15 below 
 \end{figure}  
 
 \noindent
-A key realisation having calculated the average maximum angles for the different methods was although Dittmers metrics helped to indicates that the results produced by the solver are accurate they do not actually demonstrate one methods ability to mesh in more desirable areas than another. It was therefore clear that an alternative metric need to be devised to show this. A simple solution which proved effective was simply to calculate the average stress value across all nodes created during refinement under a particular method. Graphing this for multiple iterations gave an accurate representation of each methods effectiveness with the average being reduced if a method poorly selects an area under which to refine and increased if meshing occurs exclusively in areas of concentrated stress. \\
+%A key realisation having calculated the average maximum angles for the different methods was although Dittmers metrics helped to indicates that the results produced by the solver are accurate they do not actually demonstrate one refinement methods ability to mesh in more desirable areas than another while retaining a lower computational overhead through creation of fewer elements, an alternative metric was clearly needed in order to show this. A simple solution which proved highly effective was simply to calculate the average stress across all nodes. By calculating the average each method effectively achieved a high score for placing few elements directly over the high stress area while avoiding element creation over lower stress areas that would reduce the average.\\ 
+
+\noindent
+Graphing this for multiple iterations gave an accurate representation of each methods effectiveness with the average being reduced if a method poorly selects an area under which to refine and increased if meshing occurs exclusively in areas of concentrated stress. \\
 
 \noindent
 Evaluating each of the individual methods using this metric with various weightings produced the following results: \\ 
@@ -141,10 +177,12 @@ The alternative to this is the stress refiner has to do a lot more meshing relat
 This suggests that although heuristic refinement can potentially be unreliable if used individually, as a supplementary method to support stress based refinement it has potential to improve the overall speed when analysing an FE model. \\
 
 \noindent
-Having run the model with the hybrids it was possible to open the generated .liml files within LISA to observe stress gradients across the different structures as an engineer would, see figure 18 and appendices H, I and J below. Colour coding for the gradients visible within the models depends on the rage of stress that is present with green potentially equating to a very high stress in cases where stress for the entire model is distributed evenly. When designing the models it was therefore desirable apply forces such that there would be a stress concentrations and resulting in clear gradients. \\ 
+Having run the model with the hybrids the coloured stress gradients across each structure could be inspected as an engineer would, see figure 18 and appendices H, I and J below. LISA assigns colours to different ranges of stress based on the range of values within the model. It is therefore possible for green to potentially represent a degree of high stress in cases where high stress exists across the entire model and so this is the average, although in the majority of cases this will not be true with red areas representing those of highest stress followed by orange, yellow, green, light blue and eventually dark blue.  \\ 
+
+%When designing the models it was therefore desirable apply forces such that there would be stress concentrations and resulting in clear gradients. \\ 
 
 \noindent
-Upon viewing the refined meshes within LISA it can be seen that refinement has been successfully focused in those areas of high stress as seem in figure 18 below with meshing becoming increasingly focused on smaller and smaller areas covering the highest stress this affect can be seen after as seen clearly after 8 iterations in figure 18b below and also in appendix H. This is supported by the data shown above in figure 17 above with the dramatic increase in the average stress revealed per iteration indicating convergence on these points after just two iterations. \\ 
+Looking at the gradient meshes in figure 18 it can be seen that refinement has been successfully focused in those areas of high stress with meshing becoming increasingly focused on smaller and smaller areas covering the highest stress this affect can be seen after as seen clearly after 8 iterations in figure 18b below and also in appendix H. This is supported by the data shown above in figure 17 above with the dramatic increase in the average stress revealed per iteration and thus convergence of the meshing procedures on these areas. \\ 
 
 \noindent
 This effect is the desired result of applying mesh refinement as discussed in section 2 on the projects motivation and background.  

@@ -395,10 +395,6 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                         }
                     }
                 }
-                //if (subElemNodes[2].Id == subElemNodes[3].Id)
-                //{
-                //    Console.WriteLine("wut");
-                //}
 
                 elementEdgeTrios.Add(subElemNodes);
 
@@ -481,9 +477,9 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// <summary>
         /// Make a new node half way along the edge of an element side
         /// </summary>
-        /// <param name="node"></param>
-        /// <param name="adjacentNode"></param>
-        /// <param name="nodes"></param>
+        /// <param name="node">Node acting as one end of an edge </param>
+        /// <param name="adjacentNode">Node at the other end of an edge</param>
+        /// <param name="nodes">All the nodes in the model</param>
         /// <returns></returns>
         protected Node makeMidEdgeNode(Node node, Node adjacentNode, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
@@ -498,7 +494,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         /// Creates the node in the middle of the new set of four elements which we join the others too
         /// </summary>
         /// <param name="midpointLineNodes"></param>
-        /// <returns>centeral node object</returns>
+        /// <returns>Centeral node object</returns>
         protected Node createCenterNode(List<Node> midpointLineNodes, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
 
@@ -516,9 +512,6 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             return createNode(xVal, yVal, zVal, nodes);
         }
-
-
-   
 
         abstract public List<IElement> createChildElements(Dictionary<Tuple<double, double, double>, Node> nodes);
 

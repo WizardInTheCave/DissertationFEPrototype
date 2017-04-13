@@ -16,9 +16,11 @@ namespace DissertationFEPrototype
 
         /// <summary>
         /// The main entry point for the application.
-        /// Read in possible command line arguments specifying key inoput folders and files so the system can execute
+        /// Read in any possible command line arguments although I didn't really 
+        /// specifying key input folders and files so the system can execute
+        /// 
+        /// I didn't really use this though 
         /// </summary>
-        // [STAThread]
         static void Main(string[] args)
         {
             //string topLevelFolder = @"D:\Documents\DissertationWork\models\FinalDissoExperiments\Experiments\BridgeAdvanced";
@@ -83,13 +85,13 @@ namespace DissertationFEPrototype
             //experimentVals.Add(new Tuple<short, short>(2, 2));
             //experimentVals.Add(new Tuple<short, short>(2, 3));
 
-            //experimentVals.Add(new Tuple<short, short>(1, 0));
-            //experimentVals.Add(new Tuple<short, short>(0, 1));
+            // experimentVals.Add(new Tuple<short, short>(4, 2));
+            // experimentVals.Add(new Tuple<short, short>(2, 4));
 
-            experimentVals.Add(new Tuple<short, short>(2, 3));
-            experimentVals.Add(new Tuple<short, short>(3, 2));
-            experimentVals.Add(new Tuple<short, short>(2, 4));
-            experimentVals.Add(new Tuple<short, short>(4, 2));
+            //experimentVals.Add(new Tuple<short, short>(2, 3));
+            //experimentVals.Add(new Tuple<short, short>(3, 2));
+            //experimentVals.Add(new Tuple<short, short>(2, 4));
+            //experimentVals.Add(new Tuple<short, short>(4, 2));
 
             //experimentVals.Add(new Tuple<short, short>(5, 2));
 
@@ -143,9 +145,6 @@ namespace DissertationFEPrototype
 
             const string fieldDelim = ", , , , , , , ";
 
-
-            //+"Element Count Score" + fieldDelim
-            //  + "Average Max Angle" + fieldDelim
 
             // Write the headers for the different types of information saved to the output file.
             file.WriteLine("TimesForRuns" + fieldDelim
