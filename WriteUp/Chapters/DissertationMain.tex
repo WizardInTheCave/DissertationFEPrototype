@@ -1,0 +1,217 @@
+\documentclass{article}
+%\documentclass[conference]{IEEEtran}
+
+\setcounter{secnumdepth}{0}
+%[a4paper, 11pt]
+\usepackage{comment} % enables the use of multi-line comments (\ifx \fi) 
+\usepackage{fullpage} % changes the margin
+
+\usepackage{graphicx}
+%\usepackage{lscape}
+%\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{wrapfig}
+\usepackage{gensymb}
+\usepackage{graphicx} 
+\usepackage[utf8]{inputenc}
+\usepackage{siunitx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{float}
+
+%\usepackage[titletoc]{appendix}
+
+
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage{algorithm2e}
+\usepackage[noend]{algpseudocode}
+%\usepackage{pgffor}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+
+\newcommand{\CMwidth}{-1.7cm}
+\newcommand{\CMheight}{2.7cm}
+
+\usepackage{hyperref}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	filecolor=blue,
+	menucolor=black,
+	urlcolor=blue
+}
+
+
+\setcounter{secnumdepth}{5}% Include \subsubsection in ToC
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+
+\begin{document}
+%Header-Make sure you update this information!!!!
+%\noindent
+%\large\textbf{Post/Pre-Lab X Report} \hfill \textbf{FirstName LastName} \\
+%\normalsize ECE 100-003 \hfill Teammates: Student1, Student2 \\
+%Prof. Oruklu \hfill Lab Date: XX/XX/XX \\
+%TA: Adam Sumner \hfill Due Date: XX/XX/XX
+
+%\title{Dissertation: Hybrid Methods for Finite Element Meshing}
+%\author{Jack Bradbrook (psyjb4)}
+%\date{April 5, 2017}
+%\maketitle
+
+\begin{center}
+
+\noindent
+
+\begin{figure}[h!!]
+  \centerline{\includegraphics[width=90mm, scale=0.5]{../Graphics/nottinghamLogo.jpeg}}
+\end{figure}
+
+
+\vspace{0.8cm}
+\LARGE
+\textbf{Hybrid Methods for Finite Element Meshing}\\
+\normalsize
+\vspace{0.8cm}
+Submitted April 2017, in partial fulfilment of
+the conditions of the award of the degree BSc (Hons) Computer Science.\\
+\vspace{0.4cm}
+\Large
+\textbf{Jack Bradbrook}\\
+\vspace{0.4cm}
+\textbf{psyjb4}\\\\
+\normalsize
+\vspace{0.4cm}
+School of Computer Science\\
+\vspace{0.4cm}
+University Of Nottingham\\ 
+\vspace{0.4cm}
+
+\noindent
+I hereby declare that this dissertation is all my own work, except as indicated
+in the text: \\ 
+
+\vspace{0.4cm}
+\noindent
+Signature: \\ 
+
+\vspace{2.0cm}
+\noindent
+Date: 24/04/2017 \\ 
+
+\vspace{0.4cm}
+
+\end{center}
+
+%   abstract-text
+%
+\newpage
+\renewcommand{\abstractname}{\LARGE Abstract} 
+\begin{abstract}
+\vspace{0.6cm}
+%\section{Abstract}
+
+\noindent
+\textbf{Background to Finite Element Analysis (FEA)} \\ 
+In simple terms Finite Element Analysis (FEA) is a technique that takes a structure and divides it into a number of small segments known as elements, the collection of elements form a mesh or more precisely a Finite Element Mesh (FEM). FEA then calculates a parameter (in this case stress) on each of the elements in the FEM from which it’s possible to identify where failures are most likely to occur. To calculate high stress accurately and in as little time as possible it’s necessary to create additional smaller elements in the areas most likely to experience high stress, this process is known as refinement. Traditionally those elements initially experiencing high stress are chosen for refinement then the stress calculations are repeated on the new FEM and process is repeated until the values of stress in each element cease to increase. \\
+
+
+\noindent
+\textbf{Objective of the project} \\ 
+The objective of the project was to develop a new approach to refining a Finite Element Mesh (FEM) which  combines the traditional stress based approach, described above, with a machine learning approach based on a set of established engineering rules. The success of the project will be determined by whether the new hybrid approach delivers the same accuracy as the traditional approach but also by whether it’s able to achieve this accuracy in less time than the traditional approach. \\ 
+
+
+\noindent
+\textbf{The Approach} \\ 
+Experienced engineers understand where high levels of stress and failures are most likely to occur in a structure, for example along edges where two surfaces are joined together. This information can be described in a set of user defined edge specifications. The proposed approach was to undertake the FEM refinement process in two stages, first applying the traditional stress based approach to a mesh and then further refining elements based on edge specifications. The result is a new mesh with additional elements created in areas where high stresses are most likely to occur. Having generated a new FEM using the combined approach it’s necessary to check the quality of each element to ensure its shape has not become distorted before ordering the data to allow re-calculation of stresses. Finally, the stress data is output in a format for analysis and presentation after all the planned iterations of refinement are complete. \\
+
+\noindent
+\textbf{The Solution} \\
+The project used commercially available software (LISA) to calculate the stress in each element of the FEM. All other functions were implemented using bespoke software written as part of the project. In summary the bespoke software performed the following functions:
+
+\begin{itemize}
+\item Applied edge rules to a mesh to identify elements requiring refinement.
+
+\item Performed all mesh refinement (for both approaches)
+
+\item Arranged newly formed elements into an order acceptable to LISA.
+
+\item Performed quality checks on refined elements e.g. how distorted they were. 
+
+\item Compared the results of various combinations of approaches through graphs 
+
+\end{itemize}
+\noindent
+The solution was built using a modular and open architecture to allow for uncertainties during development and to accommodate future enhancements; all code was written using C\#. \\ 
+
+
+\noindent
+\textbf{Evaluation of Findings} \\ 
+The solution was used to evaluate the effects of applying forces to three separate models, the analysis identified where stresses appeared on each model and how quickly they could be identified using each of the following approaches:
+\begin{itemize}
+\item FEA using a stress based refinement.
+
+\item FEA using a heuristic (rule) based refinement. 
+
+\item FEA after using a hybrid approach i.e. a combination of stress and heuristic (rule) based refinement.
+\end{itemize}
+
+\noindent
+For each approach the project collected data on the following parameters:
+
+\begin{itemize}
+
+\item The time it took to undertake a defined number iterations of mesh refinement.
+
+\item The quality of the elements (how distorted they were).
+
+\item The number of elements generated by the approach.
+
+\item The level of stress revealed by the approach.
+
+\end{itemize}
+\noindent
+The collected data was plotted to allow an easy comparison of each of the approaches. \\
+
+
+\noindent
+\textbf{Conclusion} \\
+From the analysis undertaken it can be concluded that the hybrid approach located high stress points as accurately as the traditional stress based approach, these findings where consistent across all three models used. However, it was not possible to demonstrate conclusively whether the hybrid approach achieved the required results in less time than the stress based approach, this in part was due to having limited time available to test the approach on more complex models where run times are measured in hours rather than the tens of seconds which were the times taken for the most complex model used in this project. The developed system worked well and provides a valuable research tool for further work using more complex models of the type found in industry. The system allows further development of edge specifications without the need for additional coding and the ability to add additional refinement strategies with minimal effort as a consequence of a well defined data model and programming interface. 
+
+\end{abstract}
+
+\newpage
+
+\tableofcontents
+
+%\listoffigures
+
+\newpage
+
+%\include{Introduction}
+\include{MotivationAndBackgroundAndIntro}
+\include{RelatedWork}
+\include{DescriptionOfWork}
+\include{SystemDesign}
+\include{Implementation}
+\include{Evaluation}
+\include{FurtherWork}
+
+\bibliographystyle{abbrv}
+\bibliography{bibItems}
+
+
+\include{Appendix}
+
+\end{document}
+
+

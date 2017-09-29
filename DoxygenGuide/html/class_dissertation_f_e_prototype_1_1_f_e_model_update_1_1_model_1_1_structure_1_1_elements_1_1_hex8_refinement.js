@@ -1,0 +1,5 @@
+var class_dissertation_f_e_prototype_1_1_f_e_model_update_1_1_model_1_1_structure_1_1_elements_1_1_hex8_refinement =
+[
+    [ "Hex8Refinement", "class_dissertation_f_e_prototype_1_1_f_e_model_update_1_1_model_1_1_structure_1_1_elements_1_1_hex8_refinement.html#a608e48812f0baf2be4521f43a05589c5", null ],
+    [ "SubElems", "class_dissertation_f_e_prototype_1_1_f_e_model_update_1_1_model_1_1_structure_1_1_elements_1_1_hex8_refinement.html#a7218450d827cf4090538acff9e1d3a0d", null ]
+];
