@@ -1,12 +1,5 @@
-﻿using DissertationFEPrototype.FEModelUpdate.Model.Structure;
-using DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
-using Loyc.Collections;
-using Loyc.Geometry;
-using System;
+﻿using Loyc.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements

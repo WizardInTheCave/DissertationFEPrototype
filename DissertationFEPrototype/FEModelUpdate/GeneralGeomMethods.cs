@@ -44,7 +44,7 @@ namespace DissertationFEPrototype.FEModelUpdate
         /// Compute the determinant of a matrix a
         /// </summary>
         /// <param name="a">matrix</param>
-        /// <returns></returns>
+        /// <returns>matrix determinant</returns>
         public static double matrixDeterminant(double[,] a)
         {
             return a[0, 0] * a[1, 1] * a[2, 2] +

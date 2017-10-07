@@ -13,29 +13,17 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
     /// </summary>
     public interface IElement
     {
-
         int? getId();
-
         void setId(int? Id);
-
         double getArea();
-
         double getAspectRatio();
-
         double getMaxCornerAngle();
-
         double getMaxParallelDev();
-
         List<IElement> getChildren();
-
         void setChildren(List<IElement> children);
-
         List<Node> getNodes();
-
         void setNodes(List<Node> nodes);
-
         List<IElement> createChildElements(Dictionary<Tuple<double, double, double>, Node> nodes);
-
         List<Node> getDiagonalNodes(Node currentNode);
 
     }

@@ -53,7 +53,16 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         List<Node> zPositive;
         List<Node> zNegative;
 
-        
+        /// <summary>
+        /// Method which splits potentially skewed 3d cube into four sub cubes by seperating the 8 points using the x, y and z axis
+        /// </summary>
+        /// <param name="hexCentre"></param>
+        /// <param name="xPositive"></param>
+        /// <param name="xNegative"></param>
+        /// <param name="yPositive"></param>
+        /// <param name="yNegative"></param>
+        /// <param name="zPositive"></param>
+        /// <param name="zNegative"></param>
         public Hex8Refinement(Node hexCentre, List<Node> xPositive, List<Node> xNegative, List<Node> yPositive,
             List<Node> yNegative, List<Node> zPositive, List<Node> zNegative)
         {
@@ -147,6 +156,11 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             return faces;
         }
 
+        /// <summary>
+        /// Hard to explain how these split corner methods work, best thing is to draw a cube with nodes in corners 
+        /// and then half way between the corners then go through the code step by step and visualise it
+        /// </summary>
+        /// <returns></returns>
         private List<Node> splitCorner1()
         {
 
@@ -205,30 +219,19 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         {
             List<Node> x1y0z0 = new List<Node>();
 
-
-           
-
-
             // back face
             var xNegLeastZ = xPositive.OrderBy(x => x.GetZ).Take(6);
             var face1 = xNegLeastZ.OrderBy(x => x.GetY).Take(4);
-
            
             // right face
             var yNegLeastZ = yNegative.OrderBy(x => x.GetZ).Take(6).ToList();
             var face2 = yNegLeastZ.OrderBy(x => x.GetX).Skip(2).ToList();
             var face2NonOverlapping = face2.Take(2).ToList();
-            
 
             // This one is the bottom of the cube
             var zNegLeastY = zNegative.OrderBy(x => x.GetY).Take(6).ToList();
             var face3 = zNegLeastY.OrderBy(x => x.GetX).Skip(2).ToList();
             var face3NonOverlapping = face3.Take(2).OrderBy(x => x.GetY).Skip(1);
-
-
-
-         
-
 
             x1y0z0.Add(hexCentre);
             x1y0z0.AddRange(face1);
@@ -242,10 +245,8 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         {
             List<Node> x1y1z0 = new List<Node>();
 
-
             var yPosLeastZ = yPositive.OrderBy(x => x.GetZ).Take(6);
             var face1 = yPosLeastZ.OrderBy(x => x.GetX).Skip(2);
-
 
             var xPosLeastZ = xPositive.OrderBy(x => x.GetZ).Take(6).ToList();
             var face2 = xPosLeastZ.OrderBy(x => x.GetY).Skip(2).ToList();

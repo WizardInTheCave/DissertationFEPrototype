@@ -30,7 +30,6 @@ namespace DissertationFEPrototype
             List<double> times = new List<double>();
             List<MeshData> meshes = new List<MeshData>();
 
-
             Stopwatch stopwatch = Stopwatch.StartNew();
 
             string experimentFolderLocal = experimentFolder;
@@ -53,9 +52,7 @@ namespace DissertationFEPrototype
 
             // only need to do this once to get the inital mesh, after that should try and drive it
             // purely with the solve data
-            
             var meshDataReader = new ReadMeshData(lisaFilePath);
-
             MeshData meshData = meshDataReader.GetMeshData;
 
             // read data from the solve
@@ -71,7 +68,8 @@ namespace DissertationFEPrototype
             string localEdgesFile = Path.Combine(experimentFolderLocal, "modelEdges.json");
             RuleManager ruleMan = new RuleManager(meshData, localEdgesFile);
 
-            while (evaluationFunction(ii) == false)
+
+            while (!evaluationFunction(ii))
             {
                
                 solve(lisaFile, experimentFolderLocal);

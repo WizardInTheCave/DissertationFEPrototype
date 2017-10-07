@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DissertationFEPrototype.Model.Analysis
+﻿namespace DissertationFEPrototype.Model.Analysis
 {
     public class Force
     {

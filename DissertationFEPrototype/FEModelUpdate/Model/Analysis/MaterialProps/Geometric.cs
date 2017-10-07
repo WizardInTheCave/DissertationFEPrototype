@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DissertationFEPrototype.Model.Analysis.MaterialProps
+﻿namespace DissertationFEPrototype.Model.Analysis.MaterialProps
 {
     /// <summary>
     /// Class storing the geometric properties of the material

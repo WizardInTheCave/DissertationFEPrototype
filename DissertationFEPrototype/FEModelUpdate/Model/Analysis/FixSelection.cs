@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DissertationFEPrototype.Model.Analysis
+﻿namespace DissertationFEPrototype.Model.Analysis
 {
     /// <summary>
-    /// Class storing
+    /// Class storing FaceSections, kind of unnecessary but because of LISA representation of model made sense to make this class for
+    /// consistency
     /// </summary>
     public class FixSelection
     {

@@ -38,8 +38,8 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
                 edges = findEdges(meshData);
                
             }
-            Console.WriteLine("something");
         }
+
         /// <summary>
         /// Using the nodes alredy present in the model and the JSON file containing edges produce edge objects correctly
         /// referenceing the nodes.
@@ -53,16 +53,13 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
             List<Edge> modelEdges = new List<Edge>();
             List<JsonEdge> jsonEdges = new List<JsonEdge>();
 
-          
             using (StreamReader r = new StreamReader(edgeFileLocal))
             {
                 string jsonString = r.ReadToEnd();
                 eg = JsonConvert.DeserializeObject<DeserializedEdgeGroup>(jsonString);
             }
 
-
             var map = nodes.ToDictionary(x => x.Id, x => x);
-
             if (eg != null)
             {
                 jsonEdges = eg.edges;

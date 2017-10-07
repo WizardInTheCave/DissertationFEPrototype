@@ -88,6 +88,7 @@ namespace DissertationFEPrototype
             // experimentVals.Add(new Tuple<short, short>(4, 2));
             // experimentVals.Add(new Tuple<short, short>(2, 4));
 
+            // configurations for some experiments
             experimentVals.Add(new Tuple<short, short>(2, 3));
             experimentVals.Add(new Tuple<short, short>(3, 2));
             experimentVals.Add(new Tuple<short, short>(2, 4));
@@ -105,7 +106,7 @@ namespace DissertationFEPrototype
             Thread[] threads = new Thread[experimentVals.Count];
 
             int kk = 0;
-            // make a bunch of threads to run the experiments with variation on the two input weightings
+            // Make a bunch of threads to run the experiments with variation on the two input weightings
             foreach (var experimentVal in experimentVals)
             {
 
@@ -160,7 +161,7 @@ namespace DissertationFEPrototype
               
                );
 
-            // write to the file at the end.
+            // write the analysis data to the file at the end.
             foreach (var column in resultCols)
             {
                 file.WriteLine(string.Join("", column));

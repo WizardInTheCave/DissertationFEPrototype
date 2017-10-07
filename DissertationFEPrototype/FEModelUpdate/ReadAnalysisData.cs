@@ -44,7 +44,6 @@ namespace DissertationFEPrototype.ModelUpdate
 
                 if (!isNodeOutput)
                 {
-                    //need in interface here
                     // analysisData = parseElementAnalysisData(parser);
                     analysisData = null;
                 }
@@ -56,14 +55,18 @@ namespace DissertationFEPrototype.ModelUpdate
             return analysisData;
         }
 
-
+        /// <summary>
+        /// Extract the results produced by the solver into a list of analysis object describing these values found at each node in the model,
+        /// this can then be used to adapt the mesh.
+        /// </summary>
+        /// <param name="parser">parser which has read the data file produced by running LISA on the model containing stress and displacement values</param>
+        /// <returns></returns>
         private List<NodeAnalysisData> parseNodeAnalysisData(TextFieldParser parser)
         {
             List<NodeAnalysisData> analysisData = new List<NodeAnalysisData>();
             while (!parser.EndOfData)
             {
                 //Process row
-                // .Skip(1)
                 string[] fields = parser.ReadFields().ToArray();
 
                 int nodeId = Convert.ToInt32(fields[0]);
@@ -106,6 +109,7 @@ namespace DissertationFEPrototype.ModelUpdate
             return analysisData;
         }
 
+        
         private List<ElementAnalysisData> parseElementAnalysisData(TextFieldParser parser)
         {
             List<ElementAnalysisData> analysisData = new List<ElementAnalysisData>();

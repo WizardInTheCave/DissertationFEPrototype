@@ -1,24 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DissertationFEPrototype.FEModelUpdate;
-using DissertationFEPrototype;
-using DissertationFEPrototype.FEModelUpdate.Model.Structure;
-using System.Collections;
-using System.Linq.Expressions;
-
-using DissertationFEPrototype.Optimisations;
 
 namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
     public class Quad4Elem : SquareBasedElem
     {
 
-        // Quad4QualMetricCalcs propCalcs;
-       
-        
         /// <summary>
         /// Given an element get a list of sub devided elements the sum of which forms that element
         /// </summary>
@@ -52,8 +40,6 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
                 List<Node> orderedTrio = trio.ToList();
 
                 Quad4Elem elem = new Quad4Elem(null, orderedTrio);
-
-
                 newElements.Add(elem);
             }
 
@@ -72,8 +58,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         }
 
         public Quad4Elem(int? id, List<Node> nodes)
-        {
-                
+        {      
 
             this.Id = id;
             this.nodes = sortFace(nodes);
@@ -95,9 +80,6 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             aspectRatio = computeAspectRatio(longestEdge, shortestEdge);
 
             area = computeFaceArea(nodes, longestEdge, shortestEdge);
-
-            // propCalcs.computeArea(longestEdge, shortestEdge);
-
         }
     }
 }

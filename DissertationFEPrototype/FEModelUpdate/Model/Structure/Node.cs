@@ -106,14 +106,25 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure
             return this.GetX * b.Item1 + this.GetY * b.Item2 + this.GetZ * b.Item3;
         }
 
+        /// <summary>
+        /// Construct a new node using an id and x, y and z values
+        /// </summary>
+        /// <param name="id">the id the node will take</param>
+        /// <param name="x">x value</param>
+        /// <param name="y">y value</param>
+        /// <param name="z">z value</param>
         public Node(int id, double x, double y, double z)
         {
             this.id = id;
             this.x = x;
             this.y = y;
             this.z = z;
-
         }
+
+        /// <summary>
+        /// Construct a new node out of another node
+        /// </summary>
+        /// <param name="node"></param>
         public Node(Node node)
         {
             this.id = node.id;

@@ -211,21 +211,16 @@ namespace DissertationFEPrototype.Optimisations
         }
 
         /// <summary>
-        /// We want to use the data from the previous analyis that we have to refine our mesh specificially in areas with high stress values
+        /// Find the areas of high stress within the model that exceed the remesh threshold and refine these
         /// </summary>
         /// <param name="elements">All the elements within the model</param>
         /// <param name="analysisData">Analysis data describing the stresses induced upon the model from the pervious iteration of the experiment</param>
         private void stressGradientDrivenRemesh(List<IElement> elements, List<NodeAnalysisData> analysisData)
         {
-            // List<double> variableOfInterest = analysisData.Select(ad => ad.ShearUW).ToList();
-
-            
 
             List<double> variableOfInterest = analysisData.Select(ad => ad.StressUVMidplace).ToList();
             double remeshThreshold = determineRemeshThreshold(variableOfInterest);
 
-
-            // ruleRefinement();
             foreach (var elem in elements)
             {
                 List<Node> elemNodes = elem.getNodes();
@@ -261,7 +256,7 @@ namespace DissertationFEPrototype.Optimisations
        
 
         /// <summary>
-        /// some function which using the nodal displacements for the whole model determines what is considered a high displacement,
+        /// Some function which using the nodal displacements for the whole model determines what is considered a high displacement,
         /// this can then be used to determine whether to do a h-refinement of a particular element
         /// </summary>
         /// <param name="analysisData"></param>
@@ -269,15 +264,12 @@ namespace DissertationFEPrototype.Optimisations
         private double determineRemeshThreshold(List<double> variableOfInterest)
         {
             double threshold = 0;
-
-      
             threshold = Percentile(variableOfInterest.ToArray(), 0.94);            
-
             return threshold;
         }
 
         /// <summary>
-        /// taken from here, needed to compare heursitics against stress refinement http://stackoverflow.com/questions/8137391/percentile-calculation
+        /// Taken from here, needed to compare heursitics against stress refinement http://stackoverflow.com/questions/8137391/percentile-calculation
         /// </summary>
         /// <param name="sequence"></param>
         /// <param name="excelPercentile"></param>

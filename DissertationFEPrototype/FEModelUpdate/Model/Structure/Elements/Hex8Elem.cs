@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using DissertationFEPrototype.FEModelUpdate.Model.Structure;
-
 namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
+    /// <summary>
+    /// Wanted to finish this class to show the system working with different element types but in the end ran out of time so only partially completed,
+    /// Quad4 class however is finished
+    /// </summary>
     public class Hex8Elem : SquareBasedElem
     {
 
@@ -59,6 +61,12 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
         }
 
+        /// <summary>
+        /// Given a Node and a list of Nodes, return true if the node is already in the list and false otherwise
+        /// </summary>
+        /// <param name="node">The node you want to check the existance of within the list</param>
+        /// <param name="checkingList">The list which may contain the Node</param>
+        /// <returns></returns>
         private bool nodeAlreadyExists(Node node, List<Node> checkingList)
         {
             const double TOLERANCE = 0.01;
@@ -78,9 +86,8 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         }
 
         /// <summary>
-        /// Get
+        /// Get the nodes on a face excuding duplicates as a 1d list
         /// </summary>
-        /// <returns></returns>
         private List<Node> faceNodesWithoutDuplicates(Node[][] nodeArray2d)
         {
             List<Node> nodesNoDups = new List<Node>();
@@ -153,16 +160,11 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
           
         }
 
-
-
         /// <summary>
         /// Make a new Hex Quad4Elem, by making a new Quad4Elem object with the right ordering for the input nodes
         /// And the right element type
         /// </summary>
         /// <returns>new hex element for that quadrent of the previous hex</returns>
-     
-
-
         private Node createHexCentre(Node[][] faces, Dictionary<Tuple<double, double, double>, Node> nodes)
         {
             // each of the sub divided sections, now need to sew up
@@ -182,9 +184,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             Node topCenter = top[0][2];
             Node bottomCentre = bottom[0][2];
-
-        
-
+  
             double x = (xFrontCenter.GetX + xBackCenter.GetX) / 2;
             double y = (yFrontCenter.GetY + yBackCenter.GetY) / 2;
             double z = (topCenter.GetZ + bottomCentre.GetZ) / 2;
@@ -227,7 +227,12 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             return subSquares;
         }
 
-
+        /// <summary>
+        /// Didn't get the time to fully finish the implementation of this class before the end of the project, Quad4 with Interface system and base class
+        /// was Enough for proof of concept
+        /// </summary>
+        /// <param name="currentNode"></param>
+        /// <returns></returns>
         public override List<Node> getDiagonalNodes(Node currentNode)
         {
             throw new NotImplementedException();

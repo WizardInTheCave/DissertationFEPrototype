@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements;
 
 namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 {
     /// <summary>
-    /// Square based Element implementing the IElement interface
+    /// Square based Element implementing the IElement interface, elements such as Hex8 and Quad4 can then subclass this abstract class
     /// </summary>
     public abstract class SquareBasedElem : IElement
     {
-
 
         // was int?
         protected int? Id;
@@ -143,165 +139,12 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
             List<Node> removableNodes = new List<Node>(nodes);
 
-
-
-            // get two axis with greatest dev
-
-            //double xMax = -1.0;      
-            //double xMin = 10000000.0;
-
-            //double yMax = -1.0;
-            //double yMin = 10000000.0;
-
-            //double zMax = -1.0;
-            //double zMin = 10000000.0;     
-
-            //foreach (var node in nodes)
-            //{
-            //    if(node.GetX > xMax)
-            //    {
-            //        xMax = node.GetX;
-            //    }
-            //    if (node.GetX < xMin)
-            //    {
-            //        xMin = node.GetX;
-            //    }
-
-
-            //    if (node.GetY > yMax)
-            //    {
-            //        yMax = node.GetY;
-            //    }
-            //    if (node.GetX < yMin)
-            //    {
-            //        yMin = node.GetY;
-            //    }
-
-
-            //    if (node.GetZ > zMax)
-            //    {
-            //        zMax = node.GetZ;
-            //    }
-            //    if (node.GetZ < zMin)
-            //    {
-            //        zMin = node.GetZ;
-            //    }                        
-            //}
-
-            //var xDev = new Tuple<string, double>("X", xMax - xMin);
-            //var yDev = new Tuple<string, double>("Y", yMax - yMin);
-            //var zDev = new Tuple<string, double>("Z", zMax - zMin);
-
-            //var twoAxisToUse = new Tuple<string, double>[] { xDev, zDev, zDev }.OrderBy(x => x.Item2).Skip(1).ToArray();
-
-
-            //Node[] topTwo = null;
-            //Node[] bottomTwo = null;;
-
-            //if (twoAxisToUse[0].Item1 == "X")
-            //{
-            //    var sortedOnX = nodes.OrderBy(x => x.GetX);
-
-            //    topTwo = sortedOnX.Take(2).ToArray();
-            //    bottomTwo = sortedOnX.Skip(2).ToArray();
-            //}
-
-            //else if (twoAxisToUse[0].Item1 == "Y")
-            //{
-            //    var sortedOnY = nodes.OrderBy(x => x.GetY);
-
-            //    topTwo = sortedOnY.Take(2).ToArray();
-            //    bottomTwo = sortedOnY.Skip(2).ToArray();
-            //}
-
-
-            //if (twoAxisToUse[0].Item1 == "Z")
-            //{
-            //    var sortedOnZ = nodes.OrderBy(x => x.GetZ);
-
-            //    topTwo = sortedOnZ.Take(2).ToArray();
-            //    bottomTwo = sortedOnZ.Skip(2).ToArray();
-            //}
-
-            //// second divding axis
-
-            //Node topLeft = null;
-            //Node topRight = null;
-            //Node bottomLeft = null;
-            //Node bottomRight = null;
-
-            //if (topTwo != null && bottomTwo != null) {
-
-            //    if (twoAxisToUse[1].Item1 == "X")
-            //    {
-            //        var bottomTwoOnX = bottomTwo.OrderBy(x => x.GetX).ToArray();
-
-            //        bottomLeft = bottomTwoOnX[0];
-            //        bottomRight = bottomTwoOnX[1];
-
-            //        var topTwoOnX = topTwo.OrderBy(x => x.GetX).ToArray();
-
-            //        topLeft = topTwoOnX[0];
-            //        topRight = topTwoOnX[1];
-            //    }
-
-            //    else if (twoAxisToUse[1].Item1 == "Y")
-            //    {
-            //        var bottomTwoOnY = bottomTwo.OrderBy(x => x.GetY).ToArray();
-
-            //        bottomLeft = bottomTwoOnY[0];
-            //        bottomRight = bottomTwoOnY[1];
-
-            //        var topTwoOnY = topTwo.OrderBy(x => x.GetY).ToArray();
-
-            //        topLeft = topTwoOnY[0];
-            //        topRight = topTwoOnY[1];
-            //    }
-
-            //    if (twoAxisToUse[1].Item1 == "Z")
-            //    {
-            //        var bottomTwoOnZ = bottomTwo.OrderBy(x => x.GetZ).ToArray();
-
-            //        bottomLeft = bottomTwoOnZ[0];
-            //        bottomRight = bottomTwoOnZ[1];
-
-            //        var topTwoOnZ = topTwo.OrderBy(x => x.GetZ).ToArray();
-
-            //        topLeft = topTwoOnZ[0];
-            //        topRight = topTwoOnZ[1];
-            //    }
-
-            //    if (topLeft != null && topRight != null && bottomLeft != null && bottomRight != null)
-            //    {
-            //        sortMatchedNodes.Add(bottomLeft);
-            //        sortMatchedNodes.Add(bottomRight);
-            //        sortMatchedNodes.Add(topRight);
-            //        sortMatchedNodes.Add(topLeft);
-
-            //    }
-            //    else
-            //    {
-            //        throw new Exception("Could nod successfully sub divide nodes within the element");
-            //    }
-            //}
-
-            //v
-
-            //var xSplitOnLargeY = smallestTwoY.OrderBy(x => x.GetX).ToArray();
-
-            //Node topLeft = xSplitOnLargeY[0];
-            //Node topRight = xSplitOnLargeY[1];
-
-
-
-
             var convexHullVals = convexHull(nodes);
             // try my method
             if (convexHullVals.Count < 4)
             {
                 Node currentnode = removableNodes[0];
                 sortMatchedNodes.Add(currentnode);
- 
                 removableNodes.Remove(currentnode);
 
                 const int nodes_in_quad_four = 4;
@@ -446,7 +289,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         }
 
         /// <summary>
-        /// check if node already exists within the model, if yes then use the node object already in the model, else add
+        /// Check if node already exists within the model, if yes then use the node object already in the model, else add
         /// the node to the model
         /// </summary>
         /// <param name="node">the node we want to check the presence of in the model</param>
@@ -588,7 +431,12 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             return aspectRatio;
         }
 
-
+        /// <summary>
+        /// Given a list of node pairs return the longest distance between any two
+        /// </summary>
+        /// <param name="edges"></param>
+        /// <param name="LONGEST_EDGE_DEFAULT"></param>
+        /// <returns></returns>
         public double computeLongestEdge(Tuple<Node, Node>[] edges, double LONGEST_EDGE_DEFAULT)
         {
             double currentlyLongestEdge = LONGEST_EDGE_DEFAULT;
@@ -601,6 +449,12 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
             return currentlyLongestEdge;
         }
 
+        /// <summary>
+        /// Given a list of node pairs return shortest distance between any two
+        /// </summary>
+        /// <param name="edges"></param>
+        /// <param name="SHORTEST_EDGE_DEFAULT"></param>
+        /// <returns></returns>
         public double computeShortestEdge(Tuple<Node, Node>[] edges, double SHORTEST_EDGE_DEFAULT)
         {
 
@@ -666,7 +520,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
 
 
         /// <summary>
-        /// get a set of tuples which represent each of the edges within the element
+        /// Get a set of tuples which represent each of the edges within the element
         /// </summary>
         /// <returns>An array of edge pairings  represented as a tuple of two nodes</returns>
         public Tuple<Node, Node>[] computeEdgePairingsForNode(List<Node> nodes)
@@ -810,7 +664,7 @@ namespace DissertationFEPrototype.FEModelUpdate.Model.Structure.Elements
         }
       
         /// <summary>
-        /// currently assumes that three of the nodes have two axis in common, can't do irregular shapes
+        /// Currently assumes that three of the nodes have two axis in common, can't do irregular shapes
         /// </summary>
         /// <param name="nodes"></param>
         /// <returns></returns>
