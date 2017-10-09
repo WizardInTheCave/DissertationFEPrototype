@@ -148,10 +148,8 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
             return opposite;
         }
 
-
-
         /// <summary>
-        /// Determine if two edges are neighbours to one another
+        /// Determine if two edges are neighbours to one another, do they share any nodes (intersect)
         /// </summary>
         /// <param name="edgeA">The first edge</param>
         /// <param name="edgeB">The second edge</param>
@@ -159,7 +157,17 @@ namespace DissertationFEPrototype.Optimisations.ILPRules
         /// false if not neighbours</returns>
         public bool isNeighbour(Edge edgeB)
         {
-            bool neighbour = true;
+            bool neighbour = false;
+            foreach (Node n1 in this.NodePath)
+            {
+                foreach(Node n2 in edgeB.NodePath)
+                {
+                    if(n1.Id == n2.Id)
+                    {
+                        neighbour = true;
+                    }
+                }
+            }
             return neighbour;
         }
 
