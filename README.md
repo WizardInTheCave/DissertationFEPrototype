@@ -2,7 +2,8 @@
 
 This project was my third year undergraduate dissertation which I worked on during my time at 
 the University of Nottingham, this read me provides a brief overview of the full dissertation write up which can be viewed here:
-[./psyjb4_Jack_Bradbrook_dissertation.pdf](psyjb4_Jack_Bradbrook_dissertation.pdf)
+[./psyjb4_Jack_Bradbrook_dissertation.pdf](psyjb4_Jack_Bradbrook_dissertation.pdf) which also includes references to any image 
+sources in this README file which I did not produce myself.
 
 ## Project Overview
 
@@ -11,7 +12,9 @@ in order to speed up an often slow numerical method prominent across various eng
 
 The Finite Element(FE) Method takes some space represented as a mesh structure and attempts to calculate some property across the mesh using
 equations which can be used to determine the distribution of that property across the mesh space 
-after running the finite element method. 
+after running the finite element method. For example the space might be say 
+a structure such as a bridge and the property might be the stresses that occur across the structure when
+placed under certain loads. Further background on the principals of FE analysis can be found in the dissertations abstract.
 
 I was inspired to do this project after working at a large aerospace company where I routinely observed engineers
 running finite element simulations that routinely took longer than 6 hours to conduct, the same engineers would often
@@ -20,7 +23,7 @@ express frustration at how predictable the results were.
 The speed and accuracy of an FE simulation is largely determined by the number of elements - cells within the mesh, in summary:
 
 * More elements -> more calculations which need to be performed.
-The time complexity for solving finite element problems varies but typically scales much worse than linearly.
+The time complexity of solving finite element problems varies but typically scales much worse than linearly.
 
 * More elements in a region -> greater accuracy of results for that region.
 
@@ -37,7 +40,7 @@ where it would be most beneficial for the mesh to be further refined. These coul
 without needing to rely  as heavily on the traditional approach which would run several solve iterations first to determine these areas 
 that require improvement.
 
-Finally using both methods it was then possible use them together (by applying different weighting of one in favour of another)
+Finally using both methods it was then possible to use them together (by applying different weighting of one in favour of another)
 to a series of models to attempt to determine how effective each approach was and to what degree.
 
 ## Tasks / Methodology
@@ -45,14 +48,14 @@ to a series of models to attempt to determine how effective each approach was an
 The project can be broken down into several key components:
 
 1. Create Interface with finite element solver which given a mesh and some additional parameters for describing the problem to be solved
-for this project I focused on the application of FE to structural analysis problems
+for this project I focused on the application of FE to structural analysis problems such as the bridge example.
 
 2. Build internal data structure to represent a mesh and write a traditional stress based refinement method.
 
-3. build a heuristic refinement method which could use both engineering knowledge about a particular problem and inherent properties of
+3. Build a heuristic refinement method which could use both engineering knowledge about a particular problem and inherent properties of
 general mechanical structures.
 
-4. Analyse models, see what the improvement in accuracy was for each method and at what cost in terms of time overhead and number of elements created. 
+4. Analyse models, to see what the improvement in accuracy was for each method and at what cost in terms of time overhead and number of elements created. 
 
 
 ## Design of project
@@ -62,8 +65,8 @@ a number of main subsystems.
 ### FE Solver and Interfacing
 
 For solving each mesh I used a finite element application known as [LISA](http://www.lisa-fet.com/) 
-Interfacing with LISA was achieved through reading and writing LISA input and output files .liml 
-(an XML based Markup Language) LISA could then be called with this as a parameter
+Interfacing with LISA was achieved through writing LISA input files .liml 
+(an XML based Markup Language) LISA could then be called with this as a parameter to produce a CSV containing stress data across the mesh
 
 ### Mesh Structure
 
@@ -75,8 +78,7 @@ This is important since element shapes selected by FE engineers can vary from mo
 on the geometry of the structure represented by the mesh. 
 For example a structure which is large but relatively thin such as a water tank or a submarine hull 
 may be represented using 2d elements which are computationally much more expensive to perform the calculations
-while retaining much of the accuracy due to the thinness of the structure
-
+while retaining much of the accuracy due to the thinness of the structure.
 
 To resolve this problem within the solution a class hierarchy was used. This provided a common element interface 
 through which high level algorithms could transform and analyse the mesh as a whole regardless of the 
@@ -127,7 +129,7 @@ known as Inductive Logic Programming, see dissertation for more info.
 These rules were designed so as to designate refinement areas based on
 
 * Engineering knowledge about the specific model which can be taken as input that could be provided by an engineer
-* Generalised knowledge embedded within the rules when they were created about general based on the machine learning method.
+* Generalised knowledge embedded within the rules about models of this type created by the machine learning method.
 
 Each rule describes meshing that should occur in terms of the location of key edges within the structure.
 Edges were convenient as a descriptor for heuristics since they play a big part in defining the shape of a model
@@ -158,10 +160,10 @@ areas of importance without the need for costly stress refinement.
 
 ### Combining both methods
 Having implemented both these approaches it was desirable to compare the two and see if some new hybrid method could be
-generated which combined them both simultaneously 
+generated which combined them both simultaneously.
 
 Due to the limited time available to work on the project I was not able to develop a sophisticated approach of combining the two
-instead opting to simply allow each of the methods to make some varying number of refinement iterations before re running the 
+instead opted to simply allow each of the methods to make some varying number of refinement iterations before re running the 
 updated mesh through the solver to obtain more stress data with which the stress refinement method could use to continue refinement.
 With each weighting for a model running on a different thread a large number of experiments could be performed quickly.
 
@@ -174,7 +176,7 @@ in terms of number of elements created by the method.
 This could be calculated as the average accuracy increase across a particular methods meshing region per additional element.
 
 ![Alt text](./WriteUp/Graphics/FinalReportGraphs/AverageStressRevealedSuspensionBridge.png "Average Stress revealed")
-Results showing the system rapidly focusing on stress concentration points after just a few iterations
+Results showing the system rapidly focusing on stress concentration points after just a few iterations.
 
 
 ### Conclusion
