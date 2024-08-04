@@ -1,29 +1,31 @@
 # Hybrid Methods for Finite Element Meshing
 
 This project was my third year undergraduate dissertation which I worked on during my time at 
-the University of Nottingham, this read me provides a brief overview of the full dissertation write up which can be viewed here:
-[./psyjb4_Jack_Bradbrook_dissertation.pdf](psyjb4_Jack_Bradbrook_dissertation.pdf) which also includes references to any image 
+the University of Nottingham. Here I provide a brief overview of the full dissertation write up which can be viewed below:
+[./psyjb4_Jack_Bradbrook_dissertation.pdf](psyjb4_Jack_Bradbrook_dissertation.pdf) 
+
+The dissertation writuo also includes references to any image 
 sources in this README file which I did not produce myself.
 
 ## Project Overview
 
-The goal of this project was to design a system which could apply heuristic rules in conjunction with another already proven method
-in order to speed up an often slow numerical method prominent across various engineering domains called "Finite Element Analysis"
+The goal of this project was to design a system which could apply heuristic rules in conjunction with another already proven method In order to speed up a process known as Finite Element Meshing. Finite Element Meshing is one step in a larger process known as Finite Element Analysis, which is prominent across multiple engineering domains.
 
-The Finite Element(FE) Method takes some space represented as a mesh structure and attempts to calculate some property across the mesh using
-equations which can be used to determine the distribution of that property across the mesh space 
-after running the finite element method. For example the space might be say 
-a structure such as a bridge and the property might be the stresses that occur across the structure when
+The Finite Element(FE) Method takes some space represented as a mesh structure and attempts to calculate some property across that space using
+equations which can be applied iteratively over the mesh.
+
+For example the space might be a physical 
+structure such as part of a bridge and the property might be the stresses that occur across the bridge when it is
 placed under certain loads. Further background on the principals of FE analysis can be found in the dissertations abstract.
 
 I was inspired to do this project after working at a large aerospace company where I routinely observed engineers
-running finite element simulations that routinely took longer than 6 hours to conduct, the same engineers would often
+running finite element simulations that took longer than 6 hours to conduct, the same engineers would
 express frustration at how predictable the results were.
 
 The speed and accuracy of an FE simulation is largely determined by the number of elements - cells within the mesh, in summary:
 
 * More elements -> more calculations which need to be performed.
-The time complexity of solving finite element problems varies but typically scales much worse than linearly.
+The time complexity of solving finite element problems varies but typically it scales much worse than linearly.
 
 * More elements in a region -> greater accuracy of results for that region.
 
@@ -37,18 +39,17 @@ so as to establish which part of the mesh is of greatest interest, once this is 
 
 For this project I looked at the possibility of speeding up this process further by building a system which could store and apply heuristics that describe
 where it would be most beneficial for the mesh to be further refined. These could then be applied to the mesh, refining sections of importance
-without needing to rely  as heavily on the traditional approach which would run several solve iterations first to determine these areas 
-that require improvement.
+without needing to rely  as heavily on the traditional approach.
 
-Finally using both methods it was then possible to use them together (by applying different weighting of one in favour of another)
+Finally using both methods it was then possible to combine them by applying different weightings of each each 
 to a series of models to attempt to determine how effective each approach was and to what degree.
 
 ## Tasks / Methodology
 
 The project can be broken down into several key components:
 
-1. Create Interface with finite element solver which given a mesh and some additional parameters for describing the problem to be solved
-for this project I focused on the application of FE to structural analysis problems such as the bridge example.
+1. Create Interface with a finite element solver which given a mesh and some additional parameters for describing the problem to be solved can run the finite element analysis.
+For this project I focused on the application of FE to structural analysis problems such as the bridge example.
 
 2. Build internal data structure to represent a mesh and write a traditional stress based refinement method.
 
