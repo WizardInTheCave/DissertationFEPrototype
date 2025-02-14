@@ -176,10 +176,6 @@ in terms of number of elements created by the method.
 
 This could be calculated as the average accuracy increase across a particular methods meshing region per additional element.
 
-![Alt text](./WriteUp/Graphics/FinalReportGraphs/AverageStressRevealedSuspensionBridge.png "Average Stress revealed")
-Results showing the system rapidly focusing on stress concentration points after just a few iterations.
-
-
 ### Conclusion
 In conclusion use of a heuristic approach was beneficial over stress based refinement in cases where engineer edges of interest were well defined
 for this project I was only able to use models consisting of tens of thousands of nodes but in reality the true benefits of this approach may
